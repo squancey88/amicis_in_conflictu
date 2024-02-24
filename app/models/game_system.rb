@@ -1,0 +1,2 @@
+class GameSystem < ApplicationRecord
+end

@@ -18,7 +18,10 @@
     "customizations": {
       "vscode": {
         "extensions": [
-          "testdouble.vscode-standard-ruby"
+          "testdouble.vscode-standard-ruby",
+          "circleci.circleci",
+          "mtxr.sqltools",
+          "mtxr.sqltools-driver-pg"
         ],
         "settings": {
           "terminal.integrated.defaultProfile.linux": "bash",
