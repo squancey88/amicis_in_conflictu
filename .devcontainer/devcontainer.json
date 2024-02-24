@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/docker-existing-dockerfile
+{
+    "name": "GamingNightTracker",
+    // Sets the run context to one level up instead of the .devcontainer folder.
+    "workspaceFolder": "/app",
+    // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "web",
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Uncomment the next line to run commands after the container is created - for example installing curl.
+    "postCreateCommand": "",
+    // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+    "mounts": [
+      "source=vscode_extensions,target=/root/.vscode-server/extensions,type=volume"
+    ],
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "testdouble.vscode-standard-ruby"
+        ],
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "bash",
+          "ruby-spec-runner.rspecCommand": "rdebug-ide --skip_wait_for_start --host 0.0.0.0 --port 1235 -- bin/rspec"
+        }
+      }
+    },
+    "shutdownAction": "stopCompose"
+  }

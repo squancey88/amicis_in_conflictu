@@ -1,0 +1,40 @@
+# This config was automatically generated from your source code
+# Stacks detected: cicd:github-actions:.github/workflows,deps:ruby:.,package_manager:yarn:
+version: 2.1
+orbs:
+  ruby: circleci/ruby@2.0.1
+jobs:
+  test-ruby:
+    # Install gems, run rspec tests
+    docker:
+      - image: cimg/ruby:3.3.0-node
+      - image: cimg/postgres:15.6
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: gaming_night_tracker_test
+          POSTGRES_PASSWORD: password
+    environment:
+      RAILS_ENV: test
+      DB_PASSWORD: password
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: rspec test
+          command: bundle exec rspec
+  standardrb:
+    docker:
+      - image: "cimg/ruby:3.3.0-node"
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Inspecting code with standardrb
+          command: bundle exec standardrb
+ 
+workflows:
+  build-and-test:
+    jobs:
+      - test-ruby
+      - standardrb
+  
