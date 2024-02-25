@@ -14,6 +14,6 @@ RSpec.describe "game_systems/index", type: :view do
 
   it "renders a list of game_systems" do
     render
-    assert_select "tr>td", text: "Name".to_s, count: 2
+    assert_select "span", text: "Name".to_s, count: 2
   end
 end
