@@ -1,0 +1,2 @@
+module GamingGroupsHelper
+end

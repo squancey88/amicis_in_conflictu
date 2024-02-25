@@ -40,6 +40,10 @@ RSpec.describe GameSystemsController, type: :controller do
   # GameSystemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before do
+    sign_in create(:user)
+  end
+
   describe "GET #index" do
     it "returns a success response" do
       GameSystem.create! valid_attributes
