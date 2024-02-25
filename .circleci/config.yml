@@ -3,6 +3,7 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@2.0.1
+  browser-tools: circleci/browser-tools@1.4.4
 jobs:
   test-ruby:
     # Install gems, run rspec tests
@@ -16,9 +17,19 @@ jobs:
     environment:
       RAILS_ENV: test
       DB_PASSWORD: password
+      DB_HOST: 127.0.0.1
     steps:
       - checkout
       - ruby/install-deps
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+      - browser-tools/install-browser-tools:
+          chrome-version: 116.0.5845.110 # https://github.com/CircleCI-Public/browser-tools-orb/issues/108#issuecomment-1958532112
+          replace-existing-chrome: true
       - run:
           name: rspec test
           command: bundle exec rspec

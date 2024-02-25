@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "db",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Database",
+      "database": "gaming_night_tracker",
+      "username": "postgres",
+      "password": "password"
+    }
+  ]
+}
