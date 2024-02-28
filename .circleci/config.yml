@@ -23,8 +23,11 @@ jobs:
       - checkout
       - ruby/install-deps
       - run:
-        name: yarn build:css
-        command: yarn build:css
+          name: yarn build
+          command: yarn build
+      - run:
+          name: yarn build:css
+          command: yarn build:css
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
