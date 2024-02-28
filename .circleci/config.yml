@@ -23,6 +23,9 @@ jobs:
       - checkout
       - ruby/install-deps
       - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - run:
           name: yarn build
           command: yarn build
       - run:
