@@ -26,6 +26,9 @@ jobs:
           name: Install Dependencies
           command: yarn install --immutable
       - run:
+          name: ESbuild
+          command: yarn add --dev esbuild
+      - run:
           name: yarn build
           command: yarn build
       - run:
