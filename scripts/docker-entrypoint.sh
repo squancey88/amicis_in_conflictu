@@ -27,5 +27,5 @@ echo "- Starting rails (with debugging enabled):"
 #  rdebug-ide --skip_wait_for_start -h $HOST -p $DEBUG_PORT --dispatcher-port $DISPATCHER_PORT -- ./bin/rails s -b $HOST -p $PORT &
 #  bundle exec sidekiq > ./log/sidekiq.log &
 #  ./scripts/webpack-docker-entrypoint.sh > ./log/webpack.log
-#)
-./bin/rails s -b $HOST -p $PORT
+#./bin/rails s -b $HOST -p $PORT
+foreman start -f Procfile.dev
