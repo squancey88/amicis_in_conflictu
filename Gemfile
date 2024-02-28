@@ -49,6 +49,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "byebug", platform: :mri
   gem "rspec-rails", "~> 6.1.0"
+  gem "rspec_junit_formatter"
   gem "standard"
   gem "standard-rails"
   gem "factory_bot_rails"
