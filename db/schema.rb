@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_211747) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_07_204345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -27,11 +27,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_211747) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "gaming_sessions", force: :cascade do |t|
+    t.datetime "start_time"
+    t.uuid "gaming_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gaming_group_id"], name: "index_gaming_sessions_on_gaming_group_id"
+  end
+
   create_table "user_group_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "gaming_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "owner", default: false
     t.index ["gaming_group_id"], name: "index_user_group_memberships_on_gaming_group_id"
     t.index ["user_id"], name: "index_user_group_memberships_on_user_id"
   end
@@ -50,4 +59,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_211747) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "gaming_sessions", "gaming_groups"
 end

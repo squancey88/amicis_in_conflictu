@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :gaming_sessions
   resources :gaming_groups
   devise_for :users
   resources :game_systems

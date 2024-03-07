@@ -22,9 +22,9 @@ class GamingGroupsController < ApplicationController
   # POST /gaming_groups or /gaming_groups.json
   def create
     @gaming_group = GamingGroup.new(gaming_group_params)
-
     respond_to do |format|
       if @gaming_group.save
+        UserGroupMembership.create!(gaming_group: @gaming_group, user: current_user, owner: true)
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Gaming group was successfully created." }
         format.json { render :show, status: :created, location: @gaming_group }
       else

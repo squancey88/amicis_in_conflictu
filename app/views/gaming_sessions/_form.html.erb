@@ -1,0 +1,27 @@
+<%= form_with(model: gaming_session) do |form| %>
+  <% if gaming_session.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(gaming_session.errors.count, "error") %> prohibited this gaming_session from being saved:</h2>
+
+      <ul>
+        <% gaming_session.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :start_time, style: "display: block" %>
+    <%= form.datetime_field :start_time %>
+  </div>
+
+  <div>
+    <%= form.label :gaming_group_id, style: "display: block" %>
+    <%= form.text_field :gaming_group_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

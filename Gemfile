@@ -70,6 +70,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
 end
 
 gem "devise"
@@ -77,3 +78,4 @@ gem "devise"
 gem "cssbundling-rails", "~> 1.4"
 
 gem "jsbundling-rails", "~> 1.3"
+gem "view_component"

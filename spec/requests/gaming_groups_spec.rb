@@ -17,11 +17,15 @@ RSpec.describe "/gaming_groups", type: :request do
   # GamingGroup. As you add validations to GamingGroup, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "test group"
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: nil
+    }
   }
 
   before do
@@ -90,14 +94,16 @@ RSpec.describe "/gaming_groups", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Other name"
+        }
       }
 
       it "updates the requested gaming_group" do
         gaming_group = GamingGroup.create! valid_attributes
         patch gaming_group_url(gaming_group), params: {gaming_group: new_attributes}
         gaming_group.reload
-        skip("Add assertions for updated state")
+        expect(gaming_group.name).to eq("Other name")
       end
 
       it "redirects to the gaming_group" do

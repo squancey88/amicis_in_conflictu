@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @gaming_session %>
+
+<div>
+  <%= link_to "Edit this gaming session", edit_gaming_session_path(@gaming_session) %> |
+  <%= link_to "Back to gaming sessions", gaming_sessions_path %>
+
+  <%= button_to "Destroy this gaming session", @gaming_session, method: :delete %>
+</div>
