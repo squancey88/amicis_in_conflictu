@@ -10,5 +10,8 @@
       "username": "postgres",
       "password": "password"
     }
+  ],
+  "circleci.persistedProjectSelection": [
+    "circleci/6ypjmZFuaV2xX9nz5Zc6iN/7ivMX2sKcTLqy8cNmx9Gc1"
   ]
 }

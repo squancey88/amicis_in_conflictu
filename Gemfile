@@ -49,6 +49,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "byebug", platform: :mri
   gem "rspec-rails", "~> 6.1.0"
+  gem "rspec_junit_formatter"
   gem "standard"
   gem "standard-rails"
   gem "factory_bot_rails"
@@ -69,4 +70,12 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
 end
+
+gem "devise"
+
+gem "cssbundling-rails", "~> 1.4"
+
+gem "jsbundling-rails", "~> 1.3"
+gem "view_component"

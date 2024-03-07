@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :gaming_sessions
+  resources :gaming_groups
+  devise_for :users
   resources :game_systems
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,4 +11,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root to: "home#homepage"
 end

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Gaming groups</h1>
+
+<div id="gaming_groups">
+  <% @gaming_groups.each do |gaming_group| %>
+    <%= render gaming_group %>
+    <p>
+      <%= link_to "Show this gaming group", gaming_group %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New gaming group", new_gaming_group_path %>

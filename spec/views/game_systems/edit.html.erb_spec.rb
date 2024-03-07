@@ -2,9 +2,7 @@ require "rails_helper"
 
 RSpec.describe "game_systems/edit", type: :view do
   before(:each) do
-    @game_system = assign(:game_system, GameSystem.create!(
-      name: "MyString"
-    ))
+    @game_system = assign(:game_system, create(:game_system))
   end
 
   it "renders the edit game_system form" do
