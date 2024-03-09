@@ -11,7 +11,9 @@
   </head>
 
   <body>
-    <%= render partial: "layouts/header" if current_user %>
+    <%= render MainHeaderComponent.new %>
+    <%= render FlashHandlerComponent.new %>
+
     <div class="container mt-2">
       <%= yield %>
     </div>
