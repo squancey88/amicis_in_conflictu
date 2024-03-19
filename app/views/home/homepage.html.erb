@@ -1,2 +1,6 @@
 
 <p>Welcome <%= current_user.firstname %></p>
+
+<h1>Your Groups</h1>
+
+<%= render GamingGroupCardComponent.with_collection(current_user.gaming_groups) %>

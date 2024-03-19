@@ -12,6 +12,7 @@ RSpec.describe MainHeaderComponent, type: :component do
 
     it "should render header" do
       render_inline(described_class.new)
+      expect(page).to have_css(".navbar")
       expect(page).to have_text "Amicis in Conflictu"
     end
   end
@@ -23,7 +24,7 @@ RSpec.describe MainHeaderComponent, type: :component do
     end
 
     it "should not render when no current_user" do
-      expect(page).to have_no_selector("body")
+      expect(page).to have_no_selector(".navbar")
     end
   end
 end

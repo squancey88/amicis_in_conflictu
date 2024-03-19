@@ -1,8 +1,19 @@
-<%= render @gaming_group %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render @gaming_group %>
 
-<div>
-  <%= link_to "Edit this gaming group", edit_gaming_group_path(@gaming_group) %> |
-  <%= link_to "Back to gaming groups", gaming_groups_path %>
+      <div>
+        <%= link_to "Edit this gaming group", edit_gaming_group_path(@gaming_group) %> |
+        <%= link_to "Back to gaming groups", gaming_groups_path %>
 
-  <%= button_to "Destroy this gaming group", @gaming_group, method: :delete %>
+        <%= button_to "Destroy this gaming group", @gaming_group, method: :delete %>
+      </div>
+    </div>
+    <div class="col">
+      <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
+    </div>
+  </div>
 </div>
+
+

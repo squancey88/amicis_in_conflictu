@@ -1,0 +1,8 @@
+<div class='error-panel' style="color: red">
+  <h1><%= pluralize(@errors.count, "error") %> prohibited this <%= @model_name %> from being saved:</h2>
+  <ul>
+    <% @errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>

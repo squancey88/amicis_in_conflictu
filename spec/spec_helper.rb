@@ -16,6 +16,7 @@
 
 require "simplecov"
 SimpleCov.start "rails" do
+  add_group "Components", "app/components"
 end
 
 RSpec.configure do |config|

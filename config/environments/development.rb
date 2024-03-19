@@ -80,4 +80,7 @@ Rails.application.configure do
 
   # View Component setup
   config.view_component.generate.sidecar = true
+
+  config.web_console.whiny_requests = false
+  config.web_console.permissions = "0.0.0.0/0"
 end

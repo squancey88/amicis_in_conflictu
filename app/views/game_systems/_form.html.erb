@@ -1,15 +1,5 @@
 <%= form_with(model: game_system) do |form| %>
-  <% if game_system.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(game_system.errors.count, "error") %> prohibited this game_system from being saved:</h2>
-
-      <ul>
-        <% game_system.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render ErrorPanelComponent.new(model_name: "Game System", errors: game_system.errors) %>
 
   <div>
     <%= form.label :name, style: "display: block" %>
