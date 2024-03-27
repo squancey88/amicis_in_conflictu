@@ -1,15 +1,5 @@
 <%= form_with(model: gaming_group) do |form| %>
-  <% if gaming_group.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(gaming_group.errors.count, "error") %> prohibited this gaming_group from being saved:</h2>
-
-      <ul>
-        <% gaming_group.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render ErrorPanelComponent.new(model_name: "Gaming Group", errors: gaming_group.errors) %>
 
   <div>
     <%= form.label :name, style: "display: block" %>

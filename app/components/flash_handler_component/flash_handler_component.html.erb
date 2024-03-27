@@ -1,0 +1,8 @@
+<div class="alert-container container my-2">
+  <% @flash.each do |key, msg| %>
+    <div class="alert <%= key_to_class(key) %> alert-dismissible" role="alert">
+      <%= msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+</div>
