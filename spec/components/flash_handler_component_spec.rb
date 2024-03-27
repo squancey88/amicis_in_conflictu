@@ -3,13 +3,25 @@
 require "rails_helper"
 
 RSpec.describe FlashHandlerComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "with notice" do
+    before do
+      render_inline(described_class.new({notice: "notice test"}))
+    end
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+    it "should display" do
+      expect(page).to have_css(".alert-container")
+      expect(page).to have_css(".alert-primary", text: "notice test")
+    end
+  end
+
+  context "with alert" do
+    before do
+      render_inline(described_class.new({alert: "alert test"}))
+    end
+
+    it "should display" do
+      expect(page).to have_css(".alert-container")
+      expect(page).to have_css(".alert-danger", text: "alert test")
+    end
+  end
 end

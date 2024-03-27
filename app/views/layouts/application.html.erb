@@ -12,7 +12,7 @@
 
   <body>
     <%= render MainHeaderComponent.new %>
-    <%= render FlashHandlerComponent.new %>
+    <%= render FlashHandlerComponent.new(flash) %>
 
     <div class="container-fluid mt-2">
       <%= yield %>

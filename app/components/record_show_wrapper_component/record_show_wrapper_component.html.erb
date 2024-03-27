@@ -1,0 +1,25 @@
+<div class="bg-body-tertiary rounded-3 p-3 record-show-wrapper" id="<%= dom_id @record %>">
+
+  <div class="record-show-wrapper_header">
+    <div class="record-show-wrapper_header-text">
+      <h2><%= @title %></h2>
+    </div>
+    <div class="dropdown record-show-wrapper_header-menu">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-gear-fill"></i> 
+      </button>
+      <ul class="dropdown-menu">
+        <% @menu_options.each do |menu_option| %>
+          <li>
+            <%= link_to menu_option[:text], menu_option[:link], class: "dropdown-item", data: menu_option[:data] %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="record-show-content">
+    <%= body %>
+  </div>
+
+</div>

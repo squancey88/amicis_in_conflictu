@@ -3,13 +3,12 @@
 require "rails_helper"
 
 RSpec.describe GroupSessionsOverviewComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:gaming_group) { create(:gaming_group) }
+  before do
+    render_inline(described_class.new(gaming_group:))
+  end
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  it "should have a tab section" do
+    expect(page).to have_css(".nav-tabs")
+  end
 end

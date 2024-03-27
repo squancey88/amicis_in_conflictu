@@ -1,7 +1,20 @@
-<div id="<%= dom_id gaming_group %>">
-  <p>
-    <strong>Name:</strong>
-    <%= gaming_group.name %>
-  </p>
+<%= render RecordShowWrapperComponent.new(
+    record: gaming_group,
+    title: gaming_group.name,
+    menu_options: [
+      { 
+        text: "Edit",
+        link: edit_gaming_group_path(gaming_group)
+      },
+      {
+        text: "Delete",
+        link: gaming_group_path(gaming_group),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      }
+    ]
+  ) do |component| %>
 
-</div>
+  <% component.with_body do %>
+  
+  <% end %>
+<% end %> 
