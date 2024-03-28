@@ -1,0 +1,10 @@
+<%= form_with(model: game) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: game, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      
+    <% end %>
+  <% end %>
+<% end %>

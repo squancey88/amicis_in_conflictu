@@ -53,6 +53,8 @@ group :development, :test do
   gem "standard"
   gem "standard-rails"
   gem "factory_bot_rails"
+  gem "ruby-debug-ide"
+  gem "debase", "~> 0.2.5.beta2"
 end
 
 group :development do

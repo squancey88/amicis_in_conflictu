@@ -11,7 +11,7 @@
   <div class="tab-content p-2 border border-top-0" id="myTabContent">
     <div class="tab-pane fade show active" id="upcoming-tab-pane" role="tabpanel" aria-labelledby="upcoming-tab" tabindex="0">
       <% @gaming_group.gaming_sessions.each do |session| %>
-        <%= l session.start_time %>
+        <%= link_to(l(session.start_time), session) %>
       <% end %>
     </div>
     <div class="tab-pane fade" id="calendar-tab-pane" role="tabpanel" aria-labelledby="calendar-tab" tabindex="0">

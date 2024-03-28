@@ -1,10 +1,9 @@
-<h1>Editing gaming group</h1>
+<% content_for :title, "Editing gaming group" %>
 
-<%= render "form", gaming_group: @gaming_group %>
-
-<br>
-
-<div>
-  <%= link_to "Show this gaming group", @gaming_group %> |
-  <%= link_to "Back to gaming groups", gaming_groups_path %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render "form", gaming_group: @gaming_group %>
+    </div>
+  </div>
 </div>
