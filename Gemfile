@@ -53,8 +53,6 @@ group :development, :test do
   gem "standard"
   gem "standard-rails"
   gem "factory_bot_rails"
-  gem "ruby-debug-ide"
-  gem "debase", "~> 0.2.5.beta2"
 end
 
 group :development do
@@ -68,6 +66,8 @@ group :development do
   # gem "spring"
   gem "letter_opener_web", "~> 2.0"
   gem "rails-erd"
+  gem "ruby-debug-ide"
+  gem "debase", "~> 0.2.5.beta2"
 end
 
 group :test do
