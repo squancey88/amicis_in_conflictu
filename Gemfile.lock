@@ -102,9 +102,6 @@ GEM
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
     date (3.3.4)
-    debase (0.2.5.beta2)
-      debase-ruby_core_source (>= 0.10.12)
-    debase-ruby_core_source (3.3.1)
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -286,8 +283,6 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.30.0, < 2.0)
-    ruby-debug-ide (0.7.3)
-      rake (>= 0.8.1)
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.13.0)
@@ -365,7 +360,6 @@ DEPENDENCIES
   byebug
   capybara
   cssbundling-rails (~> 1.4)
-  debase (~> 0.2.5.beta2)
   debug
   devise
   factory_bot_rails
@@ -379,7 +373,6 @@ DEPENDENCIES
   rails-erd
   rspec-rails (~> 6.1.0)
   rspec_junit_formatter
-  ruby-debug-ide
   selenium-webdriver
   simplecov
   sprockets-rails
