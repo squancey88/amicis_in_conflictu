@@ -1,12 +1,15 @@
 <%= form_with(model: game_system) do |form| %>
-  <%= render ErrorPanelComponent.new(model_name: "Game System", errors: game_system.errors) %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <%= render RecordFormWrapperComponent.new(record: game_system, form:) do |component| %>
 
-  <div>
-    <%= form.submit %>
-  </div>
+    <% component.with_fields do %>
+
+              <div>
+                <%= form.label :name, style: "display: block" %>
+          <%= form.text_field :name %>
+              </div>
+
+      
+    <% end %>
+  <% end %>
 <% end %>

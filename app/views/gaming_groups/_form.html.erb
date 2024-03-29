@@ -1,12 +1,12 @@
 <%= form_with(model: gaming_group) do |form| %>
-  <%= render ErrorPanelComponent.new(model_name: "Gaming Group", errors: gaming_group.errors) %>
+  <%= render RecordFormWrapperComponent.new(record: gaming_group, form:) do |component| %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+    <% component.with_fields do %>
+      <div class="form-floating">
+        <%= form.text_field :name, class: "form-control", placeholder: "Your Groups Name" %>
+        <%= form.label :name %>
+      </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+    <% end %>
+  <% end %>
 <% end %>

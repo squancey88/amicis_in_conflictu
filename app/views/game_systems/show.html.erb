@@ -1,8 +1,27 @@
-<%= render @game_system %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render RecordShowWrapperComponent.new(
+        record: @game_system,
+        title: @game_system.to_s,
+        menu_options: [
+          { 
+            text: "Edit",
+            link: edit_game_system_path(@game_system)
+          },
+          {
+            text: "Delete",
+            link: game_system_path(@game_system),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          }
+        ]
+      ) do |component| %>
 
-<div>
-  <%= link_to "Edit this game system", edit_game_system_path(@game_system) %> |
-  <%= link_to "Back to game systems", game_systems_path %>
+        <% component.with_body do %>
 
-  <%= button_to "Destroy this game system", @game_system, method: :delete %>
+          <%= render @game_system %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>

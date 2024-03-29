@@ -1,0 +1,30 @@
+<%%= form_with(model: <%= model_resource_name %>) do |form| %>
+
+  <%%= render RecordFormWrapperComponent.new(record: <%= model_resource_name %>, form:) do |component| %>
+
+    <%% component.with_fields do %>
+
+      <% attributes.each do |attribute| -%>
+        <div class="form-floating">
+      <% if attribute.password_digest? -%>
+          <%%= form.password_field :password, class: "form-control mb-3", placeholder: "Password" %>
+          <%%= form.label :password %>
+        </div>
+
+        <div>
+          <%%= form.password_field :password_confirmation, class: "form-control mb-3", placeholder: "Confirm Password" %>
+          <%%= form.label :password_confirmation  %>
+      <% elsif attribute.attachments? -%>
+          <%%= form.label :<%= attribute.column_name %>, style: "display: block" %>
+          <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true %>
+      <% else -%>
+          <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, , class: "form-control mb-3", placeholder: "<%= attribute.column_name.humanize %>" %>
+          <%%= form.label :<%= attribute.column_name %> %>
+      <% end -%>
+        </div>
+
+      <% end -%>
+
+    <%% end %>
+  <%% end %>
+<%% end %>

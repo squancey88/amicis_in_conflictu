@@ -9,4 +9,5 @@ RUN curl https://cli-assets.heroku.com/install.sh | sh
 WORKDIR /app
 RUN bundle config set force_ruby_platform true
 RUN bundle config build.nokogiri --use-system-libraries
+RUN gem install foreman
 COPY Gemfile Gemfile.lock /app/

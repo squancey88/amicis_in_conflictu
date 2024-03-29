@@ -2,6 +2,23 @@
 # yarn lockfile v1
 
 
+"@codexteam/icons@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.0.5.tgz#d17f39b6a0497c6439f57dd42711817a3dd3679c"
+  integrity sha512-s6H2KXhLz2rgbMZSkRm8dsMJvyUNZsEjxobBEg9ztdrb1B2H3pEzY6iTwI4XUPJWJ3c3qRKwV4TrO3J5jUdoQA==
+
+"@editorjs/editorjs@^2.29.1":
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/@editorjs/editorjs/-/editorjs-2.29.1.tgz#d7c644c5c3fc1ea1022373cbf2c8c3ac9f990b7b"
+  integrity sha512-WRT2pCfikMsvySQJqpCU21LfTZaPuxUWsDO8aFGrPx4MKzOR9D+Ur4mNb3jq0FXx2EMqvIWfTyFixJxtjGHTyQ==
+
+"@editorjs/header@^2.8.1":
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/@editorjs/header/-/header-2.8.1.tgz#ba16f43aaf461aa920c3594bdf0d854c4b5119b9"
+  integrity sha512-y0HVXRP7m2W617CWo3fsb5HhXmSLaRpb9GzFx0Vkp/HEm9Dz5YO1s8tC7R8JD3MskwoYh7V0hRFQt39io/r6hA==
+  dependencies:
+    "@codexteam/icons" "^0.0.5"
+
 "@esbuild/aix-ppc64@0.20.1":
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/@esbuild/aix-ppc64/-/aix-ppc64-0.20.1.tgz#eafa8775019b3650a77e8310ba4dbd17ca7af6d5"

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render RecordShowWrapperComponent.new(
+        record: @game,
+        title: @game.to_s,
+        menu_options: [
+          { 
+            text: "Edit",
+            link: edit_game_path(@game)
+          },
+          {
+            text: "Delete",
+            link: game_path(@game),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          }
+        ]
+      ) do |component| %>
+
+        <% component.with_body do %>
+
+          <%= render @game %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
