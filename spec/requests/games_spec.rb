@@ -18,6 +18,7 @@ RSpec.describe "/games", type: :request do
   # adjust the attributes here as well.
   let(:gaming_group) { create(:gaming_group) }
   let(:game_system) { create(:game_system) }
+  let(:new_game_system) { create(:game_system) }
   let(:valid_attributes) {
     {
       gaming_group_id: gaming_group.id,
@@ -54,7 +55,6 @@ RSpec.describe "/games", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      skip
       get new_game_url
       expect(response).to be_successful
     end
@@ -99,14 +99,16 @@ RSpec.describe "/games", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          game_system_id: new_game_system.id
+        }
       }
 
       it "updates the requested game" do
         game = Game.create! valid_attributes
         patch game_url(game), params: {game: new_attributes}
         game.reload
-        skip("Add assertions for updated state")
+        expect(game.game_system).to eq(new_game_system)
       end
 
       it "redirects to the game" do

@@ -50,7 +50,6 @@ RSpec.describe "/game_systems", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      skip
       get new_game_system_url
       expect(response).to be_successful
     end
@@ -95,21 +94,23 @@ RSpec.describe "/game_systems", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "New Name"
+        }
       }
 
       it "updates the requested game" do
         game_system = GameSystem.create! valid_attributes
         patch game_system_url(game_system), params: {game_system: new_attributes}
         game_system.reload
-        skip("Add assertions for updated state")
+        expect(game_system.name).to eq("New Name")
       end
 
       it "redirects to the game" do
         game_system = GameSystem.create! valid_attributes
         patch game_system_url(game_system), params: {game_system: new_attributes}
         game_system.reload
-        expect(response).to redirect_to(game_system_url(game))
+        expect(response).to redirect_to(game_system_url(game_system))
       end
     end
 
