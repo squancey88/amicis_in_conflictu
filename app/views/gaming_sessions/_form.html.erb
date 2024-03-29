@@ -4,15 +4,17 @@
 
     <% component.with_fields do %>
 
-      <div>
-        <%= form.label :start_time, style: "display: block" %>
-        <%= form.text_field :start_time %>
+      <div class="form-floating mb-3">
+        <%= form.datetime_field :start_time, class: "form-control", placeholder: "Start Time" %>
+        <%= form.label :start_time %>
       </div>
 
-      <div>
-        <%= form.label :gaming_group_id, style: "display: block" %>
-        <%= form.text_field :gaming_group_id %>
+      <div class="form-floating mb-3">
+        <%= select_for_groups form, :gaming_group_id %>
+        <%= form.label :gaming_group_id %>
       </div>
+
+      <%= render TextEditorComponent.new(form: form, attribute: :notes) %>
       
     <% end %>
   <% end %>

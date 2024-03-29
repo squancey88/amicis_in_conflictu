@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Rails Debug",
+      "type": "rdbg",
+      "request": "attach",
+      "debugPort": "0.0.0.0:1234",
+      "localfsMap": "/app:${workspaceFolder}"
+    },
+    {
+      "name": "RSpec Debug",
+      "type": "rdbg",
+      "request": "attach",
+      "debugPort": "0.0.0.0:1235",
+      "localfsMap": "/app:${workspaceFolder}"
+    }
+  ]
+}

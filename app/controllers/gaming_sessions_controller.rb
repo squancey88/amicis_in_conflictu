@@ -66,6 +66,6 @@ class GamingSessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def gaming_session_params
-    params.require(:gaming_session).permit(:start_time, :gaming_group_id)
+    params.require(:gaming_session).permit(:start_time, :gaming_group_id, :notes)
   end
 end

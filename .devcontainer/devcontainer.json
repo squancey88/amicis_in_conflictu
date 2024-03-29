@@ -22,8 +22,8 @@
           "circleci.circleci",
           "mtxr.sqltools",
           "mtxr.sqltools-driver-pg",
-          "rebornix.ruby",
-          "fooo.ruby-spec-runner"
+          "KoichiSasada.vscode-rdbg",
+          "wingrunr21.vscode-ruby"
         ],
         "settings": {
           "terminal.integrated.defaultProfile.linux": "bash",

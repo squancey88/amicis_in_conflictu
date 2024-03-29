@@ -2,9 +2,9 @@
   <%= render RecordFormWrapperComponent.new(record: gaming_group, form:) do |component| %>
 
     <% component.with_fields do %>
-      <div>
-        <%= form.label :name, style: "display: block" %>
-        <%= form.text_field :name %>
+      <div class="form-floating">
+        <%= form.text_field :name, class: "form-control", placeholder: "Your Groups Name" %>
+        <%= form.label :name %>
       </div>
 
     <% end %>
