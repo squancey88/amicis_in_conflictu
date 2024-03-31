@@ -53,6 +53,7 @@ group :development, :test do
   gem "standard"
   gem "standard-rails"
   gem "factory_bot_rails"
+  gem "faker"
 end
 
 group :development do
@@ -76,6 +77,7 @@ group :test do
 end
 
 gem "devise"
+gem "devise_invitable", "~> 2.0.0"
 
 gem "cssbundling-rails", "~> 1.4"
 

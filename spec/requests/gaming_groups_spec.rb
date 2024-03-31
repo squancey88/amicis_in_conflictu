@@ -137,4 +137,71 @@ RSpec.describe "/gaming_groups", type: :request do
       expect(response).to redirect_to(gaming_groups_url)
     end
   end
+
+  context "users management" do
+    let(:gaming_group) { create(:gaming_group) }
+    let(:owner) {
+      user = create(:user)
+      create(:user_group_membership, user:, gaming_group:, owner: true)
+      user
+    }
+    let(:member) {
+      user = create(:user)
+      create(:user_group_membership, user:, gaming_group:, owner: false)
+      user
+    }
+
+    describe "POST /update_membership" do
+      it "should demote an owner" do
+        post update_membership_gaming_group_url(gaming_group), params: {user_id: owner.id}
+        gaming_group.reload
+        expect(gaming_group.is_owner?(owner)).to be false
+      end
+
+      it "should promote a member" do
+        post update_membership_gaming_group_url(gaming_group), params: {user_id: member.id}
+        gaming_group.reload
+        expect(gaming_group.is_owner?(member)).to be true
+      end
+    end
+
+    describe "POST /remove_user" do
+      it "should remove an owner" do
+        post remove_user_gaming_group_url(gaming_group), params: {user_id: owner.id}
+        gaming_group.reload
+        expect(gaming_group.users).not_to include(owner)
+      end
+
+      it "should promote a member" do
+        post remove_user_gaming_group_url(gaming_group), params: {user_id: member.id}
+        gaming_group.reload
+        expect(gaming_group.users).not_to include(member)
+      end
+    end
+
+    describe "POST /invite_user" do
+      let(:email) { Faker::Internet.email }
+      let(:existing_user) { create(:user) }
+
+      it "should invite new user and add as member" do
+        post invite_user_gaming_group_url(gaming_group), params: {email:, owner: false}
+        expect(gaming_group.members).to include(User.find_by(email:))
+      end
+
+      it "should invite new user and add as owner" do
+        post invite_user_gaming_group_url(gaming_group), params: {email:, owner: true}
+        expect(gaming_group.owners).to include(User.find_by(email:))
+      end
+
+      it "should invite exising user and add as member" do
+        post invite_user_gaming_group_url(gaming_group), params: {email: existing_user.email, owner: false}
+        expect(gaming_group.members).to include(existing_user)
+      end
+
+      it "should invite exising user and add as owner" do
+        post invite_user_gaming_group_url(gaming_group), params: {email: existing_user.email, owner: true}
+        expect(gaming_group.owners).to include(existing_user)
+      end
+    end
+  end
 end

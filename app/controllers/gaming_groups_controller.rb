@@ -1,5 +1,5 @@
 class GamingGroupsController < ApplicationController
-  before_action :set_gaming_group, only: %i[show edit update destroy]
+  before_action :set_gaming_group, only: %i[show edit update destroy update_membership remove_user invite_user]
 
   # GET /gaming_groups or /gaming_groups.json
   def index
@@ -54,6 +54,37 @@ class GamingGroupsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to gaming_groups_url, notice: "Gaming group was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def update_membership
+    user = User.find(params.permit(:user_id)[:user_id])
+    membership = @gaming_group.user_group_memberships.find_by(user:)
+    membership.owner = !membership.owner
+    if membership.save
+      redirect_to(@gaming_group, notice: "Membership updated")
+    else
+      redirect_to(@gaming_group, alert: "Unable to update membership")
+    end
+  end
+
+  def remove_user
+    user = User.find(params.permit(:user_id)[:user_id])
+    membership = @gaming_group.user_group_memberships.find_by(user:)
+    if membership.destroy
+      redirect_to(@gaming_group, notice: "User removed from group")
+    else
+      redirect_to(@gaming_group, alert: "Unable to remove user")
+    end
+  end
+
+  def invite_user
+    user = FindOrInviteUserService.call(email: params.permit(:email)[:email], inviter: current_user)
+    membership = UserGroupMembership.new(user:, gaming_group: @gaming_group, owner: params.permit(:owner)[:owner])
+    if membership.save
+      redirect_to(@gaming_group, notice: "User added to group")
+    else
+      redirect_to(@gaming_group, alert: "Unable to add user")
     end
   end
 

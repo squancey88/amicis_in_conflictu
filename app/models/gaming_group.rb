@@ -4,4 +4,16 @@ class GamingGroup < ApplicationRecord
   has_many :gaming_sessions, dependent: :destroy
 
   validates :name, presence: true
+
+  def owners
+    users.joins(:user_group_memberships).where(user_group_memberships: {owner: true})
+  end
+
+  def members
+    users.joins(:user_group_memberships).where(user_group_memberships: {owner: false})
+  end
+
+  def is_owner?(user)
+    users.joins(:user_group_memberships).where(user_group_memberships: {owner: true, user:}).any?
+  end
 end
