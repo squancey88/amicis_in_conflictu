@@ -5,6 +5,10 @@ class GamingGroup < ApplicationRecord
 
   validates :name, presence: true
 
+  def is_user?(user)
+    users.find_by(id: user.id).present?
+  end
+
   def owners
     users.joins(:user_group_memberships).where(user_group_memberships: {owner: true})
   end

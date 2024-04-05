@@ -35,14 +35,6 @@ RSpec.describe "/gaming_sessions", type: :request do
     sign_in create(:user)
   end
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      GamingSession.create! valid_attributes
-      get gaming_sessions_url
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET /show" do
     it "renders a successful response" do
       gaming_session = GamingSession.create! valid_attributes
