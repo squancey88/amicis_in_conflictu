@@ -13,4 +13,8 @@ class User < ApplicationRecord
       email
     end
   end
+
+  def pending_invite?
+    created_by_invite? && invitation_accepted_at.nil?
+  end
 end

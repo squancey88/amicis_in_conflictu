@@ -6,11 +6,8 @@ class GamingGroupUserOverviewComponent < ViewComponent::Base
   end
 
   def name(user)
-    name = user.fullname
-    if user.invitation_accepted_at.nil?
-      name += " (pending)"
-    end
-    name
+    return "#{user.fullname} (pending)" if user.pending_invite?
+    user.fullname
   end
 
   def draw_menu(user, membership_text)
