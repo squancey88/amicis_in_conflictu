@@ -12,6 +12,6 @@ RSpec.describe RecordShowWrapperComponent, type: :component do
   end
 
   it "should show the title" do
-    expect(page).to have_css("h2", text: "Test")
+    expect(page).to have_css("h3", text: "Test")
   end
 end

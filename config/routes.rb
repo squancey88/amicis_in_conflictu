@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   resources :gaming_systems
   resources :games
   resources :gaming_sessions
-  resources :gaming_groups
+  resources :gaming_groups do
+    member do
+      post :update_membership
+      post :remove_user
+      post :invite_user
+    end
+  end
   devise_for :users
   resources :game_systems
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

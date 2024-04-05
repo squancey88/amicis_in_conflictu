@@ -23,7 +23,8 @@
           "mtxr.sqltools",
           "mtxr.sqltools-driver-pg",
           "KoichiSasada.vscode-rdbg",
-          "wingrunr21.vscode-ruby"
+          "wingrunr21.vscode-ruby",
+          "fooo.ruby-spec-runner"
         ],
         "settings": {
           "terminal.integrated.defaultProfile.linux": "bash",

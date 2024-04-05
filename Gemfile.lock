@@ -111,6 +111,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.9)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.5.1)
     docile (1.4.0)
     drb (2.2.1)
@@ -120,6 +123,8 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faker (3.3.0)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -362,7 +367,9 @@ DEPENDENCIES
   cssbundling-rails (~> 1.4)
   debug
   devise
+  devise_invitable (~> 2.0.0)
   factory_bot_rails
+  faker
   importmap-rails
   jbuilder
   jsbundling-rails (~> 1.3)

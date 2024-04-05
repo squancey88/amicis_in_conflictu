@@ -1,0 +1,49 @@
+<div class="bg-body-tertiary rounded-3 p-3">
+
+  <div class="gaming-group-user-overview_header">
+    <div class="gaming-group-user-overview_header-text">
+      <h3>Members</h3>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header">Owners</div>
+    <ul class="list-group list-group-flush">
+      <% @gaming_group.owners.each do |owner| %>
+        <li class="list-group-item">
+          <div class="user-row">
+            <div class="user-row__name">
+              <%= name(owner) %>
+            </div>
+            <div class="user-row__menu">
+              <%= draw_menu(owner, 'Demote') %> 
+            </div>
+          <div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Members</div>
+    <ul class="list-group list-group-flush">
+      <% @gaming_group.members.each do |member| %>
+        <li class="list-group-item">
+          <div class="user-row">
+            <div class="user-row__name">
+              <%= name(member) %>
+            </div>
+            <div class="user-row__menu">
+              <%= draw_menu(member, 'Promote') %> 
+            </div>
+          <div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class=mt-2>
+    <%= render UserInviteModalComponent.new(gaming_group: @gaming_group) %>
+  </div>
+
+</div>
