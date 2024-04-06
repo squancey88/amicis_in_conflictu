@@ -7,7 +7,7 @@
       <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
     </div>
     <div class="col">
-      <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group) %>
+      <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
     </div>
   </div>
 </div>

@@ -1,10 +1,6 @@
 class GamingSessionsController < ApplicationController
   before_action :set_gaming_session, only: %i[show edit update destroy]
-
-  # GET /gaming_sessions or /gaming_sessions.json
-  def index
-    @gaming_sessions = GamingSession.all
-  end
+  before_action :has_access, only: %i[show edit update destroy]
 
   # GET /gaming_sessions/1 or /gaming_sessions/1.json
   def show
@@ -58,6 +54,10 @@ class GamingSessionsController < ApplicationController
   end
 
   private
+
+  def has_access
+    @gaming_session.gaming_group.is_user?(current_user)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_gaming_session

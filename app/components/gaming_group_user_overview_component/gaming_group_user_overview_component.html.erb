@@ -42,8 +42,10 @@
     </ul>
   </div>
 
-  <div class=mt-2>
-    <%= render UserInviteModalComponent.new(gaming_group: @gaming_group) %>
-  </div>
+  <% if @gaming_group.is_owner?(@current_user) %>
+    <div class=mt-2>
+      <%= render UserInviteModalComponent.new(gaming_group: @gaming_group) %>
+    </div>
+  <% end %>
 
 </div>

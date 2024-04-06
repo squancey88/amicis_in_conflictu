@@ -3,7 +3,7 @@
     <div class="col">
       <%= render RecordShowWrapperComponent.new(
         record: @gaming_session,
-        title: @gaming_session.to_s,
+        title: l(@gaming_session.start_time),
         menu_options: [
           { 
             text: "Edit",

@@ -15,6 +15,8 @@ RSpec.describe GamingGroup, type: :model do
     user
   }
 
+  let(:not_member) { create(:user) }
+
   context "attributes" do
     it { expect(gaming_group).to have_attributes(name: "Test") }
   end
@@ -30,5 +32,11 @@ RSpec.describe GamingGroup, type: :model do
   it "should correctly return for is_owner?" do
     expect(gaming_group.is_owner?(owner)).to be true
     expect(gaming_group.is_owner?(member)).to be false
+  end
+
+  it "should correctly return for is_user?" do
+    expect(gaming_group.is_user?(owner)).to be true
+    expect(gaming_group.is_user?(member)).to be true
+    expect(gaming_group.is_user?(not_member)).to be false
   end
 end

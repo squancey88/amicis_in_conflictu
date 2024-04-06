@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :gaming_systems
   resources :games
-  resources :gaming_sessions
+  resources :gaming_sessions, except: %i[index]
   resources :gaming_groups do
     member do
       post :update_membership

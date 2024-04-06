@@ -1,5 +1,7 @@
 class GamingGroupsController < ApplicationController
   before_action :set_gaming_group, only: %i[show edit update destroy update_membership remove_user invite_user]
+  before_action :check_owner, only: %i[update edit update_membership remove_user invite_user destroy]
+  before_action :check_member, only: %i[show]
 
   # GET /gaming_groups or /gaming_groups.json
   def index
@@ -89,6 +91,14 @@ class GamingGroupsController < ApplicationController
   end
 
   private
+
+  def check_member
+    redirect_to(root_url, alert: "You cannot access this group") unless @gaming_group.is_user?(current_user)
+  end
+
+  def check_owner
+    redirect_to(@gaming_group, alert: "You cannot perform this action as you are not the owner") unless @gaming_group.is_owner?(current_user)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_gaming_group
