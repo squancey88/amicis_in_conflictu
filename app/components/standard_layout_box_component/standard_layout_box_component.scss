@@ -1,0 +1,18 @@
+.standard-box {
+  &_header{
+    display: flex;
+    flex-direction: row;
+
+    &-text {
+      flex: 1 1 70%;
+    }
+
+    &-menu {
+      flex: 0 1 30%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+  }
+}

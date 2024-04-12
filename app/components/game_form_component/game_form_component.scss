@@ -1,0 +1,26 @@
+.turn-grid {
+
+  &_row {
+    display: grid;
+    grid-template-columns: 50px repeat(var(--player-count), 1fr);
+
+    &--header {
+      text-align: center;
+    }
+  }
+
+  &_turn-number {
+    font-size: 20px;
+  }
+}
+
+.game-turns {
+  display: flex;
+  flex-direction: column;
+
+  .game-turn-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,47 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGameModal">
+  New Game
+</button>
+
+<div class="modal" tabindex="-1" id="newGameModal" data-controller="new-game-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Game</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_for @new_game do |form| %>
+
+        <%= form.hidden_field :gaming_session_id %>
+
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <%= game_system_select(form, :game_system_id) %>
+            <%= form.label :game_system_id %>
+          </div>
+
+          <div class="input-group">
+            <%= player_selection(@gaming_session.gaming_group, "player_select", { 
+                aria_label: "Player select",
+                class: "form-select", 
+                data: {
+                  new_game_modal_target: "playerSelect"
+                }
+              }) %>
+            <button class="btn btn-outline-secondary" type="button" data-action="click->new-game-modal#addPlayer">
+              <i class="bi bi-person-fill-add"></i>
+            </button>
+          </div>
+
+          <div id="players">
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form.submit "Create Game", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

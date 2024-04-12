@@ -1,0 +1,13 @@
+<%= form_with(model: team) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: team, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      <div class="form-floating">
+        <%= form.text_field :name, class: "form-control", placeholder: "Your Groups Name" %>
+        <%= form.label :name %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

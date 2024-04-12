@@ -16,19 +16,25 @@ RSpec.describe "/games", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Game. As you add validations to Game, be sure to
   # adjust the attributes here as well.
-  let(:gaming_group) { create(:gaming_group) }
+  let(:gaming_session) { create(:gaming_session) }
   let(:game_system) { create(:game_system) }
   let(:new_game_system) { create(:game_system) }
+  let(:user) { create(:user) }
+  let(:user2) { create(:user) }
   let(:valid_attributes) {
     {
-      gaming_group_id: gaming_group.id,
-      game_system_id: game_system.id
+      gaming_session_id: gaming_session.id,
+      game_system_id: game_system.id,
+      players_attributes: [
+        {controller_id: user.id, controller_type: "User"},
+        {controller_id: user2.id, controller_type: "User"}
+      ]
     }
   }
 
   let(:invalid_attributes) {
     {
-      gaming_group_id: nil,
+      gaming_session_id: nil,
       game_system_id: nil
     }
   }
@@ -78,7 +84,7 @@ RSpec.describe "/games", type: :request do
 
       it "redirects to the created game" do
         post games_url, params: {game: valid_attributes}
-        expect(response).to redirect_to(game_url(Game.last))
+        expect(response).to redirect_to(Game.last)
       end
     end
 
@@ -138,8 +144,9 @@ RSpec.describe "/games", type: :request do
 
     it "redirects to the games list" do
       game = Game.create! valid_attributes
+      session = game.gaming_session
       delete game_url(game)
-      expect(response).to redirect_to(games_url)
+      expect(response).to redirect_to(session)
     end
   end
 end

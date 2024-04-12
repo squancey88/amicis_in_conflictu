@@ -1,6 +1,11 @@
 FactoryBot.define do
   factory :game do
-    gaming_group { create(:gaming_group) }
-    game_system { create(:game_system) }
+    gaming_session
+    game_system
+
+    before(:create) do |game|
+      players = build_list(:player, 2, :with_team)
+      game.players = players
+    end
   end
 end

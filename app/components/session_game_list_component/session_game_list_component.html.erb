@@ -1,0 +1,20 @@
+<%= render StandardLayoutBoxComponent.new(title: "Games") do |component| %>
+
+  <% component.with_menu do %>
+    <%= render NewGameModalComponent.new(gaming_session: @gaming_session) %>
+  <% end %>
+
+  <% component.with_body do %>
+
+    <% @gaming_session.games.each do |game| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= game.game_system.name %></h5>
+          <%= players_html(game) %>
+          <%= link_to "View", game, class: "card-link" %>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+<% end %>

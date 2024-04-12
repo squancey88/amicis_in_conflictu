@@ -1,0 +1,10 @@
+.player-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+
+  &_fields {
+    flex: 1 1 auto;
+  }
+}

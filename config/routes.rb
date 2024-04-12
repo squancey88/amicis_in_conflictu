@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :teams
+  resources :teams, only: %i[create update destroy]
   resources :gaming_systems
   resources :games
   resources :gaming_sessions, except: %i[index]

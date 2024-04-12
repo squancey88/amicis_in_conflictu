@@ -1,0 +1,15 @@
+<div class="bg-body-tertiary rounded-3 p-3">
+  <div class="standard-box_header">
+    <div class="standard-box_header-text">
+      <h3><%= @title %></h3>
+    </div>
+    <% if menu %>
+      <div class="standard-box_menu">
+        <%= menu %>
+      </div>
+    <% end %>
+  </div>
+  <div class="standard-box-content">
+    <%= body %>
+  </div>
+</div>
