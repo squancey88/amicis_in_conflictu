@@ -18,7 +18,6 @@ RSpec.describe TeamsController, type: :routing do
       expect(get: "/teams/1/edit").to route_to("teams#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/teams").to route_to("teams#create")
     end
