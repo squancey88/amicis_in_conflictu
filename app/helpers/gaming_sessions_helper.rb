@@ -1,6 +1,6 @@
 module GamingSessionsHelper
-  def member_select(form, name, gaming_group, options = {})
-    form.select(name, gaming_group.users.map { [_1.display_name, _1.id] }, options)
+  def member_select(form, name, gaming_group, options = {}, html_options = {})
+    form.select(name, gaming_group.users.map { [_1.display_name, _1.id] }, options, html_options)
   end
 
   def player_selection(gaming_group, name, options = {})

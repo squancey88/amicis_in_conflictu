@@ -1,12 +1,22 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['playerSelect']
+  static targets = ['playerSelect', 'playersList', 'playerTemplate', 'playerRow']
 
   players = [];
   playerIndex = 0;
 
   connect() {
+  }
+
+  removePlayer({params}) {
+    const index = params.playerIndex;
+    this.players.splice(index, 1)
+    this.playerRowTargets.forEach(record => {
+      if(record.dataset.playerIndex == index) {
+        record.remove();
+      }
+    })
   }
 
   addPlayer() {
@@ -15,40 +25,12 @@ export default class extends Controller {
     const option = this.playerSelectTarget.options[index];
     const type = option.dataset.controllerType;
 
-
-    const playerDiv = document.getElementById('players');
-
-    const player = document.createElement('div');
-    player.classList.add('player-selection');
-
-    const name = document.createElement('div')
-    var content = document.createTextNode(option.text);
-    name.appendChild(content);
-
-    const delBtnWrap = document.createElement('div');
-    const btn = document.createElement('button');
-    btn.classList.add('btn');
-
-    const icon = document.createElement('i')
-    icon.classList.add('bi', 'bi-trash3')
-    btn.appendChild(icon);
-    delBtnWrap.appendChild(btn);
-
-    const idInput = document.createElement("input");
-    idInput.type = "hidden";
-    idInput.name = "game[players_attributes]["+this.playerIndex+"][controller_id]";
-    idInput.value = id;
-
-    const typeInput = document.createElement("input");
-    typeInput.type = "hidden";
-    typeInput.name = "game[players_attributes]["+this.playerIndex+"][controller_type]";
-    typeInput.value = type;
-
-    player.appendChild(name);
-    player.appendChild(delBtnWrap);
-    player.appendChild(idInput);
-    player.appendChild(typeInput);
-    playerDiv.appendChild(player)
+    const template = this.playerTemplateTarget;
+    let content = template.innerHTML.replace(/%PLAYER_INDEX%/g, this.playerIndex);
+    content = content.replace(/%ID%/g, id)
+    content = content.replace(/%TYPE%/g, type)
+    content = content.replace(/%NAME%/g, option.text)
+    this.playersListTarget.insertAdjacentHTML('beforeend', content);
 
     this.players.push({ id: id, type: type });
     this.playerIndex++

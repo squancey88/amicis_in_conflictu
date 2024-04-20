@@ -32,7 +32,7 @@
             </button>
           </div>
 
-          <div id="players">
+          <div data-new-game-modal-target="playersList">
           </div>
 
         </div>
@@ -44,4 +44,19 @@
       <% end %>
     </div>
   </div>
+  <template data-new-game-modal-target="playerTemplate">
+    <div class="player-row" data-player-index="%PLAYER_INDEX%" data-new-game-modal-target="playerRow">
+      <input type="hidden" value="%ID%" name="game[players_attributes][%PLAYER_INDEX%][controller_id]">
+      <input type="hidden" value="%TYPE%" name="game[players_attributes][%PLAYER_INDEX%][controller_type]">
+      <div>%NAME%</div>
+      <div>
+        <button type="button" class="btn" 
+          data-new-game-modal-player-index-param="%PLAYER_INDEX%"
+          data-action="click->new-game-modal#removePlayer">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
+    </div>
+  </template>
 </div>
+

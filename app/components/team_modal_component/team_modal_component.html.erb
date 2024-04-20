@@ -20,13 +20,12 @@
           </div>
 
           <%= member_select(form, :user_ids, @gaming_group, { 
-              class: "form-select", 
               multiple: true,          
               aria_label: "Player select",
               data: {
                 new_game_modal_target: "playerSelect"
               }
-            }) %>
+            }, {class: 'form-select'}) %>
 
         </div>
         <div class="modal-footer">

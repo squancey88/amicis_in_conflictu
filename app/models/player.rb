@@ -20,7 +20,7 @@ class Player < ApplicationRecord
       scoring_keys = system.scoring_values
       turns.each do |turn|
         scoring_keys.each do |key|
-          score += turn[key]
+          score += turn[key].to_i
         end
       end
     end

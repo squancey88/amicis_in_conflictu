@@ -3,9 +3,9 @@
 
     <% @gaming_group.teams.each do |team| %>
       <div class="card mb-3">
-        <div class="card-header">
-          <div><%= team.display_name %></div>
-          <div>
+        <div class="card-header gaming-group-team-management__card-header">
+          <div class="title"><%= team.display_name %></div>
+          <div class="menu">
             <%= render TeamModalComponent.new(gaming_group: @gaming_group, team:) do %>
               <i class="bi bi-gear-fill"></i>
             <% end %>

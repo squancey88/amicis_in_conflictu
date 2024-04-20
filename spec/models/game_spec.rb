@@ -56,7 +56,9 @@ RSpec.describe Game, type: :model do
       end
 
       it "should correctly assign winner when finished" do
-        game.finish(finish_reason: "army_wipe")
+        game.finish_reason = "Game End"
+        game.game_state = :finished
+        game.save!
         player1.reload
         player2.reload
         expect(player1.winner).to be false

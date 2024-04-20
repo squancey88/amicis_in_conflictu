@@ -4,28 +4,30 @@ class Game < ApplicationRecord
 
   has_many :players, dependent: :destroy
 
-  enum game_state: {not_played: 0, cancelled: 1, finished: 2, in_progress: 3}
+  enum game_state: {not_played: 0, in_progress: 3, finished: 2, cancelled: 1}
 
   validates :players, presence: true
 
   accepts_nested_attributes_for :players
 
   after_create(:setup_data)
+  after_save(:check_finished)
 
   def setup_data
     self.data = game_system.setup_game_data
     save!
   end
 
-  def editable?
-    finished? || cancelled?
+  def check_finished
+    if finished?
+      set_winners
+    else
+      players.each { |p| p.update_column(:winner, false) }
+    end
   end
 
-  def finish(finish_reason:)
-    self.game_state = :finished
-    self.finish_reason = finish_reason
-    set_winners
-    save!
+  def editable?
+    finished? || cancelled?
   end
 
   def set_winners
