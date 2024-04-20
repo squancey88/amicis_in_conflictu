@@ -78,7 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
   end
 
   create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "CreateTeams"
+    t.string "name"
     t.uuid "gaming_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
