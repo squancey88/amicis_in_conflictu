@@ -1,13 +1,18 @@
 <div class="container">
-  <div class="row gy-5">
+  <div class="row gy-5 mb-2">
     <div class="col">
       <%= render @gaming_group %>
     </div>
     <div class="col">
       <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
     </div>
+  </div>
+  <div class="row gy-5">
     <div class="col">
       <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
+    </div>
+    <div class="col">
+      <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>
     </div>
   </div>
 </div>

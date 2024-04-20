@@ -1,9 +1,6 @@
-<div class="bg-body-tertiary rounded-3 p-3 record-show-wrapper" id="<%= dom_id @record %>">
+<%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
 
-  <div class="record-show-wrapper_header">
-    <div class="record-show-wrapper_header-text">
-      <h3><%= @title %></h3>
-    </div>
+  <% component.with_menu do %>
     <div class="dropdown record-show-wrapper_header-menu">
       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="bi bi-gear-fill"></i> 
@@ -16,10 +13,9 @@
         <% end %>
       </ul>
     </div>
-  </div>
+  <% end %>
 
-  <div class="record-show-content">
+  <% component.with_body do %>
     <%= body %>
-  </div>
-
-</div>
+  <% end %>
+<% end %>

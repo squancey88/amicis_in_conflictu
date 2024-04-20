@@ -49,10 +49,11 @@ class GamesController < ApplicationController
 
   # DELETE /games/1 or /games/1.json
   def destroy
+    session = @game.gaming_session
     @game.destroy!
 
     respond_to do |format|
-      format.html { redirect_to games_url, notice: "Game was successfully destroyed." }
+      format.html { redirect_to session, notice: "Game was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +67,8 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:gaming_group_id, :game_system_id)
+    params.require(:game).permit(:gaming_session_id, :game_system_id,
+      :game_state, :finish_reason,
+      players_attributes: [:id, :controller_id, :controller_type, game_data: {}])
   end
 end

@@ -4,10 +4,12 @@ RSpec.describe "game_systems/index", type: :view do
   before(:each) do
     assign(:game_systems, [
       GameSystem.create!(
-        name: "Name"
+        name: "Name",
+        slug: "name-test-1"
       ),
       GameSystem.create!(
-        name: "Name"
+        name: "Name",
+        slug: "name-test-2"
       )
     ])
   end

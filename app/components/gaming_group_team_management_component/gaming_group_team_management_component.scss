@@ -1,0 +1,11 @@
+.gaming-group-team-management {
+  &__card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .title {
+      flex: 1 0 auto;
+    }
+  }
+}

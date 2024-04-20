@@ -1,0 +1,28 @@
+<%= render StandardLayoutBoxComponent.new(title: "Teams") do |component| %>
+  <% component.with_body do %>
+
+    <% @gaming_group.teams.each do |team| %>
+      <div class="card mb-3">
+        <div class="card-header gaming-group-team-management__card-header">
+          <div class="title"><%= team.display_name %></div>
+          <div class="menu">
+            <%= render TeamModalComponent.new(gaming_group: @gaming_group, team:) do %>
+              <i class="bi bi-gear-fill"></i>
+            <% end %>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% team.users.each do |user| %>
+            <li class="list-group-item">
+              <%= user.display_name %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= render TeamModalComponent.new(gaming_group: @gaming_group) do %>
+      New Team
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,9 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col">
+
+      <%= link_to "Back to session", @game.gaming_session %>
+
       <%= render RecordShowWrapperComponent.new(
         record: @game,
-        title: @game.to_s,
+        title: @game.game_system.name,
         menu_options: [
           { 
             text: "Edit",
@@ -20,6 +23,8 @@
         <% component.with_body do %>
 
           <%= render @game %>
+
+          <%= render GameFormComponent.new(game: @game) %>
         <% end %>
       <% end %>
     </div>

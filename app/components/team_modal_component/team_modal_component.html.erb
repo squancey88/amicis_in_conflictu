@@ -1,0 +1,38 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%= modal_id %>">
+  <%= content %>
+</button>
+
+<div class="modal" tabindex="-1" id="<%= modal_id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Team to <%= @gaming_group.name %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_for(@team) do |form| %>
+        <div class="modal-body">
+
+          <%= form.hidden_field :gaming_group_id %>
+
+          <div class="form-floating mb-3">
+            <%= form.text_field :name, class: "form-control", placeholder: "Team name" %>
+            <%= form.label :name %>
+          </div>
+
+          <%= member_select(form, :user_ids, @gaming_group, { 
+              multiple: true,          
+              aria_label: "Player select",
+              data: {
+                new_game_modal_target: "playerSelect"
+              }
+            }, {class: 'form-select'}) %>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

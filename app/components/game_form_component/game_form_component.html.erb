@@ -1,0 +1,19 @@
+<div>
+  <%= form_for @game do |form| %>
+    <% if @game_system.has_turns? %>
+      <%= render TurnBasedGameFormComponent.new(game: @game) %>
+    <% end %>
+
+    <div class="form-control__finish_section">
+
+      <%= state_select(form, classes: ["mb-3"]) %>
+
+      <% if @game.game_system.finish_reasons %>
+        <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], disabled: @game.editable?) %>
+      <% end %>
+
+    </div>
+
+    <%= form.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

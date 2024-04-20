@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:user) { create(:user, email: "test@testing.co.uk", firstname: "Bruce", surname: "Wayne") }
+  let(:user) { create(:user, email: "test@testing.co.uk", firstname: "Bruce", surname: "Wayne", nickname: "Batman") }
+  let(:user_no_nickname) { create(:user, email: "test@testing.co.uk", firstname: "Bilbo", surname: "Baggins") }
   let(:user_no_name) { create(:user, email: "noname@testing.co.uk", firstname: nil, surname: nil) }
 
   context "attributes" do
@@ -15,6 +16,16 @@ RSpec.describe User, type: :model do
 
     it "should return email if no name" do
       expect(user_no_name.fullname).to eq(user_no_name.email)
+    end
+
+    context "display_name"
+
+    it "should return fullname if no nickname" do
+      expect(user_no_nickname.display_name).to eq(user_no_nickname.fullname)
+    end
+
+    it "should return nickname if has one" do
+      expect(user.display_name).to eq(user.nickname)
     end
   end
 

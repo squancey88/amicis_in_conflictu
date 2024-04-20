@@ -16,19 +16,25 @@ RSpec.describe "/games", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Game. As you add validations to Game, be sure to
   # adjust the attributes here as well.
-  let(:gaming_group) { create(:gaming_group) }
-  let(:game_system) { create(:game_system) }
+  let(:gaming_session) { create(:gaming_session) }
+  let(:game_system) { create(:wargame, :turn_based) }
   let(:new_game_system) { create(:game_system) }
+  let(:user) { create(:user) }
+  let(:user2) { create(:user) }
   let(:valid_attributes) {
     {
-      gaming_group_id: gaming_group.id,
-      game_system_id: game_system.id
+      gaming_session_id: gaming_session.id,
+      game_system_id: game_system.id,
+      players_attributes: [
+        {controller_id: user.id, controller_type: "User"},
+        {controller_id: user2.id, controller_type: "User"}
+      ]
     }
   }
 
   let(:invalid_attributes) {
     {
-      gaming_group_id: nil,
+      gaming_session_id: nil,
       game_system_id: nil
     }
   }
@@ -78,7 +84,7 @@ RSpec.describe "/games", type: :request do
 
       it "redirects to the created game" do
         post games_url, params: {game: valid_attributes}
-        expect(response).to redirect_to(game_url(Game.last))
+        expect(response).to redirect_to(Game.last)
       end
     end
 
@@ -111,6 +117,24 @@ RSpec.describe "/games", type: :request do
         expect(game.game_system).to eq(new_game_system)
       end
 
+      it "should upate player data" do
+        game = Game.create! valid_attributes
+        player = game.players.first
+        data = [{
+          id: player.id,
+          game_data: {
+            turns: [
+              {primary: 5, seconday: 10},
+              {primary: 20, seconday: 10}
+            ]
+          }
+        }]
+        patch game_url(game), params: {game: {players_attributes: data}}
+        player.reload
+        expect(player.game_data["turns"].first["primary"]).to eq("5")
+        expect(player.game_data["turns"].second["primary"]).to eq("20")
+      end
+
       it "redirects to the game" do
         game = Game.create! valid_attributes
         patch game_url(game), params: {game: new_attributes}
@@ -138,8 +162,9 @@ RSpec.describe "/games", type: :request do
 
     it "redirects to the games list" do
       game = Game.create! valid_attributes
+      session = game.gaming_session
       delete game_url(game)
-      expect(response).to redirect_to(games_url)
+      expect(response).to redirect_to(session)
     end
   end
 end

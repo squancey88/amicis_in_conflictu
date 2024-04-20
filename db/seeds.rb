@@ -7,3 +7,32 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+GameSystems::Wargame.find_or_initialize_by(slug: "warhammer-40k-10th-ed").tap do |gs|
+  gs.name = "Warhammer 40k"
+  gs.edition = "10th"
+  gs.competitive = true
+  gs.game_config = {
+    scoring_system: :turn_based,
+    finish_reasons: [
+      "Game End",
+      "Army Wipe",
+      "Player Surrender"
+    ],
+    scoring_name: "VP",
+    turn_data: [
+      {
+        key: :primary,
+        name: "Primary",
+        type: :number,
+        scoring: true
+      },
+      {
+        key: :secondary,
+        name: "Secondary",
+        type: :number,
+        scoring: true
+      }
+    ]
+  }
+end.save!

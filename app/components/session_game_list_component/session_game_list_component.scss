@@ -1,0 +1,9 @@
+.session-game-list__game-player-list {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
+  .winner {
+    color: green;
+  }
+}
