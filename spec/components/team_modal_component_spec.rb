@@ -3,13 +3,35 @@
 require "rails_helper"
 
 RSpec.describe TeamModalComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:gaming_group) { create(:gaming_group) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  context "new team" do
+    before do
+      render_inline(described_class.new(gaming_group:)) { "New Team" }
+    end
+
+    it "should render name input" do
+      expect(page).to have_css('input[name="team[name]"]')
+    end
+
+    it "should render button with correct text" do
+      expect(page).to have_css(".btn", text: "New Team")
+    end
+  end
+
+  context "existing team" do
+    let(:team) { create(:team, gaming_group:, name: "Test Team") }
+
+    before do
+      render_inline(described_class.new(gaming_group:, team:)) { "Edit Team" }
+    end
+
+    it "should render name input" do
+      expect(page).to have_css('input[name="team[name]"][value="Test Team"]')
+    end
+
+    it "should render button with correct text" do
+      expect(page).to have_css(".btn", text: "Edit Team")
+    end
+  end
 end

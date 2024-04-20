@@ -10,8 +10,10 @@ module GameSystems
       scoring_system == "turn_based"
     end
 
-    def setup_game_data
-      {}
+    def scoring_values
+      if has_turns?
+        turn_data.filter_map { _1["key"] if _1["scoring"] }
+      end
     end
 
     def setup_player_data

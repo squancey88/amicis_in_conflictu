@@ -4,12 +4,40 @@ class Game < ApplicationRecord
 
   has_many :players, dependent: :destroy
 
+  enum game_state: {not_played: 0, cancelled: 1, finished: 2, in_progress: 3}
+
   validates :players, presence: true
 
   accepts_nested_attributes_for :players
 
+  after_create(:setup_data)
+
   def setup_data
-    self.data = gaming_system.setup_game_data
+    self.data = game_system.setup_game_data
     save!
+  end
+
+  def editable?
+    finished? || cancelled?
+  end
+
+  def finish(finish_reason:)
+    self.game_state = :finished
+    self.finish_reason = finish_reason
+    set_winners
+    save!
+  end
+
+  def set_winners
+    if game_system.has_turns?
+      by_score = players.map { [_1, _1.calculate_score] }
+      winning_score = by_score.max_by { _1[1] }[1]
+      by_score.each do |player, score|
+        if score == winning_score
+          player.winner = true
+          player.save!
+        end
+      end
+    end
   end
 end

@@ -17,7 +17,7 @@ RSpec.describe "/games", type: :request do
   # Game. As you add validations to Game, be sure to
   # adjust the attributes here as well.
   let(:gaming_session) { create(:gaming_session) }
-  let(:game_system) { create(:game_system) }
+  let(:game_system) { create(:wargame, :turn_based) }
   let(:new_game_system) { create(:game_system) }
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
@@ -115,6 +115,24 @@ RSpec.describe "/games", type: :request do
         patch game_url(game), params: {game: new_attributes}
         game.reload
         expect(game.game_system).to eq(new_game_system)
+      end
+
+      it "should upate player data" do
+        game = Game.create! valid_attributes
+        player = game.players.first
+        data = [{
+          id: player.id,
+          game_data: {
+            turns: [
+              {primary: 5, seconday: 10},
+              {primary: 20, seconday: 10}
+            ]
+          }
+        }]
+        patch game_url(game), params: {game: {players_attributes: data}}
+        player.reload
+        expect(player.game_data["turns"].first["primary"]).to eq("5")
+        expect(player.game_data["turns"].second["primary"]).to eq("20")
       end
 
       it "redirects to the game" do

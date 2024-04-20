@@ -4,10 +4,14 @@ class GameSystem < ApplicationRecord
   validates :name, presence: true
   validates :slug, uniqueness: true
 
-  store_accessor :game_config, :scoring_system
+  store_accessor :game_config, :scoring_system, :finish_reasons
 
   def has_turns?
     false
+  end
+
+  def setup_game_data
+    {}
   end
 
   def setup_player_data

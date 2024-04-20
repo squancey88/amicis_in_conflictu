@@ -1,0 +1,35 @@
+.turn-grid {
+  width: 100%;
+
+  &__cell {
+
+    &--inputs {
+      div {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        justify-content: center;
+      }
+    }
+
+    &--counter {
+     vertical-align: middle;
+     text-align: center;
+    }
+
+    &--player {
+      text-align: center;
+    }
+  }
+}
+
+.game-turns {
+  display: flex;
+  flex-direction: column;
+
+  .game-turn-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+}

@@ -1,44 +1,19 @@
-<div data-controller="game-form">
-  <% if @game_system.has_turns? %>
+<div>
+  <%= form_for @game do |form| %>
+    <% if @game_system.has_turns? %>
+      <%= render TurnBasedGameFormComponent.new(game: @game) %>
+    <% end %>
 
-    <div class="turn-grid" style="--player-count: <%= @game.players.count %>">
-      <div class="turn-grid_row turn-grid_row--header">
-        <div class=""></div>
-        <% @game.players.each do |player| %>
-          <div><%= player.display_name %></div>
-        <% end %>
-      </div>
-      <div data-game-form-target="turnRows">
-        <% @turns.each do |turn| %>
-          <div class="turn-grid_row" data-game-form-target="turnRow">
-            <div class="turn-grid_turn-number">
-              <%= turn %>
-            </div>
-            <% @game.players.each do |player| %>
-              <div class="game-turns">
-                <%= turn_row(player:) %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+    <div class="form-control__finish_section">
+
+      <%= state_select(form, classes: ["mb-3"]) %>
+
+      <% if @game.game_system.finish_reasons %>
+        <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], disabled: @game.editable?) %>
+      <% end %>
+
     </div>
 
-    <template id="empty-turn">
-      <div class="turn-grid_row" data-game-form-target="turnRow">
-        <div class="turn-grid_turn-number">
-          TURN_NUMBER
-        </div>
-        <% @game.players.each do |player| %>
-          <div class="game-turns">
-            <%= turn_row(player:, turn: "TURN_NUMBER") %>
-          </div>
-        <% end %>
-      </div>
-    </template>
-
-    <button class="btn btn-primary" data-action="click->game-form#addTurn">
-      <i class="bi bi-plus-square"></i>
-    </button>
+    <%= form.submit class: "btn btn-primary" %>
   <% end %>
 </div>

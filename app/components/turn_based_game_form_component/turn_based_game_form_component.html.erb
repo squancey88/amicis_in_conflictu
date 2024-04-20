@@ -1,0 +1,56 @@
+<div data-controller="turn-based-game-form">
+
+  <button class="btn btn-primary mb-1" type="button" data-action="click->turn-based-game-form#addTurn">
+    <i class="bi bi-plus-square"></i> Add Turn
+  </button>
+
+  <table class="turn-grid mb-3 table"
+    style="--player-count: <%= @game.players.count %>">
+    <thead>
+      <tr class="turn-grid__row">
+        <th scope="col" class="turn-grid__cell--counter">Turn</th>
+        <% @game.players.each_with_index do |player, player_index| %>
+          <th scope="col" class="turn-grid__cell--player" data-turn-based-game-form-target="playerCol" data-player-id="<%= player_index %>">
+            <%= player.display_name %>
+            <%= hidden_field_tag(players_attributes_form_name(player_index, "[id]"), player.id) %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody data-turn-based-game-form-target="turnGrid">
+      <% (0..@turn_count-1).each_with_index do |turn| %>
+        <tr class="turn-grid__row">
+          <th scope="row" class="turn-grid__cell--counter" data-turn-based-game-form-target="turnCounter">
+            <%= turn+1 %>
+          </th>
+          <% @game.players.each_with_index do |player, player_index| %>
+            <td class="turn-grid__cell--inputs">
+              <div>
+                <% @game_system.turn_data.each do |turn_field| %>
+                  <%= turn_field(player, player_index, turn_field, turn) %>
+                <% end %>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <template id="empty-turn">
+    <tr class="turn-grid__row">
+      <th scope="row" class="turn-grid__cell--counter" data-turn-based-game-form-target="turnCounter">
+        TURN_NUMBER
+      </th>
+      <% @game.players.each_with_index do |player, player_index| %>
+        <td class="turn-grid__cell--inputs">
+          <div>
+            <% @game_system.turn_data.each do |turn_field| %>
+              <%= turn_field(nil, player_index, turn_field) %>
+            <% end %>
+          </div>
+        </td>
+      <% end %>
+    </tr>
+  </template>
+</div>

@@ -14,6 +14,11 @@ GameSystems::Wargame.find_or_initialize_by(slug: "warhammer-40k-10th-ed").tap do
   gs.competitive = true
   gs.game_config = {
     scoring_system: :turn_based,
+    finish_reasons: [
+      "Game End",
+      "Army Wipe",
+      "Player Surrender"
+    ],
     scoring_name: "VP",
     turn_data: [
       {
