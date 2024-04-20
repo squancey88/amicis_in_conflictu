@@ -65,7 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
     t.jsonb "game_data"
     t.jsonb "notes"
     t.index ["controller_type", "controller_id"], name: "index_players_on_controller"
-    t.index ["controller_type", "controller_id"], name: "index_players_on_controller_type_and_controller_id"
     t.index ["game_id"], name: "index_players_on_game_id"
   end
 
@@ -79,7 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
   end
 
   create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
+    t.string "CreateTeams"
     t.uuid "gaming_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

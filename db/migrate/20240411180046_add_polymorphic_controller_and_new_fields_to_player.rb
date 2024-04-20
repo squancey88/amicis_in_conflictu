@@ -6,7 +6,5 @@ class AddPolymorphicControllerAndNewFieldsToPlayer < ActiveRecord::Migration[7.1
       t.jsonb :game_data
       t.jsonb :notes
     end
-
-    add_index :players, [:controller_type, :controller_id]
   end
 end
