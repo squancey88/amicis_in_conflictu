@@ -29,4 +29,19 @@
       <% end %>
     </div>
   </div>
+
+  <% if @current_user_player %>
+    <div class="row mt-3">
+      <div class="col">
+        <%= form_for @current_user_player do |form| %>
+          <%= render RecordFormWrapperComponent.new(form:, record: @current_user_player, 
+            title: "#{@current_user_player.display_name} notes") do |component| %>
+            <% component.with_fields do %>
+              <%= render TextEditorComponent.new(form:, attribute: :notes) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
