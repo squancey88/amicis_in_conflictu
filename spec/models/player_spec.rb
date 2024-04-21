@@ -2,6 +2,8 @@ require "rails_helper"
 
 RSpec.describe Player, type: :model do
   let(:user) { create(:user) }
+  let(:team_users) { create_list(:user, 3) }
+  let(:team) { create(:team, users: team_users) }
   let(:game) { create(:game) }
 
   it "requires controller" do
@@ -12,6 +14,20 @@ RSpec.describe Player, type: :model do
   it "requires game" do
     player = Player.new(controller: user)
     expect(player.save).to be false
+  end
+
+  describe "user_is_player?" do
+    it "should return true if user in team" do
+      player = Player.new(controller: team, game:)
+      expect(player.user_is_player?(team_users.first)).to be true
+      expect(player.user_is_player?(user)).to be false
+    end
+
+    it "should return true if user is player" do
+      player = Player.new(controller: user, game:)
+      expect(player.user_is_player?(team_users.first)).to be false
+      expect(player.user_is_player?(user)).to be true
+    end
   end
 
   context "with turn based data" do

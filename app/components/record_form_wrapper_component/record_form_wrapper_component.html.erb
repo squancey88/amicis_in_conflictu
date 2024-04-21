@@ -1,15 +1,17 @@
-<div class="bg-body-tertiary rounded-3 p-3 record-form-wrapper">
+<%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
 
-  <%= render ErrorPanelComponent.new(
-    model_name: @record.model_name.human, 
-    errors: @record.errors) %>
+  <% component.with_body do %>
+    <%= render ErrorPanelComponent.new(
+      model_name: @record.model_name.human, 
+      errors: @record.errors) %>
 
-  <div class="record-form-wrapper__fields">
-    <%= fields %>
-  </div>
+    <div class="record-form-wrapper__fields">
+      <%= fields %>
+    </div>
 
-  <div class="mt-2">
-    <%= @form.submit(class: "btn btn-primary") %>
-  </div>
+    <div class="mt-2">
+      <%= @form.submit(class: "btn btn-primary") %>
+    </div>
 
-</div>
+  <% end %>
+<% end %>

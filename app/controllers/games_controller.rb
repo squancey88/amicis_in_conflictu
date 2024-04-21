@@ -8,6 +8,7 @@ class GamesController < ApplicationController
 
   # GET /games/1 or /games/1.json
   def show
+    @current_user_player = @game.players.filter { _1.user_is_player?(current_user) }&.first
   end
 
   # GET /games/new

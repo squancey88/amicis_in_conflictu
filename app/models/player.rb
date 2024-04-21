@@ -13,6 +13,14 @@ class Player < ApplicationRecord
     save!
   end
 
+  def user_is_player?(user)
+    if controller_type == "User"
+      controller_id == user.id
+    else
+      controller.users.include?(user)
+    end
+  end
+
   def calculate_score
     score = 0
     system = game.game_system
