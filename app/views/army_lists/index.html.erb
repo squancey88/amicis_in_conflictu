@@ -1,0 +1,14 @@
+<% content_for :title, "Army lists" %>
+
+<h1>Army lists</h1>
+
+<div id="army_lists">
+  <% @army_lists.each do |army_list| %>
+    <%= render army_list %>
+    <p>
+      <%= link_to "Show this army list", army_list %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New army list", new_army_list_path %>

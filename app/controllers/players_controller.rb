@@ -23,6 +23,6 @@ class PlayersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def player_params
-    params.require(:player).permit(:notes)
+    params.require(:player).permit(:notes, player_armies_attributes: [:id, :army_id, :army_list_id])
   end
 end

@@ -1,0 +1,21 @@
+<%= form_with(model: army) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: army, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      <div class="form-floating">
+        <%= form.text_field :name, class: "form-control mb-3", placeholder: "Name" %>
+        <%= form.label :name %>
+      </div>
+
+      <div class="form-floating">
+        <%= game_systems_with_army_select(form, :game_system_id) %>
+        <%= form.label :game_system_id %>
+      </div>
+
+      <%= form.hidden_field :user_id %>
+      
+    <% end %>
+  <% end %>
+<% end %>

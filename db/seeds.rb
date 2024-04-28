@@ -12,6 +12,8 @@ GameSystems::Wargame.find_or_initialize_by(slug: "warhammer-40k-10th-ed").tap do
   gs.name = "Warhammer 40k"
   gs.edition = "10th"
   gs.competitive = true
+  gs.has_armies = true
+  gs.has_army_lists = true
   gs.game_config = {
     scoring_system: :turn_based,
     finish_reasons: [
@@ -41,6 +43,8 @@ GameSystems::Wargame.find_or_initialize_by(slug: "legions-imperialis-1st-ed").ta
   gs.name = "Legions Imperialis"
   gs.edition = "1st"
   gs.competitive = true
+  gs.has_armies = true
+  gs.has_army_lists = true
   gs.game_config = {
     scoring_system: :turn_based,
     finish_reasons: [
@@ -53,6 +57,34 @@ GameSystems::Wargame.find_or_initialize_by(slug: "legions-imperialis-1st-ed").ta
       {
         key: :primary,
         name: "Primary",
+        type: :number,
+        scoring: true
+      }
+    ]
+  }
+end.save!
+
+GameSystems::Wargame.find_or_initialize_by(slug: "underworlds").tap do |gs|
+  gs.name = "Underworlds"
+  gs.edition = "Current"
+  gs.competitive = true
+  gs.has_armies = true
+  gs.game_config = {
+    scoring_system: :turn_based,
+    finish_reasons: [
+      "Game End"
+    ],
+    scoring_name: "Glory",
+    turn_data: [
+      {
+        key: :objectives,
+        name: "Objectives",
+        type: :number,
+        scoring: true
+      },
+      {
+        key: :kills,
+        name: "Kills",
         type: :number,
         scoring: true
       }

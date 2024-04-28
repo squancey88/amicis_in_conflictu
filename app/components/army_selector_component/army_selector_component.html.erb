@@ -1,0 +1,39 @@
+<div class="army-selector mb-3" data-controller="army-selector">
+  <div class="armies" data-army-selector-target="armiesList">
+    <% @player.player_armies.each_with_index do |player_army, index| %>
+      <div class="army-row" data-army-index="<%= index %>" data-army-selector-target="armyRow">
+        <div><%= player_army.army.name %></div>
+        <input type="hidden" value="<%= player_army.id %>" name="player[player_armies_attributes][<%= index %>][id]">
+        <input type="hidden" value="<%= player_army.army.id %>" name="player[player_armies_attributes][<%= index %>][army_id]">
+        <div>
+          <button type="button" class="btn" 
+            data-army-selector-army-index-param="<%= index %>"
+            data-action="click->army-selector#removeArmy">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= army_select %>
+    <%= label_tag "Army" %>
+  </div>
+
+  <button type="button" class="btn btn-primary" data-action="click->army-selector#addArmy">Add Army</button>
+
+  <template data-army-selector-target="armyTemplate">
+    <div class="army-row" data-army-index="%ARMY_INDEX%" data-army-selector-target="armyRow">
+      <div>%NAME%</div>
+      <input type="hidden" value="%ID%" name="player[player_armies_attributes][%ARMY_INDEX%][army_id]">
+      <div>
+        <button type="button" class="btn" 
+          data-army-selector-army-index-param="%ARMY_INDEX%"
+          data-action="click->army-selector#removeArmy">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
+    </div>
+  </template>
+</div>
