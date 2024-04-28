@@ -13,7 +13,6 @@ export default class extends Controller {
     const id = this.armySelectTarget.value;
     const index = this.armySelectTarget.selectedIndex;
     const option = this.armySelectTarget.options[index];
-    const type = option.dataset.controllerType;
 
     const template = this.armyTemplateTarget;
     let content = template.innerHTML.replace(/%ARMY_INDEX%/g, this.armyIndex);
