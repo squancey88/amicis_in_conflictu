@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_131040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "armies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "game_system_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_armies_on_game_system_id"
+    t.index ["user_id"], name: "index_armies_on_user_id"
+  end
+
+  create_table "army_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.jsonb "details"
+    t.uuid "army_id", null: false
+    t.integer "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["army_id"], name: "index_army_lists_on_army_id"
+  end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -24,6 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
     t.boolean "competitive"
     t.string "edition"
     t.string "slug"
+    t.boolean "has_armies", default: false
+    t.boolean "has_army_lists", default: false
     t.index ["slug"], name: "index_game_systems_on_slug", unique: true
   end
 
@@ -53,6 +75,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
     t.datetime "updated_at", null: false
     t.jsonb "notes"
     t.index ["gaming_group_id"], name: "index_gaming_sessions_on_gaming_group_id"
+  end
+
+  create_table "player_armies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "player_id", null: false
+    t.uuid "army_id", null: false
+    t.uuid "army_list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["army_id"], name: "index_player_armies_on_army_id"
+    t.index ["army_list_id"], name: "index_player_armies_on_army_list_id"
+    t.index ["player_id"], name: "index_player_armies_on_player_id"
   end
 
   create_table "players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -122,9 +155,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_144336) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "armies", "game_systems"
+  add_foreign_key "armies", "users"
+  add_foreign_key "army_lists", "armies"
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"
+  add_foreign_key "player_armies", "armies"
+  add_foreign_key "player_armies", "army_lists"
+  add_foreign_key "player_armies", "players"
   add_foreign_key "players", "games"
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"

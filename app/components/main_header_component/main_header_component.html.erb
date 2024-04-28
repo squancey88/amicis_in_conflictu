@@ -20,6 +20,10 @@
             <li><a class="dropdown-item" href="<%= new_gaming_group_path %>">New Group</a></li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= armies_path %>">
+            Your Armies
+          </a>
       </ul>
       <div class="d-flex">
         <%= button_to destroy_user_session_path, class: "nav-link", method: :delete do %>

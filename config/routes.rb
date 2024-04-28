@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :army_lists
+  resources :armies
   resources :teams
   resources :teams, only: %i[create update destroy]
   resources :gaming_systems

@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe "Players", type: :request do
   let(:game) { create(:game) }
   let(:user) { create(:user) }
+  let(:army) { create(:army, user:) }
+  let(:army_list) { create(:army_list, army:) }
   let(:player) { create(:player, controller: user, game:) }
 
   before do
@@ -12,7 +14,10 @@ RSpec.describe "Players", type: :request do
     context "with valid parameters" do
       let(:valid_attributes) {
         {
-          notes: {}.to_json
+          notes: {}.to_json,
+          player_armies_attributes: [
+            army_id: army.id
+          ]
         }
       }
       it "should update player" do
@@ -20,6 +25,8 @@ RSpec.describe "Players", type: :request do
           player: valid_attributes
         }
         expect(response).to redirect_to(game)
+        player.reload
+        expect(player.player_armies[0].army).to eq(army)
       end
     end
 

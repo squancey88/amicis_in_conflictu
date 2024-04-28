@@ -1,6 +1,10 @@
 class Player < ApplicationRecord
   belongs_to :game
   belongs_to :controller, polymorphic: true
+  has_many :player_armies, dependent: :destroy
+  has_many :armies, through: :player_armies, dependent: nil
+
+  accepts_nested_attributes_for :player_armies
 
   delegate :display_name, to: :controller
 
