@@ -1,9 +1,10 @@
 class ArmyListsController < ApplicationController
+  before_action :set_army
   before_action :set_army_list, only: %i[show edit update destroy]
 
   # GET /army_lists or /army_lists.json
   def index
-    @army_lists = current_user.army_lists
+    @army_lists = @army.army_lists
   end
 
   # GET /army_lists/1 or /army_lists/1.json
@@ -12,7 +13,7 @@ class ArmyListsController < ApplicationController
 
   # GET /army_lists/new
   def new
-    @army_list = ArmyList.new
+    @army_list = ArmyList.new(army: @army)
   end
 
   # GET /army_lists/1/edit
@@ -25,7 +26,7 @@ class ArmyListsController < ApplicationController
 
     respond_to do |format|
       if @army_list.save
-        format.html { redirect_to army_list_url(@army_list), notice: "Army list was successfully created." }
+        format.html { redirect_to army_army_list_url(@army, @army_list), notice: "Army list was successfully created." }
         format.json { render :show, status: :created, location: @army_list }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class ArmyListsController < ApplicationController
   def update
     respond_to do |format|
       if @army_list.update(army_list_params)
-        format.html { redirect_to army_list_url(@army_list), notice: "Army list was successfully updated." }
+        format.html { redirect_to army_army_list_url(@army, @army_list), notice: "Army list was successfully updated." }
         format.json { render :show, status: :ok, location: @army_list }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,12 +53,16 @@ class ArmyListsController < ApplicationController
     @army_list.destroy!
 
     respond_to do |format|
-      format.html { redirect_to army_lists_url, notice: "Army list was successfully destroyed." }
+      format.html { redirect_to army_url(@army), notice: "Army list was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
+
+  def set_army
+    @army = Army.find(params[:army_id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_army_list

@@ -7,7 +7,7 @@ module GamesHelper
       else
         "text-bg-secondary"
       end
-      content_tag(:div, player.display_name, class: classes)
+      content_tag(:div, player.display_name, class: classes, title: army_list_str(player))
     end
     player_html_array.join(content_tag(:div, "vs")).html_safe
   end

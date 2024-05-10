@@ -7,11 +7,11 @@
         menu_options: [
           { 
             text: "Edit",
-            link: edit_army_list_path(@army_list)
+            link: edit_army_army_list_path(@army, @army_list)
           },
           {
             text: "Delete",
-            link: army_list_path(@army_list),
+            link: army_army_list_path(@army, @army_list),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           }
         ]
