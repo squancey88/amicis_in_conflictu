@@ -1,8 +1,9 @@
 .armies {
   .army-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
+    &--to-remove {
+      td {
+        background-color: lightcoral;
+      }
+    }
   }
 }

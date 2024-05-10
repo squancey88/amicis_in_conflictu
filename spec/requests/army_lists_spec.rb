@@ -36,7 +36,7 @@ RSpec.describe "/army_lists", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       ArmyList.create! valid_attributes
-      get army_lists_url
+      get army_army_lists_url(army)
       expect(response).to be_successful
     end
   end
@@ -44,14 +44,14 @@ RSpec.describe "/army_lists", type: :request do
   describe "GET /show" do
     it "renders a successful response" do
       army_list = ArmyList.create! valid_attributes
-      get army_list_url(army_list)
+      get army_army_list_url(army, army_list)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_army_list_url
+      get new_army_army_list_url(army)
       expect(response).to be_successful
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe "/army_lists", type: :request do
   describe "GET /edit" do
     it "renders a successful response" do
       army_list = ArmyList.create! valid_attributes
-      get edit_army_list_url(army_list)
+      get edit_army_army_list_url(army, army_list)
       expect(response).to be_successful
     end
   end
@@ -68,25 +68,25 @@ RSpec.describe "/army_lists", type: :request do
     context "with valid parameters" do
       it "creates a new ArmyList" do
         expect {
-          post army_lists_url, params: {army_list: valid_attributes}
+          post army_army_lists_url(army), params: {army_list: valid_attributes}
         }.to change(ArmyList, :count).by(1)
       end
 
       it "redirects to the created army_list" do
-        post army_lists_url, params: {army_list: valid_attributes}
-        expect(response).to redirect_to(army_list_url(ArmyList.last))
+        post army_army_lists_url(army), params: {army_list: valid_attributes}
+        expect(response).to redirect_to(army_army_list_url(army, ArmyList.last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new ArmyList" do
         expect {
-          post army_lists_url, params: {army_list: invalid_attributes}
+          post army_army_lists_url(army), params: {army_list: invalid_attributes}
         }.to change(ArmyList, :count).by(0)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post army_lists_url, params: {army_list: invalid_attributes}
+        post army_army_lists_url(army), params: {army_list: invalid_attributes}
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -102,23 +102,23 @@ RSpec.describe "/army_lists", type: :request do
 
       it "updates the requested army_list" do
         army_list = ArmyList.create! valid_attributes
-        patch army_list_url(army_list), params: {army_list: new_attributes}
+        patch army_army_list_url(army, army_list), params: {army_list: new_attributes}
         army_list.reload
         expect(army_list.name).to eq("New Name")
       end
 
       it "redirects to the army_list" do
         army_list = ArmyList.create! valid_attributes
-        patch army_list_url(army_list), params: {army_list: new_attributes}
+        patch army_army_list_url(army, army_list), params: {army_list: new_attributes}
         army_list.reload
-        expect(response).to redirect_to(army_list_url(army_list))
+        expect(response).to redirect_to(army_army_list_url(army, army_list))
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         army_list = ArmyList.create! valid_attributes
-        patch army_list_url(army_list), params: {army_list: invalid_attributes}
+        patch army_army_list_url(army, army_list), params: {army_list: invalid_attributes}
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -128,14 +128,14 @@ RSpec.describe "/army_lists", type: :request do
     it "destroys the requested army_list" do
       army_list = ArmyList.create! valid_attributes
       expect {
-        delete army_list_url(army_list)
+        delete army_army_list_url(army, army_list)
       }.to change(ArmyList, :count).by(-1)
     end
 
     it "redirects to the army_lists list" do
       army_list = ArmyList.create! valid_attributes
-      delete army_list_url(army_list)
-      expect(response).to redirect_to(army_lists_url)
+      delete army_army_list_url(army, army_list)
+      expect(response).to redirect_to(army_url(army))
     end
   end
 end

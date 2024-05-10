@@ -36,7 +36,7 @@ RSpec.describe "Players", type: :request do
           notes: {}
         }
       }
-      it "should update player" do
+      it "should not update player" do
         patch player_url(player), params: {player: invalid_attributes}
         expect(response).to have_http_status(400)
       end

@@ -1,8 +1,9 @@
-<%= form_with(model: army_list) do |form| %>
+<%= form_with(model: [@army, army_list]) do |form| %>
 
   <%= render RecordFormWrapperComponent.new(record: army_list, form:) do |component| %>
 
     <% component.with_fields do %>
+      <%= form.hidden_field :army_id %>
 
       <div class="form-floating">
         <%= form.text_field :name, class: "form-control mb-3", placeholder: "Name" %>
@@ -10,19 +11,11 @@
       </div>
 
       <div class="form-floating">
-        <%= form.text_field :details, class: "form-control mb-3", placeholder: "Details" %>
-        <%= form.label :details %>
-      </div>
-
-      <div class="form-floating">
-        <%= form.text_field :army_id, class: "form-control mb-3", placeholder: "Army" %>
-        <%= form.label :army_id %>
-      </div>
-
-      <div class="form-floating">
         <%= form.number_field :cost, class: "form-control mb-3", placeholder: "Cost" %>
         <%= form.label :cost %>
       </div>
+
+      <%= render TextEditorComponent.new(form:, attribute: :details) %>
       
     <% end %>
   <% end %>
