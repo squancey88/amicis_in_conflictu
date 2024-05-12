@@ -1,31 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <%= render RecordShowWrapperComponent.new(
-        record: @gaming_session,
-        title: l(@gaming_session.start_time),
-        menu_options: [
-          { 
-            text: "Edit",
-            link: edit_gaming_session_path(@gaming_session)
-          },
-          {
-            text: "Delete",
-            link: gaming_session_path(@gaming_session),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          }
-        ]
-      ) do |component| %>
+  <%= render RecordShowWrapperComponent.new(
+    record: @gaming_session,
+    title: l(@gaming_session.start_time),
+    classes: ["mb-3"],
+    menu_options: [
+      { 
+        text: "Edit",
+        link: edit_gaming_session_path(@gaming_session)
+      },
+      {
+        text: "Delete",
+        link: gaming_session_path(@gaming_session),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      }
+    ]
+  ) do |component| %>
 
-        <% component.with_body do %>
+    <% component.with_body do %>
 
-          <%= render @gaming_session %>
-        <% end %>
-      <% end %>
-    </div>
+      <%= render @gaming_session %>
+    <% end %>
+  <% end %>
 
-    <div class="col">
-      <%= render SessionGameListComponent.new(gaming_session: @gaming_session) %>
-    </div>
-  </div>
+  <%= render SessionGameListComponent.new(gaming_session: @gaming_session) %>
 </div>

@@ -1,0 +1,37 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= @game.game_system.name %>
+      <%= state_badge(@game) %>
+    </h5>
+    <% if @game.winners.any? %>
+      <div class="session-game-list__game-player-list">
+        <div>Winners:</div>
+        <% @game.winners.each do |winner| %>
+          <%= winner_badge(winner) %>
+        <% end %>
+      </div>
+    <% end %>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <% @game.players.each do |player| %>
+            <th scope="col">
+              <%= player.display_name %>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% @game.players.each do |player| %>
+            <td>
+              <%= player.calculate_score %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "View", @game, class: "card-link" %>
+  </div>
+</div>

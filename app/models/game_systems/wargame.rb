@@ -12,7 +12,13 @@ module GameSystems
 
     def scoring_values
       if has_turns?
-        turn_data.filter_map { _1["key"] if _1["scoring"] }
+        turn_data.filter { _1["scoring"] }
+      end
+    end
+
+    def scoring_keys
+      if has_turns?
+        scoring_values.pluck("key")
       end
     end
 
