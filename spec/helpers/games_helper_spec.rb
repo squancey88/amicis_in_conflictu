@@ -1,14 +1,24 @@
 require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the GamesHelper. For example:
-#
-# describe GamesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe GamesHelper, type: :helper do
+  describe "players_html" do
+    let(:game) { create(:game) }
+
+    it "should include the correct class" do
+      expect(helper.players_html(game)).to have_css(".badge", count: 2)
+    end
+
+    describe "with winner" do
+      before do
+        player = game.players.first
+        player.winner = true
+        player.save!
+        game.reload
+      end
+
+      it "should include the correct class" do
+        expect(helper.players_html(game)).to have_css(".text-bg-success", count: 1)
+      end
+    end
+  end
 end

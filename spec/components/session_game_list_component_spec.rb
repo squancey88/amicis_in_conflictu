@@ -12,7 +12,7 @@ RSpec.describe SessionGameListComponent, type: :component do
     render_inline(described_class.new(gaming_session:))
   end
 
-  it "should show the gaming system name" do
-    expect(page).to have_css(".card-title", text: wargame.name)
+  it "should have the box title" do
+    expect(page).to have_css("h3", text: "Games")
   end
 end

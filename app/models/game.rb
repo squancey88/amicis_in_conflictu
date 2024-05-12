@@ -30,6 +30,10 @@ class Game < ApplicationRecord
     finished? || cancelled?
   end
 
+  def winners
+    players.where(winner: true)
+  end
+
   def set_winners
     if game_system.has_turns?
       by_score = players.map { [_1, _1.calculate_score] }

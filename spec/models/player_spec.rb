@@ -39,7 +39,7 @@ RSpec.describe Player, type: :model do
       before do
         player.turns = [
           {primary: 10, secondary: 5},
-          {primary: 3, secondary: 8}
+          {primary: 3, secondary: 6}
         ]
         player.save!
         player.reload
@@ -50,7 +50,13 @@ RSpec.describe Player, type: :model do
       end
 
       it "should calculate score correctly" do
-        expect(player.calculate_score).to eq(10 + 5 + 3 + 8)
+        expect(player.calculate_score).to eq(10 + 5 + 3 + 6)
+      end
+
+      it "should return keys correctly" do
+        score_hash = player.score_by_keys
+        expect(score_hash[:primary]).to eq(10 + 3)
+        expect(score_hash[:secondary]).to eq(5 + 6)
       end
     end
   end

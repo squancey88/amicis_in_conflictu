@@ -3,21 +3,16 @@
 
   &__cell {
 
-    &--inputs {
-      div {
-        display: flex;
-        flex-direction: row;
-        gap: 5px;
-        justify-content: center;
-      }
+    &-total {
+      text-align: right;
     }
 
-    &--counter {
+    &-counter {
      vertical-align: middle;
      text-align: center;
     }
 
-    &--player {
+    &-player {
       text-align: center;
     }
   }

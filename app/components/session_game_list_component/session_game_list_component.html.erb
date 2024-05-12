@@ -6,20 +6,7 @@
 
   <% component.with_body do %>
 
-    <% @gaming_session.games.each do |game| %>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= game.game_system.name %>
-            <%= state_badge(game) %>
-          </h5>
-          <div class="session-game-list__game-player-list">
-            <%= players_html(game) %>
-          </div>
-          <%= link_to "View", game, class: "card-link" %>
-        </div>
-      </div>
-    <% end %>
+    <%= render(GameSummaryCardComponent.with_collection(@gaming_session.games)) %>
 
   <% end %>
 <% end %>

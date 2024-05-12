@@ -36,4 +36,11 @@ RSpec.describe PlayersHelper, type: :helper do
       expect(army_name(player_armies_with_list)).to eq("#{army.name} (#{list.name})")
     end
   end
+
+  describe "winner_badge" do
+    let(:player) { create(:player, :with_user, :with_game) }
+    it "should have the correct classes" do
+      expect(winner_badge(player)).to include("badge")
+    end
+  end
 end
