@@ -4,14 +4,17 @@
       <%= @game.game_system.name %>
       <%= state_badge(@game) %>
     </h5>
-    <% if @game.winners.any? %>
-      <div class="session-game-list__game-player-list">
-        <div>Winners:</div>
+    <div class="session-game-list__game-player-list">
+      <div>Result: </div>
+      <% if @game.winners.any? %>
+        <div>Winners</div>
         <% @game.winners.each do |winner| %>
           <%= winner_badge(winner) %>
         <% end %>
-      </div>
-    <% end %>
+      <% else %>
+        <div>Draw</div>
+      <% end %>
+    </div>
     <table class="table table-sm">
       <thead>
         <tr>
