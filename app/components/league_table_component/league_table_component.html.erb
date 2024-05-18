@@ -1,0 +1,64 @@
+<%= render StandardLayoutBoxComponent.new(title: "Results", classes: ['mt-2']) do |component| %>
+  <% component.with_body do %>
+    <ul class="nav nav-tabs" id="resultTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="by-user-tab" data-bs-toggle="tab" data-bs-target="#by-user-tab-pane" 
+          type="button" role="tab" aria-controls="by-user-tab-pane" aria-selected="true">
+          Users
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="by-team-tab" data-bs-toggle="tab" data-bs-target="#by-team-tab-pane" 
+          type="button" role="tab" aria-controls="by-team-tab-pane" aria-selected="false">
+          Teams
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content p-2 border border-top-0" id="resultsTabContainer">
+      <div class="tab-pane fade show active" id="by-user-tab-pane" role="tabpanel" aria-labelledby="by-user-tab" tabindex="0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Wins</th>
+              <th>Draws</th>
+              <th>Losses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% by_player.each do |player_row| %>
+              <tr>
+                <td><%= player_row[0].display_name %></td>
+                <td><%= player_row[1] %></td>
+                <td><%= player_row[2] %></td>
+                <td><%= player_row[3] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="by-team-tab-pane" role="tabpanel" aria-labelledby="by-team-tab" tabindex="0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>Wins</th>
+              <th>Draws</th>
+              <th>Losses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% by_team.each do |team_row| %>
+              <tr>
+                <td><%= team_row[0].name %></td>
+                <td><%= team_row[1] %></td>
+                <td><%= team_row[2] %></td>
+                <td><%= team_row[3] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+<% end %>
