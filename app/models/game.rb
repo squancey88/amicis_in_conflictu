@@ -22,7 +22,7 @@ class Game < ApplicationRecord
     if finished?
       set_winners
     else
-      players.each { |p| p.update_column(:winner, false) }
+      players.each { |p| p.update_column(:result, :not_set) }
     end
   end
 
@@ -31,16 +31,25 @@ class Game < ApplicationRecord
   end
 
   def winners
-    players.where(winner: true)
+    players.where(result: :won)
   end
 
   def set_winners
     if game_system.has_turns?
       by_score = players.map { [_1, _1.calculate_score] }
-      winning_score = by_score.max_by { _1[1] }[1]
-      by_score.each do |player, score|
-        if score == winning_score
-          player.winner = true
+      if by_score.map { _2 }.uniq.count <= 1
+        players.each do |p|
+          p.result = :draw
+          p.save!
+        end
+      else
+        winning_score = by_score.max_by { _1[1] }[1]
+        by_score.each do |player, score|
+          player.result = if score == winning_score
+            :won
+          else
+            :lost
+          end
           player.save!
         end
       end

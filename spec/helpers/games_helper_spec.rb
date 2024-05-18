@@ -11,7 +11,7 @@ RSpec.describe GamesHelper, type: :helper do
     describe "with winner" do
       before do
         player = game.players.first
-        player.winner = true
+        player.result = :won
         player.save!
         game.reload
       end

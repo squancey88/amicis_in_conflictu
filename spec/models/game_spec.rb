@@ -38,7 +38,7 @@ RSpec.describe Game, type: :model do
     let(:player1) { game.players.first }
     let(:player2) { game.players.last }
 
-    context "with scores" do
+    context "with winning scores" do
       before do
         player1.turns = [
           {primary: 5, secondary: 3},
@@ -61,8 +61,36 @@ RSpec.describe Game, type: :model do
         game.save!
         player1.reload
         player2.reload
-        expect(player1.winner).to be false
-        expect(player2.winner).to be true
+        expect(player1.lost?).to be true
+        expect(player2.won?).to be true
+      end
+    end
+
+    context "with drawing scores" do
+      before do
+        player1.turns = [
+          {primary: 2, secondary: 6},
+          {primary: 1, secondary: 2}
+        ]
+        player1.save!
+        player1.reload
+
+        player2.turns = [
+          {primary: 5, secondary: 3},
+          {primary: 3, secondary: 0}
+        ]
+        player2.save!
+        player2.reload
+      end
+
+      it "should correctly assign winner when finished" do
+        game.finish_reason = "Game End"
+        game.game_state = :finished
+        game.save!
+        player1.reload
+        player2.reload
+        expect(player1.draw?).to be true
+        expect(player2.draw?).to be true
       end
     end
   end
