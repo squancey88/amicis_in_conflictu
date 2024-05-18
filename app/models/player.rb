@@ -4,6 +4,12 @@ class Player < ApplicationRecord
   has_many :player_armies, dependent: :destroy
   has_many :armies, through: :player_armies, dependent: nil
 
+  belongs_to :user, -> { where(players: {controller_type: "User"}) }, foreign_key: "controller_id",
+    inverse_of: :user_players, optional: true
+
+  belongs_to :team, -> { where(players: {controller_type: "Team"}) }, foreign_key: "controller_id",
+    inverse_of: :team_players, optional: true
+
   enum result: {
     not_set: 0,
     lost: 1,
