@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_131040) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_18_132949) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -90,13 +90,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_131040) do
 
   create_table "players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "game_id", null: false
-    t.boolean "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "controller_type"
     t.uuid "controller_id"
     t.jsonb "game_data"
     t.jsonb "notes"
+    t.integer "result", default: 0
     t.index ["controller_type", "controller_id"], name: "index_players_on_controller"
     t.index ["game_id"], name: "index_players_on_game_id"
   end

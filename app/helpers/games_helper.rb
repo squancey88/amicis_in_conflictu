@@ -2,7 +2,7 @@ module GamesHelper
   def players_html(game)
     player_html_array = game.players.map do |player|
       classes = ["badge"]
-      classes << if player.winner
+      classes << if player.won?
         "text-bg-success"
       else
         "text-bg-secondary"

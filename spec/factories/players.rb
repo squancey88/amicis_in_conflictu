@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :player do
-    winner { false }
-
     trait :with_team do
       association :controller, factory: :team
     end

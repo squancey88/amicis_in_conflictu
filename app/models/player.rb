@@ -4,6 +4,13 @@ class Player < ApplicationRecord
   has_many :player_armies, dependent: :destroy
   has_many :armies, through: :player_armies, dependent: nil
 
+  enum result: {
+    not_set: 0,
+    lost: 1,
+    draw: 2,
+    won: 3
+  }
+
   accepts_nested_attributes_for :player_armies, allow_destroy: true
 
   delegate :display_name, to: :controller
