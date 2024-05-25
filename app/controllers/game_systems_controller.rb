@@ -22,7 +22,6 @@ class GameSystemsController < ApplicationController
   # POST /game_systems or /game_systems.json
   def create
     @game_system = GameSystem.new(game_system_params)
-
     respond_to do |format|
       if @game_system.save
         format.html { redirect_to game_system_url(@game_system), notice: "Game system was successfully created." }
@@ -66,6 +65,6 @@ class GameSystemsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_system_params
-    params.require(:game_system).permit(:name)
+    params.require(:game_system).permit(:name, :slug)
   end
 end

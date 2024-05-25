@@ -20,9 +20,14 @@ class GamingSessionsController < ApplicationController
     @gaming_session = GamingSession.new(gaming_session_params)
 
     respond_to do |format|
-      if @gaming_session.save
-        format.html { redirect_to gaming_session_url(@gaming_session), notice: "Gaming session was successfully created." }
-        format.json { render :show, status: :created, location: @gaming_session }
+      if @gaming_session.valid?
+        if @gaming_session.gaming_group.is_user?(current_user)
+          @gaming_session.save!
+          format.html { redirect_to gaming_session_url(@gaming_session), notice: "Gaming session was successfully created." }
+          format.json { render :show, status: :created, location: @gaming_session }
+        else
+          redirect_to(root_url, notice: "You cannot create a session for a group you are not a member of")
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @gaming_session.errors, status: :unprocessable_entity }
@@ -56,7 +61,7 @@ class GamingSessionsController < ApplicationController
   private
 
   def has_access
-    @gaming_session.gaming_group.is_user?(current_user)
+    redirect_to(@gaming_session.gaming_group) unless @gaming_session.gaming_group.is_user?(current_user)
   end
 
   # Use callbacks to share common setup or constraints between actions.

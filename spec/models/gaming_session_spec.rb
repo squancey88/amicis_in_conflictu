@@ -6,6 +6,15 @@ RSpec.describe GamingSession, type: :model do
   let(:today_gaming_session) { create(:gaming_session, start_time: Time.zone.now) }
   let(:upcoming_gaming_session) { create(:gaming_session, start_time: 3.hours.from_now) }
 
+  context "associations" do
+    it { should belong_to(:gaming_group) }
+    it { should have_many(:games) }
+  end
+
+  context "validations" do
+    it { should validate_presence_of(:start_time) }
+  end
+
   context "attributes" do
     it { expect(gaming_session).to have_attributes(start_time: DateTime.parse("2024/1/1 12:00")) }
     it { expect(gaming_session.to_s).to eq(I18n.l(gaming_session.start_time)) }

@@ -1,7 +1,7 @@
 class GameSystem < ApplicationRecord
   has_many :games, dependent: nil
 
-  validates :name, presence: true
+  validates :name, :slug, presence: true
   validates :slug, uniqueness: true
 
   store_accessor :game_config, :scoring_system, :finish_reasons

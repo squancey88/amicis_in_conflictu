@@ -18,7 +18,8 @@ RSpec.describe "/game_systems", type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-      name: "test"
+      name: "test",
+      slug: Faker::Internet.slug
     }
   }
 

@@ -17,6 +17,17 @@ RSpec.describe GamingGroup, type: :model do
 
   let(:not_member) { create(:user) }
 
+  context "associations" do
+    it { should have_many(:user_group_memberships) }
+    it { should have_many(:users) }
+    it { should have_many(:teams) }
+    it { should have_many(:gaming_sessions) }
+  end
+
+  context "validations" do
+    it { should validate_presence_of(:name) }
+  end
+
   context "attributes" do
     it { expect(gaming_group).to have_attributes(name: "Test") }
   end
