@@ -5,6 +5,14 @@ RSpec.describe User, type: :model do
   let(:user_no_nickname) { create(:user, email: "test@testing.co.uk", firstname: "Bilbo", surname: "Baggins") }
   let(:user_no_name) { create(:user, email: "noname@testing.co.uk", firstname: nil, surname: nil) }
 
+  context "associations" do
+    it { should have_many(:user_group_memberships) }
+    it { should have_many(:gaming_groups) }
+    it { should have_many(:players) }
+    it { should have_many(:armies) }
+    it { should have_many(:army_lists) }
+  end
+
   context "attributes" do
     it { expect(user).to have_attributes(email: "test@testing.co.uk") }
   end

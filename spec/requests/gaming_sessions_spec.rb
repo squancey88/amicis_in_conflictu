@@ -17,6 +17,12 @@ RSpec.describe "/gaming_sessions", type: :request do
   # GamingSession. As you add validations to GamingSession, be sure to
   # adjust the attributes here as well.
   let(:gaming_group) { create(:gaming_group) }
+  let(:member) {
+    user = create(:user)
+    create(:user_group_membership, user:, gaming_group:)
+    user
+  }
+  let(:non_member) { create(:user) }
   let(:valid_attributes) {
     {
       start_time: DateTime.now,
@@ -31,105 +37,177 @@ RSpec.describe "/gaming_sessions", type: :request do
     }
   }
 
-  before do
-    sign_in create(:user)
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      gaming_session = GamingSession.create! valid_attributes
-      get gaming_session_url(gaming_session)
-      expect(response).to be_successful
+  context "as non member" do
+    before do
+      sign_in(non_member)
     end
-  end
 
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_gaming_session_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      gaming_session = create(:gaming_session)
-      get edit_gaming_session_url(gaming_session)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new GamingSession" do
-        expect {
-          post gaming_sessions_url, params: {gaming_session: valid_attributes}
-        }.to change(GamingSession, :count).by(1)
-      end
-
-      it "redirects to the created gaming_session" do
-        post gaming_sessions_url, params: {gaming_session: valid_attributes}
-        expect(response).to redirect_to(gaming_session_url(GamingSession.last))
+    describe "GET /show" do
+      it "redirects to gaming group" do
+        gaming_session = GamingSession.create! valid_attributes
+        get gaming_session_url(gaming_session)
+        expect(response).to redirect_to(gaming_group_url(gaming_group))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new GamingSession" do
+    describe "GET /edit" do
+      it "redirects to gaming group" do
+        gaming_session = create(:gaming_session, gaming_group:)
+        get edit_gaming_session_url(gaming_session)
+        expect(response).to redirect_to(gaming_group_url(gaming_group))
+      end
+    end
+
+    describe "POST /create" do
+      context "with valid parameters" do
+        it "should not create a session attached to gaming group" do
+          expect {
+            post gaming_sessions_url, params: {gaming_session: valid_attributes}
+          }.to change(GamingSession, :count).by(0)
+        end
+      end
+    end
+
+    describe "PATCH /update" do
+      context "with valid parameters" do
+        let(:new_attributes) {
+          {
+            start_time: 2.days.from_now
+          }
+        }
+
+        it "updates the requested gaming_session" do
+          gaming_session = GamingSession.create! valid_attributes
+          patch gaming_session_url(gaming_session), params: {gaming_session: new_attributes}
+          gaming_session.reload
+          expect(gaming_session.start_time).to be_within(1.second).of(valid_attributes[:start_time])
+        end
+
+        it "redirects to the gaming group" do
+          gaming_session = GamingSession.create! valid_attributes
+          patch gaming_session_url(gaming_session), params: {gaming_session: new_attributes}
+          expect(response).to redirect_to(gaming_group_url(gaming_group))
+        end
+      end
+    end
+
+    describe "DELETE /destroy" do
+      it "destroys the requested gaming_session" do
+        gaming_session = GamingSession.create! valid_attributes
         expect {
-          post gaming_sessions_url, params: {gaming_session: invalid_attributes}
+          delete gaming_session_url(gaming_session)
         }.to change(GamingSession, :count).by(0)
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post gaming_sessions_url, params: {gaming_session: invalid_attributes}
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        {
-          start_time: 2.days.from_now
-        }
-      }
-
-      it "updates the requested gaming_session" do
+      it "redirects to the gaming_group" do
         gaming_session = GamingSession.create! valid_attributes
-        patch gaming_session_url(gaming_session), params: {gaming_session: new_attributes}
-        gaming_session.reload
-        expect(gaming_session.start_time).to be_within(1.second).of(new_attributes[:start_time])
-      end
-
-      it "redirects to the gaming_session" do
-        gaming_session = GamingSession.create! valid_attributes
-        patch gaming_session_url(gaming_session), params: {gaming_session: new_attributes}
-        gaming_session.reload
-        expect(response).to redirect_to(gaming_session_url(gaming_session))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        gaming_session = GamingSession.create! valid_attributes
-        patch gaming_session_url(gaming_session), params: {gaming_session: invalid_attributes}
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested gaming_session" do
-      gaming_session = GamingSession.create! valid_attributes
-      expect {
         delete gaming_session_url(gaming_session)
-      }.to change(GamingSession, :count).by(-1)
+        expect(response).to redirect_to(gaming_group)
+      end
+    end
+  end
+
+  context "as member" do
+    before do
+      sign_in(member)
     end
 
-    it "redirects to the gaming_sessions list" do
-      gaming_session = GamingSession.create! valid_attributes
-      delete gaming_session_url(gaming_session)
-      expect(response).to redirect_to(gaming_sessions_url)
+    describe "GET /show" do
+      it "renders a successful response" do
+        gaming_session = GamingSession.create! valid_attributes
+        get gaming_session_url(gaming_session)
+        expect(response).to be_successful
+      end
+    end
+
+    describe "GET /new" do
+      it "renders a successful response" do
+        get new_gaming_session_url
+        expect(response).to be_successful
+      end
+    end
+
+    describe "GET /edit" do
+      it "renders a successful response" do
+        gaming_session = create(:gaming_session, gaming_group:)
+        get edit_gaming_session_url(gaming_session)
+        expect(response).to be_successful
+      end
+    end
+
+    describe "POST /create" do
+      context "with valid parameters" do
+        it "creates a new GamingSession" do
+          expect {
+            post gaming_sessions_url, params: {gaming_session: valid_attributes}
+          }.to change(GamingSession, :count).by(1)
+        end
+
+        it "redirects to the created gaming_session" do
+          post gaming_sessions_url, params: {gaming_session: valid_attributes}
+          expect(response).to redirect_to(gaming_session_url(GamingSession.last))
+        end
+      end
+
+      context "with invalid parameters" do
+        it "does not create a new GamingSession" do
+          expect {
+            post gaming_sessions_url, params: {gaming_session: invalid_attributes}
+          }.to change(GamingSession, :count).by(0)
+        end
+
+        it "renders a response with 422 status (i.e. to display the 'new' template)" do
+          post gaming_sessions_url, params: {gaming_session: invalid_attributes}
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+    end
+
+    describe "PATCH /update" do
+      context "with valid parameters" do
+        let(:new_attributes) {
+          {
+            start_time: 2.days.from_now
+          }
+        }
+
+        it "updates the requested gaming_session" do
+          gaming_session = GamingSession.create! valid_attributes
+          patch gaming_session_url(gaming_session), params: {gaming_session: new_attributes}
+          gaming_session.reload
+          expect(gaming_session.start_time).to be_within(1.second).of(new_attributes[:start_time])
+        end
+
+        it "redirects to the gaming_session" do
+          gaming_session = GamingSession.create! valid_attributes
+          patch gaming_session_url(gaming_session), params: {gaming_session: new_attributes}
+          gaming_session.reload
+          expect(response).to redirect_to(gaming_session_url(gaming_session))
+        end
+      end
+
+      context "with invalid parameters" do
+        it "renders a response with 422 status (i.e. to display the 'edit' template)" do
+          gaming_session = GamingSession.create! valid_attributes
+          patch gaming_session_url(gaming_session), params: {gaming_session: invalid_attributes}
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+    end
+
+    describe "DELETE /destroy" do
+      it "destroys the requested gaming_session" do
+        gaming_session = GamingSession.create! valid_attributes
+        expect {
+          delete gaming_session_url(gaming_session)
+        }.to change(GamingSession, :count).by(-1)
+      end
+
+      it "redirects to the gaming_sessions list" do
+        gaming_session = GamingSession.create! valid_attributes
+        delete gaming_session_url(gaming_session)
+        expect(response).to redirect_to(gaming_sessions_url)
+      end
     end
   end
 end

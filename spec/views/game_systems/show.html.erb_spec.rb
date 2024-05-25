@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe "game_systems/show", type: :view do
   before(:each) do
     @game_system = assign(:game_system, GameSystem.create!(
-      name: "Name"
+      name: "Name",
+      slug: Faker::Internet.slug
     ))
   end
 

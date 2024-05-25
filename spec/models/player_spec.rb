@@ -6,14 +6,23 @@ RSpec.describe Player, type: :model do
   let(:team) { create(:team, users: team_users) }
   let(:game) { create(:game) }
 
-  it "requires controller" do
-    player = Player.new(game:)
-    expect(player.save).to be false
+  context "associations" do
+    it { should belong_to(:game) }
+    it { should belong_to(:controller) }
+    it { should have_many(:player_armies) }
+    it { should have_many(:armies) }
   end
 
-  it "requires game" do
-    player = Player.new(controller: user)
-    expect(player.save).to be false
+  context "validations" do
+    it "requires controller" do
+      player = Player.new(game:)
+      expect(player.valid?).to be false
+    end
+
+    it "requires game" do
+      player = Player.new(controller: user)
+      expect(player.valid?).to be false
+    end
   end
 
   describe "user_is_player?" do
