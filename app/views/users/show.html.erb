@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="<%= column_row_class %>">
+    <div class="col">
+      <%= render RecordShowWrapperComponent.new(
+        record: @user,
+        title: @user.display_name
+      ) do |component| %>
+
+        <% component.with_body do %>
+          <%= form_with(model: @user) do |form| %>
+            <%= render RecordFormWrapperComponent.new(record: @user, form:) do |component| %>
+              <% component.with_fields do %>
+                <%= render 'basic_form', form: %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
