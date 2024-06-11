@@ -1,14 +1,14 @@
 <div class="container">
-  <div class="row gy-5 mb-2">
+  <div class="<%= column_row_class %>">
     <div class="col">
-      <%= render @gaming_group %>
-      <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
-    </div>
-    <div class="col">
+      <div class="mb-2">
+        <%= render @gaming_group %>
+      </div>
       <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
     </div>
-  </div>
-  <div class="row gy-5">
+    <div class="col">
+      <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
+    </div>
     <div class="col">
       <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
     </div>

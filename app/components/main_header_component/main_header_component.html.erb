@@ -26,7 +26,10 @@
           </a>
       </ul>
       <div class="d-flex">
-        <%= button_to destroy_user_session_path, class: "nav-link", method: :delete do %>
+        <%= link_to user_path(current_user), class: "btn nav-link p-2" do %>
+          <i class="bi bi-person-circle"></i>
+        <% end %>
+        <%= button_to destroy_user_session_path, class: "btn nav-link p-2", method: :delete do %>
           <i class="bi bi-box-arrow-right"></i>
         <% end %>
       </div>

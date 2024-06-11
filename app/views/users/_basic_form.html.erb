@@ -1,0 +1,27 @@
+<div class="form-floating mb-3">
+  <%= form.text_field :firstname, class: "form-control", placeholder: "First name" %>
+  <%= form.label :firstname %>
+</div>
+
+<div class="form-floating mb-3">
+  <%= form.text_field :surname, class: "form-control", placeholder: "Surname" %>
+  <%= form.label :surname %>
+</div>
+
+<div class="form-floating mb-3">
+  <%= form.text_field :nickname, class: "form-control", placeholder: "Nick name" %>
+  <%= form.label :nickname %>
+</div>
+
+<% if form.object.class.require_password_on_accepting %>
+
+  <div class="form-floating mb-3">
+    <%= form.password_field :password, class: "form-control", placeholder: "Password" %>
+    <%= form.label :password %>
+  </div>
+  
+  <div class="form-floating mb-3">
+    <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password" %>
+    <%= form.label :password_confirmation %>
+  </div>
+<% end %>
