@@ -70,6 +70,8 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:gaming_session_id, :game_system_id,
       :game_state, :finish_reason,
-      players_attributes: [:id, :controller_id, :controller_type, game_data: {}])
+      players_attributes: [:id, :controller_id, :controller_type, :notes, :surrendered,
+        player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy],
+        game_data: {}])
   end
 end

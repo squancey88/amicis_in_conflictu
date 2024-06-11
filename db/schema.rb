@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_18_132949) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_11_192016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_132949) do
     t.jsonb "game_data"
     t.jsonb "notes"
     t.integer "result", default: 0
+    t.boolean "surrendered", default: false
     t.index ["controller_type", "controller_id"], name: "index_players_on_controller"
     t.index ["game_id"], name: "index_players_on_game_id"
   end

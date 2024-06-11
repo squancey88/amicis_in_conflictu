@@ -1,8 +1,41 @@
-<div>
+<div data-controller="game-form">
   <%= form_for @game do |form| %>
 
     <% if @game_system.has_turns? %>
       <%= render TurnBasedGameFormComponent.new(game: @game) %>
+    <% end %>
+
+    <% if @current_user_player %>
+      <div class="form-control__player-section mb-3">
+        <%= form.fields_for :players, @current_user_player, child_index: @player_index do |player_form| %>
+          <div class="accordion" id="playerData">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#playerArmies" aria-expanded="true" aria-controls="collapseOne">
+                  Your Army
+                </button>
+              </h2>
+              <div id="playerArmies" class="accordion-collapse collapse" data-bs-parent="#playerData">
+                <div class="accordion-body">
+                  <%= render ArmySelectorComponent.new(form: player_form, player: @current_user_player, player_index: @player_index) %>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#playerNotes" aria-expanded="true" aria-controls="collapseOne">
+                  Your Notes
+                </button>
+              </h2>
+              <div id="playerNotes" class="accordion-collapse collapse" data-bs-parent="#playerData">
+                <div class="accordion-body">
+                  <%= render TextEditorComponent.new(form: player_form, attribute: :notes) %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
 
     <div class="form-control__finish_section">
@@ -12,6 +45,15 @@
       <% if @game.game_system.finish_reasons %>
         <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], disabled: @game.editable?) %>
       <% end %>
+
+      <div class="surrender-selection">
+        <% @game.players.each_with_index do |player, index| %>
+          <%= form.fields_for :players, player, child_index: index do |player_form| %>
+            <%= player_form.label :surrendered, player.display_name %>
+            <%= player_form.check_box(:surrendered) %>
+          <% end %>
+        <% end %>
+      </div>
 
     </div>
 
