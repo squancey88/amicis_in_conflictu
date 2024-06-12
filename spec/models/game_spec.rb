@@ -103,5 +103,34 @@ RSpec.describe Game, type: :model do
         expect(player2.draw?).to be true
       end
     end
+
+    context "with drawing scores but a surrendered player" do
+      before do
+        player1.turns = [
+          {primary: 2, secondary: 6},
+          {primary: 1, secondary: 2}
+        ]
+        player1.surrendered = true
+        player1.save!
+        player1.reload
+
+        player2.turns = [
+          {primary: 5, secondary: 3},
+          {primary: 3, secondary: 0}
+        ]
+        player2.save!
+        player2.reload
+      end
+
+      it "should correctly assign winner when finished" do
+        game.finish_reason = "Player Surrender"
+        game.game_state = :finished
+        game.save!
+        player1.reload
+        player2.reload
+        expect(player1.lost?).to be true
+        expect(player2.won?).to be true
+      end
+    end
   end
 end

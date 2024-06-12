@@ -43,14 +43,24 @@
       <%= state_select(form, classes: ["mb-3"]) %>
 
       <% if @game.game_system.finish_reasons %>
-        <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], disabled: @game.editable?) %>
+        <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], 
+              disabled: @game.editable?,
+              data: {
+                action: "game-form#finishChosen"
+              }) %>
       <% end %>
 
-      <div class="surrender-selection">
+      <div class="<%= class_names("surrender-selection", "mb-3", "surrender-selection--show": @game.finish_reason == "Player Surrender") %>" data-game-form-target="surrenderSection">
+        <p>Who surrender?</p>
+        <div class="surrender-selection__players">
         <% @game.players.each_with_index do |player, index| %>
           <%= form.fields_for :players, player, child_index: index do |player_form| %>
-            <%= player_form.label :surrendered, player.display_name %>
-            <%= player_form.check_box(:surrendered) %>
+            <div class="form-check">
+              <%= player_form.label(:surrendered, player.display_name, class: "form-check-label") %>
+              <%= player_form.check_box(:surrendered, class: "form-check-input", data: {
+                "game-form-target": "surrenderCheckBox"
+              }) %>
+            </div>
           <% end %>
         <% end %>
       </div>

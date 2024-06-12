@@ -1,0 +1,15 @@
+.surrender-selection {
+  display: none;
+  border: 1px solid black;
+  padding: $spacer;
+
+  &--show {
+    display: block;
+  }
+
+  &__players {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}

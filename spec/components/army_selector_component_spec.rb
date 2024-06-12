@@ -9,10 +9,11 @@ RSpec.describe ArmySelectorComponent, type: :component do
   let(:army_list) { create(:army_list, army:, user:) }
   let(:player) { create(:player, :with_game, :with_user) }
   let(:player_team) { create(:player, :with_game, controller: team) }
+  let(:form) { double }
 
   describe "player user" do
     before do
-      render_inline(described_class.new(player:))
+      render_inline(described_class.new(form:, player:, player_index: 0))
     end
 
     it "should have a btn" do
@@ -21,7 +22,7 @@ RSpec.describe ArmySelectorComponent, type: :component do
   end
   describe "player team" do
     before do
-      render_inline(described_class.new(player: player_team))
+      render_inline(described_class.new(form:, player: player_team, player_index: 1))
     end
 
     it "should have a btn" do

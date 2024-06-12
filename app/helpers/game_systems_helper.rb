@@ -13,10 +13,10 @@ module GameSystemsHelper
     end
   end
 
-  def finish_reason_select(game_system, form, attribute_name, classes: [], disabled: false)
+  def finish_reason_select(game_system, form, attribute_name, classes: [], disabled: false, data: {})
     content_tag(:div, class: classes + ["form-floating"]) do
       concat(form.select(attribute_name, game_system.finish_reasons,
-        {include_blank: "== Select Reason for Finish =="}, {class: "form-select", disabled:}))
+        {include_blank: "== Select Reason for Finish =="}, {class: "form-select", disabled:, data:}))
       concat(form.label(attribute_name))
     end
   end
