@@ -63,12 +63,12 @@
 
   <template data-turn-based-game-form-target="emptyPlayerRow">
     <tr class="turn-grid__row">
-      <th scope="row" class="turn-grid__cell--counter" data-turn-based-game-form-target="turnCounter">
+      <th scope="row" class="turn-grid__cell-counter" data-turn-based-game-form-target="turnCounter">
         TURN_NUMBER
       </th>
       <% @game.players.each_with_index do |player, player_index| %>
         <% @game_system.turn_data.each do |turn_field| %>
-          <td class="turn-grid__cell--inputs">
+          <td class="turn-grid__cell-inputs">
             <%= turn_field(nil, player_index, turn_field) %>
           </td>
         <% end %>
