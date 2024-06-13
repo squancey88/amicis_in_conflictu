@@ -9,7 +9,7 @@
     </thead>
     <tbody data-army-selector-target="armiesList">
       <% @player.player_armies.each_with_index do |player_army, index| %>
-        <% @form.fields_for :player_armies, player_army, include_id: index do |army_form| %>
+        <% @form.fields_for :player_armies, player_army, child_index: index do |army_form| %>
           <tr class="army-row align-middle" data-army-index="<%= index %>" data-army-selector-target="armyRow">
             <td><%= player_army.army.name %></td>
             <td><%= player_army.army_list&.name %></td>
