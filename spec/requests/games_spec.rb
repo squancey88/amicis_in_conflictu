@@ -40,7 +40,8 @@ RSpec.describe "/games", type: :request do
   }
 
   before do
-    sign_in create(:user)
+    sign_in(user)
+    allow_any_instance_of(GamesController).to receive(:current_user).and_return(user)
   end
 
   describe "GET /index" do

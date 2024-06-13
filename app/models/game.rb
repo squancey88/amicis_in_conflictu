@@ -38,9 +38,16 @@ class Game < ApplicationRecord
     if game_system.has_turns?
       by_score = players.map { [_1, _1.calculate_score] }
       if by_score.map { _2 }.uniq.count <= 1
-        players.each do |p|
-          p.result = :draw
-          p.save!
+        if players.any? { _1.surrendered }
+          players.each do |p|
+            p.result = p.surrendered ? :lost : :won
+            p.save!
+          end
+        else
+          players.each do |p|
+            p.result = :draw
+            p.save!
+          end
         end
       else
         winning_score = by_score.max_by { _1[1] }[1]

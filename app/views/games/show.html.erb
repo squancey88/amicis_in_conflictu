@@ -24,25 +24,10 @@
 
           <%= render @game %>
 
-          <%= render GameFormComponent.new(game: @game) %>
+          <%= render GameFormComponent.new(game: @game, current_user: current_user) %>
         <% end %>
       <% end %>
     </div>
   </div>
 
-  <% if @current_user_player %>
-    <div class="row mt-3">
-      <div class="col">
-        <%= form_for @current_user_player do |form| %>
-          <%= render RecordFormWrapperComponent.new(form:, record: @current_user_player, 
-            title: "#{@current_user_player.display_name}") do |component| %>
-            <% component.with_fields do %>
-              <%= render ArmySelectorComponent.new(player: @current_user_player) %>
-              <%= render TextEditorComponent.new(form:, attribute: :notes) %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
 </div>

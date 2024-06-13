@@ -10,7 +10,6 @@ RSpec.describe "games/edit", type: :view do
   it "renders the edit game form" do
     render
 
-    assert_select "form[action=?][method=?]", game_path(game), "post" do
-    end
+    expect(rendered).to have_css("form[action='#{game_path(game)}']")
   end
 end

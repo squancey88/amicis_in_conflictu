@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class ArmySelectorComponent < ViewComponent::Base
-  def initialize(player:)
+  def initialize(form:, player:, player_index:)
+    @form = form
     @player = player
+    @player_index = player_index
   end
 
   def army_select

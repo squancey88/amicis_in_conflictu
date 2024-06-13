@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["armyTemplate", "armyRow", "armySelect", "armiesList"];
+  static values = { playerIndex: Number }
 
   armyIndex = 0;
 
@@ -27,7 +28,7 @@ export default class extends Controller {
   }
 
   paramName(variableName){
-    return "player[player_armies_attributes]["+ this.armyIndex +"]["+ variableName +"]";
+    return "game[players_attributes][" + this.playerIndexValue + "][player_armies_attributes]["+ this.armyIndex +"]["+ variableName +"]";
   }
 
   drawArmyRow(id, name, lists=null){

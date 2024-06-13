@@ -2,10 +2,12 @@ require "rails_helper"
 
 RSpec.describe GameFormComponent, type: :component do
   let(:game_system) { create(:wargame, :turn_based) }
-  let(:game) { create(:game, game_system:) }
+  let(:user1) { create(:user) }
+  let(:user2) { create(:user) }
+  let(:game) { create(:game, game_system:, user_list: [user1, user2]) }
 
   before do
-    render_inline described_class.new(game:)
+    render_inline described_class.new(game:, current_user: user1)
   end
 
   it "should render the TurnBasedGameFormComponent" do
