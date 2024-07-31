@@ -91,3 +91,37 @@ GameSystems::Wargame.find_or_initialize_by(slug: "underworlds").tap do |gs|
     ]
   }
 end.save!
+
+GameSystems::Wargame.find_or_initialize_by(slug: "aos-spearhead-4th").tap do |gs|
+  gs.name = "AOS - Spearhead"
+  gs.edition = "4th"
+  gs.competitive = true
+  gs.has_armies = true
+  gs.game_config = {
+    scoring_system: :turn_based,
+    finish_reasons: [
+      "Game End"
+    ],
+    scoring_name: "VP",
+    turn_data: [
+      {
+        key: :objectives,
+        name: "Objectives",
+        type: :number,
+        scoring: true
+      },
+      {
+        key: :battle_tactics,
+        name: "Battle Tactics",
+        type: :number,
+        scoring: true
+      },
+      {
+        key: :twist,
+        name: "Twist",
+        type: :number,
+        scoring: true
+      }
+    ]
+  }
+end.save!
