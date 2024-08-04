@@ -1,0 +1,2 @@
+module GameSystems::WargameHelper
+end

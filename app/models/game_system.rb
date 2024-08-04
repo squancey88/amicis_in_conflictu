@@ -23,10 +23,20 @@ class GameSystem < ApplicationRecord
   end
 
   def display_name
-    "#{name} - #{edition}"
+    [name, edition].join(" - ")
   end
+
+  def to_s = display_name
 
   def category
     self.class.category_name
+  end
+
+  def self.schema
+    {
+      title: "Config",
+      type: :object,
+      properties: {}
+    }
   end
 end

@@ -1,0 +1,14 @@
+<% content_for :title, "Game systems" %>
+
+<h1>Wargames</h1>
+
+<div id="wargames">
+  <% @wargames.each do |wargame| %>
+    <%= render wargame %>
+    <p>
+      <%= link_to "Show this wargame", wargame %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New game system", new_game_systems_wargame_path %>
