@@ -1,2 +1,2 @@
 web: bundle exec puma -C config/puma.rb
-# release: bash ./release-tasks.sh
+release: bash ./release-tasks.sh
