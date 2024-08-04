@@ -3,11 +3,11 @@ require "rails_helper"
 RSpec.describe "game_systems/index", type: :view do
   before(:each) do
     assign(:game_systems, [
-      GameSystem.create!(
+      GameSystems::Wargame.create!(
         name: "Name",
         slug: "name-test-1"
       ),
-      GameSystem.create!(
+      GameSystems::Wargame.create!(
         name: "Name",
         slug: "name-test-2"
       )

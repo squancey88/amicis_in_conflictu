@@ -1,0 +1,9 @@
+<div data-controller="json-editor" 
+  data-json-editor-config-value="<%= json_data.to_json %>"
+  data-json-editor-schema-value="<%= @schema.to_json %>"
+  >
+  <div data-json-editor-target="editor"></div>
+
+  <input class="test" type="hidden" data-json-editor-target="config" 
+    name="<%= @model.class.model_name.param_key %>[<%= @attribute %>_json_string]">
+</div>

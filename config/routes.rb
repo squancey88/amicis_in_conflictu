@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   end
   resources :teams
   resources :teams, only: %i[create update destroy]
-  resources :gaming_systems
+  resources :game_systems, only: %i[index]
+  namespace :game_systems do
+    resources :wargames, except: %i[index]
+  end
   resources :games
   resources :gaming_sessions, except: %i[index]
   resources :players, only: %i[update]
@@ -17,7 +20,6 @@ Rails.application.routes.draw do
   end
   devise_for :users
   resources :users, only: %i[show update]
-  resources :game_systems
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

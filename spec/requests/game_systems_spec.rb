@@ -13,21 +13,7 @@ require "rails_helper"
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/game_systems", type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # GameSystem. As you add validations to GameSystem, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    {
-      name: "test",
-      slug: Faker::Internet.slug
-    }
-  }
-
-  let(:invalid_attributes) {
-    {
-      name: nil
-    }
-  }
+  let!(:wargame) { create(:wargame) }
 
   before do
     sign_in create(:user)
@@ -35,107 +21,8 @@ RSpec.describe "/game_systems", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      GameSystem.create! valid_attributes
       get game_systems_url
       expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      game_system = GameSystem.create! valid_attributes
-      get game_system_url(game_system)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_game_system_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      game_system = GameSystem.create! valid_attributes
-      get edit_game_system_url(game_system)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new GameSystem" do
-        expect {
-          post game_systems_url, params: {game_system: valid_attributes}
-        }.to change(GameSystem, :count).by(1)
-      end
-
-      it "redirects to the created game" do
-        post game_systems_url, params: {game_system: valid_attributes}
-        expect(response).to redirect_to(game_system_url(GameSystem.last))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new GameSystem" do
-        expect {
-          post game_systems_url, params: {game_system: invalid_attributes}
-        }.to change(GameSystem, :count).by(0)
-      end
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post game_systems_url, params: {game_system: invalid_attributes}
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        {
-          name: "New Name"
-        }
-      }
-
-      it "updates the requested game" do
-        game_system = GameSystem.create! valid_attributes
-        patch game_system_url(game_system), params: {game_system: new_attributes}
-        game_system.reload
-        expect(game_system.name).to eq("New Name")
-      end
-
-      it "redirects to the game" do
-        game_system = GameSystem.create! valid_attributes
-        patch game_system_url(game_system), params: {game_system: new_attributes}
-        game_system.reload
-        expect(response).to redirect_to(game_system_url(game_system))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        game_system = GameSystem.create! valid_attributes
-        patch game_system_url(game_system), params: {game_system: invalid_attributes}
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested game" do
-      game_system = GameSystem.create! valid_attributes
-      expect {
-        delete game_system_url(game_system)
-      }.to change(GameSystem, :count).by(-1)
-    end
-
-    it "redirects to the games list" do
-      game_system = GameSystem.create! valid_attributes
-      delete game_system_url(game_system)
-      expect(response).to redirect_to(game_systems_url)
     end
   end
 end
