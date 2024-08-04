@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "GameSystems::Wargames", type: :request do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :admin) }
   let(:wargame) { create(:wargame) }
   let(:game_config) {
     {

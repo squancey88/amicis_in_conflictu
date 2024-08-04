@@ -1,6 +1,7 @@
 module GameSystems
   class WargamesController < ApplicationController
     before_action :set_wargame, only: %i[show edit update destroy]
+    before_action :verify_admin
 
     # GET /wargames/1 or /wargames/1.json
     def show

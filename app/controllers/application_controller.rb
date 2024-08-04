@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def verify_admin
+    recdirect_to root_url unless current_user.admin?
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:accept_invitation, keys: [:firstname, :surname])
   end
