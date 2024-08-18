@@ -12,7 +12,6 @@
           <th scope="col" class="turn-grid__cell-counter">Turn</th>
           <% @game.players.each_with_index do |player, player_index| %>
             <th scope="col" class="turn-grid__cell-player" 
-              colspan="<%= @scoring_values.count %>"
               data-turn-based-game-form-target="playerCol" data-player-id="<%= player_index %>">
               <%= player.display_name %>
               <%= hidden_field_tag(players_attributes_form_name(player_index, "[id]"), player.id) %>
@@ -27,11 +26,13 @@
               <%= turn+1 %>
             </th>
             <% @game.players.each_with_index do |player, player_index| %>
-              <% @scoring_values.each do |turn_field| %>
-                <td class="turn-grid__cell-inputs">
-                  <%= turn_field(player, player_index, turn_field, turn) %>
-                </td>
-              <% end %>
+              <td class="turn-grid__cell-inputs">
+                <div class="turn-grid__cell-inputs-wrapper">
+                  <% @scoring_values.each do |turn_field| %>
+                    <%= turn_field(player, player_index, turn_field, turn) %>
+                  <% end %>
+                </div>
+              </td>
             <% end %>
           </tr>
         <% end %>
@@ -41,18 +42,22 @@
           <tr>
             <td>By Score</td>
             <% @game.players.each_with_index do |player, player_index| %>
-              <% @scoring_values.each do |turn_field| %>
-                <td class="turn-grid__cell-total">
-                  <%= player.score_by_keys[turn_field["key"].to_sym] %>
-                </td>
-              <% end %>
+              <td class="turn-grid__cell-total">
+                <div class="turn-grid__cell-total-wrapper">
+                  <% @scoring_values.each do |turn_field| %>
+                    <div class="score-container">
+                      <%= player.score_by_keys[turn_field["key"].to_sym] %>
+                    </div>
+                  <% end %>
+                </div>
+              </td>
             <% end %>
           </tr>
         <% end %>
         <tr>
           <td>Total</td>
           <% @game.players.each_with_index do |player, player_index| %>
-            <td class="turn-grid__cell-total" colspan="<%= @scoring_values.count %>">
+            <td class="turn-grid__cell-total">
               <%= player.score_by_keys.values.sum %>
             </td>
           <% end %>
@@ -67,11 +72,13 @@
         TURN_NUMBER
       </th>
       <% @game.players.each_with_index do |player, player_index| %>
-        <% @game_system.turn_data.each do |turn_field| %>
-          <td class="turn-grid__cell-inputs">
-            <%= turn_field(nil, player_index, turn_field) %>
-          </td>
-        <% end %>
+        <td class="turn-grid__cell-inputs">
+          <div class="turn-grid__cell-inputs-wrapper">
+            <% @game_system.turn_data.each do |turn_field| %>
+              <%= turn_field(nil, player_index, turn_field) %>
+            <% end %>
+          </div>
+        </td>
       <% end %>
     </tr>
   </template>

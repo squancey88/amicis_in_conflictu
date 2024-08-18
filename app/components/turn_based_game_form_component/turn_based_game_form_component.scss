@@ -3,8 +3,28 @@
 
   &__cell {
 
+    &-inputs-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      @include media-breakpoint-up(md) {
+        flex-direction: row;
+      }
+    }
+
     &-total {
       text-align: right;
+
+      &-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+
+        .score-container {
+          flex: 1 1 auto;
+        }
+      }
     }
 
     &-counter {
