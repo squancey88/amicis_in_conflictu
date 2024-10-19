@@ -4,10 +4,48 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
       /* Email styles need to be inline */
+      body {
+        font-family: "Helvetica"
+      }
+
+      div.email-body {
+        width: 800px;
+        margin: 0 auto;
+      }
+
+      div.email-header {
+        border-bottom: 1px solid grey;
+        margin-bottom: 30px;
+        padding: 10px 5px;
+      }
+
+      div.email-content {
+        padding: 0 10px;
+
+      }
+
+      div.email-footer {
+        font-size: 12px;
+        border-top: 1px solid grey;
+        margin-top: 30px;
+        padding: 10px 5px;
+      }
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="email-body">
+      <div class="email-header">
+        Amicis in Conflictu
+      </div>
+
+      <div class="email-content">
+        <%= yield %>
+      </div>
+
+      <div class="email-footer">
+        Email sent from the Amicis in Conflictu system
+      </div>
+    </div>
   </body>
 </html>

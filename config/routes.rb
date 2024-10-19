@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get "login", to: "auth#login", as: :login
+  get "invite", to: "auth#invite", as: :invite
+  get "forgot_password", to: "auth#forgot_password", as: :forgot_password
+  post "logout", to: "auth#logout", as: :logout
+  post "auth/authenticate"
+  post "auth/complete_invite"
+  post "auth/reset_password"
+
   resources :armies do
     resources :army_lists
   end
@@ -18,7 +26,6 @@ Rails.application.routes.draw do
       post :invite_user
     end
   end
-  devise_for :users
   resources :users, only: %i[show update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
