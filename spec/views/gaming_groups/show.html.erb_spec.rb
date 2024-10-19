@@ -5,7 +5,7 @@ RSpec.describe "gaming_groups/show", type: :view do
     assign(:gaming_group, GamingGroup.create!(
       name: "Name"
     ))
-    allow(controller).to receive(:current_user) { create(:user) }
+    allow(view).to receive(:current_user) { create(:user) }
   end
 
   it "renders attributes in <p>" do

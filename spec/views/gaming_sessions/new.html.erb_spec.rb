@@ -7,7 +7,7 @@ RSpec.describe "gaming_sessions/new", type: :view do
     assign(:gaming_session, GamingSession.new(
       gaming_group: nil
     ))
-    allow(controller).to receive(:current_user) { user }
+    allow(view).to receive(:current_user) { user }
   end
 
   it "renders new gaming_session form" do

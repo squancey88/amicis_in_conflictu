@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <%= render MainHeaderComponent.new %>
+    <%= render MainHeaderComponent.new(user: current_user) %>
     <%= render FlashHandlerComponent.new(flash) %>
 
     <div class="container-fluid mt-2">

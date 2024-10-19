@@ -8,9 +8,11 @@ require File.expand_path("../config/environment", __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
 require "support/factory_bot"
+require "support/aic_auth_helper"
 require "view_component/test_helpers"
 require "view_component/system_test_helpers"
 require "capybara/rspec"
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -59,9 +61,7 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-  config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::ControllerHelpers, type: :component
+  config.include AicAuthHelper
 
   config.include ViewComponent::TestHelpers, type: :component
   config.include ViewComponent::SystemTestHelpers, type: :component

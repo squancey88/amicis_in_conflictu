@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="p-3 text-center bg-body-tertiary rounded-3">
+    <h1>Amicis In Conflictu</h1>
+    <h2>Log in</h2>
+
+    <%= form_with(url: auth_authenticate_path) do |f| %>
+      <div class="form-floating mb-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %>
+        <%= f.label :email %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+
+      <div class="actions mt-2">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
