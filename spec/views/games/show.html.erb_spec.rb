@@ -6,7 +6,7 @@ RSpec.describe "games/show", type: :view do
 
   before(:each) do
     assign(:game, create(:game, user_list: [user1, user2]))
-    allow(controller).to receive(:current_user).and_return(user1)
+    allow(view).to receive(:current_user) { create(:user) }
     render
   end
 
