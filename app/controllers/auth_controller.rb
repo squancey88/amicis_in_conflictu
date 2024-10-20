@@ -5,7 +5,7 @@ class AuthController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
+    reset_session
     redirect_to login_url, notice: "Logged out!"
   end
 
@@ -38,6 +38,16 @@ class AuthController < ApplicationController
   end
 
   def forgot_password
+  end
+
+  def request_password_reset
+    email = password_reset_request_params[:email]
+    user = User.find_by(email:)
+    ResetUserPasswordService.call(user:) if user
+    redirect_to login_url, notice: "Password reset sent"
+  end
+
+  def password_reset
     @reset_password_token = reset_params[:reset_password_token]
     if @reset_password_token.nil?
       redirect_to root_url
@@ -47,7 +57,7 @@ class AuthController < ApplicationController
     end
   end
 
-  def reset_password
+  def complete_password_reset
     if reset_params[:reset_password_token]
       user = User.find_by(reset_password_token: reset_params[:reset_password_token])
       if user
@@ -72,11 +82,19 @@ class AuthController < ApplicationController
         user.migrate_to_secure_password(login_params[:password])
         session[:user_id] = user.id
         redirect_to "/"
+      else
+        redirect_to login_url, alert: "Incorrect email or password"
       end
+    else
+      redirect_to login_url, alert: "Incorrect email"
     end
   end
 
   private
+
+  def password_reset_request_params
+    params.permit(:email)
+  end
 
   def login_params
     params.permit(:email, :password)

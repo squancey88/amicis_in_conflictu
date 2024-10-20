@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
   get "forgot_password", to: "auth#forgot_password", as: :forgot_password
+  get "password_reset", to: "auth#password_reset"
   post "logout", to: "auth#logout", as: :logout
   post "auth/authenticate"
   post "auth/complete_invite"
-  post "auth/reset_password"
+  post "auth/complete_password_reset"
+  post "auth/request_password_reset"
 
   resources :armies do
     resources :army_lists
