@@ -14,9 +14,16 @@
       }
 
       div.email-header {
+        border-top: 1px solid grey;
         border-bottom: 1px solid grey;
         margin-bottom: 30px;
         padding: 10px 5px;
+        text-align: center;
+      }
+
+      div.email-header img {
+        height: 85px;
+        width: auto;
       }
 
       div.email-content {
@@ -36,7 +43,7 @@
   <body>
     <div class="email-body">
       <div class="email-header">
-        Amicis in Conflictu
+        <%= image_tag "amicis_in_conflictu_logo" %>
       </div>
 
       <div class="email-content">
