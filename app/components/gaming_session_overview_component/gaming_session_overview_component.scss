@@ -1,0 +1,13 @@
+.gaming-session-overview {
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+
+    h5 {
+      flex: 1 1 auto;
+    }
+  }
+
+}

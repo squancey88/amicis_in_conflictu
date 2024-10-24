@@ -23,20 +23,12 @@
   <div class="tab-content p-2 border border-top-0" id="myTabContent">
     <div class="tab-pane fade show active" id="upcoming-tab-pane" role="tabpanel" aria-labelledby="upcoming-tab" tabindex="0">
       <% @gaming_group.gaming_sessions.upcoming.order(:start_time).each do |session| %>
-        <div class="card mb-1">
-          <div class="card-body">
-            <%= link_to(l(session.start_time), session) %>
-          </div>
-        </div>
-      <% end %>
+        <%= render GamingSessionOverviewComponent.new(gaming_session: session) %>
+      <% end %> 
     </div>
     <div class="tab-pane fade" id="previous-tab-pane" role="tabpanel" aria-labelledby="previous-tab" tabindex="0">
       <% @gaming_group.gaming_sessions.previous.limit(10).order(:start_time).each do |session| %>
-        <div class="card">
-          <div class="card-body">
-            <%= link_to(l(session.start_time), session) %>
-          </div>
-        </div>
+        <%= render GamingSessionOverviewComponent.new(gaming_session: session) %>
       <% end %>
     </div>
     <div class="tab-pane fade" id="calendar-tab-pane" role="tabpanel" aria-labelledby="calendar-tab" tabindex="0">

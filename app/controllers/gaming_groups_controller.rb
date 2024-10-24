@@ -10,6 +10,7 @@ class GamingGroupsController < ApplicationController
 
   # GET /gaming_groups/1 or /gaming_groups/1.json
   def show
+    @gaming_group = GamingGroup.includes(gaming_sessions: {games: {players: [:controller]}}).find(params[:id])
   end
 
   # GET /gaming_groups/new

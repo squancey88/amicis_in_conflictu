@@ -1,0 +1,41 @@
+<div class="card mb-1">
+  <div class="card-body">
+    <div class="gaming-session-overview__header">
+      <h5 class="card-title"><%= l(@gaming_session.start_time) %></h5>
+      <%= link_to("View", @gaming_session, class: ["btn", "btn-primary"]) %>
+    </div>
+    <% if @gaming_session.games.any? %>
+      <div class="accordion" id="results-<%= @gaming_session.id %>">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= @gaming_session.id %>" aria-expanded="true" aria-controls="collapse-<%= @gaming_session.id %>">
+              Results
+            </button>
+          </h2>
+          <div id="collapse-<%= @gaming_session.id %>" class="accordion-collapse collapse" data-bs-parent="#results-<%= @gaming_session.id %>">
+            <div class="accordion-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">System</th>
+                    <th scope="col">Winner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @gaming_session.games.each do |game| %>
+                    <tr>
+                      <td><%= game.game_system.name %></td>
+                      <td><%= game.winners.map{ _1.controller.display_name }.join(", ") %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <p>No games played</p>
+    <% end %>
+  </div>
+</div>
