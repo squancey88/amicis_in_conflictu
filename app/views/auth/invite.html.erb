@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="p-3 text-center bg-body-tertiary rounded-3">
+    <h1>Amicis In Conflictu</h1>
+    <h2>Register</h2>
+
+    <%= form_with(url: auth_complete_invite_path, html: { method: :post }) do |f| %>
+
+      <%= f.hidden_field :invitation_token, value: @invitation_token %>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :confirm_password, class: "form-control", placeholder: "Confirm Password" %>
+        <%= f.label :confirm_password %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Register", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

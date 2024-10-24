@@ -11,7 +11,7 @@ RSpec.describe MainHeaderComponent, type: :component do
     it "should render header" do
       render_inline(described_class.new)
       expect(page).to have_css(".navbar")
-      expect(page).to have_text "Amicis in Conflictu"
+      expect(page).to have_css(".navbar-brand img")
     end
   end
 

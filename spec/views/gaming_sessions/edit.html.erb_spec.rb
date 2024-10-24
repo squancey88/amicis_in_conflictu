@@ -6,7 +6,7 @@ RSpec.describe "gaming_sessions/edit", type: :view do
 
   before(:each) do
     assign(:gaming_session, gaming_session)
-    allow(controller).to receive(:current_user) { user }
+    allow(view).to receive(:current_user) { user }
   end
 
   it "renders the edit gaming_session form" do

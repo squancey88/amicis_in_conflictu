@@ -8,6 +8,19 @@ class FindOrInviteUserService < ApplicationService
     user = User.find_by(email: @email)
     return user if user
 
-    User.invite!({email: @email}, @inviter)
+    invite
+  end
+
+  def invite
+    new_user = User.create!(
+      email: @email,
+      invited_by: @inviter,
+      invitation_created_at: DateTime.now,
+      invitation_token: SecureRandom.hex(20),
+      password_migration: SecureRandom.hex(20),
+      password: SecureRandom.hex(20)
+    )
+    UserMailer.with(user: new_user).invite.deliver_now
+    new_user
   end
 end
