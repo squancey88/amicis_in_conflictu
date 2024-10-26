@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   get "forgot_password", to: "auth#forgot_password", as: :forgot_password
   get "password_reset", to: "auth#password_reset"
   post "logout", to: "auth#logout", as: :logout
-  post "auth/authenticate"
-  post "auth/complete_invite"
-  post "auth/complete_password_reset"
-  post "auth/request_password_reset"
+
+  namespace :auth do
+    post "authenticate"
+    post "authenticate_token"
+    post "complete_invite"
+    post "complete_password_reset"
+    post "request_password_reset"
+  end
 
   resources :armies do
     resources :army_lists

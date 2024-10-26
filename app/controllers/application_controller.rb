@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   include AuthHelper
 
+  skip_before_action :verify_authenticity_token, if: :json_request?
   before_action :authenticate_user
 
   protected
+
+  def json_request?
+    request.format.json?
+  end
 
   def authenticate_user
     redirect_to login_path unless current_user

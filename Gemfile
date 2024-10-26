@@ -84,3 +84,6 @@ gem "cssbundling-rails", "~> 1.4"
 
 gem "jsbundling-rails", "~> 1.3"
 gem "view_component"
+
+gem "jwt"
+gem "rack-cors"

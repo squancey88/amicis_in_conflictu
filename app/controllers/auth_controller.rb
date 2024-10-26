@@ -90,7 +90,33 @@ class AuthController < ApplicationController
     end
   end
 
+  def authenticate_token
+    user = User.find_for_authentication(email: login_params[:email])
+    if user
+      if user.valid_password?(login_params[:password])
+        render json: {
+          token: encode_token({
+            user_id: user.id,
+            exp: 8.hours.from_now.to_i
+          })
+        }
+      else
+        render json: {
+          error: "Invalid login"
+        }
+      end
+    else
+      render json: {
+        error: "Invalid login"
+      }
+    end
+  end
+
   private
+
+  def encode_token(payload)
+    JWT.encode(payload, Rails.configuration.jwt_password)
+  end
 
   def password_reset_request_params
     params.permit(:email)
