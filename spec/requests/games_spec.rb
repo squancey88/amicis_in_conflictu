@@ -165,7 +165,7 @@ RSpec.describe "/games", type: :request do
       game = Game.create! valid_attributes
       session = game.gaming_session
       delete game_url(game)
-      expect(response).to redirect_to(session)
+      expect(response).to redirect_to(gaming_group_gaming_session_url(session.gaming_group, session))
     end
   end
 end

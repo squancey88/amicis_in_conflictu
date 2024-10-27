@@ -6,11 +6,11 @@
     menu_options: [
       { 
         text: "Edit",
-        link: edit_gaming_session_path(@gaming_session)
+        link: edit_gaming_group_gaming_session_path(@gaming_group, @gaming_session)
       },
       {
         text: "Delete",
-        link: gaming_session_path(@gaming_session),
+        link: gaming_group_gaming_session_path(@gaming_group, @gaming_session),
         data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
       }
     ]

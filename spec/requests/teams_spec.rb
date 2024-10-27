@@ -16,11 +16,16 @@ RSpec.describe "/teams", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Team. As you add validations to Team, be sure to
   # adjust the attributes here as well.
-  let(:gaming_group) { create(:gaming_group) }
+  let!(:gaming_group) { create(:gaming_group) }
+  let!(:team) { create(:team, gaming_group:) }
+  let(:member) {
+    user = create(:user)
+    create(:user_group_membership, user:, gaming_group:)
+    user
+  }
   let(:valid_attributes) {
     {
-      name: Faker::Lorem.word,
-      gaming_group_id: gaming_group.id
+      name: Faker::Lorem.word
     }
   }
 
@@ -31,36 +36,33 @@ RSpec.describe "/teams", type: :request do
   }
 
   before do
-    sign_in create(:user)
+    sign_in member
   end
 
   describe "GET /index" do
     it "renders a successful response" do
-      Team.create! valid_attributes
-      get teams_url
+      get gaming_group_teams_url(gaming_group)
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      team = Team.create! valid_attributes
-      get team_url(team)
+      get gaming_group_team_url(gaming_group, team)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_team_url
+      get new_gaming_group_team_url(gaming_group)
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      team = Team.create! valid_attributes
-      get edit_team_url(team)
+      get edit_gaming_group_team_url(gaming_group, team)
       expect(response).to be_successful
     end
   end
@@ -69,25 +71,25 @@ RSpec.describe "/teams", type: :request do
     context "with valid parameters" do
       it "creates a new Team" do
         expect {
-          post teams_url, params: {team: valid_attributes}
+          post gaming_group_teams_url(gaming_group), params: {team: valid_attributes}
         }.to change(Team, :count).by(1)
       end
 
       it "redirects to the created team" do
-        post teams_url, params: {team: valid_attributes}
-        expect(response).to redirect_to(team_url(Team.last))
+        post gaming_group_teams_url(gaming_group), params: {team: valid_attributes}
+        expect(response).to redirect_to(gaming_group_team_url(gaming_group, Team.order(:created_at).last))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Team" do
         expect {
-          post teams_url, params: {team: invalid_attributes}
+          post gaming_group_teams_url(gaming_group), params: {team: invalid_attributes}
         }.to change(Team, :count).by(0)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post teams_url, params: {team: invalid_attributes}
+        post gaming_group_teams_url(gaming_group), params: {team: invalid_attributes}
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -102,24 +104,21 @@ RSpec.describe "/teams", type: :request do
       }
 
       it "updates the requested team" do
-        team = Team.create! valid_attributes
-        patch team_url(team), params: {team: new_attributes}
+        patch gaming_group_team_url(gaming_group, team), params: {team: new_attributes}
         team.reload
         expect(team.name).to eq("new name")
       end
 
       it "redirects to the team" do
-        team = Team.create! valid_attributes
-        patch team_url(team), params: {team: new_attributes}
+        patch gaming_group_team_url(gaming_group, team), params: {team: new_attributes}
         team.reload
-        expect(response).to redirect_to(team_url(team))
+        expect(response).to redirect_to(gaming_group_team_url(gaming_group, team))
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        team = Team.create! valid_attributes
-        patch team_url(team), params: {team: invalid_attributes}
+        patch gaming_group_team_url(gaming_group, team), params: {team: invalid_attributes}
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -127,16 +126,14 @@ RSpec.describe "/teams", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested team" do
-      team = Team.create! valid_attributes
       expect {
-        delete team_url(team)
+        delete gaming_group_team_url(gaming_group, team)
       }.to change(Team, :count).by(-1)
     end
 
     it "redirects to the teams list" do
-      team = Team.create! valid_attributes
-      delete team_url(team)
-      expect(response).to redirect_to(teams_url)
+      delete gaming_group_team_url(gaming_group, team)
+      expect(response).to redirect_to(gaming_group_teams_url(gaming_group))
     end
   end
 end

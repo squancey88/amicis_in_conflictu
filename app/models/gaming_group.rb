@@ -3,6 +3,7 @@ class GamingGroup < ApplicationRecord
   has_many :users, through: :user_group_memberships
   has_many :teams, dependent: :destroy
   has_many :gaming_sessions, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
 
   validates :name, presence: true
 

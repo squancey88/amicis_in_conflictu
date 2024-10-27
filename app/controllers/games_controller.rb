@@ -54,7 +54,7 @@ class GamesController < ApplicationController
     @game.destroy!
 
     respond_to do |format|
-      format.html { redirect_to session, notice: "Game was successfully destroyed." }
+      format.html { redirect_to gaming_group_gaming_session_url(session.gaming_group, session), notice: "Game was successfully destroyed." }
       format.json { head :no_content }
     end
   end

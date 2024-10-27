@@ -2,16 +2,16 @@
   <div class="row">
     <div class="col">
       <%= render RecordShowWrapperComponent.new(
-        record: @team,
-        title: @team.name,
+        record: @campaign,
+        title: @campaign.to_s,
         menu_options: [
           { 
             text: "Edit",
-            link: edit_gaming_group_team_path(@gaming_group, @team)
+            link: edit_gaming_group_campaign_path(@gaming_group, @campaign)
           },
           {
             text: "Delete",
-            link: gaming_group_team_path(@gaming_group, @team),
+            link: gaming_group_campaign_path(@gaming_group, @campaign),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           }
         ]
@@ -19,7 +19,7 @@
 
         <% component.with_body do %>
 
-          <%= render @team %>
+          <%= render @campaign %>
         <% end %>
       <% end %>
     </div>
