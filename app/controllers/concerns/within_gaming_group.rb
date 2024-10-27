@@ -14,7 +14,7 @@ module WithinGamingGroup
     if request.format.html?
       redirect_to(@gaming_group) unless @gaming_group.is_user?(current_user)
     else
-      # TODO Deal with JSON
+      render json: {error: "No access"}, status: :forbidden
     end
   end
 end

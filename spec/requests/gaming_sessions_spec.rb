@@ -33,6 +33,15 @@ RSpec.describe "/gaming_sessions", type: :request do
       end
     end
 
+    describe "GET /show.json" do
+      it "redirects to gaming group" do
+        get gaming_group_gaming_session_url(gaming_group, gaming_session, format: :json)
+        expect(response).to have_http_status(:forbidden)
+        body = JSON.parse(response.body)
+        expect(body["error"]).to eq("No access")
+      end
+    end
+
     describe "GET /edit" do
       it "redirects to gaming group" do
         gaming_session = create(:gaming_session, gaming_group:)
