@@ -1,12 +1,42 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['playerSelect', 'playersList', 'playerTemplate', 'playerRow']
+  static targets = ['playerSelect', 'playersList', 'playerTemplate', 'playerRow', 'campaignSelect', 'submitBtn']
+  static values = {
+    gamingGroupId: String
+  }
 
   players = [];
   playerIndex = 0;
 
   connect() {
+  }
+
+  gameSystemSelected(event){
+    this.submitBtnTarget.disabled = true;
+    if(event.target.value){
+      fetch('/gaming_groups/'+ this.gamingGroupIdValue + '/campaigns.json?filter[game_system_id]='+event.target.value).then(
+        (response) => {
+          response.json().then((campaigns) => this.setCampaigns(campaigns));
+        }
+      )
+    }
+  }
+
+  setCampaigns(campaigns){
+    this.campaignSelectTarget.options.length = 0;
+
+    const option = document.createElement("option");
+    option.text = 'No Campaign'
+    option.value = null;
+    this.campaignSelectTarget.appendChild(option);
+    campaigns.forEach((campaign) => {
+      const option = document.createElement("option");
+      option.text = campaign.name;
+      option.value = campaign.id;
+      this.campaignSelectTarget.appendChild(option);
+    });
+    this.submitBtnTarget.disabled = false;
   }
 
   removePlayer({params}) {

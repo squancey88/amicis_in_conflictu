@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_26_161709) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -68,6 +68,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_26_161709) do
     t.jsonb "notes"
     t.integer "game_state", default: 0
     t.string "finish_reason"
+    t.uuid "campaign_id"
+    t.index ["campaign_id"], name: "index_games_on_campaign_id"
     t.index ["game_system_id"], name: "index_games_on_game_system_id"
     t.index ["gaming_session_id"], name: "index_games_on_gaming_session_id"
   end

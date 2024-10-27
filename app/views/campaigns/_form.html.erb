@@ -10,12 +10,7 @@
       </div>
 
       <div class="form-floating">
-        <%= form.text_field :gaming_group_id, class: "form-control mb-3", placeholder: "Gaming group" %>
-        <%= form.label :gaming_group_id %>
-      </div>
-
-      <div class="form-floating">
-        <%= form.text_field :game_system_id, class: "form-control mb-3", placeholder: "Game system" %>
+        <%= game_system_select(form, :game_system_id) %>
         <%= form.label :game_system_id %>
       </div>
       

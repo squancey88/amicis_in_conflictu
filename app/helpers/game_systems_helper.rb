@@ -1,6 +1,6 @@
 module GameSystemsHelper
-  def game_system_select(form, attribute_name)
-    form.select attribute_name, grouped_options_for_select(game_system_grouped_options(GameSystem.all)), {}, {class: "form-select"}
+  def game_system_select(form, attribute_name, data: {})
+    form.select attribute_name, grouped_options_for_select(game_system_grouped_options(GameSystem.all)), {include_blank: "Please Select"}, {class: "form-select", data:}
   end
 
   def game_systems_with_army_select(form, attribute_name)

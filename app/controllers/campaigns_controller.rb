@@ -4,7 +4,11 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns or /campaigns.json
   def index
-    @campaigns = @gaming_group.campaigns.all
+    @campaigns = if params[:filter]
+      @gaming_group.campaigns.where(**filter_params)
+    else
+      @gaming_group.campaigns.all
+    end
   end
 
   # GET /campaigns/1 or /campaigns/1.json
@@ -68,6 +72,10 @@ class CampaignsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def campaign_params
-    params.require(:campaign).permit(:name, :gaming_group_id, :game_system_id)
+    params.require(:campaign).permit(:name, :game_system_id)
+  end
+
+  def filter_params
+    params.require(:filter).permit(:game_system_id)
   end
 end

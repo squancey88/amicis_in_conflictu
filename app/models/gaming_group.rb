@@ -38,6 +38,8 @@ class GamingGroup < ApplicationRecord
     users.map { flatten_results(_1, data) }
   end
 
+  def to_s = name
+
   private
 
   def flatten_results(model, data)
