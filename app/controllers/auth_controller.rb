@@ -114,10 +114,6 @@ class AuthController < ApplicationController
 
   private
 
-  def encode_token(payload)
-    JWT.encode(payload, Rails.configuration.jwt_password)
-  end
-
   def password_reset_request_params
     params.permit(:email)
   end
