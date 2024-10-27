@@ -3,6 +3,11 @@
     <h5 class="card-title">
       <%= @game.game_system.name %>
       <%= state_badge(@game) %>
+      <% if @game.campaign %>
+        <br>
+        Campaign: <%= @game.campaign.name %>
+      <% end %>
+
     </h5>
     <div class="session-game-list__game-player-list">
       <div>Result: </div>

@@ -54,7 +54,7 @@ class GamesController < ApplicationController
     @game.destroy!
 
     respond_to do |format|
-      format.html { redirect_to session, notice: "Game was successfully destroyed." }
+      format.html { redirect_to gaming_group_gaming_session_url(session.gaming_group, session), notice: "Game was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -68,7 +68,7 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:gaming_session_id, :game_system_id,
+    params.require(:game).permit(:gaming_session_id, :game_system_id, :campaign_id,
       :game_state, :finish_reason,
       players_attributes: [:id, :controller_id, :controller_type, :notes, :surrendered,
         player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy],

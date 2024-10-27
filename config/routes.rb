@@ -12,14 +12,10 @@ Rails.application.routes.draw do
   resources :armies do
     resources :army_lists
   end
-  resources :teams
-  resources :teams, only: %i[create update destroy]
   resources :game_systems, only: %i[index]
   namespace :game_systems do
     resources :wargames, except: %i[index]
   end
-  resources :games
-  resources :gaming_sessions, except: %i[index]
   resources :players, only: %i[update]
   resources :gaming_groups do
     member do
@@ -27,7 +23,14 @@ Rails.application.routes.draw do
       post :remove_user
       post :invite_user
     end
+
+    resources :campaigns
+    resources :teams
+    resources :teams, only: %i[create update destroy]
+    resources :gaming_sessions, except: %i[index]
   end
+
+  resources :games
   resources :users, only: %i[show update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -6,9 +6,9 @@
   <% @gaming_sessions.each do |gaming_session| %>
     <%= render gaming_session %>
     <p>
-      <%= link_to "Show this gaming session", gaming_session %>
+      <%= link_to "Show this gaming session", gaming_group_gaming_session_path(@gaming_group, gaming_session) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New gaming session", new_gaming_session_path %>
+<%= link_to "New gaming session", new_gaming_group_gaming_session_path(@gaming_group) %>

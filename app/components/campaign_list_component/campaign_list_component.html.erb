@@ -1,0 +1,14 @@
+<%= render StandardLayoutBoxComponent.new(title: "Campaigns") do |component| %>
+  <% component.with_body do %>
+
+    <div class="campaign-list">
+      <% @gaming_group.campaigns.each do |campaign| %>
+        <%= link_to campaign.name, [@gaming_group, campaign] %>
+      <% end %>
+    </div>
+
+    <div class=mt-2>
+      <%= link_to "New Campaign", new_gaming_group_campaign_path(@gaming_group), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>

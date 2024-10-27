@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render RecordShowWrapperComponent.new(
+        record: @campaign,
+        title: @campaign.name,
+        menu_options: [
+          { 
+            text: "Edit",
+            link: edit_gaming_group_campaign_path(@gaming_group, @campaign)
+          },
+          {
+            text: "Delete",
+            link: gaming_group_campaign_path(@gaming_group, @campaign),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          }
+        ]
+      ) do |component| %>
+
+        <% component.with_body do %>
+
+          <%= render @campaign %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

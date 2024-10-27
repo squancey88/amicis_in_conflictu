@@ -7,11 +7,11 @@
         menu_options: [
           { 
             text: "Edit",
-            link: edit_team_path(@team)
+            link: edit_gaming_group_team_path(@gaming_group, @team)
           },
           {
             text: "Delete",
-            link: team_path(@team),
+            link: gaming_group_team_path(@gaming_group, @team),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           }
         ]

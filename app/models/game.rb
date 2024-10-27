@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :gaming_session, dependent: nil
   belongs_to :game_system, dependent: nil
+  belongs_to :campaign, dependent: nil, optional: true
 
   has_many :players, dependent: :destroy
 

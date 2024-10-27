@@ -1,4 +1,4 @@
-<%= form_with(model: team) do |form| %>
+<%= form_with(model: team, url: [@gaming_group, team]) do |form| %>
 
   <%= render RecordFormWrapperComponent.new(record: team, form:) do |component| %>
 

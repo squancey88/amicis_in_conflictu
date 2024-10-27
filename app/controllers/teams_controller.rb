@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  include WithinGamingGroup
   before_action :set_team, only: %i[show edit update destroy]
 
   # GET /teams or /teams.json
@@ -22,10 +23,11 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
+    @team.gaming_group = @gaming_group
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
+        format.html { redirect_to gaming_group_team_url(@gaming_group, @team), notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
+        format.html { redirect_to gaming_group_team_url(@gaming_group, @team), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +54,7 @@ class TeamsController < ApplicationController
     @team.destroy!
 
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
+      format.html { redirect_to gaming_group_teams_url(@gaming_group), notice: "Team was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +68,6 @@ class TeamsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def team_params
-    params.require(:team).permit(:gaming_group_id, :name, user_ids: [])
+    params.require(:team).permit(:name, user_ids: [])
   end
 end

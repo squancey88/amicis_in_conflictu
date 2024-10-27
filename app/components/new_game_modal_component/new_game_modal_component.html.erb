@@ -2,7 +2,7 @@
   New Game
 </button>
 
-<div class="modal" tabindex="-1" id="newGameModal" data-controller="new-game-modal">
+<div class="modal" tabindex="-1" id="newGameModal" data-controller="new-game-modal" data-new-game-modal-gaming-group-id-value="<%= @gaming_session.gaming_group.id %>">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,11 +15,13 @@
 
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <%= game_system_select(form, :game_system_id) %>
+            <%= game_system_select(form, :game_system_id, data: {
+              action: "new-game-modal#gameSystemSelected"
+            }) %>
             <%= form.label :game_system_id %>
           </div>
 
-          <div class="input-group">
+          <div class="input-group mb-3">
             <%= player_selection(@gaming_session.gaming_group, "player_select", { 
                 aria_label: "Player select",
                 class: "form-select", 
@@ -35,11 +37,21 @@
           <div data-new-game-modal-target="playersList">
           </div>
 
+          <div class="form-floating mb-3">
+            <%= form.select :campaign_id, options_for_select([['No Campaign', nil]]), {}, { class: "form-select", data: {
+              "new-game-modal-target": "campaignSelect"
+            }} %>
+            <%= form.label :campaign_id %>
+          </div>
+
+
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <%= form.submit "Create Game", class: "btn btn-primary" %>
+          <%= form.submit "Create Game", class: "btn btn-primary", data: {
+            "new-game-modal-target": "submitBtn"
+          } %>
         </div>
       <% end %>
     </div>

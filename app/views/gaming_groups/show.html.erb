@@ -8,6 +8,8 @@
     </div>
     <div class="col">
       <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
+      <div class="mb-3"></div>
+      <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
     </div>
     <div class="col">
       <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>

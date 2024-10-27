@@ -3,6 +3,7 @@ class GamingGroup < ApplicationRecord
   has_many :users, through: :user_group_memberships
   has_many :teams, dependent: :destroy
   has_many :gaming_sessions, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
 
   validates :name, presence: true
 
@@ -36,6 +37,8 @@ class GamingGroup < ApplicationRecord
     data = results.group_by { |k, v| k[0] }
     users.map { flatten_results(_1, data) }
   end
+
+  def to_s = name
 
   private
 

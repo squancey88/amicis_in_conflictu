@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_17_194219) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -33,6 +33,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_194219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["army_id"], name: "index_army_lists_on_army_id"
+  end
+
+  create_table "campaigns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "gaming_group_id", null: false
+    t.uuid "game_system_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_campaigns_on_game_system_id"
+    t.index ["gaming_group_id"], name: "index_campaigns_on_gaming_group_id"
   end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,6 +68,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_194219) do
     t.jsonb "notes"
     t.integer "game_state", default: 0
     t.string "finish_reason"
+    t.uuid "campaign_id"
+    t.index ["campaign_id"], name: "index_games_on_campaign_id"
     t.index ["game_system_id"], name: "index_games_on_game_system_id"
     t.index ["gaming_session_id"], name: "index_games_on_gaming_session_id"
   end
@@ -161,6 +173,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_194219) do
   add_foreign_key "armies", "game_systems"
   add_foreign_key "armies", "users"
   add_foreign_key "army_lists", "armies"
+  add_foreign_key "campaigns", "game_systems"
+  add_foreign_key "campaigns", "gaming_groups"
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"

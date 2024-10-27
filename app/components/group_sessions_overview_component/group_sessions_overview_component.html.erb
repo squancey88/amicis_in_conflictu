@@ -25,7 +25,7 @@
       <% @gaming_group.gaming_sessions.upcoming.order(:start_time).each do |session| %>
         <div class="card mb-1">
           <div class="card-body">
-            <%= link_to(l(session.start_time), session) %>
+            <%= link_to(l(session.start_time), gaming_group_gaming_session_path(@gaming_group, session)) %>
           </div>
         </div>
       <% end %>
@@ -34,7 +34,7 @@
       <% @gaming_group.gaming_sessions.previous.limit(10).order(:start_time).each do |session| %>
         <div class="card">
           <div class="card-body">
-            <%= link_to(l(session.start_time), session) %>
+            <%= link_to(l(session.start_time), gaming_group_gaming_session_path(@gaming_group, session)) %>
           </div>
         </div>
       <% end %>
@@ -45,7 +45,7 @@
   </div>
 
   <div class=mt-2>
-    <%= link_to "New Session", new_gaming_session_path(gaming_group_id: @gaming_group), class: "btn btn-primary" %>
+    <%= link_to "New Session", new_gaming_group_gaming_session_path(@gaming_group), class: "btn btn-primary" %>
   </div>
 
 </div>

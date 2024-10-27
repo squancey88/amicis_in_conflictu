@@ -1,0 +1,19 @@
+<%= form_with(model: campaign, url: [@gaming_group, campaign]) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: campaign, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      <div class="form-floating">
+        <%= form.text_field :name, class: "form-control mb-3", placeholder: "Name" %>
+        <%= form.label :name %>
+      </div>
+
+      <div class="form-floating">
+        <%= game_system_select(form, :game_system_id) %>
+        <%= form.label :game_system_id %>
+      </div>
+      
+    <% end %>
+  <% end %>
+<% end %>
