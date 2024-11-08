@@ -11,10 +11,12 @@ module WithinGamingGroup
   end
 
   def check_group_access
-    if request.format.html?
-      redirect_to(@gaming_group) unless @gaming_group.is_user?(current_user)
-    else
-      render json: {error: "No access"}, status: :forbidden
+    unless @gaming_group.is_user?(current_user)
+      if request.format.html?
+        redirect_to(@gaming_group)
+      else
+        render json: {error: "No access"}, status: :forbidden
+      end
     end
   end
 end

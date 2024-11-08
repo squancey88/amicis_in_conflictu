@@ -84,3 +84,6 @@ gem "cssbundling-rails", "~> 1.4"
 
 gem "jsbundling-rails", "~> 1.3"
 gem "view_component"
+gem "dotenv", groups: [:development, :test]
+gem "jwt"
+gem "rack-cors"

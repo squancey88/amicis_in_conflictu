@@ -5,6 +5,13 @@ RSpec.describe "Auths", type: :request do
   let(:forgot_password_user) { create(:user, :forgot_password) }
   let(:user) { create(:user) }
 
+  describe "unauthenticated access" do
+    it "should direct to login with unauthorized" do
+      get user_url(user)
+      expect(response).to redirect_to(login_url)
+    end
+  end
+
   describe "GET /login" do
     it "returns http success" do
       get "/login"
@@ -138,6 +145,46 @@ RSpec.describe "Auths", type: :request do
       forgot_password_user.reload
       expect(forgot_password_user.authenticate_password_migration(password)).to be false
       expect(response).to redirect_to(forgot_password_url(params: {reset_password_token: forgot_password_user.reset_password_token}))
+    end
+  end
+
+  # Token login
+
+  describe "POST /auth/authenticate_token" do
+    it "returns root to main page if valid login" do
+      post "/auth/authenticate_token", params: {
+        email: user.email,
+        password: user.password
+      }
+      expect(response).to have_http_status(:success)
+      json = JSON.parse(response.body)
+      expect(json["token"]).to be_truthy
+    end
+
+    it "redirects to login if invalid login" do
+      post "/auth/authenticate_token", params: {
+        email: user.email,
+        password: user.password + "test"
+      }
+      expect(response).to have_http_status(:success)
+      json = JSON.parse(response.body)
+      expect(json["error"]).to be_truthy
+    end
+
+    it "valid token should allow access" do
+      token = get_auth_token(user)
+      get user_url(user, format: :json), params: {}, headers: {
+        Authorization: "Bearer #{token}"
+      }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "invalid token should not allow access" do
+      token = get_auth_token(user)
+      get user_url(user, format: :json), params: {}, headers: {
+        Authorization: "Bearer #{token}abc"
+      }
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end

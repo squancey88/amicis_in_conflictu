@@ -20,7 +20,11 @@ class UsersController < ApplicationController
   private
 
   def check_access
-    redirect_to(root_url) unless current_user == @user
+    if request.format.html?
+      redirect_to(root_url) unless current_user == @user
+    else
+      render json: {error: "No access"}, status: :forbidden unless current_user == @user
+    end
   end
 
   def set_user
