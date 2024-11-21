@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Game, type: :model do
-  let(:game_system) { create(:game_system) }
+  let(:game_system) { create(:wargame) }
   let(:gaming_session) { create(:gaming_session) }
 
   describe "associations" do

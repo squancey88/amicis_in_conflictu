@@ -19,7 +19,7 @@ class GameSystem < ApplicationRecord
   end
 
   def update_player_data(player)
-    raise NotImplementedError
+    # Optional override if needed
   end
 
   def calculate_player_score(player) = 0
@@ -39,7 +39,7 @@ class GameSystem < ApplicationRecord
   end
 
   def game_data_form_component(game)
-    raise NotImplementedError
+    # Optional override for additional form components
   end
 
   def player_form_components
