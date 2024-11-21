@@ -1,38 +1,26 @@
 <div data-controller="game-form">
   <%= form_for @game do |form| %>
 
-    <% if @game_system.has_turns? %>
-      <%= render TurnBasedGameFormComponent.new(game: @game) %>
-    <% end %>
+    <%= render @game_system.game_data_form_component(@game) if @game_system.game_data_form_component(@game) %>
 
     <% if @current_user_player %>
       <div class="form-control__player-section mb-3">
         <%= form.fields_for :players, @current_user_player, child_index: @player_index do |player_form| %>
           <div class="accordion" id="playerData">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#playerArmies" aria-expanded="true" aria-controls="collapseOne">
-                  Your Army
-                </button>
-              </h2>
-              <div id="playerArmies" class="accordion-collapse collapse" data-bs-parent="#playerData">
-                <div class="accordion-body">
-                  <%= render ArmySelectorComponent.new(form: player_form, player: @current_user_player, player_index: @player_index) %>
+            <% @game_system.player_form_components.each_with_index do |player_component, component_index| %>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#playerComponent-<%= component_index %>" aria-expanded="true" aria-controls="collapseOne">
+                    <%= player_component[:title] %>
+                  </button>
+                </h2>
+                <div id="playerComponent-<%= component_index %>" class="accordion-collapse collapse" data-bs-parent="#playerData">
+                  <div class="accordion-body">
+                    <%= render player_component[:component].new(player_form: player_form, current_player: @current_user_player, player_index: @player_index) %>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#playerNotes" aria-expanded="true" aria-controls="collapseOne">
-                  Your Notes
-                </button>
-              </h2>
-              <div id="playerNotes" class="accordion-collapse collapse" data-bs-parent="#playerData">
-                <div class="accordion-body">
-                  <%= render TextEditorComponent.new(form: player_form, attribute: :notes) %>
-                </div>
-              </div>
-            </div>
+            <% end %>
           </div>
         <% end %>
       </div>

@@ -5,8 +5,8 @@ class TurnBasedGameFormComponent < ViewComponent::Base
 
   def initialize(game:)
     @game = game
-    @game_system = game.game_system
-    @turn_count = game.players.first.turns.length
+    @game_system = @game.game_system
+    @turn_count = @game.players.first.turns.length
     @scoring_values = @game_system.scoring_values
   end
 
