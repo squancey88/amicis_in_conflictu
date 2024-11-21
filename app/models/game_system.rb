@@ -15,9 +15,11 @@ class GameSystem < ApplicationRecord
   end
 
   def set_winners(game)
+    raise NotImplementedError
   end
 
   def update_player_data(player)
+    raise NotImplementedError
   end
 
   def calculate_player_score(player) = 0
@@ -37,6 +39,7 @@ class GameSystem < ApplicationRecord
   end
 
   def game_data_form_component(game)
+    raise NotImplementedError
   end
 
   def player_form_components
