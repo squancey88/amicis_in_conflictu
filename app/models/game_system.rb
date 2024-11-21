@@ -4,19 +4,25 @@ class GameSystem < ApplicationRecord
   validates :name, :slug, presence: true
   validates :slug, uniqueness: true
 
-  store_accessor :game_config, :scoring_system, :finish_reasons
-
-  def has_turns?
-    false
-  end
+  store_accessor :game_config, :finish_reasons
 
   def setup_game_data
     {}
   end
 
-  def setup_player_data
+  def setup_player_data(game)
     {}
   end
+
+  def set_winners(game)
+    raise NotImplementedError
+  end
+
+  def update_player_data(player)
+    # Optional override if needed
+  end
+
+  def calculate_player_score(player) = 0
 
   def self.category_name
     nil
@@ -32,11 +38,11 @@ class GameSystem < ApplicationRecord
     self.class.category_name
   end
 
-  def self.schema
-    {
-      title: "Config",
-      type: :object,
-      properties: {}
-    }
+  def game_data_form_component(game)
+    # Optional override for additional form components
+  end
+
+  def player_form_components
+    []
   end
 end

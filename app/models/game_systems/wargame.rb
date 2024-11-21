@@ -1,9 +1,91 @@
 module GameSystems
   class Wargame < GameSystem
-    store_accessor :game_config, :turn_data
+    include HasGameConfig
+
+    config_has_scoring_systems(:turn_based)
+    config_has_turn_data(title: "Turn Tracking",
+      point_title: "Tracking Point") do |items|
+        items.add_item(:key, :string)
+        items.add_item(:type, :string, enum: [:number])
+        items.add_item(:name, :string)
+        items.add_item(:scoring, :boolean)
+      end
 
     def self.category_name
       "Wargames"
+    end
+
+    def game_data_form_component(game)
+      if has_turns?
+        TurnBasedGameFormComponent.new(game: game)
+      end
+    end
+
+    def player_form_components
+      [
+        {
+          title: "Your Army",
+          component: ArmySelectorComponent
+        },
+        {
+          title: "Your Notes",
+          component: PlayerNotesComponent
+        }
+      ]
+    end
+
+    def player_score_by_keys(player)
+      score_hash = {}
+      if has_turns?
+        scoring_keys.each_with_object(score_hash) { |key, hash| hash[key.to_sym] = 0 }
+        player.game_data["turns"].each do |turn|
+          score_hash.keys.each do |key|
+            score_hash[key] = score_hash[key] + turn[key.to_s].to_i
+          end
+        end
+      end
+      score_hash
+    end
+
+    def calculate_player_score(player)
+      score = 0
+      if has_turns?
+        player.game_data["turns"].each do |turn|
+          scoring_keys.each do |key|
+            score += turn[key].to_i
+          end
+        end
+      end
+      score
+    end
+
+    def set_winners(game)
+      if has_turns?
+        by_score = game.players.map { [_1, _1.calculate_score] }
+        if by_score.map { _2 }.uniq.count <= 1
+          if game.players.any? { _1.surrendered }
+            game.players.each do |p|
+              p.result = p.surrendered ? :lost : :won
+              p.save!
+            end
+          else
+            game.players.each do |p|
+              p.result = :draw
+              p.save!
+            end
+          end
+        else
+          winning_score = by_score.max_by { _1[1] }[1]
+          by_score.each do |player, score|
+            player.result = if score == winning_score
+              :won
+            else
+              :lost
+            end
+            player.save!
+          end
+        end
+      end
     end
 
     def has_turns?
@@ -22,57 +104,10 @@ module GameSystems
       end
     end
 
-    def setup_player_data
+    def setup_player_data(game)
       player_data = {}
       player_data[:turns] = [] if has_turns?
       player_data
-    end
-
-    def self.schema
-      schema_data = super
-      schema_data[:properties][:scoring_system] = {
-        type: :string,
-        required: true,
-        enum: [:turn_based]
-      }
-      schema_data[:properties][:scoring_name] = {
-        type: :string,
-        required: true
-      }
-      schema_data[:properties][:finish_reasons] = {
-        title: "Finish Reasons",
-        required: true,
-        type: :array,
-        items: {
-          title: "Reason",
-          type: :string
-        }
-      }
-      schema_data[:properties][:turn_data] = {
-        type: :array,
-        required: true,
-        title: "Turn Tracking",
-        items: {
-          title: "Tracking Point",
-          type: :object,
-          properties: {
-            key: {
-              type: :string
-            },
-            type: {
-              type: :string,
-              enum: [:number]
-            },
-            name: {
-              type: :string
-            },
-            scoring: {
-              type: :boolean
-            }
-          }
-        }
-      }
-      schema_data
     end
   end
 end

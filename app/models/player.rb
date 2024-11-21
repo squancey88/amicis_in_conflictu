@@ -23,11 +23,11 @@ class Player < ApplicationRecord
 
   store_accessor :game_data, :turns
 
-  after_create(:setup_game_data)
+  before_save(:process_player_data)
+  before_create(:setup_game_data)
 
   def setup_game_data
-    self.game_data = game.game_system.setup_player_data
-    save!
+    self.game_data = game.game_system.setup_player_data(game)
   end
 
   def user_is_player?(user)
@@ -38,31 +38,15 @@ class Player < ApplicationRecord
     end
   end
 
+  def process_player_data
+    game.game_system.update_player_data(self) if game_data
+  end
+
   def score_by_keys
-    system = game.game_system
-    score_hash = {}
-    if system.has_turns?
-      system.scoring_keys.each_with_object(score_hash) { |key, hash| hash[key.to_sym] = 0 }
-      turns.each do |turn|
-        score_hash.keys.each do |key|
-          score_hash[key] = score_hash[key] + turn[key.to_s].to_i
-        end
-      end
-    end
-    score_hash
+    game.game_system.player_score_by_keys(self)
   end
 
   def calculate_score
-    score = 0
-    system = game.game_system
-    if system.has_turns?
-      scoring_keys = system.scoring_keys
-      turns.each do |turn|
-        scoring_keys.each do |key|
-          score += turn[key].to_i
-        end
-      end
-    end
-    score
+    game.game_system.calculate_player_score(self)
   end
 end

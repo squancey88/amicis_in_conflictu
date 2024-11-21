@@ -11,12 +11,17 @@ class Game < ApplicationRecord
 
   accepts_nested_attributes_for :players
 
-  after_create(:setup_data)
+  before_create(:setup_data)
   after_save(:check_finished)
 
+  def set_initial_data(**start_values)
+    @initial_data = start_values
+  end
+
   def setup_data
-    self.data = game_system.setup_game_data
-    save!
+    game_data = game_system.setup_game_data
+    game_data.merge!(@initial_data) if @initial_data
+    self.data = game_data
   end
 
   def check_finished
@@ -36,31 +41,6 @@ class Game < ApplicationRecord
   end
 
   def set_winners
-    if game_system.has_turns?
-      by_score = players.map { [_1, _1.calculate_score] }
-      if by_score.map { _2 }.uniq.count <= 1
-        if players.any? { _1.surrendered }
-          players.each do |p|
-            p.result = p.surrendered ? :lost : :won
-            p.save!
-          end
-        else
-          players.each do |p|
-            p.result = :draw
-            p.save!
-          end
-        end
-      else
-        winning_score = by_score.max_by { _1[1] }[1]
-        by_score.each do |player, score|
-          player.result = if score == winning_score
-            :won
-          else
-            :lost
-          end
-          player.save!
-        end
-      end
-    end
+    game_system.set_winners(self)
   end
 end
