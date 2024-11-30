@@ -16,10 +16,8 @@ class Unit < ApplicationRecord
   end
 
   def enough_cost_in_list
-    unless army_list.starting_cost.nil?
-      if cost > army_list.remaining_cost
-        throw :abort
-      end
+    if !army_list.starting_cost.nil? && cost > army_list.remaining_cost
+      throw :abort
     end
   end
 
