@@ -1,6 +1,6 @@
 @import "../../components/army_selector_component/army_selector_component.scss";
 @import "../../components/campaign_list_component/campaign_list_component.scss";
-@import "../../components/flash_handler_component/flash_handler_component.scss";
+@import "../../components/common/flash_handler_component/flash_handler_component.scss";
 @import "../../components/gaming_group_team_management_component/gaming_group_team_management_component.scss";
 @import "../../components/gaming_group_user_overview_component/gaming_group_user_overview_component.scss";
 @import "../../components/game_form_component/game_form_component.scss";
@@ -11,3 +11,8 @@
 @import "../../components/standard_layout_box_component/standard_layout_box_component.scss";
 @import "../../components/text_editor_component/text_editor_component.scss";
 @import "../../components/turn_based_game_form_component/turn_based_game_form_component.scss";
+
+@import "../../components/common/card_with_menu_component/card_with_menu_component.scss";
+
+@import "../../components/units/stat_row_component/stat_row_component.scss";
+@import "../../components/units/list_component/list_component.scss";

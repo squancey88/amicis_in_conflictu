@@ -13,12 +13,34 @@ Rails.application.routes.draw do
     post "request_password_reset"
   end
 
-  resources :armies do
-    resources :army_lists
+  resources :armies
+  resources :army_lists do
+    resources :units do
+      collection do
+        get :add_trait_row
+      end
+    end
   end
+
   resources :game_systems, only: %i[index]
   namespace :game_systems do
-    resources :wargames, except: %i[index]
+    resources :wargames, except: %i[index] do
+      collection do
+        get :add_new_stat_row
+      end
+    end
+  end
+
+  resources :unit_traits
+  resources :unit_templates do
+    collection do
+      get :add_trait_row
+    end
+  end
+  resources :unit_stat_modifiers do
+    collection do
+      get :add_stat_change_row
+    end
   end
   resources :players, only: %i[update]
   resources :gaming_groups do
@@ -35,7 +57,11 @@ Rails.application.routes.draw do
   end
 
   resources :games
-  resources :users, only: %i[show update]
+  resources :users, only: %i[show update] do
+    member do
+      get :campaigns
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

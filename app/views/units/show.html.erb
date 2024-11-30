@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render RecordShowWrapperComponent.new(
+        record: @unit,
+        title: @unit.to_s,
+        menu_options: [
+          { 
+            text: "Edit",
+            link: edit_army_list_unit_path(@army_list, @unit)
+          },
+          {
+            text: "Delete",
+            link: army_list_unit_path(@army_list, @unit),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          }
+        ]
+      ) do |component| %>
+
+        <% component.with_body do %>
+
+          <%= render @unit %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

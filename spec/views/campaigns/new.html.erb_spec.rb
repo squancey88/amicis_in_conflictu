@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe "campaigns/new", type: :view do
   let(:gaming_group) { create(:gaming_group) }
+  let(:game_system) { create(:wargame, :turn_based) }
   before(:each) do
     assign(:gaming_group, gaming_group)
-    assign(:campaign, Campaign.new)
+    assign(:campaign, Campaign.new(game_system:))
   end
 
   it "renders new campaign form" do

@@ -1,0 +1,2 @@
+module UnitStatModifiersHelper
+end

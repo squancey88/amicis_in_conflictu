@@ -17,6 +17,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def campaigns
+    @campaigns = @user.campaigns.where(**campaign_params)
+    respond_to do |format|
+      format.json { render "campaigns/index", status: :ok }
+    end
+  end
+
   private
 
   def check_access
@@ -25,6 +32,10 @@ class UsersController < ApplicationController
     else
       render json: {error: "No access"}, status: :forbidden unless current_user == @user
     end
+  end
+
+  def campaign_params
+    params.require(:filter).permit(:game_system_id)
   end
 
   def set_user

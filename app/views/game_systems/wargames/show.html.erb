@@ -1,27 +1,47 @@
 <div class="container">
+  <div class="row mb-3">
+    <%= render RecordShowWrapperComponent.new(
+      record: @wargame,
+      title: @wargame.to_s,
+      menu_options: [
+        { 
+          text: "Edit",
+          link: edit_game_systems_wargame_path(@wargame)
+        },
+        {
+          text: "Delete",
+          link: game_systems_wargame_path(@wargame),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+        }
+      ]
+    ) do |component| %>
+      <% component.with_body do %>
+        <%= render @wargame %>
+      <% end %>
+    <% end %>
+  </div>
   <div class="row">
     <div class="col">
-      <%= render RecordShowWrapperComponent.new(
-        record: @wargame,
-        title: @wargame.to_s,
-        menu_options: [
-          { 
-            text: "Edit",
-            link: edit_game_systems_wargame_path(@wargame)
-          },
-          {
-            text: "Delete",
-            link: game_systems_wargame_path(@wargame),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          }
-        ]
+      <%= render StandardLayoutBoxComponent.new(
+        title: "Unit Stats"
       ) do |component| %>
 
         <% component.with_body do %>
-
-          <%= render @wargame %>
+          <% @wargame.unit_stat_definitions.each do |unit_stat| %>
+            <%= render partial: "unit_stat_definitions/overview_card", locals: { unit_stat_definition: unit_stat } %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
+    <div class="col">
+      <%= render UnitTemplates::ListComponent.new(game_system: @wargame) %>
+
+      <%= render Common::EmbeddedIndexComponent.new(title: "Traits",
+          turbo_frame_id: "unit_traits",
+          records_path: unit_traits_path(game_system_id: @wargame.id),
+          new_path: new_unit_trait_path(game_system_id: @wargame.id)
+        )%>
+    </div>
   </div>
+  
 </div>

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe FlashHandlerComponent, type: :component do
+RSpec.describe Common::FlashHandlerComponent, type: :component do
   context "with notice" do
     before do
       render_inline(described_class.new({notice: "notice test"}))

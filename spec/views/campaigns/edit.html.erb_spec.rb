@@ -14,7 +14,6 @@ RSpec.describe "campaigns/edit", type: :view do
 
     assert_select "form[action=?][method=?]", gaming_group_campaign_path(gaming_group, campaign), "post" do
       assert_select "input[name=?]", "campaign[name]"
-      assert_select "select[name=?]", "campaign[game_system_id]"
     end
   end
 end

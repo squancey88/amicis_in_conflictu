@@ -1,0 +1,32 @@
+<%= form_with(model: unit_stat_modifier) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: unit_stat_modifier, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      <%= bootstrap_game_system_select(form, :game_system_id) %> 
+      <%= bootstrap_text_form(form, :name) %>
+      <%= bootstrap_text_form(form, :description) %>
+      <%= bootstrap_number_form(form, :cost) %>
+      <%= bootstrap_check_box(form, :active) %>
+
+
+      <% if @unit_stat_modifier.game_system%>
+        <%= turbo_frame_tag :stat_change_list  do %>
+          <%= form.fields_for :unit_stat_changes do |unit_stat_change_form| %>
+            <%= render partial: "unit_stat_changes/form_row", locals: {form: unit_stat_change_form,
+              game_system: @unit_stat_modifier.game_system} %>
+          <% end %>
+        <% end %>
+
+        <%= link_to "Add Stat Change", 
+          add_stat_change_row_unit_stat_modifiers_path(game_system_id: @unit_stat_modifier.game_system.id), 
+          class: ['btn', 'btn-secondary'],
+          data: {turbo_frame: :stat_change_list, turbo_stream: true} %>
+      <% else %>
+        <p>Save your record to add stat changes</p>
+      <% end %>
+      
+    <% end %>
+  <% end %>
+<% end %>

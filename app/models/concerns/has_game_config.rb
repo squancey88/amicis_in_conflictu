@@ -34,6 +34,16 @@ module HasGameConfig
       store_accessor :game_config, :has_timed_turns
     end
 
+    def config_has_campaign_list_attributes(&block)
+      game_config_schema.add_array_property(
+        :campaign_list_attributes,
+        true,
+        game_schema_object(title: "Attribute", &block),
+        title: "Campaign Attributes"
+      )
+      store_accessor :game_config, :campaign_list_attributes
+    end
+
     def game_schema_object(title:, &block)
       items = ItemList.new
       block.call(items)
@@ -58,9 +68,7 @@ module HasGameConfig
     end
 
     def add_item(name, type, **extras)
-      @data[name] = {
-        type:
-      }.merge(extras)
+      @data[name] = {type:}.merge(extras)
     end
   end
 
@@ -71,7 +79,8 @@ module HasGameConfig
         {
           title: "Reason",
           type: :string
-        }, title: "Finish Reasons")
+        },
+        title: "Finish Reasons")
     end
 
     def add_array_property(name, required, items, title: nil)

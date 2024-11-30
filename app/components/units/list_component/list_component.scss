@@ -1,0 +1,43 @@
+.unit-list-row {
+  margin-bottom: 5px;
+  border: 1px solid black;
+  padding: 5px;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+
+    &-title {
+      flex: 1 1 auto;
+    }
+
+    &-menu {
+      flex: 0 1 20%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.unit-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+
+  &__template-form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px;
+
+    select {
+      min-width: 130px;
+    }
+  }
+
+  .btn {
+    min-width: 130px;
+  }
+
+}

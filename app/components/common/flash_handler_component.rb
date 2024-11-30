@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FlashHandlerComponent < ViewComponent::Base
+class Common::FlashHandlerComponent < ViewComponent::Base
   delegate :flash, to: :helpers
 
   def initialize(flash)

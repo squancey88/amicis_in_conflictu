@@ -1,0 +1,14 @@
+<% content_for :title, "Unit templates" %>
+
+<h1>Unit templates</h1>
+
+<div id="unit_templates">
+  <% @unit_templates.each do |unit_template| %>
+    <%= render unit_template %>
+    <p>
+      <%= link_to "Show this unit template", unit_template %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New unit template", new_unit_template_path %>

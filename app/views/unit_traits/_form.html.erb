@@ -1,0 +1,14 @@
+<%= form_with(model: unit_trait) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: unit_trait, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      <%= form.hidden_field :game_system_id %>
+      <%= bootstrap_text_form(form, :name) %>
+      <%= bootstrap_text_form(form, :description) %>
+      <%= bootstrap_check_box(form, :active) %>
+      
+    <% end %>
+  <% end %>
+<% end %>

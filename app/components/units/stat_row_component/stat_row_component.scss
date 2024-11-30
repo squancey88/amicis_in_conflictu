@@ -1,0 +1,17 @@
+.stat-row {
+  display: flex;
+  flex-direction: row;
+
+  .stat {
+    flex: 0 1 65px;
+
+    &__header {
+      background-color: lightblue;
+      text-align: center;
+    }
+    
+    &__value{
+      text-align: center;
+    }
+  }
+}

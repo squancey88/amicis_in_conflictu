@@ -1,0 +1,10 @@
+<%= render Common::CardWithMenuComponent.new(
+  title: "#{unit_stat_definition.label} - #{unit_stat_definition.name}",
+  subtitle: unit_stat_definition.stat_type_name) do |card| %>
+  <% card.with_body do %>
+    <p class="card-text">
+      Min: <%= unit_stat_definition.min %>
+      Max: <%= unit_stat_definition.max %>
+    </p>
+  <% end %>
+<% end %>

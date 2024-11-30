@@ -7,8 +7,8 @@ RSpec.describe "/campaigns", type: :request do
     create(:user_group_membership, user:, gaming_group:)
     user
   }
-  let!(:campaign) { create(:campaign, gaming_group: gaming_group) }
-  let(:game_system) { create(:game_system) }
+  let(:game_system) { create(:wargame, :turn_based) }
+  let!(:campaign) { create(:campaign, game_system:, gaming_group:) }
   let(:valid_attributes) {
     {
       name: Faker::Lorem.word,
@@ -17,7 +17,10 @@ RSpec.describe "/campaigns", type: :request do
   }
 
   let(:invalid_attributes) {
-    {name: nil}
+    {
+      name: nil,
+      game_system_id: game_system.id
+    }
   }
 
   before do
@@ -40,7 +43,7 @@ RSpec.describe "/campaigns", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_gaming_group_campaign_url(gaming_group)
+      get new_gaming_group_campaign_url(gaming_group, game_system_id: game_system.id)
       expect(response).to be_successful
     end
   end

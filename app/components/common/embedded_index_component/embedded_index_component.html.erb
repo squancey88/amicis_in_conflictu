@@ -1,0 +1,18 @@
+<%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
+
+  <% component.with_menu do%>
+    <%= render Common::MenuButtonComponent.new(
+      menu_options: [
+        { 
+          text: "New",
+          link: @new_path
+        }
+      ]) %>
+  <% end %>
+
+  <% component.with_body do %>
+    <turbo-frame id="<%= @turbo_frame_id %>" src="<%= @records_path %>">
+      Loading...
+    </turbo-frame>
+  <% end %>
+<% end %>

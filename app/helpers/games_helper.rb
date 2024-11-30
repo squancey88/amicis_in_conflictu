@@ -16,11 +16,9 @@ module GamesHelper
     "game[players_attributes][#{player_index}]#{param_string}"
   end
 
-  def state_select(form, classes: [])
-    content_tag(:div, class: classes + ["form-floating"]) do
-      concat(form.select(:game_state, Game.game_states.keys.map { |key| [key.humanize, key] }, {}, {class: "form-select"}))
-      concat(form.label(:game_state))
-    end
+  def state_select(form)
+    bootstrap_field_wrapper(form, :game_state,
+      form.select(:game_state, Game.game_states.keys.map { |key| [key.humanize, key] }, {}, {class: "form-select"}))
   end
 
   def state_badge(game)
