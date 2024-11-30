@@ -18,7 +18,6 @@ RSpec.describe UnitTemplatesController, type: :routing do
       expect(get: "/unit_templates/1/edit").to route_to("unit_templates#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/unit_templates").to route_to("unit_templates#create")
     end
