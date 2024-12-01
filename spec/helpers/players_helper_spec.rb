@@ -1,15 +1,5 @@
 require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the PlayerHelper. For example:
-#
-# describe PlayerHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe PlayersHelper, type: :helper do
   let(:player) { create(:player, :with_user, :with_game) }
   let(:army) { create(:army, name: "Test Army") }

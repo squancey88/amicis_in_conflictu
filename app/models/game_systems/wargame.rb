@@ -2,6 +2,15 @@ module GameSystems
   class Wargame < GameSystem
     include HasGameConfig
 
+    has_many :unit_stat_definitions, -> { order "unit_stat_definitions.sort" }, dependent: :destroy,
+      foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :unit_stat_modifiers, foreign_key: "game_system_id", inverse_of: :game_system, dependent: :destroy
+    has_many :unit_templates, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :unit_traits, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :equipment, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+
+    accepts_nested_attributes_for :unit_stat_definitions, allow_destroy: true, reject_if: proc { |attributes| attributes["name"].blank? }
+
     config_has_scoring_systems(:turn_based)
     config_has_turn_data(title: "Turn Tracking",
       point_title: "Tracking Point") do |items|
@@ -10,6 +19,11 @@ module GameSystems
         items.add_item(:name, :string)
         items.add_item(:scoring, :boolean)
       end
+    config_has_campaign_list_attributes do |items|
+      items.add_item(:key, :string)
+      items.add_item(:type, :string, enum: [:number])
+      items.add_item(:name, :string)
+    end
 
     def self.category_name
       "Wargames"

@@ -1,0 +1,38 @@
+
+<%= render StandardLayoutBoxComponent.new(title: "Units") do |component| %>
+
+  <% component.with_menu do %>
+    <div class="unit-menu">
+      <%= form_with url: new_army_list_unit_path(@army_list), method: :get do |f| %>
+        <div class="unit-menu__template-form">
+          <%= bootstrap_unit_templates_select(@army_list.game_system, f, :template_id) %>
+          <%= f.submit "From Template", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <%= link_to "Blank Unit", new_army_list_unit_path(@army_list), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <% component.with_body do %>
+    <% @army_list.units.each do |unit| %>
+      <%= render Common::CardWithMenuComponent.new(
+        title: unit.name,
+        subtitle: "Cost: #{unit.total_cost}",
+        menu_options: [
+        { 
+          text: "Edit",
+          link: edit_army_list_unit_path(@army_list, unit)
+        },
+        {
+          text: "Clone",
+          link: new_army_list_unit_path(@army_list, cloned_from_id: unit.id)
+        }
+        ]) do |card| %>
+        <% card.with_body do %>
+          <%= render Units::StatRowComponent.new(unit_stats: unit.unit_stats) %>
+          <%= traits_list(unit) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

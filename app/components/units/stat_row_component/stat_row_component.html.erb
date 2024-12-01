@@ -1,0 +1,9 @@
+
+<div class="stat-row">
+  <% @stats.each do |stat| %>
+    <div class="stat">
+      <div class="stat__header"><%= stat.unit_stat_definition.label %></div>
+      <div class="stat__value"><%= stat.current_value %><%= stat_flourish(stat.unit_stat_definition) %></div>
+    </div>
+  <% end %>
+</div>

@@ -3,16 +3,19 @@
   <%= render RecordFormWrapperComponent.new(record: campaign, form:) do |component| %>
 
     <% component.with_fields do %>
+      <p>Game system: <%= campaign.game_system.name %></p>
+      <%= form.hidden_field :game_system_id %>
 
-      <div class="form-floating">
-        <%= form.text_field :name, class: "form-control mb-3", placeholder: "Name" %>
-        <%= form.label :name %>
-      </div>
+      <%= bootstrap_text_form(form, :name) %>
+      <%= bootstrap_number_form(form, :list_cost) %>
 
-      <div class="form-floating">
-        <%= game_system_select(form, :game_system_id) %>
-        <%= form.label :game_system_id %>
-      </div>
+      <%= form.fields_for :config do |config_form| %>
+        <% campaign.game_system.campaign_list_attributes.each do |attr| %>
+          <%= bootstrap_field_wrapper(config_form, attr["key"], 
+            config_form.number_field(attr["key"], value: campaign.config[attr["key"]], class: "form-control"), 
+            label: attr["name"]) %>
+        <% end %>
+      <% end %>
       
     <% end %>
   <% end %>

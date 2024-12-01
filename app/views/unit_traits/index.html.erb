@@ -1,0 +1,19 @@
+<% content_for :title, "Unit traits" %>
+
+<h1>Unit traits</h1>
+
+<div id="unit_traits">
+  <%= turbo_frame_tag :unit_traits do %>
+    <% @unit_traits.each do |unit_trait| %>
+      <%= render Common::CardWithMenuComponent.new(title: "#{unit_trait.name}",
+        menu_options: [{link: edit_unit_trait_path(unit_trait), text: "Edit"}]) do |card| %>
+        <% card.with_body do %>
+          <p class="card-text"><%= unit_trait.description %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+  <% end %>
+</div>
+
+<%= link_to "New unit trait", new_unit_trait_path %>

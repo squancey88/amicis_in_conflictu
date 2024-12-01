@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -28,11 +28,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
   create_table "army_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.jsonb "details"
-    t.uuid "army_id", null: false
+    t.uuid "army_id"
     t.integer "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "campaign_id"
+    t.uuid "user_id", null: false
+    t.uuid "game_system_id", null: false
+    t.jsonb "initial_values"
+    t.integer "starting_cost"
     t.index ["army_id"], name: "index_army_lists_on_army_id"
+    t.index ["campaign_id"], name: "index_army_lists_on_campaign_id"
+    t.index ["game_system_id"], name: "index_army_lists_on_game_system_id"
+    t.index ["user_id"], name: "index_army_lists_on_user_id"
   end
 
   create_table "campaigns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -41,8 +49,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
     t.uuid "game_system_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "config"
+    t.integer "list_start_cost"
     t.index ["game_system_id"], name: "index_campaigns_on_game_system_id"
     t.index ["gaming_group_id"], name: "index_campaigns_on_gaming_group_id"
+  end
+
+  create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "cost"
+    t.boolean "attach_to_list"
+    t.boolean "attach_to_unit"
+    t.uuid "game_system_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_equipment_on_game_system_id"
+  end
+
+  create_table "equipment_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "equipment_id", null: false
+    t.string "attached_to_type", null: false
+    t.uuid "attached_to_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attached_to_type", "attached_to_id"], name: "index_equipment_attachments_on_attached_to"
+    t.index ["equipment_id"], name: "index_equipment_attachments_on_equipment_id"
   end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -131,6 +163,123 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
     t.index ["gaming_group_id"], name: "index_teams_on_gaming_group_id"
   end
 
+  create_table "unit_applied_modifiers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "unit_id", null: false
+    t.uuid "game_id", null: false
+    t.uuid "unit_stat_modifier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_unit_applied_modifiers_on_game_id"
+    t.index ["unit_id"], name: "index_unit_applied_modifiers_on_unit_id"
+    t.index ["unit_stat_modifier_id"], name: "index_unit_applied_modifiers_on_unit_stat_modifier_id"
+  end
+
+  create_table "unit_stat_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "unit_stat_definition_id", null: false
+    t.uuid "unit_stat_modifier_id", null: false
+    t.integer "stat_change"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_stat_definition_id"], name: "index_unit_stat_changes_on_unit_stat_definition_id"
+    t.index ["unit_stat_modifier_id"], name: "index_unit_stat_changes_on_unit_stat_modifier_id"
+  end
+
+  create_table "unit_stat_definitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "game_system_id", null: false
+    t.string "name"
+    t.string "label"
+    t.integer "stat_type", default: 0
+    t.integer "min"
+    t.integer "max"
+    t.integer "sort"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_unit_stat_definitions_on_game_system_id"
+  end
+
+  create_table "unit_stat_modifiers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "game_system_id", null: false
+    t.string "name"
+    t.string "description"
+    t.integer "cost"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_unit_stat_modifiers_on_game_system_id"
+  end
+
+  create_table "unit_stats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "unit_id", null: false
+    t.uuid "unit_stat_definition_id", null: false
+    t.integer "base_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_unit_stats_on_unit_id"
+    t.index ["unit_stat_definition_id"], name: "index_unit_stats_on_unit_stat_definition_id"
+  end
+
+  create_table "unit_template_stats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "unit_template_id", null: false
+    t.uuid "unit_stat_definition_id", null: false
+    t.integer "base_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_stat_definition_id"], name: "index_unit_template_stats_on_unit_stat_definition_id"
+    t.index ["unit_template_id"], name: "index_unit_template_stats_on_unit_template_id"
+  end
+
+  create_table "unit_template_trait_mappings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "unit_template_id", null: false
+    t.uuid "unit_trait_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_template_id"], name: "index_unit_template_trait_mappings_on_unit_template_id"
+    t.index ["unit_trait_id"], name: "index_unit_template_trait_mappings_on_unit_trait_id"
+  end
+
+  create_table "unit_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "cost"
+    t.uuid "game_system_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_unit_templates_on_game_system_id"
+  end
+
+  create_table "unit_trait_mappings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "unit_id", null: false
+    t.uuid "unit_trait_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unit_id"], name: "index_unit_trait_mappings_on_unit_id"
+    t.index ["unit_trait_id"], name: "index_unit_trait_mappings_on_unit_trait_id"
+  end
+
+  create_table "unit_traits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.uuid "game_system_id", null: false
+    t.uuid "army_id"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["army_id"], name: "index_unit_traits_on_army_id"
+    t.index ["game_system_id"], name: "index_unit_traits_on_game_system_id"
+  end
+
+  create_table "units", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "cost"
+    t.jsonb "stats"
+    t.jsonb "stat_modifiers"
+    t.boolean "active", default: true, null: false
+    t.uuid "army_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["army_list_id"], name: "index_units_on_army_list_id"
+  end
+
   create_table "user_group_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "gaming_group_id", null: false
@@ -173,8 +322,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
   add_foreign_key "armies", "game_systems"
   add_foreign_key "armies", "users"
   add_foreign_key "army_lists", "armies"
+  add_foreign_key "army_lists", "game_systems"
+  add_foreign_key "army_lists", "users"
   add_foreign_key "campaigns", "game_systems"
   add_foreign_key "campaigns", "gaming_groups"
+  add_foreign_key "equipment", "game_systems"
+  add_foreign_key "equipment_attachments", "equipment"
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"
@@ -185,4 +338,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_27_145900) do
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
   add_foreign_key "teams", "gaming_groups"
+  add_foreign_key "unit_applied_modifiers", "games"
+  add_foreign_key "unit_applied_modifiers", "unit_stat_modifiers"
+  add_foreign_key "unit_applied_modifiers", "units"
+  add_foreign_key "unit_stat_changes", "unit_stat_definitions"
+  add_foreign_key "unit_stat_changes", "unit_stat_modifiers"
+  add_foreign_key "unit_stat_definitions", "game_systems"
+  add_foreign_key "unit_stat_modifiers", "game_systems"
+  add_foreign_key "unit_stats", "unit_stat_definitions"
+  add_foreign_key "unit_stats", "units"
+  add_foreign_key "unit_template_stats", "unit_stat_definitions"
+  add_foreign_key "unit_template_stats", "unit_templates"
+  add_foreign_key "unit_template_trait_mappings", "unit_templates"
+  add_foreign_key "unit_template_trait_mappings", "unit_traits"
+  add_foreign_key "unit_templates", "game_systems"
+  add_foreign_key "unit_trait_mappings", "unit_traits"
+  add_foreign_key "unit_trait_mappings", "units"
+  add_foreign_key "unit_traits", "armies"
+  add_foreign_key "unit_traits", "game_systems"
+  add_foreign_key "units", "army_lists"
 end

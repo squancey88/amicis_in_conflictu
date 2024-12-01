@@ -18,8 +18,14 @@
       ) do |component| %>
 
         <% component.with_body do %>
-
           <%= render @campaign %>
+
+          <h3>Config</h3>
+
+          <% @campaign.game_system.campaign_list_attributes.each do |attr| %>
+            <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
+          <% end %>
+
         <% end %>
       <% end %>
     </div>

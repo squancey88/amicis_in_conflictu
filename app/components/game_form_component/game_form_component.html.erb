@@ -28,7 +28,7 @@
 
     <div class="form-control__finish_section">
 
-      <%= state_select(form, classes: ["mb-3"]) %>
+      <%= state_select(form) %>
 
       <% if @game.game_system.finish_reasons %>
         <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], 

@@ -31,7 +31,14 @@ FactoryBot.define do
               type: :number,
               scoring: true
             }
-          ]
+          ],
+          unit_stats: [
+            {
+              label: "S",
+              name: "Strength"
+            }
+          ],
+          campaign_list_attributes: []
         }
       }
     end

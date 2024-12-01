@@ -1,0 +1,40 @@
+<%= form_with(model: unit_template) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: unit_template, form:) do |component| %>
+
+    <% component.with_fields do %>
+      <%= form.hidden_field :game_system_id %>
+
+      <%= bootstrap_text_form(form, :name) %>
+      <%= bootstrap_number_form(form, :cost) %>
+      
+      <h3>Stats</h3>
+
+      <div class="form-row">
+        <%= form.fields_for :unit_template_stats do |stats_form| %>
+          <%= bootstrap_number_form(stats_form, :base_value, 
+            label: stats_form.object.unit_stat_definition.label,
+            min: stats_form.object.unit_stat_definition.min,
+            max: stats_form.object.unit_stat_definition.max) %>
+          <%= stats_form.hidden_field :unit_stat_definition_id %>
+        <% end %>
+      </div>
+
+      <h3>Traits</h3>
+
+      <%= turbo_frame_tag :trait_mappings  do %>
+        <%= form.fields_for :unit_template_trait_mappings do |trait_mappings| %>
+          <%= render partial: "unit_traits/mapping_row", locals: {
+            form: trait_mappings, game_system: unit_template.game_system
+          } %>
+        <% end %>
+      <% end %>
+
+      <%= link_to "Add Trait", 
+        add_trait_row_unit_templates_path(game_system_id: unit_template.game_system.id), 
+        class: ['btn', 'btn-secondary'],
+        data: {turbo_frame: :trait_mappings, turbo_stream: true} %>
+
+    <% end %>
+  <% end %>
+<% end %>

@@ -17,7 +17,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/new
   def new
-    @campaign = Campaign.new
+    @campaign = Campaign.new(game_system: get_game_system)
   end
 
   # GET /campaigns/1/edit
@@ -65,6 +65,10 @@ class CampaignsController < ApplicationController
 
   private
 
+  def get_game_system
+    GameSystem.find(params.permit(:game_system_id)[:game_system_id])
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_campaign
     @campaign = Campaign.find(params[:id])
@@ -72,7 +76,7 @@ class CampaignsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def campaign_params
-    params.require(:campaign).permit(:name, :game_system_id)
+    params.require(:campaign).permit(:name, :game_system_id, config: {})
   end
 
   def filter_params

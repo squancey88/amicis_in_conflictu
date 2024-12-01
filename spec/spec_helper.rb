@@ -17,6 +17,8 @@
 require "simplecov"
 SimpleCov.start "rails" do
   add_group "Components", "app/components"
+  add_group "Views", "app/views"
+  enable_coverage_for_eval
 
   current_branch = `git rev-parse --abbrev-ref HEAD`
   changed_files = `git diff --name-only main...#{current_branch}`.split("\n")

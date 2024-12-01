@@ -9,9 +9,10 @@ class User < ApplicationRecord
 
   has_many :user_group_memberships, dependent: :destroy
   has_many :gaming_groups, through: :user_group_memberships
+  has_many :campaigns, through: :gaming_groups
   has_many :players, as: :controller, dependent: :destroy
   has_many :armies, dependent: :destroy
-  has_many :army_lists, through: :armies
+  has_many :army_lists, dependent: :destroy
   belongs_to :invited_by, class_name: :User, dependent: nil, optional: true
   has_many :invities, class_name: :User, foreign_key: :invited_by_id, dependent: :nullify, inverse_of: :invited_by
 

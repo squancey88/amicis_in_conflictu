@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def column_row_classes
     %i[row row-cols-1 row-cols-md-2 g-2]
   end

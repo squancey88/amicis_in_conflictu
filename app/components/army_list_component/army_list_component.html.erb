@@ -7,12 +7,12 @@
         <div class="card-body">
           <h5 class="card-title"><%= list.name %></h5>
           <h6 class="card-subtitle mb-2 text-body-secondary"><%= list.cost %></h6>
-          <%= link_to content_tag(:i, nil, class: ["bi", "bi-pencil-fill"]), edit_army_army_list_path(@army, list), class:"btn btn-primary" %>
+          <%= link_to content_tag(:i, nil, class: ["bi", "bi-pencil-fill"]), edit_army_list_path(list), class:"btn btn-primary" %>
         </div>
       </div>
     <% end %>
 
-    <%= link_to "New List", new_army_army_list_path(@army), class:"btn btn-primary" %>
+    <%= link_to "New List", new_army_list_path, class:"btn btn-primary" %>
   <% end %>
 
 <% end %>

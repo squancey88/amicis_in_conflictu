@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Users", type: :request do
   let(:user) { create(:user, firstname: "Bob") }
+  let(:game_system) { create(:wargame) }
 
   before do
     sign_in(user)
@@ -49,6 +50,13 @@ RSpec.describe "Users", type: :request do
         }
         expect(response).to have_http_status(:unprocessable_entity)
       end
+    end
+  end
+
+  describe "GET /campaigns" do
+    it "returns http success" do
+      get campaigns_user_url(user, filter: {game_system_id: game_system.id}, format: :json)
+      expect(response).to have_http_status(:success)
     end
   end
 end

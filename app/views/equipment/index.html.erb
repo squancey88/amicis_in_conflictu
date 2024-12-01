@@ -1,0 +1,21 @@
+<% content_for :title, "Equipment" %>
+
+<h1>Equipment</h1>
+
+<div id="equipment">
+  <%= turbo_frame_tag :equipment do %>
+    <% @equipment.each do |equipment| %>
+      <%= render Common::CardWithMenuComponent.new(title: "#{equipment.name} (#{equipment.cost})",
+        menu_options: [
+          {link: edit_equipment_path(equipment), text: "Edit", target: "_top"}
+          ]) do |card| %>
+        <% card.with_body do %>
+          <p class="card-text"><%= equipment.description %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+  <% end %>
+</div>
+
+<%= link_to "New equipment", new_equipment_path %>

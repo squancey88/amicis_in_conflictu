@@ -1,0 +1,13 @@
+<%= content_tag :div, class: menu_classes do %>
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= content_tag :i, nil, class: icon_classes %>
+  </button>
+  <ul class="dropdown-menu">
+    <% @menu_options.each do |menu_option| %>
+      <li>
+        <%= link_to menu_option[:text], menu_option[:link], class: "dropdown-item", 
+          target: menu_option[:target], data: menu_option[:data] %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

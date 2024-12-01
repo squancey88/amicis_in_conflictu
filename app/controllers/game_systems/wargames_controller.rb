@@ -53,6 +53,18 @@ module GameSystems
       end
     end
 
+    def add_new_stat_row
+      helpers.fields GameSystems::Wargame.new do |f|
+        f.fields_for :unit_stat_definitions, UnitStatDefinition.new, child_index: Time.now.to_i do |ff|
+          render turbo_stream: turbo_stream.append(
+            "definition_list",
+            partial: "unit_stat_definitions/form_row",
+            locals: {form: ff}
+          )
+        end
+      end
+    end
+
     private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -66,7 +78,8 @@ module GameSystems
         params["game_systems_wargame"]["game_config"] = JSON.parse(params["game_systems_wargame"]["game_config_json_string"])
       end
       params.require(:game_systems_wargame).permit(:name, :slug, :edition, :competitive, :has_armies, :has_army_lists,
-        game_config: {})
+        game_config: {},
+        unit_stat_definitions_attributes: [:id, :name, :label, :stat_type, :min, :max, :sort])
     end
   end
 end

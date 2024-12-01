@@ -1,0 +1,19 @@
+<%= content_tag :div, data: do %>
+
+  <%= bootstrap_field_wrapper(@form, @game_system_field,
+      game_systems_with_army_lists_select(@form, :game_system_id, include_blank: "Please Select",
+        data: { 
+          campaign_and_army_selector_target: "gameSystemSelect",
+          action: "campaign-and-army-selector#gameSystemSelected"
+        })) %>
+
+  <%= bootstrap_field_wrapper(@form, @campaign_field,
+      @form.select(@campaign_field, [], {include_blank: "No Campaign"}, 
+      {class: "form-control", 
+        data: { 
+          campaign_and_army_selector_target: "campaignSelect",
+        }
+      })) %>
+          
+
+<% end %>

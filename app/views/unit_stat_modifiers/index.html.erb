@@ -1,0 +1,14 @@
+<% content_for :title, "Unit stat modifiers" %>
+
+<h1>Unit stat modifiers</h1>
+
+<div id="unit_stat_modifiers">
+  <% @unit_stat_modifiers.each do |unit_stat_modifier| %>
+    <%= render unit_stat_modifier %>
+    <p>
+      <%= link_to "Show this unit stat modifier", unit_stat_modifier %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New unit stat modifier", new_unit_stat_modifier_path %>
