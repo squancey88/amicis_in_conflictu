@@ -1,0 +1,27 @@
+<%= render StandardLayoutBoxComponent.new(title: "Equipment") do |component| %>
+
+  <% component.with_menu do %>
+    <div class="equipment-menu">
+      <%= form_with url: attach_equipment_army_list_path(@army_list) do |f| %>
+        <div class="equipment-menu__template-form">
+          <%= bootstrap_equipment_select(@army_list.game_system, f, :equipment_id) %>
+          <%= f.submit "Attach", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% component.with_body do %>
+    <% @army_list.equipment_attachments.each do |equipment_attachment| %>
+      <%= render Common::CardWithMenuComponent.new(
+        title: equipment_attachment.equipment.name,
+        subtitle: "Cost: #{equipment_attachment.equipment.cost}"
+        ) do |card| %>
+        <% card.with_body do %>
+          <%= equipment_attachment.equipment.description %>
+          <%= button_to "Remove", remove_equipment_army_list_path(@army_list, equipment_attachment_id: equipment_attachment.id) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

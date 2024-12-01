@@ -3,6 +3,8 @@ class ArmyList < ApplicationRecord
   belongs_to :user
   belongs_to :game_system
   belongs_to :campaign, optional: true
+  has_many :equipment_attachments, dependent: :destroy, foreign_key: "attached_to_id", inverse_of: :attached_to
+  has_many :equipment, through: :equipment_attachments
 
   has_many :units, dependent: :destroy
 
@@ -18,10 +20,11 @@ class ArmyList < ApplicationRecord
   end
 
   def list_cost
-    units.sum(:cost)
+    units.sum(:cost) + equipment.sum(:cost)
   end
 
   def remaining_cost
-    starting_cost - list_cost
+    return starting_cost - list_cost if starting_cost
+    0
   end
 end

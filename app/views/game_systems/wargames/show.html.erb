@@ -41,6 +41,12 @@
           records_path: unit_traits_path(game_system_id: @wargame.id),
           new_path: new_unit_trait_path(game_system_id: @wargame.id)
         )%>
+
+      <%= render Common::EmbeddedIndexComponent.new(title: "Equipment",
+          turbo_frame_id: "equipment",
+          records_path: equipment_index_path(game_system_id: @wargame.id),
+          new_path: new_equipment_path(game_system_id: @wargame.id)
+        )%>
     </div>
   </div>
   

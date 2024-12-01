@@ -1,0 +1,16 @@
+<%= form_with(model: equipment) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: equipment, form:) do |component| %>
+
+    <% component.with_fields do %>
+
+      <%= form.hidden_field :game_system_id %>
+      <%= bootstrap_text_form(form, :name) %>
+      <%= bootstrap_text_form(form, :description) %>
+      <%= bootstrap_number_form(form, :cost) %>
+
+      <%= bootstrap_check_box(form, :attach_to_list) %>
+      <%= bootstrap_check_box(form, :attach_to_unit) %>
+    <% end %>
+  <% end %>
+<% end %>

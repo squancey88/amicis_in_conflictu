@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   resources :armies
   resources :army_lists do
+    member do
+      post :attach_equipment
+      post :remove_equipment
+    end
     resources :units do
       collection do
         get :add_trait_row
@@ -30,6 +34,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :equipment
 
   resources :unit_traits
   resources :unit_templates do

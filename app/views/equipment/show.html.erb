@@ -2,16 +2,16 @@
   <div class="row">
     <div class="col">
       <%= render RecordShowWrapperComponent.new(
-        record: @army_list,
-        title: @army_list.name,
+        record: @equipment,
+        title: @equipment.to_s,
         menu_options: [
           { 
             text: "Edit",
-            link: edit_army_list_path(@army_list)
+            link: edit_equipment_path(@equipment)
           },
           {
             text: "Delete",
-            link: army_list_path(@army_list),
+            link: equipment_path(@equipment),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           }
         ]
@@ -19,17 +19,9 @@
 
         <% component.with_body do %>
 
-          <%= render @army_list %>
+          <%= render @equipment %>
         <% end %>
       <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <%= render Units::ListComponent.new(army_list: @army_list) %>
-    </div>
-    <div class="col">
-      <%= render EquipmentAttachments::ListComponent.new(army_list: @army_list) %>
     </div>
   </div>
 </div>

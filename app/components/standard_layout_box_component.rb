@@ -10,6 +10,6 @@ class StandardLayoutBoxComponent < ViewComponent::Base
   end
 
   def box_classes
-    (["bg-body-tertiary", "rounded-3", "p-3"] + @classes).join(" ")
+    (["bg-body-tertiary", "rounded-3", "p-3", "mb-3"] + @classes).join(" ")
   end
 end

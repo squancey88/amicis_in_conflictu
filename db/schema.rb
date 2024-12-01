@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_30_161825) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,6 +53,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_30_161825) do
     t.integer "list_start_cost"
     t.index ["game_system_id"], name: "index_campaigns_on_game_system_id"
     t.index ["gaming_group_id"], name: "index_campaigns_on_gaming_group_id"
+  end
+
+  create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "cost"
+    t.boolean "attach_to_list"
+    t.boolean "attach_to_unit"
+    t.uuid "game_system_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_equipment_on_game_system_id"
+  end
+
+  create_table "equipment_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "equipment_id", null: false
+    t.string "attached_to_type", null: false
+    t.uuid "attached_to_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attached_to_type", "attached_to_id"], name: "index_equipment_attachments_on_attached_to"
+    t.index ["equipment_id"], name: "index_equipment_attachments_on_equipment_id"
   end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -304,6 +326,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_30_161825) do
   add_foreign_key "army_lists", "users"
   add_foreign_key "campaigns", "game_systems"
   add_foreign_key "campaigns", "gaming_groups"
+  add_foreign_key "equipment", "game_systems"
+  add_foreign_key "equipment_attachments", "equipment"
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"

@@ -1,5 +1,5 @@
 class ArmyListsController < ApplicationController
-  before_action :set_army_list, only: %i[show edit update destroy]
+  before_action :set_army_list, only: %i[show edit update destroy attach_equipment remove_equipment]
 
   # GET /army_lists or /army_lists.json
   def index
@@ -58,7 +58,34 @@ class ArmyListsController < ApplicationController
     end
   end
 
+  def attach_equipment
+    equipment = Equipment.find(equipment_params[:equipment_id])
+    attachment = EquipmentAttachment.new(equipment:, attached_to: @army_list)
+    if attachment.save
+      redirect_to @army_list
+    else
+      redirect_to @army_list, alert: "Unable to add equipment, not enough cost"
+    end
+  end
+
+  def remove_equipment
+    ea = EquipmentAttachment.find(equipment_attachments_params[:equipment_attachment_id])
+    if ea.destroy!
+      redirect_to @army_list
+    else
+      redirect_to @army_list, notice: "Unable to remove equipment"
+    end
+  end
+
   private
+
+  def equipment_params
+    params.permit(:equipment_id)
+  end
+
+  def equipment_attachments_params
+    params.permit(:equipment_attachment_id)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_army_list
