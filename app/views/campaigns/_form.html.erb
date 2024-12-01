@@ -10,7 +10,7 @@
       <%= bootstrap_number_form(form, :list_cost) %>
 
       <%= form.fields_for :config do |config_form| %>
-        <% campaign.game_system.campaign_list_attributes.each do |attr| %>
+        <% campaign.game_system.campaign_list_attributes&.each do |attr| %>
           <%= bootstrap_field_wrapper(config_form, attr["key"], 
             config_form.number_field(attr["key"], value: campaign.config[attr["key"]], class: "form-control"), 
             label: attr["name"]) %>

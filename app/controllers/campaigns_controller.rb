@@ -17,7 +17,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/new
   def new
-    @campaign = Campaign.new(game_system: get_game_system)
+    @campaign = Campaign.new(game_system: get_game_system, config: {})
   end
 
   # GET /campaigns/1/edit
