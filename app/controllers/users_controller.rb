@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user
-  before_action :check_access
+  before_action :set_user, except: %i[emulate_user stop_emulation]
+  before_action :check_access, except: %i[emulate_user stop_emulation]
+  before_action :verify_admin, only: %i[emulate_user]
 
   def show
   end
@@ -22,6 +23,21 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json { render "campaigns/index", status: :ok }
     end
+  end
+
+  def emulate_user
+    user_id = params.permit(:user_id)[:user_id]
+    if User.find(user_id)
+      session[:original_user_id] = session[:user_id]
+      session[:user_id] = user_id
+    end
+    redirect_to root_url
+  end
+
+  def stop_emulation
+    session[:user_id] = session[:original_user_id]
+    session.delete(:original_user_id)
+    redirect_to root_url
   end
 
   private
