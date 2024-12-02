@@ -66,6 +66,10 @@ Rails.application.routes.draw do
     member do
       get :campaigns
     end
+    collection do
+      post :emulate_user
+      post :stop_emulation
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

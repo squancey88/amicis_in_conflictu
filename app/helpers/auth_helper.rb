@@ -11,6 +11,10 @@ module AuthHelper
     @current_user ||= User.find_by(id: user_id)
   end
 
+  def emulated
+    session[:original_user_id].present?
+  end
+
   def encode_token(payload)
     JWT.encode(payload, Rails.configuration.jwt_password)
   end
