@@ -14,9 +14,11 @@
       </div>
     </div>
   </div>
-  <div class="card-body">
-    <div class="card-with-menu__content">
-      <%= body %>
+  <% if body %>
+    <div class="card-body">
+      <div class="card-with-menu__content">
+        <%= body %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

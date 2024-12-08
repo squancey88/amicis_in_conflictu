@@ -6,9 +6,11 @@
   <%= turbo_frame_tag :unit_traits do %>
     <% @unit_traits.each do |unit_trait| %>
       <%= render Common::CardWithMenuComponent.new(title: "#{unit_trait.name}",
-        menu_options: [{link: edit_unit_trait_path(unit_trait), text: "Edit"}]) do |card| %>
+        menu_options: [
+          {link: edit_unit_trait_path(unit_trait), text: "Edit", target: "_top"}
+          ]) do |card| %>
         <% card.with_body do %>
-          <p class="card-text"><%= unit_trait.description %></p>
+          <%= render TextEditorRenderComponent.new(model: unit_trait, attribute: :rich_description) %>
         <% end %>
       <% end %>
     <% end %>

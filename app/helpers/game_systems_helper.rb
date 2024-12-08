@@ -21,13 +21,14 @@ module GameSystemsHelper
   def game_systems_with_army_lists_select(form, attribute_name, include_blank: nil, data: {})
     options = {}
     options[:include_blank] = include_blank if include_blank
+    selected = form.object.send(attribute_name) if form.object
     form.select attribute_name,
-      grouped_options_for_select(game_system_grouped_options(GameSystem.where(has_army_lists: true))),
+      grouped_options_for_select(game_system_grouped_options(GameSystem.where(has_army_lists: true)), selected),
       options,
       {class: "form-select", data:}
   end
 
-  def game_system_grouped_options game_systems
+  def game_system_grouped_options(game_systems)
     game_systems.group_by(&:category).each_with_object([]) do |(k, v), m|
       m << [k, v.map { |x| [x.display_name, x.id] }]
     end

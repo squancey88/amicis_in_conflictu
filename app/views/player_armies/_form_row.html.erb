@@ -1,0 +1,12 @@
+<div class="player-army-row form-row">
+  <%= form.hidden_field :id %>
+  <div>
+    <%= bootstrap_army_select(game_system, form, :army_id) %>
+  </div>
+  <div>
+    <%= bootstrap_army_list_select(game_system, form, :army_list_id) %>
+  </div>
+  <div class="form-row__no-grow"> 
+    <%= bootstrap_check_box(form, "_destroy", label: "Remove") %>
+  </div>
+</div>

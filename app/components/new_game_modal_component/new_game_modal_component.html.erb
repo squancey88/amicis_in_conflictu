@@ -9,7 +9,7 @@
         <h5 class="modal-title">New Game</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <%= form_for @new_game do |form| %>
+      <%= form_with model: @new_game do |form| %>
 
         <%= form.hidden_field :gaming_session_id %>
 

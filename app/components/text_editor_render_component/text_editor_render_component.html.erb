@@ -1,0 +1,8 @@
+<% blocks.each do |block| %>
+  <% case block["type"] %>
+  <% when "paragraph" %>
+    <%= content_tag :p, block["data"]["text"].html_safe %>
+  <% when "header" %>
+    <%= content_tag "h#{block["data"]["level"]}", block["data"]["text"].html_safe %>
+  <% end %>
+<% end %>

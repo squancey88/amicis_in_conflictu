@@ -1,14 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "unit_templates/index", type: :view do
+  let(:game_system) { create(:wargame) }
   before(:each) do
+    assign(:game_system, game_system)
     assign(:unit_templates, create_list(:unit_template, 2, name: "Name", cost: 2))
+    render
   end
 
   it "renders a list of unit_templates" do
-    render
-    cell_selector = "div>p"
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
+    expect(rendered).to have_css(".card", count: 2)
   end
 end

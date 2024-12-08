@@ -9,7 +9,7 @@
         <h5 class="modal-title">Add Team to <%= @gaming_group.name %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <%= form_for(@team, url: [@gaming_group]) do |form| %>
+      <%= form_with(model: @team, url: [@gaming_group]) do |form| %>
         <div class="modal-body">
 
           <%= form.hidden_field :gaming_group_id %>

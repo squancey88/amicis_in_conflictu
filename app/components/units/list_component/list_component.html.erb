@@ -5,7 +5,7 @@
     <div class="unit-menu">
       <%= form_with url: new_army_list_unit_path(@army_list), method: :get do |f| %>
         <div class="unit-menu__template-form">
-          <%= bootstrap_unit_templates_select(@army_list.game_system, f, :template_id) %>
+          <%= unit_templates_select_grouped_armies(@army_list.game_system, f, :template_id) %>
           <%= f.submit "From Template", class: "btn btn-primary" %>
         </div>
       <% end %>

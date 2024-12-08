@@ -2,11 +2,12 @@ require "rails_helper"
 
 RSpec.describe UnitTemplate, type: :model do
   let(:game_system) { create(:wargame) }
-  let(:army_list) { create(:army_list, game_system:) }
+  let(:army) { create(:army, game_system:) }
+  let(:army_list) { create(:army_list, game_system:, army:) }
   let(:unit_trait) { create(:unit_trait, game_system:) }
   let(:definitions) { create_list(:unit_stat_definition, 2, game_system:) }
   let(:unit_template) {
-    template = create(:unit_template, cost: 50, game_system:)
+    template = create(:unit_template, cost: 50, game_system:, army:)
     definitions.each_with_index do |d, i|
       create(:unit_template_stat, unit_template: template, unit_stat_definition: d, base_value: (i + 1))
     end

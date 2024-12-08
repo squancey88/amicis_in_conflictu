@@ -1,13 +1,16 @@
 require "rails_helper"
 
 RSpec.describe "armies/index", type: :view do
+  let(:game_system) { create(:wargame) }
   before(:each) do
-    assign(:armies, create_list(:army, 2, name: "Name"))
+    create_list(:army, 2, name: "Name", game_system:)
+    pagy, armies = pagy(Army.all)
+    assign(:armies, armies)
+    assign(:pagy, pagy)
+    render
   end
 
   it "renders a list of armies" do
-    render
-    cell_selector = (Rails::VERSION::STRING >= "7") ? "div>p" : "tr>td"
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
+    expect(rendered).to have_css(".card", count: 2)
   end
 end

@@ -4,7 +4,8 @@
 
     <% component.with_fields do %>
       <%= form.hidden_field :game_system_id %>
-
+      
+      <%= bootstrap_army_select(unit_template.game_system, form, :army_id) %>
       <%= bootstrap_text_form(form, :name) %>
       <%= bootstrap_number_form(form, :cost) %>
       

@@ -71,6 +71,6 @@ class UnitTraitsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def unit_trait_params
-    params.require(:unit_trait).permit(:name, :description, :game_system_id, :army_id, :active)
+    params.require(:unit_trait).permit(:name, :description, :game_system_id, :army_id, :active, :rich_description)
   end
 end

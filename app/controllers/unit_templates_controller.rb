@@ -1,10 +1,10 @@
 class UnitTemplatesController < ApplicationController
-  before_action :set_game_system, only: %i[new add_trait_row]
+  before_action :set_game_system, only: %i[index new add_trait_row]
   before_action :set_unit_template, only: %i[show edit update destroy]
 
   # GET /unit_templates or /unit_templates.json
   def index
-    @unit_templates = UnitTemplate.all
+    @unit_templates = @game_system.unit_templates
   end
 
   # GET /unit_templates/1 or /unit_templates/1.json
@@ -88,7 +88,7 @@ class UnitTemplatesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def unit_template_params
-    params.require(:unit_template).permit(:name, :cost, :game_system_id,
+    params.require(:unit_template).permit(:name, :cost, :game_system_id, :army_id,
       unit_template_stats_attributes: [:id, :base_value, :unit_stat_definition_id],
       unit_template_trait_mappings_attributes: [:id, :unit_trait_id])
   end

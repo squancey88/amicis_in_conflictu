@@ -47,7 +47,11 @@ Rails.application.routes.draw do
       get :add_stat_change_row
     end
   end
-  resources :players, only: %i[update]
+  resources :players, only: %i[update] do
+    member do
+      get :add_army_row
+    end
+  end
   resources :gaming_groups do
     member do
       post :update_membership
