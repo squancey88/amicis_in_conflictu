@@ -100,7 +100,7 @@ RSpec.describe "/armies", type: :request do
         army = Army.create! valid_attributes
         patch army_url(army), params: {army: new_attributes}
         army.reload
-        expect(response).to redirect_to(army_url(army))
+        expect(response).to redirect_to(game_systems_wargame_url(army.game_system))
       end
     end
 
@@ -124,7 +124,7 @@ RSpec.describe "/armies", type: :request do
     it "redirects to the armies list" do
       army = Army.create! valid_attributes
       delete army_url(army)
-      expect(response).to redirect_to(armies_url(game_system_id: game_system.id))
+      expect(response).to redirect_to(game_systems_wargame_url(game_system))
     end
   end
 end

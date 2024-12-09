@@ -43,7 +43,7 @@ class ArmiesController < ApplicationController
   def update
     respond_to do |format|
       if @army.update(army_params)
-        format.html { redirect_to army_url(@army), notice: "Army was successfully updated." }
+        format.html { redirect_to game_systems_wargame_url(@army.game_system), notice: "Army was successfully updated." }
         format.json { render :show, status: :ok, location: @army }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class ArmiesController < ApplicationController
     @army.destroy!
 
     respond_to do |format|
-      format.html { redirect_to armies_url(game_system_id: game_system.id), notice: "Army was successfully destroyed." }
+      format.html { redirect_to game_systems_wargame_url(game_system), notice: "Army was successfully destroyed." }
       format.json { head :no_content }
     end
   end
