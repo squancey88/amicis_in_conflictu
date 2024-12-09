@@ -4,9 +4,6 @@ export default class extends Controller {
   static targets = ["armyTemplate", "armyRow"];
   static values = { playerIndex: Number }
 
-  connect(){
-  }
-
   removeArmy({params}) {
     const index = params.armyIndex;
     this.armyRowTargets.forEach(record => {

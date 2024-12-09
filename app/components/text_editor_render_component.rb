@@ -2,7 +2,12 @@
 
 class TextEditorRenderComponent < ViewComponent::Base
   def initialize(model:, attribute:)
-    @data = JSON.parse(model.send(attribute))
+    json = model.send(attribute)
+    @data = JSON.parse(json) if json
+  end
+
+  def render?
+    @data
   end
 
   def blocks

@@ -12,7 +12,6 @@ RSpec.describe "unit_traits/edit", type: :view do
 
     assert_select "form[action=?][method=?]", unit_trait_path(unit_trait), "post" do
       assert_select "input[name=?]", "unit_trait[name]"
-      assert_select "input[name=?]", "unit_trait[description]"
       assert_select "input[name=?]", "unit_trait[game_system_id]"
       assert_select "input[name=?]", "unit_trait[active]"
     end
