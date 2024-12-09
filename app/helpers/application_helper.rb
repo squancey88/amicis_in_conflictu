@@ -8,4 +8,20 @@ module ApplicationHelper
   def column_row_class
     column_row_classes.join(" ")
   end
+
+  def simple_text_to_rich(text)
+    {
+      time: DateTime.now.to_i,
+      version: "2.29.1",
+      blocks: [
+        {
+          type: :paragraph,
+          data: {
+            text:
+          },
+          id: SecureRandom.base64(10)
+        }
+      ]
+    }.to_json
+  end
 end

@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe MainHeaderComponent, type: :component do
+RSpec.describe Layout::MainHeaderComponent, type: :component do
   let(:user) { create(:user) }
 
   context "when logged in" do
     before do
-      allow_any_instance_of(MainHeaderComponent).to receive(:current_user).and_return(user)
+      allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(user)
     end
 
     it "should render header" do
@@ -17,7 +17,7 @@ RSpec.describe MainHeaderComponent, type: :component do
 
   context "when not logged in" do
     before do
-      allow_any_instance_of(MainHeaderComponent).to receive(:current_user).and_return(nil)
+      allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(nil)
       render_inline(described_class.new)
     end
 

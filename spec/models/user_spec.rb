@@ -10,7 +10,6 @@ RSpec.describe User, type: :model do
     it { should have_many(:user_group_memberships) }
     it { should have_many(:gaming_groups) }
     it { should have_many(:players) }
-    it { should have_many(:armies) }
     it { should have_many(:army_lists) }
   end
 

@@ -3,5 +3,6 @@ FactoryBot.define do
     name { Faker::Lorem.word }
     cost { 1 }
     game_system
+    army
   end
 end

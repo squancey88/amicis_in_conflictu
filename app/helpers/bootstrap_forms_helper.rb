@@ -22,10 +22,11 @@ module BootstrapFormsHelper
     end
   end
 
-  def bootstrap_check_box(form, attr, margin_bottom: 0)
+  def bootstrap_check_box(form, attr, label: nil, margin_bottom: 0)
+    label = label.presence || attr.to_s.humanize
     content_tag :div, class: ["form-check", "mb-#{margin_bottom}"] do
       concat(form.check_box(attr, class: "form-check-input"))
-      concat(form.label(attr, class: "form-check-label"))
+      concat(form.label(attr, label, class: "form-check-label"))
     end
   end
 end

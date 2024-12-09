@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -18,11 +18,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
   create_table "armies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "game_system_id", null: false
-    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "parent_id"
     t.index ["game_system_id"], name: "index_armies_on_game_system_id"
-    t.index ["user_id"], name: "index_armies_on_user_id"
+    t.index ["parent_id"], name: "index_armies_on_parent_id"
   end
 
   create_table "army_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -243,6 +243,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
     t.uuid "game_system_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "army_id"
+    t.index ["army_id"], name: "index_unit_templates_on_army_id"
     t.index ["game_system_id"], name: "index_unit_templates_on_game_system_id"
   end
 
@@ -263,6 +265,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "rich_description"
     t.index ["army_id"], name: "index_unit_traits_on_army_id"
     t.index ["game_system_id"], name: "index_unit_traits_on_game_system_id"
   end
@@ -319,8 +322,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "armies", "armies", column: "parent_id"
   add_foreign_key "armies", "game_systems"
-  add_foreign_key "armies", "users"
   add_foreign_key "army_lists", "armies"
   add_foreign_key "army_lists", "game_systems"
   add_foreign_key "army_lists", "users"
@@ -351,6 +354,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_01_135413) do
   add_foreign_key "unit_template_stats", "unit_templates"
   add_foreign_key "unit_template_trait_mappings", "unit_templates"
   add_foreign_key "unit_template_trait_mappings", "unit_traits"
+  add_foreign_key "unit_templates", "armies"
   add_foreign_key "unit_templates", "game_systems"
   add_foreign_key "unit_trait_mappings", "unit_traits"
   add_foreign_key "unit_trait_mappings", "units"

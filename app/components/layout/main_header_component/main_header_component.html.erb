@@ -9,9 +9,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-3 mb-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="<%= gaming_groups_path %>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="nav-link dropdown-toggle" href="<%= gaming_groups_path %>" 
+            data-bs-toggle="dropdown" aria-expanded="false">
             Your Groups
-          </a>
+          </button>
           <ul class="dropdown-menu">
             <% current_user.gaming_groups.each do |group| %>
               <li><a class="dropdown-item" href="<%= gaming_group_path(group) %>"><%= group.name %></a></li>
@@ -21,11 +22,6 @@
             <% end %>
             <li><a class="dropdown-item" href="<%= new_gaming_group_path %>">New Group</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= armies_path %>">
-            Your Armies
-          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= army_lists_path %>">

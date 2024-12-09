@@ -1,8 +1,10 @@
 class UnitTemplate < ApplicationRecord
+  belongs_to :army
+  belongs_to :game_system
+
   has_many :unit_template_stats, dependent: :destroy
   has_many :unit_template_trait_mappings, dependent: :destroy
   has_many :unit_traits, through: :unit_template_trait_mappings
-  belongs_to :game_system
 
   accepts_nested_attributes_for :unit_template_stats
   accepts_nested_attributes_for :unit_template_trait_mappings, allow_destroy: true

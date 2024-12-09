@@ -1,9 +1,14 @@
 class ArmiesController < ApplicationController
+  before_action :set_game_system, only: %i[new index]
   before_action :set_army, only: %i[show edit update destroy]
 
   # GET /armies or /armies.json
   def index
-    @armies = current_user.armies
+    results = @game_system.armies
+    respond_to do |format|
+      format.html { @pagy, @armies = pagy(results) }
+      format.json { @armies = results }
+    end
   end
 
   # GET /armies/1 or /armies/1.json
@@ -12,7 +17,7 @@ class ArmiesController < ApplicationController
 
   # GET /armies/new
   def new
-    @army = Army.new(user: current_user)
+    @army = Army.new(game_system: @game_system)
   end
 
   # GET /armies/1/edit
@@ -38,7 +43,7 @@ class ArmiesController < ApplicationController
   def update
     respond_to do |format|
       if @army.update(army_params)
-        format.html { redirect_to army_url(@army), notice: "Army was successfully updated." }
+        format.html { redirect_to game_systems_wargame_url(@army.game_system), notice: "Army was successfully updated." }
         format.json { render :show, status: :ok, location: @army }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,15 +54,20 @@ class ArmiesController < ApplicationController
 
   # DELETE /armies/1 or /armies/1.json
   def destroy
+    game_system = @army.game_system
     @army.destroy!
 
     respond_to do |format|
-      format.html { redirect_to armies_url, notice: "Army was successfully destroyed." }
+      format.html { redirect_to game_systems_wargame_url(game_system), notice: "Army was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
+
+  def set_game_system
+    @game_system = GameSystem.find(params[:game_system_id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_army
@@ -66,6 +76,6 @@ class ArmiesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def army_params
-    params.require(:army).permit(:name, :game_system_id, :user_id)
+    params.require(:army).permit(:name, :game_system_id, :army_id)
   end
 end

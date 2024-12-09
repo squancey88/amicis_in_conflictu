@@ -6,8 +6,8 @@
 
       <%= form.hidden_field :game_system_id %>
       <%= bootstrap_text_form(form, :name) %>
-      <%= bootstrap_text_form(form, :description) %>
       <%= bootstrap_check_box(form, :active) %>
+      <%= render TextEditorComponent.new(form:, attribute: :rich_description) %>
       
     <% end %>
   <% end %>

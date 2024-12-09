@@ -1,0 +1,15 @@
+<%= render Common::CardWithMenuComponent.new(
+  title: @unit_template.name,
+  subtitle: "Cost: #{@unit_template.cost}",
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_unit_template_path(@unit_template),
+      target: "_top"
+    }
+  ]) do |card| %>
+  <% card.with_body do %>
+    <%= render Units::StatRowComponent.new(unit_stats: @unit_template.unit_template_stats) %>
+    <%= traits_list(@unit_template) %>
+  <% end %>
+<% end %>

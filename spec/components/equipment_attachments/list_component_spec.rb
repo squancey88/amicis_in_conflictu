@@ -3,13 +3,14 @@
 require "rails_helper"
 
 RSpec.describe EquipmentAttachments::ListComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:army_list) { create(:army_list) }
+  let!(:equipment_attachment) { create(:equipment_attachment, attached_to: army_list) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  before do
+    render_inline(described_class.new(army_list:))
+  end
+
+  it "should render the attachment link" do
+    expect(page).to have_css("form[action='/army_lists/#{army_list.id}/attach_equipment']")
+  end
 end

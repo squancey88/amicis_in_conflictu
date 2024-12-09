@@ -2,11 +2,13 @@ require "rails_helper"
 
 RSpec.describe "/unit_templates", type: :request do
   let(:game_system) { create(:wargame) }
+  let(:army) { create(:army, game_system:) }
   let(:user) { create(:user) }
 
   let(:valid_attributes) {
     {
       name: Faker::Lorem.word,
+      army_id: army.id,
       game_system_id: game_system.id
     }
   }
@@ -14,6 +16,7 @@ RSpec.describe "/unit_templates", type: :request do
   let(:invalid_attributes) {
     {
       name: nil,
+      army_id: army.id,
       game_system_id: game_system.id
     }
   }
@@ -25,7 +28,7 @@ RSpec.describe "/unit_templates", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       UnitTemplate.create! valid_attributes
-      get unit_templates_url
+      get unit_templates_url(game_system_id: game_system.id)
       expect(response).to be_successful
     end
   end

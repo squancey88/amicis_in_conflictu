@@ -1,11 +1,12 @@
 <div data-controller="game-form">
-  <%= form_for @game do |form| %>
+  <%= form_with model: @game do |form| %>
 
     <%= render @game_system.game_data_form_component(@game) if @game_system.game_data_form_component(@game) %>
 
     <% if @current_user_player %>
       <div class="form-control__player-section mb-3">
         <%= form.fields_for :players, @current_user_player, child_index: @player_index do |player_form| %>
+          <%= player_form.hidden_field :id %>
           <div class="accordion" id="playerData">
             <% @game_system.player_form_components.each_with_index do |player_component, component_index| %>
               <div class="accordion-item">
@@ -16,7 +17,7 @@
                 </h2>
                 <div id="playerComponent-<%= component_index %>" class="accordion-collapse collapse" data-bs-parent="#playerData">
                   <div class="accordion-body">
-                    <%= render player_component[:component].new(player_form: player_form, current_player: @current_user_player, player_index: @player_index) %>
+                    <%= render player_component[:component].new(game: @game, player_form: player_form, current_player: @current_user_player, player_index: @player_index) %>
                   </div>
                 </div>
               </div>

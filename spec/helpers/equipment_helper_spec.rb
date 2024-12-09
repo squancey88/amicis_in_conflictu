@@ -1,15 +1,13 @@
 require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the EquipmentHelper. For example:
-#
-# describe EquipmentHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe EquipmentHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:game_system) { create(:wargame) }
+  let(:army_list) { create(:army_list, game_system:) }
+
+  it "should render equipment select" do
+    form_res = form_with url: attach_equipment_army_list_path(army_list) do |form|
+      helper.bootstrap_equipment_select(game_system, form, :equipment_id)
+    end
+    expect(form_res).to have_css("select")
+  end
 end

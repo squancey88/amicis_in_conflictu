@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MainHeaderComponent < ViewComponent::Base
+class Layout::MainHeaderComponent < ViewComponent::Base
   delegate :current_user, :emulated, to: :helpers
 
   def render?
