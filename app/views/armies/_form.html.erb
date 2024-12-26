@@ -2,7 +2,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: army, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
 
       <div class="form-floating">
         <%= form.text_field :name, class: "form-control mb-3", placeholder: "Name" %>

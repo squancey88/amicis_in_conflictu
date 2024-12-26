@@ -6,6 +6,7 @@ module BootstrapFormsHelper
       form.text_field(attr, class: "form-control", placeholder:),
       label:, margin_bottom:)
   end
+  alias_method :bootstrap_text_field, :bootstrap_text_form
 
   def bootstrap_number_form(form, attr, label: nil, placeholder: nil, margin_bottom: 3, min: nil, max: nil)
     label = label.presence || attr.to_s.humanize
@@ -14,6 +15,7 @@ module BootstrapFormsHelper
       form.number_field(attr, class: "form-control", placeholder:, min:, max:),
       label:, margin_bottom:)
   end
+  alias_method :bootstrap_number_field, :bootstrap_number_form
 
   def bootstrap_field_wrapper(form, attr, field, label: nil, margin_bottom: 3)
     content_tag :div, class: ["form-floating", "mb-#{margin_bottom}"] do

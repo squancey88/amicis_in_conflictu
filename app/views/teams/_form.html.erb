@@ -2,7 +2,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: team, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
 
       <div class="form-floating">
         <%= form.text_field :name, class: "form-control", placeholder: "Your Groups Name" %>

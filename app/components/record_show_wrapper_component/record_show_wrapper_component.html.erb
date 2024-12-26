@@ -1,11 +1,21 @@
-<%= render StandardLayoutBoxComponent.new(title: @title, classes: @classes) do |component| %>
-
-  <% component.with_menu do %>
+<%= render Common::HeaderCardComponent.new(title: @title) do |header| %>
+  <%= header.with_buttons do %>
     <%= render Common::MenuButtonComponent.new(menu_options: @menu_options, 
                 additional_classes: ["record-show-wrapper__header-menu"]) %>
   <% end %>
-
-  <% component.with_body do %>
-    <%= body %>
-  <% end %>
 <% end %>
+
+<%= body %>
+
+<div class="<%= grid_classes(@row_cols) %>">
+  <% boxes.each do |box| %>
+    <div class="col">
+      <%= box %>
+    </div>
+  <% end %>
+  <% spaces.each do |space| %>
+    <div class="col">
+      <%= space %>
+    </div>
+  <% end %>
+</div>

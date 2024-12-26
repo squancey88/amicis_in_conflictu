@@ -1,0 +1,9 @@
+<%= form_with(model: @record) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: @record, form:) do |component| %>
+
+    <% component.with_form_box do %>
+      <%= render partial: "#{controller_name}/fields", locals: {form:} %>
+    <% end %>
+  <% end %>
+<% end %>

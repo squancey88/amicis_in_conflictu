@@ -1,26 +1,26 @@
-<div class="container">
-  <%= render RecordShowWrapperComponent.new(
-    record: @gaming_session,
-    title: l(@gaming_session.start_time),
-    classes: ["mb-3"],
-    menu_options: [
-      { 
-        text: "Edit",
-        link: edit_gaming_group_gaming_session_path(@gaming_group, @gaming_session)
-      },
-      {
-        text: "Delete",
-        link: gaming_group_gaming_session_path(@gaming_group, @gaming_session),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-      }
-    ]
-  ) do |component| %>
+<%= render RecordShowWrapperComponent.new(
+  record: @gaming_session,
+  title: l(@gaming_session.start_time),
+  classes: ["mb-3"],
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_gaming_group_gaming_session_path(@gaming_group, @gaming_session)
+    },
+    {
+      text: "Delete",
+      link: gaming_group_gaming_session_path(@gaming_group, @gaming_session),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
 
-    <% component.with_body do %>
+  <% component.with_box do %>
 
-      <%= render @gaming_session %>
-    <% end %>
+    <%= render @gaming_session %>
   <% end %>
 
-  <%= render SessionGameListComponent.new(gaming_session: @gaming_session) %>
-</div>
+  <% component.with_space do %>
+    <%= render SessionGameListComponent.new(gaming_session: @gaming_session) %>
+  <% end %>
+<% end %>

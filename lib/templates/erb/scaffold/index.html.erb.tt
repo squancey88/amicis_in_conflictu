@@ -1,14 +1,23 @@
 <%% content_for :title, "<%= human_name.pluralize %>" %>
 
-<h1><%= human_name.pluralize %></h1>
+<%%= render Common::HeaderCardComponent.new(title: "<%= human_name.pluralize %>") do |header| %>
+  <%%= header.with_buttons do %>
+    <%%= link_to "New <%= human_name.downcase %>", <%= new_helper(type: :path) %>, class: %i[btn btn-primary] %>
+  <%% end %>
+<%% end %>
 
 <div id="<%= plural_table_name %>">
-  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-    <%%= render <%= singular_table_name %> %>
-    <p>
-      <%%= link_to "Show this <%= human_name.downcase %>", <%= model_resource_name(singular_table_name) %> %>
-    </p>
+  <%%= turbo_frame_tag :<%= plural_table_name %> do %>
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <%%= render Common::CardWithMenuComponent.new(title: <%= singular_table_name %>,
+        menu_options: [
+          {link: <%= model_resource_name(singular_table_name) %>, text: "Show", target: "_top"},
+          {link: <%= edit_helper(type: :path) %>, text: "Edit", target: "_top"}
+        ]) do |card| %>
+        <%% card.with_body do %>
+          <%%= render <%= singular_table_name %> %>
+        <%% end %>
+      <%% end %>
+    <%% end %>
   <%% end %>
 </div>
-
-<%%= link_to "New <%= human_name.downcase %>", <%= new_helper(type: :path) %> %>

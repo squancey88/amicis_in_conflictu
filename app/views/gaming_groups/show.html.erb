@@ -1,23 +1,31 @@
-<div class="container">
-  <div class="<%= column_row_class %>">
-    <div class="col">
-      <div class="mb-2">
-        <%= render @gaming_group %>
-      </div>
-      <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
-    </div>
-    <div class="col">
-      <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
-      <div class="mb-3"></div>
-      <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
-    </div>
-    <div class="col">
-      <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
-    </div>
-    <div class="col">
-      <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>
-    </div>
-  </div>
-</div>
+<%= render RecordShowWrapperComponent.new(
+  record: @gaming_group,
+  title: @gaming_group.name,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_gaming_group_path(@gaming_group)
+    },
+  ]
+) do |component| %>
 
+  <% component.with_space do %>
+    <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
+  <% end %>
 
+  <% component.with_space do %>
+    <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
+  <% end %>
+
+  <% component.with_space do %>
+    <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
+  <% end %>
+
+  <% component.with_space do %>
+    <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
+  <% end %>
+
+  <% component.with_space do %>
+    <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>
+  <% end %>
+<% end %>

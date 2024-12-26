@@ -1,0 +1,17 @@
+<%= form_with(model: world) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: world, form:) do |component| %>
+
+    <% component.with_form_box do %>
+      <%= bootstrap_text_field(form, :name) %>
+      <%= render TextEditorComponent.new(form:, attribute: :blurb) %>
+    <% end %>
+
+    <% component.with_form_box do %>
+      <%= render JsonEditorComponent.new(model: world,
+                                    attribute: :time_period_config,
+                                    schema: World.time_period_schema) %>
+    <% end %>
+
+  <% end %>
+<% end %>

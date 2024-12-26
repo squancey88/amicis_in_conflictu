@@ -1,27 +1,20 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= render RecordShowWrapperComponent.new(
-        record: @army,
-        title: @army.name,
-        menu_options: [
-          { 
-            text: "Edit",
-            link: edit_army_path(@army)
-          },
-          {
-            text: "Delete",
-            link: army_path(@army),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          }
-        ]
-      ) do |component| %>
+<%= render RecordShowWrapperComponent.new(
+  record: @army,
+  title: @army.name,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_army_path(@army)
+    },
+    {
+      text: "Delete",
+      link: army_path(@army),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
 
-        <% component.with_body do %>
-
-          <%= render @army %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
+  <% component.with_box do%>
+    <%= render @army %>
+  <% end %>
+<% end %>

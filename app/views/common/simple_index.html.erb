@@ -1,0 +1,11 @@
+<div id="<%= controller_name %>">
+  <%= turbo_frame_tag controller_name do %>
+    <% instance_variable_get(:"@#{controller_name}").each do |record| %>
+      <%= render Common::CardWithMenuComponent.new(title: record,
+        menu_options: [
+          {link: record, text: "Edit", target: "_top"},
+        ]) do |card| %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

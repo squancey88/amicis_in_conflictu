@@ -2,7 +2,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: unit_trait, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
 
       <%= form.hidden_field :game_system_id %>
       <%= bootstrap_text_form(form, :name) %>

@@ -16,7 +16,6 @@ RSpec.describe "game_systems/index", type: :view do
 
   it "renders a list of game_systems" do
     render
-    cell_selector = "div>p"
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 4
+    expect(rendered).to have_css(".card", count: 3)
   end
 end

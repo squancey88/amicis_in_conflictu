@@ -1,27 +1,21 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= render RecordShowWrapperComponent.new(
-        record: @unit_template,
-        title: @unit_template.to_s,
-        menu_options: [
-          { 
-            text: "Edit",
-            link: edit_unit_template_path(@unit_template)
-          },
-          {
-            text: "Delete",
-            link: unit_template_path(@unit_template),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          }
-        ]
-      ) do |component| %>
+<%= render RecordShowWrapperComponent.new(
+  record: @unit_template,
+  title: @unit_template.name,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_unit_template_path(@unit_template)
+    },
+    {
+      text: "Delete",
+      link: unit_template_path(@unit_template),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
 
-        <% component.with_body do %>
+  <% component.with_box do %>
 
-          <%= render @unit_template %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
+    <%= render @unit_template %>
+  <% end %>
+<% end %>

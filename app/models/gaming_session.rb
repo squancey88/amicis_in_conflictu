@@ -8,6 +8,6 @@ class GamingSession < ApplicationRecord
   scope :previous, -> { where("start_time <= ?", Time.zone.today.beginning_of_day) }
 
   def to_s
-    I18n.l(start_time)
+    I18n.l(start_time) if start_time
   end
 end

@@ -8,6 +8,7 @@
         <% end %>
       </div>
       <div class="card-with-menu__header-menu">
+        <%= menu_section if menu_section %>
         <% if @menu_options %>
           <%= render Common::MenuButtonComponent.new(menu_options: @menu_options) %>
         <% end %>

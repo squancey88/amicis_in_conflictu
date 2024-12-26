@@ -1,0 +1,18 @@
+<div class="card mb-2 text-bg-light">
+  <div class="card-body">
+    <div class="d-flex">
+      <div class="record-form-wrapper__menu-title">
+        <h5 class="card-title"><%= @title %></h2>
+        <% if @subtitle %>
+          <h6 class="card-subtitle mb-2 text-body-secondary"><%= @subtitle %></h6>
+        <% end %>
+      </div>
+      <div class="record-form-wrapper__menu-content flex-grow-1">
+        <%= menu_items %>
+      </div>
+      <div class="record-form-wrapper__menu-default-buttons d-flex flex-row align-items-center">
+        <%= buttons %>
+      </div>
+    </div>
+  </div>
+</div>

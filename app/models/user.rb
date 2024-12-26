@@ -61,4 +61,8 @@ class User < ApplicationRecord
       save!
     end
   end
+
+  def is_admin? = admin
+
+  def to_s = display_name
 end

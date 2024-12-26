@@ -1,0 +1,20 @@
+require "rails_helper"
+
+RSpec.describe "characters/edit", type: :view do
+  let(:world) { create(:world) }
+  let(:character) { create(:character, world:) }
+
+  before(:each) do
+    assign(:character, character)
+    allow_any_instance_of(WorldsHelper).to receive(:current_world).and_return(world)
+  end
+
+  it "renders the edit character form" do
+    render
+
+    assert_select "form[action=?][method=?]", character_path(character), "post" do
+      assert_select "input[name=?]", "character[given_name]"
+      assert_select "input[name=?]", "character[family_name]"
+    end
+  end
+end

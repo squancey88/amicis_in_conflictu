@@ -1,0 +1,15 @@
+<%= form_with(model: time_period) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: time_period, form:) do |component| %>
+
+    <% component.with_form_box do %>
+      <%= form.hidden_field(:world_id) %>
+
+      <%= bootstrap_text_field(form, :name) %>
+      <%= bootstrap_number_field(form, :order) %>
+    <% end %>
+    <% component.with_form_box do %>
+      <%= render TextEditorComponent.new(form:, attribute: :description) %>
+    <% end %>
+  <% end %>
+<% end %>

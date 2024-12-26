@@ -1,0 +1,20 @@
+<% content_for :title, "Time periods" %>
+
+<%= render Common::HeaderCardComponent.new(title: "Time periods") do |header| %>
+  <%= header.with_buttons do %>
+    <%= link_to "New time period", new_time_period_path, class: %i[btn btn-primary] %>
+  <% end %>
+<% end %>
+
+<div id="time_periods">
+  <%= turbo_frame_tag :time_periods do %>
+    <% @time_periods.each do |time_period| %>
+      <%= render Common::CardWithMenuComponent.new(title: time_period,
+        menu_options: [
+          {link: time_period, text: "Show", target: "_top"},
+          {link: edit_time_period_path(time_period), text: "Edit", target: "_top"}
+        ]) do |card| %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -27,7 +27,9 @@
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- End Google Tag Manager (noscript) -->
     <% end %>
-    <%= render Layout::MainHeaderComponent.new(user: current_user) %>
+    <%= render Layout::MainHeaderComponent.new %>
+    <%= render Layout::SystemAdminMenuComponent.new %>
+    <%= render Layout::WorldBuilderMenuComponent.new(world_building: @world_building) %>
     <%= render Common::FlashHandlerComponent.new(flash) %>
 
     <div class="container-fluid mt-2">

@@ -1,14 +1,18 @@
 <% content_for :title, "Game systems" %>
 
-<h1>Game Systems</h1>
+<%= render Common::HeaderCardComponent.new(title: "Game Systems") do |header| %>
+  <%= header.with_buttons do %>
+    <%= link_to "New wargame", new_game_systems_wargame_path, class: %i[btn btn-primary] %>
+  <% end %>
+<% end %>
 
 <div id="game_systems">
   <% @game_systems.each do |game_system| %>
-    <%= render game_system %>
-    <p>
-      <%= link_to "Show this system", game_system %>
-    </p>
+    <%= render Common::CardWithMenuComponent.new(title: "#{game_system.name}",
+      menu_options: [
+        {link: game_systems_wargame_path(game_system), text: "Show", target: "_top"},
+        {link: edit_game_systems_wargame_path(game_system), text: "Edit", target: "_top"}
+      ]) do |card| %>
+    <% end %>
   <% end %>
 </div>
-
-<%= link_to 'New Wargame', new_game_systems_wargame_path %>

@@ -1,0 +1,13 @@
+<nav class="navbar" style="background-color:rgb(136, 16, 0);">
+  <div class="container-fluid">
+    <% if current_user.admin %>
+      <%= form_with url: emulate_user_users_path do |form| %>
+        <%= form.collection_select :user_id, User.all, :id, :display_name %>
+        <%= form.submit "Emulate" %>
+      <% end %>
+    <% end %>
+    <% if emulated %>
+      <%= button_to "Stop Emulation", stop_emulation_users_path, method: :post %>
+    <% end %>
+  </div>
+</nav>
