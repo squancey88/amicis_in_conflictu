@@ -1,0 +1,24 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @time_period,
+  title: @time_period.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_time_period_path(@time_period)
+    },
+    {
+      text: "Delete",
+      link: time_period_path(@time_period),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
+
+  <% component.with_box(title: "Details") do %>
+    <%= render @time_period %>
+  <% end %>
+
+  <% component.with_box(title: "Description") do %>
+    <%= render TextEditorRenderComponent.new(model: @time_period, attribute: :description) %>
+  <% end %>
+<% end %>

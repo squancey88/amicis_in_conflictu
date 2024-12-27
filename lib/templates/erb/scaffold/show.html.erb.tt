@@ -1,27 +1,21 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%%= render RecordShowWrapperComponent.new(
-        record: @<%= singular_name %>,
-        title: @<%= singular_name %>.to_s,
-        menu_options: [
-          { 
-            text: "Edit",
-            link: <%= edit_helper(type: :path) %>
-          },
-          {
-            text: "Delete",
-            link: <%= show_helper(type: :path) %>,
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          }
-        ]
-      ) do |component| %>
+<%%= render RecordShowWrapperComponent.new(
+  record: @<%= singular_name %>,
+  title: @<%= singular_name %>.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: <%= edit_helper(type: :path) %>
+    },
+    {
+      text: "Delete",
+      link: <%= show_helper(type: :path) %>,
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
 
-        <%% component.with_body do %>
+  <%% component.with_box do %>
 
-          <%%= render @<%= singular_table_name %> %>
-        <%% end %>
-      <%% end %>
-    </div>
-  </div>
-</div>
+    <%%= render @<%= singular_table_name %> %>
+  <%% end %>
+<%% end %>

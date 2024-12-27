@@ -1,0 +1,23 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @character,
+  title: @character.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_character_path(@character)
+    },
+    {
+      text: "Delete",
+      link: character_path(@character),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
+
+  <% component.with_box(title: "Details") do %>
+    <%= render @character %>
+  <% end %>
+  <% component.with_box(title: "Description") do %>
+    <%= render TextEditorRenderComponent.new(model: @character, attribute: :physical_description) %>
+  <% end %>
+<% end %>

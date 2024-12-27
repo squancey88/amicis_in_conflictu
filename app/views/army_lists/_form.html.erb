@@ -2,15 +2,16 @@
 
   <%= render RecordFormWrapperComponent.new(record: army_list, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
       <%= form.hidden_field :army_id %>
 
       <%= bootstrap_text_form(form, :name) %>
 
       <%= render GameSystems::CampaignAndArmySelectorComponent.new(form:) %>
+    <% end %>
 
+    <% component.with_form_box do %>
       <%= render TextEditorComponent.new(form:, attribute: :details) %>
-      
     <% end %>
   <% end %>
 <% end %>

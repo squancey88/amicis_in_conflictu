@@ -3,11 +3,11 @@
 class TextEditorRenderComponent < ViewComponent::Base
   def initialize(model:, attribute:)
     json = model.send(attribute)
-    @data = JSON.parse(json) if json
+    @data = JSON.parse(json) if json.present?
   end
 
   def render?
-    @data
+    @data&.has_key?("blocks")
   end
 
   def blocks

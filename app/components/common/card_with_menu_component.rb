@@ -2,6 +2,7 @@
 
 class Common::CardWithMenuComponent < ViewComponent::Base
   renders_one :body
+  renders_one :menu_section
 
   def initialize(title:, menu_options: nil, subtitle: nil)
     @title = title

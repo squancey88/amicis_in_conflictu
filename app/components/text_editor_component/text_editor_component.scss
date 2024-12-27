@@ -1,4 +1,6 @@
 .text-editor-component {
-  background-color: white;
-  border: 1px solid black;
+  &__content {
+    background-color: white;
+    border: 1px solid black;
+  }
 }

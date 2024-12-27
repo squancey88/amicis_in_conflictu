@@ -2,12 +2,10 @@
 <%= bootstrap_text_form(form, :edition)%>
 <%= bootstrap_text_form(form, :slug)%>
 
-<div class="mb-3">
-  <%= bootstrap_check_box(form, :competitive) %>
-  <%= bootstrap_check_box(form, :has_armies) %>
-  <%= bootstrap_check_box(form, :has_army_lists) %>
-</div>
+<%= bootstrap_check_box(form, :competitive) %>
+<%= bootstrap_check_box(form, :has_armies) %>
+<%= bootstrap_check_box(form, :has_army_lists) %>
 
 <%= render JsonEditorComponent.new(model: game_system,
-                                    attribute: :game_config,
-                                    schema: game_system.class.schema) %>
+                                  attribute: :game_config,
+                                  schema: game_system.class.schema) %>

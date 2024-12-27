@@ -13,6 +13,6 @@ RSpec.describe SessionGameListComponent, type: :component do
   end
 
   it "should have the box title" do
-    expect(page).to have_css("h3", text: "Games")
+    expect(page).to have_css("h5", text: "Games")
   end
 end

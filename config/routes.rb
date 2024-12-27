@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :characters
+  resources :time_periods
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
   get "forgot_password", to: "auth#forgot_password", as: :forgot_password
@@ -12,6 +14,14 @@ Rails.application.routes.draw do
     post "complete_password_reset"
     post "request_password_reset"
   end
+
+  resources :worlds do
+    member do
+      get :start_editing
+    end
+  end
+  resources :character_types
+  resources :character_species_types
 
   resources :armies
   resources :army_lists do

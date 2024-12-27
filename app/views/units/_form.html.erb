@@ -2,7 +2,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: unit, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
 
       <%= bootstrap_text_form(form, :name) %>
 

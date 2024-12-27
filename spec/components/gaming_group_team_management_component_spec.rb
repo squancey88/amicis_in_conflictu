@@ -18,7 +18,7 @@ RSpec.describe GamingGroupTeamManagementComponent, type: :component do
   end
 
   it "should render card for teams" do
-    expect(page).to have_css(".card", count: 2)
+    expect(page).to have_css(".card", count: 3)
   end
 
   it "should render the team name" do

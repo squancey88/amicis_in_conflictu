@@ -1,14 +1,21 @@
 <% content_for :title, "Army lists" %>
 
-<h1>Army lists</h1>
+<%= render Common::HeaderCardComponent.new(title: "My Army Lists") do |header| %>
+  <%= header.with_buttons do %>
+    <%= link_to "New Army List", new_game_systems_wargame_path, class: %i[btn btn-primary] %>
+  <% end %>
+<% end %>
 
 <div id="army_lists">
   <% @army_lists.each do |army_list| %>
-    <%= render army_list %>
-    <p>
-      <%= link_to "Show this army list", army_list_path(army_list) %>
-    </p>
+    <%= render Common::CardWithMenuComponent.new(title: "#{army_list.name}",
+      menu_options: [
+        {link: army_list_path(army_list), text: "Show", target: "_top"},
+        {link: edit_army_list_path(army_list), text: "Edit", target: "_top"}
+      ]) do |card| %>
+      <% card.with_body do %>
+        <%= render army_list %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
-
-<%= link_to "New army list", new_army_list_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_23_163021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,6 +53,39 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
     t.integer "list_start_cost"
     t.index ["game_system_id"], name: "index_campaigns_on_game_system_id"
     t.index ["gaming_group_id"], name: "index_campaigns_on_gaming_group_id"
+  end
+
+  create_table "character_species_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "lifespan"
+    t.uuid "world_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["world_id"], name: "index_character_species_types_on_world_id"
+  end
+
+  create_table "character_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "world_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["world_id"], name: "index_character_types_on_world_id"
+  end
+
+  create_table "characters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "given_name"
+    t.string "family_name"
+    t.jsonb "physical_description"
+    t.uuid "world_id", null: false
+    t.uuid "born_during_id", null: false
+    t.uuid "character_type_id", null: false
+    t.uuid "character_species_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["born_during_id"], name: "index_characters_on_born_during_id"
+    t.index ["character_species_type_id"], name: "index_characters_on_character_species_type_id"
+    t.index ["character_type_id"], name: "index_characters_on_character_type_id"
+    t.index ["world_id"], name: "index_characters_on_world_id"
   end
 
   create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -161,6 +194,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["gaming_group_id"], name: "index_teams_on_gaming_group_id"
+  end
+
+  create_table "time_periods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "order"
+    t.uuid "world_id", null: false
+    t.string "name"
+    t.jsonb "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["world_id"], name: "index_time_periods_on_world_id"
   end
 
   create_table "unit_applied_modifiers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -322,6 +365,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "worlds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "blurb"
+    t.jsonb "time_period_config"
+    t.uuid "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_worlds_on_owner_id"
+  end
+
   add_foreign_key "armies", "armies", column: "parent_id"
   add_foreign_key "armies", "game_systems"
   add_foreign_key "army_lists", "armies"
@@ -329,6 +382,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
   add_foreign_key "army_lists", "users"
   add_foreign_key "campaigns", "game_systems"
   add_foreign_key "campaigns", "gaming_groups"
+  add_foreign_key "character_species_types", "worlds"
+  add_foreign_key "character_types", "worlds"
+  add_foreign_key "characters", "character_species_types"
+  add_foreign_key "characters", "character_types"
+  add_foreign_key "characters", "time_periods", column: "born_during_id"
+  add_foreign_key "characters", "worlds"
   add_foreign_key "equipment", "game_systems"
   add_foreign_key "equipment_attachments", "equipment"
   add_foreign_key "games", "game_systems"
@@ -341,6 +400,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
   add_foreign_key "teams", "gaming_groups"
+  add_foreign_key "time_periods", "worlds"
   add_foreign_key "unit_applied_modifiers", "games"
   add_foreign_key "unit_applied_modifiers", "unit_stat_modifiers"
   add_foreign_key "unit_applied_modifiers", "units"
@@ -361,4 +421,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_08_213152) do
   add_foreign_key "unit_traits", "armies"
   add_foreign_key "unit_traits", "game_systems"
   add_foreign_key "units", "army_lists"
+  add_foreign_key "worlds", "users", column: "owner_id"
 end

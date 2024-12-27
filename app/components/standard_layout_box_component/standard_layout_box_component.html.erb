@@ -1,15 +1,20 @@
 <div class="<%= box_classes %>">
-  <div class="standard-box_header mb-2">
-    <div class="standard-box_header-text">
-      <h3><%= @title %></h3>
-    </div>
-    <% if menu %>
-      <div class="standard-box_menu">
-        <%= menu %>
+  <% if @title || menu %>
+    <div class="standard-box_header card-header">
+      <div class="standard-box_header-text">
+        <% if @title %>
+          <h5 class="card-title"><%= @title %></h5>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="standard-box-content">
+      <% if menu %>
+        <div class="standard-box_menu">
+          <%= menu %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="standard-box-content card-body">
     <%= body %>
+    <%= content %>
   </div>
 </div>

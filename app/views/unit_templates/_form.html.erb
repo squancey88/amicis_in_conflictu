@@ -2,7 +2,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: unit_template, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
       <%= form.hidden_field :game_system_id %>
       
       <%= bootstrap_army_select(unit_template.game_system, form, :army_id) %>
@@ -21,6 +21,8 @@
         <% end %>
       </div>
 
+    <% end %>
+    <% component.with_form_box do %>
       <h3>Traits</h3>
 
       <%= turbo_frame_tag :trait_mappings  do %>

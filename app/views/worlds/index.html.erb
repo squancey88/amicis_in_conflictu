@@ -1,0 +1,25 @@
+<% content_for :title, "Worlds" %>
+
+<%= render Common::HeaderCardComponent.new(title: "Your worlds") do |header| %>
+  <%= header.with_buttons do %>
+    <%= link_to "New world", new_world_path, class: %i[btn btn-primary] %>
+  <% end %>
+<% end %>
+
+<div id="worlds">
+  <% @worlds.each do |world| %>
+    <%= render Common::CardWithMenuComponent.new(title: "#{world.name}",
+      menu_options: [
+        {link: edit_world_path(world), text: "Edit", target: "_top"}
+        ]) do |card| %>
+
+      <% card.with_menu_section do %>
+        <%= link_to "Start Editing", start_editing_world_path(world), class: %i[btn btn-primary] %>
+      <% end %>
+
+      <% card.with_body do %>
+        <%= render TextEditorRenderComponent.new(model: world, attribute: :blurb) %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

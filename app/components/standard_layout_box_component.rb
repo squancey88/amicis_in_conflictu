@@ -4,12 +4,12 @@ class StandardLayoutBoxComponent < ViewComponent::Base
   renders_one :body
   renders_one :menu
 
-  def initialize(title:, classes: [])
+  def initialize(title: nil, classes: [])
     @title = title
     @classes = classes
   end
 
   def box_classes
-    (["bg-body-tertiary", "rounded-3", "p-3", "mb-3"] + @classes).join(" ")
+    (["card", "text-bg-light"] + @classes).join(" ")
   end
 end

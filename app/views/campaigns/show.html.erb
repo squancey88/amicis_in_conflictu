@@ -1,33 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <%= render RecordShowWrapperComponent.new(
-        record: @campaign,
-        title: @campaign.name,
-        menu_options: [
-          { 
-            text: "Edit",
-            link: edit_gaming_group_campaign_path(@gaming_group, @campaign)
-          },
-          {
-            text: "Delete",
-            link: gaming_group_campaign_path(@gaming_group, @campaign),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          }
-        ]
-      ) do |component| %>
+<%= render RecordShowWrapperComponent.new(
+  record: @campaign,
+  title: @campaign.name,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_gaming_group_campaign_path(@gaming_group, @campaign)
+    },
+    {
+      text: "Delete",
+      link: gaming_group_campaign_path(@gaming_group, @campaign),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
 
-        <% component.with_body do %>
-          <%= render @campaign %>
+  <% component.with_box do %>
+    <%= render @campaign %>
+  <% end %>
 
-          <h3>Config</h3>
+  <% component.with_box do %>
+    <h3>Config</h3>
 
-          <% @campaign.game_system.campaign_list_attributes&.each do |attr| %>
-            <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
-          <% end %>
+    <% @campaign.game_system.campaign_list_attributes&.each do |attr| %>
+      <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
+    <% end %>
 
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
+  <% end %>
+<% end %>

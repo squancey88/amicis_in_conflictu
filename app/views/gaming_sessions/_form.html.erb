@@ -2,7 +2,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: gaming_session, form:) do |component| %>
 
-    <% component.with_fields do %>
+    <% component.with_form_box do %>
 
       <div class="form-floating mb-3">
         <%= form.datetime_field :start_time, class: "form-control", placeholder: "Start Time" %>
@@ -13,9 +13,10 @@
         <%= select_for_groups form, :gaming_group_id %>
         <%= form.label :gaming_group_id %>
       </div>
+    <% end %>
 
+    <% component.with_form_box do %>
       <%= render TextEditorComponent.new(form: form, attribute: :notes) %>
-      
     <% end %>
   <% end %>
 <% end %>

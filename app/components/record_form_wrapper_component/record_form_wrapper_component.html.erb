@@ -1,17 +1,17 @@
-<%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
+<%= render ErrorPanelComponent.new(
+  model_name: @record.model_name.human, 
+  errors: @record.errors) %>
 
-  <% component.with_body do %>
-    <%= render ErrorPanelComponent.new(
-      model_name: @record.model_name.human, 
-      errors: @record.errors) %>
-
-    <div class="record-form-wrapper__fields">
-      <%= fields %>
-    </div>
-
-    <div class="mt-2">
-      <%= @form.submit(class: "btn btn-primary") %>
-    </div>
-
+<%= render Common::HeaderCardComponent.new(title:, subtitle:) do |header| %>
+  <%= header.with_buttons do %>
+    <%= @form.submit(class: "btn btn-primary") %>
   <% end %>
+<% end %>
+
+<% if form_boxes %>
+  <div class="record-form-wrapper__box_grid <%= grid_classes(@row_cols) %>">
+    <% form_boxes.each do |box| %>
+      <%= box %>
+    <% end %>
+  </div>
 <% end %>
