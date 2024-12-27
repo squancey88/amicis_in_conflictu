@@ -4,6 +4,7 @@ module WithinWorld
   included do
     prepend_before_action :check_world
     prepend_before_action :set_world
+    before_action :new_record, only: %i[new] # standard:disable Rails/LexicallyScopedActionFilter
   end
 
   def check_world

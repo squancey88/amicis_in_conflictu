@@ -4,7 +4,6 @@ module SimpleModel
   included do
     before_action :set_record, only: %i[show update destroy]
     before_action :set_records, only: %i[index]
-    before_action :new_record, only: %i[new]
   end
 
   def index
