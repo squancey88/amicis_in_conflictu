@@ -21,7 +21,9 @@
           <%= stats_form.hidden_field :unit_stat_definition_id %>
         <% end %>
       </div>
+    <% end %>
 
+    <% component.with_form_box do %>
       <h3>Traits</h3>
 
       <%= turbo_frame_tag :trait_mappings  do %>
@@ -37,6 +39,7 @@
         class: ['btn', 'btn-secondary'],
         data: {turbo_frame: :trait_mappings, turbo_stream: true} %>
 
+      <%= render partial: "unit_trait_category_mappings/form_embed", locals: { record: @unit, form: } %>
     <% end %>
   <% end %>
 <% end %>

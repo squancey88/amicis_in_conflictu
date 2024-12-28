@@ -31,6 +31,7 @@
         <% card.with_body do %>
           <%= render Units::StatRowComponent.new(unit_stats: unit.unit_stats) %>
           <%= traits_list(unit) %>
+          <%= unit_trait_category_list(unit) %>
         <% end %>
       <% end %>
     <% end %>

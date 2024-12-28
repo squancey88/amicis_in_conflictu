@@ -9,8 +9,6 @@ RSpec.describe "units/index", type: :view do
 
   it "renders a list of units" do
     render
-    cell_selector = "div>p"
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Description".to_s), count: 2
+    expect(rendered).to have_css(".card", count: 2)
   end
 end

@@ -7,7 +7,9 @@ module GameSystems
     has_many :unit_stat_modifiers, foreign_key: "game_system_id", inverse_of: :game_system, dependent: :destroy
     has_many :unit_templates, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
     has_many :unit_traits, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :unit_trait_categories, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
     has_many :equipment, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :unit_xp_gain_events, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
 
     accepts_nested_attributes_for :unit_stat_definitions, allow_destroy: true, reject_if: proc { |attributes| attributes["name"].blank? }
 
