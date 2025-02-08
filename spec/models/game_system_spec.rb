@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe GameSystem, type: :model do
-  let(:game_system) { create(:game_system, name: "Test") }
+  let(:game_system) { create(:wargame, name: "Test") }
 
   context "associations" do
     it { should have_many(:games) }

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class TurnBasedGameFormComponent < ViewComponent::Base
+class GameForms::TurnBasedComponent < ViewComponent::Base
   delegate :players_attributes_form_name, to: :helpers
 
-  def initialize(game:)
+  def initialize(game:, form:, user_player:)
     @game = game
     @game_system = @game.game_system
     @turn_count = @game.players.first.turns.length

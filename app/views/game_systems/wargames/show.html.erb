@@ -68,4 +68,12 @@
       ) %>
   <% end %>
 
+  <% component.with_space do %>
+    <%= render Common::EmbeddedIndexComponent.new(title: "Stat Modifiers",
+        turbo_frame_id: "unit_stat_modifiers",
+        records_path: unit_stat_modifiers_path(game_system_id: @wargame.id),
+        new_path: new_unit_stat_modifier_path(game_system_id: @wargame.id)
+      ) %>
+  <% end %>
+
 <% end %>

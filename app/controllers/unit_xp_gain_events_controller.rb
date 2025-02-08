@@ -5,7 +5,6 @@ class UnitXpGainEventsController < ApplicationController
 
   # GET /unit_xp_gain_events or /unit_xp_gain_events.json
   def index
-    @unit_xp_gain_events = @game_system.unit_xp_gain_events
   end
 
   # GET /unit_xp_gain_events/1 or /unit_xp_gain_events/1.json

@@ -31,10 +31,21 @@ module GameSystems
       "Wargames"
     end
 
-    def game_data_form_component(game)
+    def game_data_form_components(game)
+      game_forms = []
       if has_turns?
-        TurnBasedGameFormComponent.new(game: game)
+        game_forms << {
+          title: "Turn Details",
+          component: GameForms::TurnBasedComponent
+        }
       end
+      if game.campaign
+        game_forms << {
+          title: "Campaign Tracking (#{game.campaign.name})",
+          component: GameForms::UnitModifiersComponent
+        }
+      end
+      game_forms
     end
 
     def player_form_components

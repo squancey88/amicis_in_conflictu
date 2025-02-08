@@ -20,6 +20,10 @@ class Unit < ApplicationRecord
     cost
   end
 
+  def current_xp
+    starting_xp
+  end
+
   def enough_cost_in_list
     if !army_list.starting_cost.nil? && cost > army_list.remaining_cost
       throw :abort

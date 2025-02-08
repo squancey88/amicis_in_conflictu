@@ -78,7 +78,7 @@ class UnitStatModifiersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def unit_stat_modifier_params
-    params.require(:unit_stat_modifier).permit(:game_system_id, :cost, :active, :name, :description,
+    params.require(:unit_stat_modifier).permit(:game_system_id, :cost, :active, :name, :rich_description,
       unit_stat_changes_attributes: [:id, :stat_change, :unit_stat_definition_id])
   end
 end

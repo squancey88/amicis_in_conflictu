@@ -3,7 +3,7 @@ FactoryBot.define do
     name { "MyString" }
     description { "" }
     xp_gain { 1 }
-    game_system
+    game_system { create(:wargame) }
     active { true }
   end
 end
