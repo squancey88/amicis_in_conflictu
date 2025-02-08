@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :unit_stat_definition do
-    game_system
+    game_system { create(:wargame) }
     name { "MyString" }
     label { "MyString" }
     stat_type { 0 }
