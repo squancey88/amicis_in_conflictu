@@ -12,15 +12,15 @@ class GamingGroup < ApplicationRecord
   end
 
   def owners
-    users.joins(:user_group_memberships).where(user_group_memberships: {owner: true})
+    users.includes(:user_group_memberships).where(user_group_memberships: {owner: true})
   end
 
   def members
-    users.joins(:user_group_memberships).where(user_group_memberships: {owner: false})
+    users.includes(:user_group_memberships).where(user_group_memberships: {owner: false})
   end
 
   def is_owner?(user)
-    users.joins(:user_group_memberships).where(user_group_memberships: {owner: true, user:}).any?
+    users.includes(:user_group_memberships).where(user_group_memberships: {owner: true, user:}).any?
   end
 
   def results_by_team

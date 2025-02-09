@@ -72,7 +72,7 @@ Rails.application.routes.draw do
     resources :campaigns
     resources :teams
     resources :teams, only: %i[create update destroy]
-    resources :gaming_sessions, except: %i[index]
+    resources :gaming_sessions
   end
 
   resources :games

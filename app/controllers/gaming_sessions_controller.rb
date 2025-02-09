@@ -2,6 +2,10 @@ class GamingSessionsController < ApplicationController
   include WithinGamingGroup
   before_action :set_gaming_session, only: %i[show edit update destroy]
 
+  def index
+    @gaming_sessions = @gaming_group.gaming_sessions
+  end
+
   # GET /gaming_sessions/1 or /gaming_sessions/1.json
   def show
   end
