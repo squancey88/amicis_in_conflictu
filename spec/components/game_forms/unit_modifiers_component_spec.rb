@@ -2,14 +2,18 @@
 
 require "rails_helper"
 
-RSpec.describe GameForms::UnitModifiersComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe GameForms::UnitModifiersComponent, type: :helper do
+  include ViewComponent::TestHelpers
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  let(:game) { create(:game) }
+
+  before do
+    form_with model: game do |form|
+      render_inline(described_class.new(game:, user_player: game.players.first, form:))
+    end
+  end
+
+  it "should render an add Xp Gain button" do
+    expect(page).to have_link("Add XP Gain")
+  end
 end

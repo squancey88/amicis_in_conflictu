@@ -5,7 +5,7 @@
 <div id="units">
   <%= turbo_frame_tag :units do %>
     <% @units.each do |unit| %>
-      <%= render partial: "units/unit_card", locals: { unit: } %>
+      <%= render partial: "units/unit_card", locals: { unit:, army_list: @army_list } %>
     <% end %>
   <% end %>
 </div>

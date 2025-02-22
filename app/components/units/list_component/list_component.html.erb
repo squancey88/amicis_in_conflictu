@@ -15,7 +15,7 @@
 
   <% component.with_body do %>
     <% @army_list.units.each do |unit| %>
-      <%= render partial: "units/unit_card", locals: { unit: } %>
+      <%= render partial: "units/unit_card", locals: { unit:, army_list: @army_list } %>
     <% end %>
   <% end %>
 <% end %>

@@ -41,8 +41,12 @@ module GameSystems
       end
       if game.campaign
         game_forms << {
-          title: "Campaign Tracking (#{game.campaign.name})",
+          title: "Unit Modifiers (#{game.campaign.name})",
           component: GameForms::UnitModifiersComponent
+        }
+        game_forms << {
+          title: "Campaign Tracking (#{game.campaign.name})",
+          component: GameForms::CampaignAttributesComponent
         }
       end
       game_forms
@@ -134,6 +138,15 @@ module GameSystems
     def setup_player_data(game)
       player_data = {}
       player_data[:turns] = [] if has_turns?
+      if game.campaign
+        campaign_data = {
+          changes: {}
+        }
+        game.game_system.campaign_list_attributes.each do |attribute|
+          campaign_data[:changes][attribute["key"]] = nil
+        end
+        player_data[:campaign] = campaign_data
+      end
       player_data
     end
   end

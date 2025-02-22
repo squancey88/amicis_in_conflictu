@@ -3,7 +3,7 @@ FactoryBot.define do
     game_system { create(:wargame) }
     name { "MyString" }
     label { "MyString" }
-    stat_type { 0 }
+    stat_type { :standard_stat }
     min { 0 }
     max { 10 }
     sort { 1 }

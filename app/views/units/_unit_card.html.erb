@@ -4,11 +4,11 @@
   menu_options: [
   { 
     text: "Edit",
-    link: edit_army_list_unit_path(@army_list, unit)
+    link: edit_army_list_unit_path(army_list, unit)
   },
   {
     text: "Clone",
-    link: new_army_list_unit_path(@army_list, cloned_from_id: unit.id)
+    link: new_army_list_unit_path(army_list, cloned_from_id: unit.id)
   }
   ]) do |card| %>
   <% card.with_body do %>
