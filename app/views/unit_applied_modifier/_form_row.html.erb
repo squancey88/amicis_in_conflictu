@@ -1,6 +1,6 @@
 <div class="form-row">
   <%= form.hidden_field :id %>
-  <% if unit %>
+  <% if local_assigns.fetch(:unit, nil) %>
     <%= form.hidden_field :unit_id %>
   <% else %>
     <%= unit_select(form, user_player.player_armies.first.army_list, :unit_id) %>

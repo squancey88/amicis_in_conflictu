@@ -75,9 +75,9 @@ FactoryBot.define do
           ],
           campaign_list_attributes: [
             {
-              key: "credits",
+              key: "rep",
               type: "number",
-              name: "Credits"
+              name: "Rep"
             }
           ]
         }
