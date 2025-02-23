@@ -7,11 +7,13 @@ module GameSystems
     has_many :unit_stat_modifiers, foreign_key: "game_system_id", inverse_of: :game_system, dependent: :destroy
     has_many :unit_templates, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
     has_many :unit_traits, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :unit_trait_categories, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
     has_many :equipment, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
+    has_many :unit_xp_gain_events, dependent: :destroy, foreign_key: "game_system_id", inverse_of: :game_system
 
     accepts_nested_attributes_for :unit_stat_definitions, allow_destroy: true, reject_if: proc { |attributes| attributes["name"].blank? }
 
-    config_has_scoring_systems(:turn_based)
+    config_has_scoring_systems(:turn_based, :non_scoring)
     config_has_turn_data(title: "Turn Tracking",
       point_title: "Tracking Point") do |items|
         items.add_item(:key, :string)
@@ -29,10 +31,25 @@ module GameSystems
       "Wargames"
     end
 
-    def game_data_form_component(game)
+    def game_data_form_components(game)
+      game_forms = []
       if has_turns?
-        TurnBasedGameFormComponent.new(game: game)
+        game_forms << {
+          title: "Turn Details",
+          component: GameForms::TurnBasedComponent
+        }
       end
+      if game.campaign
+        game_forms << {
+          title: "Unit Modifiers (#{game.campaign.name})",
+          component: GameForms::UnitModifiersComponent
+        }
+        game_forms << {
+          title: "Campaign Tracking (#{game.campaign.name})",
+          component: GameForms::CampaignAttributesComponent
+        }
+      end
+      game_forms
     end
 
     def player_form_components
@@ -121,6 +138,18 @@ module GameSystems
     def setup_player_data(game)
       player_data = {}
       player_data[:turns] = [] if has_turns?
+      if game.campaign
+        campaign_data = {
+          changes: {}
+        }
+        if game.game_system.list_cost_change_in_game
+          campaign_data[:changes][:list_cost_change] = 0
+        end
+        game.game_system.campaign_list_attributes.each do |attribute|
+          campaign_data[:changes][attribute["key"]] = nil
+        end
+        player_data[:campaign] = campaign_data
+      end
       player_data
     end
   end

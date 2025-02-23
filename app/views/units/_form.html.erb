@@ -10,6 +10,8 @@
 
       <%= bootstrap_number_form(form, :cost) %>
 
+      <%= bootstrap_number_form(form, :starting_xp) %>
+
       <h3>Stats</h3>
 
       <div class="form-row">
@@ -21,7 +23,9 @@
           <%= stats_form.hidden_field :unit_stat_definition_id %>
         <% end %>
       </div>
+    <% end %>
 
+    <% component.with_form_box do %>
       <h3>Traits</h3>
 
       <%= turbo_frame_tag :trait_mappings  do %>
@@ -37,6 +41,30 @@
         class: ['btn', 'btn-secondary'],
         data: {turbo_frame: :trait_mappings, turbo_stream: true} %>
 
+      <%= render partial: "unit_trait_category_mappings/form_embed", locals: { record: @unit, form: } %>
     <% end %>
+
+    <% component.with_form_box do %>
+      <h3>Modifiers</h3>
+
+      <%= turbo_frame_tag :unit_applied_modifiers  do %>
+        <%= form.fields_for :unit_applied_modifiers do |modifiers| %>
+          <%= render partial: "unit_applied_modifier/form_row", locals: {
+            form: modifiers, game_system: @unit.army_list.game_system,
+            unit: @unit
+          } %>
+        <% end %>
+      <% end %>
+
+      <% unless @unit.new_record? %>
+        <%= link_to "Add Modifier", 
+          add_applied_modifier_row_army_list_unit_path(@unit.army_list, @unit, game_system_id: @unit.army_list.game_system_id),
+          class: ['btn', 'btn-secondary'],
+          data: {turbo_frame: :unit_applied_modifiers, turbo_stream: true} %>
+      <% else %>
+        <p>Please save your unit to add modifiers</p>
+      <% end %>
+    <% end %>
+
   <% end %>
 <% end %>

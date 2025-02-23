@@ -7,7 +7,8 @@ RSpec.describe TextEditorRenderComponent, type: :component do
     {
       time: 1714678203542,
       blocks: [
-        {id: "Wk4L5wcZCZ", type: "paragraph", data: {text: "Something something dark side"}}
+        {id: "Wk4L5wcZCZ", type: "paragraph", data: {text: "Something something dark side"}},
+        {id: "Wk4L5wcZCZ", type: "header", data: {text: "Hello world", level: "1"}}
       ],
       version: "2.29.1"
     }.to_json
@@ -30,8 +31,16 @@ RSpec.describe TextEditorRenderComponent, type: :component do
       render_inline(described_class.new(model: world_with_content, attribute: :blurb))
     end
 
-    it "should not render" do
+    it "should render" do
       expect(page).to have_css(".text-editor-render-component")
+    end
+
+    it "should render a paragraph" do
+      expect(page).to have_css("p", text: "Something something dark side")
+    end
+
+    it "should render a header" do
+      expect(page).to have_css("h1", text: "Hello world")
     end
   end
 end

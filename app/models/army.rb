@@ -7,4 +7,6 @@ class Army < ApplicationRecord
   has_many :children, class_name: :Army, foreign_key: :parent_id, dependent: :nullify, inverse_of: :parent
 
   validates :name, presence: true
+
+  def to_s = name
 end

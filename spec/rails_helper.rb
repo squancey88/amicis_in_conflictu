@@ -39,9 +39,30 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+selenium_driver = :local_chrome_headless
+
+Capybara.server = :puma, {Silent: true}
+Capybara.default_max_wait_time = 5
+Capybara.register_driver selenium_driver do |app|
+  options = ::Selenium::WebDriver::Chrome::Options.new
+
+  options.add_argument("headless=new")
+  options.add_argument("--disable-dev-shm-usage") # without this you may get Selenium::WebDriver::Error::InvalidSessionError
+  options.add_argument("--disable-extensions")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-gpu")
+  options.add_argument("--window-size=1400,1400")
+  options.add_argument("--verbose")
+  options.add_argument("--enable-logging")
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+end
+Capybara.javascript_driver = selenium_driver
+Capybara.save_path = Rails.root.join("tmp/screenshots")
+
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = Rails.root.join("spec/fixtures").to_s
+  require_relative "support/simplecov_warnings_patch" # To remove excess warnings from line below
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -72,6 +93,10 @@ RSpec.configure do |config|
 
   config.before(:each, type: :component) do
     @request = vc_test_controller.request
+  end
+
+  config.before(:each, type: :system) do
+    driven_by selenium_driver
   end
 
   # Filter lines from Rails gems in backtraces.

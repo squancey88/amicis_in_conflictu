@@ -2,10 +2,11 @@
 .form-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 5px;
 
   div {
-    flex: 1 1 0px;
+    flex: 1 1 50px;
 
     &.form-row__no-grow {
       flex: 0 1 0px;

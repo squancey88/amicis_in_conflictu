@@ -3,6 +3,9 @@
   errors: @record.errors) %>
 
 <%= render Common::HeaderCardComponent.new(title:, subtitle:) do |header| %>
+  <%= header.with_menu_items do %>
+    <%= menu_items %>
+  <% end %>
   <%= header.with_buttons do %>
     <%= @form.submit(class: "btn btn-primary") %>
   <% end %>
