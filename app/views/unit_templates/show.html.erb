@@ -18,4 +18,9 @@
 
     <%= render @unit_template %>
   <% end %>
+  <% component.with_box do %>
+    <%= render Units::StatRowComponent.new(unit_stats: @unit_template.unit_template_stats) %>
+    <%= traits_list(@unit_template) %>
+    <%= unit_trait_category_list(@unit_template) %>
+  <% end %>
 <% end %>

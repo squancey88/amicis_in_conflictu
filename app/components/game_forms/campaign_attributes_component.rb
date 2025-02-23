@@ -13,13 +13,12 @@ class GameForms::CampaignAttributesComponent < ViewComponent::Base
   end
 
   def field_name(key)
-    players_attributes_form_name(@player_index, "[game_data][changes][#{key}]")
+    players_attributes_form_name(@player_index, "[game_data][campaign][changes][#{key}]")
   end
 
   def get_value(key)
-    return nil unless @user_player.game_data.has_key?("changes")
-    return nil unless @user_player.game_data["changes"].has_key?(key)
-    @user_player.game_data["changes"][key]
+    return nil unless @user_player.game_data.has_key?("campaign")
+    @user_player.game_data["campaign"]["changes"][key.to_s]
   end
 
   def render?

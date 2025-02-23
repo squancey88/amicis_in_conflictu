@@ -8,6 +8,12 @@
       <%= bootstrap_text_form(form, :name) %>
       <%= bootstrap_number_form(form, :cost) %>
       <%= bootstrap_check_box(form, :active) %>
+
+
+      <%= bootstrap_check_box(form, :repeatable) %>
+      <%= bootstrap_number_form(form, :repeat_cost) %>
+      <%= bootstrap_check_box(form, :increase_cost_by_additional_instances) %>
+      <%= bootstrap_number_form(form, :list_cost_increase) %>
     <% end %>
 
     <% component.with_form_box(title: "Stat Changes") do %>

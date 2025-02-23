@@ -1,7 +1,7 @@
 class UnitsController < ApplicationController
   before_action :set_army_list
-  before_action :set_game_system, only: %i[add_trait_row]
-  before_action :set_unit, only: %i[show edit update destroy]
+  before_action :set_game_system, only: %i[add_trait_row add_applied_modifier_row]
+  before_action :set_unit, only: %i[show edit update destroy add_applied_modifier_row]
 
   # GET /units or /units.json
   def index
@@ -90,6 +90,18 @@ class UnitsController < ApplicationController
     end
   end
 
+  def add_applied_modifier_row
+    helpers.fields Unit.new do |f|
+      f.fields_for :unit_applied_modifiers, UnitAppliedModifier.new, child_index: Time.now.to_i do |ff|
+        render turbo_stream: turbo_stream.append(
+          :unit_applied_modifiers,
+          partial: "unit_applied_modifier/form_row",
+          locals: {form: ff, game_system: @game_system, unit: @unit}
+        )
+      end
+    end
+  end
+
   private
 
   def set_game_system
@@ -118,6 +130,7 @@ class UnitsController < ApplicationController
     params.require(:unit).permit(:name, :description, :cost, stats: {},
       unit_stats_attributes: [:id, :base_value, :unit_stat_definition_id],
       unit_trait_mappings_attributes: [:id, :unit_trait_id],
+      unit_applied_modifiers_attributes: [:id, :unit_stat_modifier_id, :_destroy],
       unit_trait_category_mappings_attributes: [:unit_trait_category_id, :order, :_destroy, :id])
   end
 end

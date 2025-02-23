@@ -16,3 +16,17 @@
   <%= army_list.army.name %>
 </p>
 
+<% if army_list.campaign %>
+  <p>
+    <strong>Campaign:</strong>
+    <%= army_list.campaign&.name %>
+  </p>
+  
+  <% army_list.game_gains.each do |key, value| %>
+    <p>
+      <strong><%= key %>:</strong>
+      <%= value %>
+    </p>
+  <% end %>
+
+<% end %>

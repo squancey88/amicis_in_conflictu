@@ -18,11 +18,11 @@
     <%= render @army_list %>
   <% end %>
 
-  <% component.with_box do %>
+  <% component.with_space do %>
     <%= render Units::ListComponent.new(army_list: @army_list) %>
   <% end %>
 
-  <% component.with_box do %>
+  <% component.with_space do %>
     <%= render EquipmentAttachments::ListComponent.new(army_list: @army_list) %>
   <% end %>
 <% end %>

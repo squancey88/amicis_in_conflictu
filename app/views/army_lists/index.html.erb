@@ -2,7 +2,7 @@
 
 <%= render Common::HeaderCardComponent.new(title: "My Army Lists") do |header| %>
   <%= header.with_buttons do %>
-    <%= link_to "New Army List", new_game_systems_wargame_path, class: %i[btn btn-primary] %>
+    <%= link_to "New Army List", new_army_list_path, class: %i[btn btn-primary] %>
   <% end %>
 <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_25_170008) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_23_141246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -208,7 +208,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_25_170008) do
 
   create_table "unit_applied_modifiers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "unit_id", null: false
-    t.uuid "game_id", null: false
+    t.uuid "game_id"
     t.uuid "unit_stat_modifier_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -249,6 +249,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_25_170008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "rich_description"
+    t.boolean "repeatable", default: true
+    t.integer "repeat_cost", default: 0
+    t.boolean "increase_cost_by_additional_instances", default: true
+    t.integer "list_cost_increase", default: 0
     t.index ["game_system_id"], name: "index_unit_stat_modifiers_on_game_system_id"
   end
 

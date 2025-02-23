@@ -33,6 +33,9 @@ Rails.application.routes.draw do
       collection do
         get :add_trait_row
       end
+      member do
+        get :add_applied_modifier_row
+      end
     end
   end
 

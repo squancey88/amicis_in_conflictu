@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "/units", type: :request do
-  let(:army_list) { create(:army_list) }
+  let(:game_system) { create(:wargame) }
+  let!(:unit_stat_definition) { create(:unit_stat_definition, game_system:) }
+  let(:army_list) { create(:army_list, game_system:) }
   let(:user) { create(:user) }
   let!(:unit) { create(:unit, army_list:) }
 
@@ -37,9 +39,25 @@ RSpec.describe "/units", type: :request do
   end
 
   describe "GET /new" do
-    it "renders a successful response" do
-      get new_army_list_unit_url(army_list)
-      expect(response).to be_successful
+    context "without template" do
+      it "renders a successful response" do
+        get new_army_list_unit_url(army_list)
+        expect(response).to be_successful
+      end
+    end
+
+    context "with template" do
+      let(:template) { create(:unit_template) }
+      it "renders a successful response" do
+        get new_army_list_unit_url(army_list, template_id: template.id)
+        expect(response).to be_successful
+      end
+
+      it "renders a successful response but with warning if invalid template" do
+        get new_army_list_unit_url(army_list, template_id: "not-real-id")
+        expect(response).to be_successful
+        expect(flash[:alert]).to eq("Unable to find template")
+      end
     end
   end
 
@@ -117,6 +135,20 @@ RSpec.describe "/units", type: :request do
     it "redirects to the units list" do
       delete army_list_unit_url(army_list, unit)
       expect(response).to redirect_to(army_list_url(army_list))
+    end
+  end
+
+  describe "GET /add_trait_row" do
+    it "renders turbo stream" do
+      get add_trait_row_army_list_units_url(army_list, game_system_id: game_system.id, format: :turbo_stream)
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET /add_applied_modifier_row" do
+    it "renders turbo stream" do
+      get add_applied_modifier_row_army_list_unit_url(army_list, unit, game_system_id: game_system.id, format: :turbo_stream)
+      expect(response).to be_successful
     end
   end
 end

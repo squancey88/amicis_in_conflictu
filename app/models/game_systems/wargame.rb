@@ -13,7 +13,7 @@ module GameSystems
 
     accepts_nested_attributes_for :unit_stat_definitions, allow_destroy: true, reject_if: proc { |attributes| attributes["name"].blank? }
 
-    config_has_scoring_systems(:turn_based)
+    config_has_scoring_systems(:turn_based, :non_scoring)
     config_has_turn_data(title: "Turn Tracking",
       point_title: "Tracking Point") do |items|
         items.add_item(:key, :string)
@@ -142,6 +142,9 @@ module GameSystems
         campaign_data = {
           changes: {}
         }
+        if game.game_system.list_cost_change_in_game
+          campaign_data[:changes][:list_cost_change] = 0
+        end
         game.game_system.campaign_list_attributes.each do |attribute|
           campaign_data[:changes][attribute["key"]] = nil
         end

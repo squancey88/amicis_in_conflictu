@@ -7,7 +7,7 @@
       <%= form.hidden_field :game_system_id %>
 
       <%= bootstrap_text_form(form, :name) %>
-      <%= bootstrap_number_form(form, :list_cost) %>
+      <%= bootstrap_number_form(form, :list_start_cost, label: "Starting #{campaign.game_system.list_cost_name}") %>
 
       <%= form.fields_for :config do |config_form| %>
         <% campaign.game_system.campaign_list_attributes&.each do |attr| %>

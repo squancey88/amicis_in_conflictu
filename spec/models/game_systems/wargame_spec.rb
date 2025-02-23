@@ -13,7 +13,7 @@ RSpec.describe GameSystems::Wargame, type: :model do
     end
 
     it "should have scoring systems" do
-      expect(@schema[:properties][:scoring_system][:enum]).to eq([:turn_based])
+      expect(@schema[:properties][:scoring_system][:enum]).to eq([:turn_based, :non_scoring])
     end
   end
 

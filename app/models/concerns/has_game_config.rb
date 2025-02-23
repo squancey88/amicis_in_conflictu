@@ -35,6 +35,10 @@ module HasGameConfig
     end
 
     def config_has_campaign_list_attributes(&block)
+      game_config_schema.add_string_property(:list_cost_name, true)
+      game_config_schema.add_boolean_property(:list_cost_change_in_game, true)
+      store_accessor :game_config, :list_cost_name
+      store_accessor :game_config, :list_cost_change_in_game
       game_config_schema.add_array_property(
         :campaign_list_attributes,
         true,

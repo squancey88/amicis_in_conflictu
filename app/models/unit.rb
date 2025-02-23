@@ -1,11 +1,16 @@
 class Unit < ApplicationRecord
   belongs_to :army_list
   has_many :unit_stats, dependent: :destroy
-  has_many :unit_applied_modifiers, dependent: :destroy
   has_many :unit_trait_mappings, dependent: :destroy
   has_many :unit_traits, through: :unit_trait_mappings
   has_many :unit_trait_category_mappings, dependent: :destroy, foreign_key: :mapped_to_id,
     inverse_of: :mapped_to
+
+  has_many :unit_xp_gain_applied, dependent: :destroy
+  has_many :unit_xp_gain_events, through: :unit_xp_gain_applied
+
+  has_many :unit_applied_modifiers, dependent: :destroy
+  has_many :unit_stat_modifiers, through: :unit_applied_modifiers
 
   validates :name, presence: true
   before_create :enough_cost_in_list
@@ -13,6 +18,7 @@ class Unit < ApplicationRecord
   accepts_nested_attributes_for :unit_stats, allow_destroy: true
   accepts_nested_attributes_for :unit_trait_mappings, allow_destroy: true
   accepts_nested_attributes_for :unit_trait_category_mappings, allow_destroy: true
+  accepts_nested_attributes_for :unit_applied_modifiers, allow_destroy: true
 
   delegate :game_system, to: :army_list
 
@@ -21,7 +27,7 @@ class Unit < ApplicationRecord
   end
 
   def current_xp
-    starting_xp
+    starting_xp + unit_xp_gain_events.sum(&:xp_gain) - unit_stat_modifiers.sum(&:cost)
   end
 
   def enough_cost_in_list
