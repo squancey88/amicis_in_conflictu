@@ -1,0 +1,24 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @article,
+  title: @article.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_article_path(@article)
+    },
+    {
+      text: "Delete",
+      link: article_path(@article),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ],
+  row_cols: 1
+) do |component| %>
+
+
+  <% component.with_space do %>
+    <% @article.sections.each do |section| %>
+      <%= render WorldItemData::Views::TextSectionComponent.new(section:) %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,9 +1,9 @@
-<%= form_with(model: wargame) do |form| %>
+<%= form_with(model: @wargame) do |form| %>
 
-  <%= render RecordFormWrapperComponent.new(record: wargame, form:) do |component| %>
+  <%= render RecordFormWrapperComponent.new(record: @wargame, form:) do |component| %>
 
     <% component.with_form_box do %>
-      <%= render partial: "game_systems/base_fields", locals: {form:, game_system: wargame} %>
+      <%= render partial: "game_systems/base_fields", locals: {form:, game_system: @wargame} %>
     <% end %>
 
     <% component.with_form_box do %>

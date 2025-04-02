@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :characters
+  resources :articles
   resources :time_periods
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
@@ -18,10 +18,17 @@ Rails.application.routes.draw do
   resources :worlds do
     member do
       get :start_editing
+      get :build
     end
   end
   resources :character_types
   resources :character_species_types
+  resources :characters do
+    collection do
+      get :my
+    end
+  end
+  get "world_item_data/new_text_section", to: "world_item_data#new_text_section", as: :new_text_section
 
   resources :armies
   resources :army_lists do
@@ -41,6 +48,8 @@ Rails.application.routes.draw do
 
   resources :game_systems, only: %i[index]
   namespace :game_systems do
+    resources :card_games, except: %i[index]
+    resources :role_playing_games, except: %i[index]
     resources :wargames, except: %i[index] do
       collection do
         get :add_new_stat_row

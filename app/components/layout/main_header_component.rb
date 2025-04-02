@@ -9,8 +9,9 @@ class Layout::MainHeaderComponent < ViewComponent::Base
 
   def menu_links
     [
-      {name: "Your Lists", url: army_lists_path, admin_only: false},
-      {name: "Your Worlds", url: worlds_path, admin_only: false},
+      {name: "My Lists", url: army_lists_path, admin_only: false},
+      {name: "My Characters", url: my_characters_path, admin_only: false},
+      {name: "My Worlds", url: worlds_path, admin_only: false},
       {name: "Game Systems", url: game_systems_path, admin_only: true}
     ]
   end

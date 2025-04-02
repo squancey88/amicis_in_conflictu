@@ -1,0 +1,25 @@
+<%= form_with(model: article) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: article, form:, row_cols: 1) do |component| %>
+
+    <% component.with_form_box do -%>
+      <%= bootstrap_text_field(form, :title) %>
+      <%= visiblity_select(form)  %>
+    <% end %>
+  
+    <% component.with_form_box do -%>
+      <%= link_to "Add New Section", 
+        new_text_section_path(model: "Article", attribute: "sections"), 
+        class: ['btn', 'btn-secondary'],
+        data: {turbo_frame: :text_sections, turbo_stream: true} %>
+
+      <%= turbo_frame_tag :text_sections  do %>
+        <%= form.fields_for :sections do |section_form| %>
+          <%= render WorldItemData::Forms::TextSectionComponent.new(form: section_form) %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+
+  <% end %>
+<% end %>

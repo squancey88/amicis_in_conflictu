@@ -34,4 +34,8 @@ module ApplicationHelper
       form.select(attribute, options_for_select(Precedence.map.map { |k, v| [v.titlecase, k] }),
         {include_blank: "Please Select"}, {class: "form-select"}))
   end
+
+  def button_link(text, url, type: "primary")
+    link_to(text, url, class: ["btn", "btn-#{type}"])
+  end
 end
