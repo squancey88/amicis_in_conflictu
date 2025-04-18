@@ -83,6 +83,4 @@ Rails.application.configure do
 
   config.web_console.whiny_requests = false
   config.web_console.permissions = "0.0.0.0/0"
-
-  config.view_component.preview_paths << Rails.root.join("previews/components")
 end

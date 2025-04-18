@@ -1,9 +1,0 @@
-<%= form_with(model: @role_playing_game) do |form| %>
-
-  <%= render RecordFormWrapperComponent.new(record: @role_playing_game, form:) do |component| %>
-
-    <% component.with_form_box do %>
-      <%= render partial: "game_systems/base_fields", locals: {form:, game_system: @role_playing_game} %>
-    <% end %>
-  <% end %>
-<% end %>

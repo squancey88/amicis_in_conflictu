@@ -3,30 +3,5 @@
     <div>
       <strong>Editing world:</strong> <%= link_to current_world.name, current_world %>
     </div>
-    <div>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#worldBuilderMenu">
-        Add World Item 
-      </button>
-    </div>
   </div>
 </nav>
-
-<!-- Button trigger modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="worldBuilderMenu" tabindex="-1" aria-labelledby="worldBuilderMenuLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="worldBuilderMenuLabel">World Items</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= link_to new_article_path do %>
-          <%= content_tag :i, nil, class: %w[bi bi-file-earmark-text] %>
-          New Article
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>

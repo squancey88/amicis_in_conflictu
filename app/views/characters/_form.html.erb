@@ -5,11 +5,9 @@
     <% component.with_form_box(title: "Details") do %>
       <%= bootstrap_text_field(form, :given_name) %>
       <%= bootstrap_text_field(form, :family_name) %>
-      <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
-      <%= character_species_type_select(form, :character_species_type_id, @world) %>
-      <%= form.hidden_field :campaign_id unless @world_building %>
+      <%= character_type_select(form, :character_type_id) %>
+      <%= character_species_type_select(form, :character_species_type_id) %>
     <% end %>
-
     <% component.with_form_box(title: "Descriptions") do %>
       <%= render TextEditorComponent.new(form:, attribute: :physical_description) %>
     <% end %>

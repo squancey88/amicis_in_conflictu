@@ -6,7 +6,7 @@ RSpec.describe "characters/edit", type: :view do
 
   before(:each) do
     assign(:character, character)
-    assign(:world, world)
+    allow_any_instance_of(WorldsHelper).to receive(:current_world).and_return(world)
   end
 
   it "renders the edit character form" do

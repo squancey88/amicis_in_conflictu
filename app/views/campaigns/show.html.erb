@@ -14,32 +14,16 @@
   ]
 ) do |component| %>
 
-  <% component.with_header_buttons do %>
-    <%= button_link "New Character", new_character_path(world_id: @campaign.world.id, campaign_id: @campaign.id) if @campaign.world && @campaign.game_system.instance_of?(GameSystems::RolePlayingGame) %>
-  <% end %>
-
-  <% component.with_box(title: "Details") do %>
+  <% component.with_box do %>
     <%= render @campaign %>
   <% end %>
 
-  <% component.with_box(title: "My Characters") do %>
-    <ul class="list-group">
-      <% current_user.characters.where(campaign: @campaign).each do |character| %>
-        <li class="list-group-item">
-          <%= link_to character %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <% component.with_box do %>
+    <h3>Config</h3>
 
-  <% if @campaign.game_system.respond_to?(:campaign_list_attributes) && @campaign.game_master == current_user %>
-    <% component.with_box do %>
-      <h3>Config</h3>
-
-      <% @campaign.game_system.campaign_list_attributes&.each do |attr| %>
-        <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
-      <% end %>
-
+    <% @campaign.game_system.campaign_list_attributes&.each do |attr| %>
+      <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
     <% end %>
+
   <% end %>
 <% end %>

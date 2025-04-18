@@ -1,6 +1,7 @@
 module ArmiesHelper
   def army_select(game_system, form, attribute_name, data: {}, include_blank: "Please Select")
-    bootstrapped_collection_select(form, attribute_name, game_system.armies, data:, include_blank:)
+    form.collection_select attribute_name, game_system.armies, :id, :name,
+      {include_blank:}, {class: "form-select", data:}
   end
 
   def bootstrap_army_select(game_system, form, attribute_name)

@@ -7,6 +7,5 @@ FactoryBot.define do
     born_during { create(:time_period) }
     character_type
     character_species_type
-    visibility { 0 }
   end
 end

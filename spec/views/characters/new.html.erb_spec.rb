@@ -4,7 +4,7 @@ RSpec.describe "characters/new", type: :view do
   let(:world) { create(:world) }
   before(:each) do
     assign(:character, Character.new(world:))
-    assign(:world, world)
+    allow_any_instance_of(WorldsHelper).to receive(:current_world).and_return(world)
   end
 
   it "renders new character form" do

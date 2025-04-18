@@ -3,18 +3,15 @@
 <%= render Common::HeaderCardComponent.new(title: "Game Systems") do |header| %>
   <%= header.with_buttons do %>
     <%= link_to "New wargame", new_game_systems_wargame_path, class: %i[btn btn-primary] %>
-    <%= link_to "New card game", new_game_systems_card_game_path, class: %i[btn btn-primary] %>
-    <%= link_to "New RPG", new_game_systems_role_playing_game_path, class: %i[btn btn-primary] %>
   <% end %>
 <% end %>
 
 <div id="game_systems">
   <% @game_systems.each do |game_system| %>
     <%= render Common::CardWithMenuComponent.new(title: "#{game_system.name}",
-      subtitle: game_system.class.category_name.singularize,
       menu_options: [
-        {link: game_system_show_path(game_system), text: "Show", target: "_top"},
-        {link: game_system_edit_path(game_system), text: "Edit", target: "_top"}
+        {link: game_systems_wargame_path(game_system), text: "Show", target: "_top"},
+        {link: edit_game_systems_wargame_path(game_system), text: "Edit", target: "_top"}
       ]) do |card| %>
     <% end %>
   <% end %>

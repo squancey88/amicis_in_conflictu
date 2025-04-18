@@ -1,6 +1,6 @@
 class WorldsController < ApplicationController
-  before_action :set_world, only: %i[show build edit update destroy start_editing]
-  before_action :set_world_building, only: %i[build edit]
+  before_action :set_world, only: %i[show edit update destroy start_editing]
+  before_action :set_world_building, only: %i[show edit]
 
   # GET /worlds or /worlds.json
   def index
@@ -9,9 +9,6 @@ class WorldsController < ApplicationController
 
   # GET /worlds/1 or /worlds/1.json
   def show
-  end
-
-  def build
   end
 
   # GET /worlds/new
@@ -64,7 +61,7 @@ class WorldsController < ApplicationController
 
   def start_editing
     session[:world_id] = @world.id
-    redirect_to build_world_path(@world)
+    redirect_to @world
   end
 
   private
@@ -76,7 +73,6 @@ class WorldsController < ApplicationController
 
   def set_world_building
     @world_building = true if session[:world_id]
-    redirect_to @world unless @world.owner == current_user
   end
 
   # Only allow a list of trusted parameters through.

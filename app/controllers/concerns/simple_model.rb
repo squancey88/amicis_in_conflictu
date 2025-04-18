@@ -2,7 +2,7 @@ module SimpleModel
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_record, only: %i[show edit update destroy]
+    before_action :set_record, only: %i[show update destroy]
     before_action :set_records, only: %i[index]
   end
 
@@ -16,10 +16,6 @@ module SimpleModel
   end
 
   def show
-    redirect_to id: @record.id, action: :edit
-  end
-
-  def edit
     render "common/simple_show_edit"
   end
 

@@ -9,30 +9,23 @@
   ]
 ) do |component| %>
 
-  <% component.with_tab_section do |tab_section| %>
+  <% component.with_space do %>
+    <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
+  <% end %>
 
-    <% tab_section.with_tab(label: "Sessions") do |tab| %>
-      <% tab.with_grid_box do %>
-        <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
-      <% end %>
+  <% component.with_space do %>
+    <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
+  <% end %>
 
-      <% tab.with_grid_box do %>
-        <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
-      <% end %>
-    <% end %>
+  <% component.with_space do %>
+    <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
+  <% end %>
 
-    <% tab_section.with_tab(label: "Campaigns") do |tab| %>
-      <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
-    <% end %>
+  <% component.with_space do %>
+    <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
+  <% end %>
 
-    <% tab_section.with_tab(label: "Members & Teams") do |tab| %>
-      <% tab.with_grid_box do %>
-        <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
-      <% end %>
-
-      <% tab.with_grid_box do %>
-        <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>
-      <% end %>
-    <% end %>
+  <% component.with_space do %>
+    <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>
   <% end %>
 <% end %>

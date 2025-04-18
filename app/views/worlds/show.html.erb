@@ -1,16 +1,48 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @world,
+  title: @world.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_world_path(@world)
+    },
+    {
+      text: "Delete",
+      link: world_path(@world),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
 
-<%= content_tag :h1, @world.name %>
+  <% component.with_box(title: "Details") do %>
+    <%= render @world %>
+  <% end %>
 
-<div class="<%= grid_classes(2) %>">
-  <div class="col">
-    <%= render StandardLayoutBoxComponent.new(title: "Articles") do %>
-      <ul class="list-group">
-        <% @world.articles.each do |article| %>
-          <li class="list-group-item">
-            <%= link_to article %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
-</div>
+  <% component.with_box(title: "Blurb") do %>
+    <%= render TextEditorRenderComponent.new(model: @world, attribute: :blurb) %>
+  <% end %>
+
+  <% component.with_space do %>
+    <%= render Common::EmbeddedIndexComponent.new(title: "Time Periods",
+        turbo_frame_id: "time_periods",
+        records_path: time_periods_path,
+        new_path: new_time_period_path
+      ) %>
+  <% end %>
+  
+  <% component.with_space do %>
+    <%= render Common::EmbeddedIndexComponent.new(title: "Character Types",
+        turbo_frame_id: "character_types",
+        records_path: character_types_path,
+        new_path: new_character_type_path
+      ) %>
+  <% end %>
+
+  <% component.with_space do %>
+    <%= render Common::EmbeddedIndexComponent.new(title: "Character Species",
+        turbo_frame_id: "character_species_types",
+        records_path: character_species_types_path,
+        new_path: new_character_species_type_path
+      ) %>
+  <% end %>
+<% end %>
