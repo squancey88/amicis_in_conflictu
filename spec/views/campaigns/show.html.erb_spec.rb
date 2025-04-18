@@ -6,6 +6,7 @@ RSpec.describe "campaigns/show", type: :view do
   before(:each) do
     assign(:gaming_group, gaming_group)
     assign(:campaign, campaign)
+    allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(create(:user))
   end
 
   it "renders attributes in <p>" do

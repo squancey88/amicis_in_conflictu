@@ -1,6 +1,10 @@
 class Character < ApplicationRecord
+  include Rails.application.routes.url_helpers
   include WorldItem
   include WorldVisibility
+  include TextLinkable
+
+  register_link_search_fields :given_name, :family_name
 
   belongs_to :world
   belongs_to :born_during, class_name: :TimePeriod, optional: true
@@ -17,6 +21,10 @@ class Character < ApplicationRecord
   def full_name
     [given_name, family_name].join(" ")
   end
+
+  def link_name = full_name
+
+  def link_path = character_path(self)
 
   def to_s = full_name
 end

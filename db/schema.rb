@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_23_102742) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_18_101512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -195,6 +195,38 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_23_102742) do
     t.boolean "surrendered", default: false
     t.index ["controller_type", "controller_id"], name: "index_players_on_controller"
     t.index ["game_id"], name: "index_players_on_game_id"
+  end
+
+  create_table "quest_event_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "quest_event_id", null: false
+    t.string "type"
+    t.jsonb "data"
+    t.integer "order"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quest_event_id"], name: "index_quest_event_data_on_quest_event_id"
+  end
+
+  create_table "quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.jsonb "blurb"
+    t.uuid "quest_id", null: false
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quest_id"], name: "index_quest_events_on_quest_id"
+  end
+
+  create_table "quests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.jsonb "blurb"
+    t.uuid "world_id", null: false
+    t.uuid "created_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_quests_on_created_by_id"
+    t.index ["world_id"], name: "index_quests_on_world_id"
   end
 
   create_table "team_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -480,6 +512,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_23_102742) do
   add_foreign_key "player_armies", "army_lists"
   add_foreign_key "player_armies", "players"
   add_foreign_key "players", "games"
+  add_foreign_key "quest_event_data", "quest_events"
+  add_foreign_key "quest_events", "quests"
+  add_foreign_key "quests", "users", column: "created_by_id"
+  add_foreign_key "quests", "worlds"
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
   add_foreign_key "teams", "gaming_groups"

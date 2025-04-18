@@ -1,0 +1,15 @@
+<%= form_with(model: quest) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: quest, form:) do |component| %>
+
+    <% component.with_form_box(title: "Details") do -%>
+      <%= bootstrap_text_field(form, :title) %>
+      <%= world_select(form, :world_id) %>
+    <% end %>
+
+    <% component.with_form_box(title: "Blurb") do -%>
+      <%= render TextEditorComponent.new(form:, attribute: :blurb) %>
+    <% end %>
+
+  <% end %>
+<% end %>

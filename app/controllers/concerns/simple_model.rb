@@ -16,11 +16,11 @@ module SimpleModel
   end
 
   def show
-    redirect_to id: @record.id, action: :edit
+    render "common/simple_show_edit"
   end
 
   def edit
-    render "common/simple_show_edit"
+    redirect_to id: @record.id, action: :show
   end
 
   def create

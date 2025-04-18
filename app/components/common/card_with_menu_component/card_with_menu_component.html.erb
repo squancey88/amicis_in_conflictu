@@ -7,7 +7,7 @@
           <h6 class="card-subtitle text-body-secondary"><%= @subtitle %></h6>
         <% end %>
       </div>
-      <div class="card-with-menu__header-menu">
+      <div class="card-with-menu__header-menu d-flex gap-1">
         <%= menu_section if menu_section %>
         <% if @menu_options %>
           <%= render Common::MenuButtonComponent.new(menu_options: @menu_options) %>

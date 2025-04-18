@@ -4,8 +4,12 @@ FactoryBot.define do
     world { create(:world) }
     visibility { 0 }
 
-    after(:create) do |article|
-      create_list(:text_section, 2, relates_to: article)
+    transient do
+      text_section_count { 2 }
+    end
+
+    after(:create) do |article, context|
+      create_list(:text_section, context.text_section_count, relates_to: article)
     end
   end
 end

@@ -13,4 +13,8 @@ class WorldItemData::Views::BaseViewComponent < ViewComponent::Base
     return true if @world_item.visible?
     false
   end
+
+  def call
+    ""
+  end
 end
