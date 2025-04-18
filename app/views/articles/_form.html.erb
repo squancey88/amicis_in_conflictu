@@ -9,7 +9,7 @@
   
     <% component.with_form_box do -%>
       <%= link_to "Add New Section", 
-        new_text_section_path(model: "Article", attribute: "sections"), 
+        world_item_data_new_text_section_path(model: "Article", attribute: "sections"), 
         class: ['btn', 'btn-secondary'],
         data: {turbo_frame: :text_sections, turbo_stream: true} %>
 

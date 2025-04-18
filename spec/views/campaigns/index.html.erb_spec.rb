@@ -9,6 +9,6 @@ RSpec.describe "campaigns/index", type: :view do
 
   it "renders a list of campaigns" do
     render
-    assert_select "div>p", text: Regexp.new("Campaign Test".to_s), count: 2
+    expect(rendered).to have_text("Campaign Test", count: 2)
   end
 end

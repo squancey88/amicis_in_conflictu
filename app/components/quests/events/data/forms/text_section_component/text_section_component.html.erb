@@ -1,0 +1,17 @@
+<%= render Common::AccordionItemComponent.new do |comp| %>
+
+  <% comp.with_header do %>
+    <%= render_parent %>
+  <% end %>
+
+  <% comp.with_body do %>
+
+    <div class="d-flex gap-2">
+      <div class="flex-grow-1">
+        <%= bootstrap_text_form(@form, :title) %>
+      </div>
+    </div>
+
+    <%= render TextEditorComponent.new(form: @form, attribute: :content) %>
+  <% end %>
+<% end %>
