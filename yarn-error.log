@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/bin/node /usr/share/node_modules/yarn/bin/yarn.js add @types/editorjs__link-autocomplete
+  /usr/bin/node /usr/share/node_modules/yarn/bin/yarn.js add @types/json-editor__json-editor
 
 PATH: 
-  /vscode/vscode-server/bin/linux-alpine/4949701c880d4bdb949e3c0e6b400288da7f474b/bin/remote-cli:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  /vscode/vscode-server/bin/linux-alpine/89de5a8d4d6205e5b11647eb6a74844ca23d2573/bin/remote-cli:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2feditorjs__link-autocomplete: Not found
+  Error: https://registry.yarnpkg.com/@types%2fjson-editor__json-editor: Not found
       at params.callback [as _callback] (/usr/share/node_modules/yarn/lib/cli.js:66145:18)
       at self.callback (/usr/share/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:518:28)
@@ -55,9 +55,6 @@ npm manifest:
       "build:css": "yarn build:css:compile && yarn build:css:prefix",
       "watch:css": "nodemon --verbose --watch ./app/assets/stylesheets/ --watch ./app/components/ -L --ext scss --exec \"yarn build:css\"",
       "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
-    },
-    "devDependencies": {
-      "@editorjs/link-autocomplete": "^0.1.0"
     }
   }
 
@@ -83,13 +80,6 @@ Lockfile:
     version "2.8.1"
     resolved "https://registry.yarnpkg.com/@editorjs/header/-/header-2.8.1.tgz#ba16f43aaf461aa920c3594bdf0d854c4b5119b9"
     integrity sha512-y0HVXRP7m2W617CWo3fsb5HhXmSLaRpb9GzFx0Vkp/HEm9Dz5YO1s8tC7R8JD3MskwoYh7V0hRFQt39io/r6hA==
-    dependencies:
-      "@codexteam/icons" "^0.0.5"
-  
-  "@editorjs/link-autocomplete@^0.1.0":
-    version "0.1.0"
-    resolved "https://registry.yarnpkg.com/@editorjs/link-autocomplete/-/link-autocomplete-0.1.0.tgz#acd51517cd1acba16efc11b4f6cc4a97ea479390"
-    integrity sha512-Suij3TwZZREAUB2aNASrxPSsCwNN3gBAkQGL2N6rnrxwr2RI6KWw98QC/GFCTP2/hTctfNvXRbxnFi2fsJldZA==
     dependencies:
       "@codexteam/icons" "^0.0.5"
   

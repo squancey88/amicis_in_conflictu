@@ -33,14 +33,6 @@
         ) %>
     <% end %>
 
-    <% tab_section.with_tab(label: "Quests") do |tab| %>
-      <%= render Common::EmbeddedIndexComponent.new(title: "Quests",
-          turbo_frame_id: "quests",
-          records_path: quests_path,
-          new_path: new_quest_path
-        ) %>
-    <% end %>
-
     <% tab_section.with_tab(label: "Character Settings") do |tab| %>
       <% tab.with_grid_box do %>
         <%= render Common::EmbeddedIndexComponent.new(title: "Character Types",

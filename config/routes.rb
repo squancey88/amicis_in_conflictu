@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'text_editor/link'
-  resources :quests do
-    resources :quest_events
-  end
   resources :articles
   resources :time_periods
   get "login", to: "auth#login", as: :login
@@ -32,13 +28,7 @@ Rails.application.routes.draw do
       get :my
     end
   end
-  namespace :world_item_data do
-    get "new_text_section", as: :new_text_section
-  end
-
-  namespace :quest_event_data do
-    get "new_text_section", as: :new_text_section
-  end
+  get "world_item_data/new_text_section", to: "world_item_data#new_text_section", as: :new_text_section
 
   resources :armies
   resources :army_lists do

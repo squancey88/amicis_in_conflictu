@@ -1,7 +1,0 @@
-<% content_for :title, "Quests" %>
-
-<div id="quest_events">
-  <%= turbo_frame_tag :quest_events do %>
-    <%= render Quests::Events::CardComponent.with_collection(@quest_events) %>
-  <% end %>
-</div>

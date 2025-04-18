@@ -7,7 +7,6 @@ class World < ApplicationRecord
   has_many :characters, dependent: :destroy
 
   has_many :articles, dependent: :destroy
-  has_many :quests, dependent: :destroy
 
   validates :name, presence: true
 
@@ -17,21 +16,15 @@ class World < ApplicationRecord
     character_types.find_by(name: "Player")
   end
 
-  def text_editor_link_search(query)
-    records = characters.text_editor_link_search(query)
-    records += articles.text_editor_link_search(query)
-    records
+  def self.time_period_schema
+    schema = JsonSchema.new
+    schema.add_string_property("Time Period Name", true)
+    schema
   end
 
   def to_s = name
 
   def setup_player_type
     CharacterType.create(world: self, name: "Player")
-  end
-
-  def self.time_period_schema
-    schema = JsonSchema.new
-    schema.add_string_property("Time Period Name", true)
-    schema
   end
 end

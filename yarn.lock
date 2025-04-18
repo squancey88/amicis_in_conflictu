@@ -7,11 +7,6 @@
   resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.0.5.tgz#d17f39b6a0497c6439f57dd42711817a3dd3679c"
   integrity sha512-s6H2KXhLz2rgbMZSkRm8dsMJvyUNZsEjxobBEg9ztdrb1B2H3pEzY6iTwI4XUPJWJ3c3qRKwV4TrO3J5jUdoQA==
 
-"@codexteam/icons@^0.3.2":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.3.3.tgz#89d53af1d2bfc106e4e44be5fd824a059e94c098"
-  integrity sha512-cp7mkZPgmBuSxigTm3Vb+DtVHYeX7qXfQd7o05vcLD8Ag5WvRlol2QSn5P10k0CDAJwmkH9nQGQLBycErS9lsQ==
-
 "@editorjs/editorjs@^2.29.1":
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/@editorjs/editorjs/-/editorjs-2.29.1.tgz#d7c644c5c3fc1ea1022373cbf2c8c3ac9f990b7b"
@@ -23,20 +18,6 @@
   integrity sha512-y0HVXRP7m2W617CWo3fsb5HhXmSLaRpb9GzFx0Vkp/HEm9Dz5YO1s8tC7R8JD3MskwoYh7V0hRFQt39io/r6hA==
   dependencies:
     "@codexteam/icons" "^0.0.5"
-
-"@editorjs/link-autocomplete@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/link-autocomplete/-/link-autocomplete-0.1.0.tgz#acd51517cd1acba16efc11b4f6cc4a97ea479390"
-  integrity sha512-Suij3TwZZREAUB2aNASrxPSsCwNN3gBAkQGL2N6rnrxwr2RI6KWw98QC/GFCTP2/hTctfNvXRbxnFi2fsJldZA==
-  dependencies:
-    "@codexteam/icons" "^0.0.5"
-
-"@editorjs/list@^2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-2.0.6.tgz#2f9004ca3499044988af43f0aa9b81d2db7b054e"
-  integrity sha512-QmmRAMtIBlO9k8LxfiqhWM+CjrA9r1F5th3cI9UFhDMC78YqFdFNg+dWrH57bAW4063HJfS1ygbGoH/LfHBkww==
-  dependencies:
-    "@codexteam/icons" "^0.3.2"
 
 "@esbuild/aix-ppc64@0.20.1":
   version "0.20.1"

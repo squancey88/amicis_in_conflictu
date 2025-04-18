@@ -4,13 +4,10 @@
 
 <div id="campaigns">
   <% @campaigns.each do |campaign| %>
-    <%= render Common::CardWithMenuComponent.new(title: campaign,
-      menu_options: [
-        {link: gaming_group_campaign_path(@gaming_group, campaign), text: "Show", target: "_top"},
-        {link: edit_gaming_group_campaign_path(@gaming_group, campaign), text: "Edit", target: "_top"}
-      ]) do |card| %>
-      <%= render campaign %>
-    <% end %>
+    <%= render campaign %>
+    <p>
+      <%= link_to "Show this campaign", gaming_group_campaign_path(@gaming_group, campaign) %>
+    </p>
   <% end %>
 </div>
 

@@ -1,8 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
-import LinkAutocomplete from '@editorjs/link-autocomplete';
-import EditorjsList from '@editorjs/list';
 
 export default class extends Controller {
 
@@ -21,20 +19,6 @@ export default class extends Controller {
       data: initialState,
       tools: {
         header: Header,
-        link: {
-          class: LinkAutocomplete,
-          config: {
-            endpoint: '/text_editor/link',
-            queryParam: 'search'
-          }
-        },
-        list: {
-          class: EditorjsList,
-          inlineToolbar: true,
-          config: {
-            defaultStyle: 'unordered'
-          },
-        },
       },
       onChange: (api, event) => {
         this.save();

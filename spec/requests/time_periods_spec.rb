@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "/time_periods", type: :request do
   let(:user) { create(:user) }
-  let(:world) { create(:world, owner: user) }
+  let(:world) { create(:world) }
   let!(:time_period) { create(:time_period, world:) }
   let(:valid_attributes) {
     {

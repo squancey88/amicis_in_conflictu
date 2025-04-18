@@ -1,7 +1,5 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe WorldItemDatum, type: :model do
-  context "associations" do
-    it { should belong_to(:relates_to) }
-  end
+  pending "add some examples to (or delete) #{__FILE__}"
 end

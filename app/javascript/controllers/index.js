@@ -7,7 +7,6 @@ import TurnBasedGameFormController from '../../components/game_forms/turn_based_
 import ArmySelectorController from '../../components/army_selector_component/army_selector_controller';
 import GameFormController from '../../components/game_form_component/game_form_controller';
 import CampaignAndArmySelectorController from '../../components/game_systems/campaign_and_army_selector_component/campaign_and_army_selector_controller';
-import QuestEventsDetailsFormContrller from '../../components/quests/events/details_form_component/details_form_controller';
 
 application.register('editorjs', EditorController);
 application.register('json-editor', JsonEditorController);
@@ -16,4 +15,3 @@ application.register('game-forms-turn-based', TurnBasedGameFormController);
 application.register('army-selector', ArmySelectorController);
 application.register('game-form', GameFormController);
 application.register('campaign-and-army-selector', CampaignAndArmySelectorController);
-application.register('quest-event-details-form', QuestEventsDetailsFormContrller);

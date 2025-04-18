@@ -5,7 +5,6 @@ class RecordFormWrapperComponent < ViewComponent::Base
 
   renders_one :menu_items
   renders_many :form_boxes, "FormBoxComponent"
-  renders_one :tab_section, Common::TabsSectionComponent
 
   def initialize(record:, form:, title: nil, row_cols: 2)
     @record = record
