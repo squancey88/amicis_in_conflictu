@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'text_editor/link'
   resources :quests do
     resources :quest_events
   end
@@ -38,6 +37,10 @@ Rails.application.routes.draw do
 
   namespace :quest_event_data do
     get "new_text_section", as: :new_text_section
+  end
+
+  namespace :text_editor do
+    get "link"
   end
 
   resources :armies

@@ -36,9 +36,9 @@ module TextLinkable
     end
 
     def text_editor_link_search_query(query_param)
-      query = where("#{@fields.first} LIKE ?", "%#{sanitize_sql_like(query_param)}%")
+      query = where("#{@fields.first} ILIKE ?", "%#{sanitize_sql_like(query_param)}%")
       @fields[1..].each do |field|
-        query = query.or(where("#{field} LIKE ?", "%#{sanitize_sql_like(query_param)}%"))
+        query = query.or(where("#{field} ILIKE ?", "%#{sanitize_sql_like(query_param)}%"))
       end
       query
     end

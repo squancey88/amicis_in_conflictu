@@ -2,7 +2,7 @@ class QuestEventsController < ApplicationController
   include WithinWorld
 
   before_action :set_quest
-  before_action :set_quest_event, only: %i[edit update]
+  before_action :set_quest_event, only: %i[edit update destroy]
 
   def index
     @quest_events = @quest.quest_events
@@ -15,12 +15,10 @@ class QuestEventsController < ApplicationController
   end
 
   def new
-    @quest_event = @quest.quest_events.new
   end
 
   def create
     @quest_event = @quest.quest_events.new(quest_event_params)
-
     respond_to do |format|
       if @quest_event.save
         format.html { redirect_to quest_url(@quest), notice: "Quest event was successfully created." }
@@ -32,7 +30,6 @@ class QuestEventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /quests/1 or /quests/1.json
   def update
     respond_to do |format|
       if @quest_event.update(quest_event_params)
@@ -45,19 +42,23 @@ class QuestEventsController < ApplicationController
     end
   end
 
-  # DELETE /quests/1 or /quests/1.json
   def destroy
-    @quest.destroy!
+    @quest_event.destroy!
 
     respond_to do |format|
-      format.html { redirect_to quests_url, notice: "Quest was successfully destroyed." }
+      format.html { redirect_to quest_url(@quest), notice: "Quest was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
 
-  def get_record
+  def new_record # override WithinWorld
+    set_quest
+    @quest_event = @quest.quest_events.new
+  end
+
+  def get_record # override WithinWorld
     Quest.find(params[:quest_id])
   end
 
