@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :rpg, class: "GameSystems::RolePlayingGame" do
+  factory :role_playing_game, class: "GameSystems::RolePlayingGame" do
     name { "Test RPG System" }
     game_config { {} }
     edition { "1st" }
