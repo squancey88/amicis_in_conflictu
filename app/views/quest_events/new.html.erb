@@ -1,0 +1,21 @@
+<% content_for :title, "New Event" %>
+
+<%= form_with(model: @quest_event, url: [@quest, @quest_event]) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: @quest_event, form:) do |component| %>
+
+    <% component.with_form_box(title: "Details") do -%>
+      <%= bootstrap_text_field(form, :title) %>
+    <% end %>
+
+    <% component.with_form_box(title: "Blurb") do -%>
+      <%= render TextEditorComponent.new(form:, attribute: :blurb) %>
+    <% end %>
+
+  <% end %>
+<% end %>
+
+
+
+
+

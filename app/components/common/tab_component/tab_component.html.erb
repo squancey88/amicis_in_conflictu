@@ -1,0 +1,13 @@
+
+<%= content_tag :div, class: tab_classes, id: @id, role: :tabpanel, aria: {labelledby: "#{@id}-tab" } do %>
+
+  <%= content %>
+
+  <% if grid_boxes %>
+    <div class="<%= grid_classes(@row_cols) %>">
+      <% grid_boxes.each do |box| %>
+        <%= box %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

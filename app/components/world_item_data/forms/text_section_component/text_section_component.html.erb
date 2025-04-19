@@ -1,0 +1,14 @@
+<div class="border border-3 p-2">
+  <%= @form.hidden_field :id %>
+
+  <div class="d-flex gap-2">
+    <div class="flex-grow-1">
+      <%= bootstrap_text_form(@form, :title) %>
+    </div>
+    <div>
+      <%= visiblity_select(@form)  %>
+    </div>
+  </div>
+
+  <%= render TextEditorComponent.new(form: @form, attribute: :content) %>
+</div>

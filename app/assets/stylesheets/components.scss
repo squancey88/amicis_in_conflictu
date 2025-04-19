@@ -1,4 +1,3 @@
-@import "../../components/army_selector_component/army_selector_component.scss";
 @import "../../components/campaign_list_component/campaign_list_component.scss";
 @import "../../components/gaming_group_team_management_component/gaming_group_team_management_component.scss";
 @import "../../components/gaming_group_user_overview_component/gaming_group_user_overview_component.scss";
@@ -19,3 +18,6 @@
 
 // Game Forms
 @import "../../components/game_forms/turn_based_component/turn_based_component.scss";
+
+// Player Forms
+@import "../../components/player_forms/wargames/army_selector_component/army_selector_component.scss";

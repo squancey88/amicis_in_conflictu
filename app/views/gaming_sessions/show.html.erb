@@ -16,8 +16,7 @@
 ) do |component| %>
 
   <% component.with_box do %>
-
-    <%= render @gaming_session %>
+    <%= labelled_attribute("Gaming group", @gaming_session.gaming_group.name) %>
   <% end %>
 
   <% component.with_space do %>

@@ -1,27 +1,7 @@
 <div class="bg-body-tertiary rounded-3 p-3">
 
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming-tab-pane" 
-        type="button" role="tab" aria-controls="upcoming-tab-pane" aria-selected="true">
-        Upcoming
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="previous-tab" data-bs-toggle="tab" data-bs-target="#previous-tab-pane" 
-        type="button" role="tab" aria-controls="previous-tab-pane" aria-selected="false">
-        Previous
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar-tab-pane" 
-        type="button" role="tab" aria-controls="calendar-tab-pane" aria-selected="false">
-        Calendar
-      </button>
-    </li>
-  </ul>
-  <div class="tab-content p-2 border border-top-0" id="myTabContent">
-    <div class="tab-pane fade show active" id="upcoming-tab-pane" role="tabpanel" aria-labelledby="upcoming-tab" tabindex="0">
+  <%= render Common::TabsSectionComponent.new do |tab_section|%>
+    <% tab_section.with_tab(label: "Upcoming") do %>
       <% @gaming_group.gaming_sessions.upcoming.order(:start_time).each do |session| %>
         <div class="card mb-1">
           <div class="card-body">
@@ -29,20 +9,20 @@
           </div>
         </div>
       <% end %>
-    </div>
-    <div class="tab-pane fade" id="previous-tab-pane" role="tabpanel" aria-labelledby="previous-tab" tabindex="0">
-      <% @gaming_group.gaming_sessions.previous.limit(10).order(:start_time).each do |session| %>
+    <% end %>
+    <% tab_section.with_tab(label: "Previous") do %>
+      <% @gaming_group.gaming_sessions.previous.limit(10).order(start_time: :desc).each do |session| %>
         <div class="card">
           <div class="card-body">
             <%= link_to(l(session.start_time), gaming_group_gaming_session_path(@gaming_group, session)) %>
           </div>
         </div>
       <% end %>
-    </div>
-    <div class="tab-pane fade" id="calendar-tab-pane" role="tabpanel" aria-labelledby="calendar-tab" tabindex="0">
+    <% end %>
+    <% tab_section.with_tab(label: "Calendar") do %>
       Coming soon...
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 
   <div class=mt-2>
     <%= link_to "New Session", new_gaming_group_gaming_session_path(@gaming_group), class: "btn btn-primary" %>

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :characters
+  resources :quests do
+    resources :quest_events
+  end
+  resources :articles
   resources :time_periods
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
@@ -18,10 +21,27 @@ Rails.application.routes.draw do
   resources :worlds do
     member do
       get :start_editing
+      get :build
     end
   end
   resources :character_types
   resources :character_species_types
+  resources :characters do
+    collection do
+      get :my
+    end
+  end
+  namespace :world_item_data do
+    get "new_text_section", as: :new_text_section
+  end
+
+  namespace :quest_event_data do
+    get "new_text_section", as: :new_text_section
+  end
+
+  namespace :text_editor do
+    get "link"
+  end
 
   resources :armies
   resources :army_lists do
@@ -41,6 +61,8 @@ Rails.application.routes.draw do
 
   resources :game_systems, only: %i[index]
   namespace :game_systems do
+    resources :card_games, except: %i[index]
+    resources :role_playing_games, except: %i[index]
     resources :wargames, except: %i[index] do
       collection do
         get :add_new_stat_row
@@ -67,6 +89,9 @@ Rails.application.routes.draw do
   end
   resources :unit_xp_gain_events
   resources :players, only: %i[update] do
+    collection do
+      get :add_player_row
+    end
     member do
       get :add_army_row
     end
@@ -78,7 +103,11 @@ Rails.application.routes.draw do
       post :invite_user
     end
 
-    resources :campaigns
+    resources :campaigns do
+      member do
+        get :add_players_row
+      end
+    end
     resources :teams
     resources :teams, only: %i[create update destroy]
     resources :gaming_sessions
