@@ -89,6 +89,9 @@ Rails.application.routes.draw do
   end
   resources :unit_xp_gain_events
   resources :players, only: %i[update] do
+    collection do
+      get :add_player_row
+    end
     member do
       get :add_army_row
     end
@@ -100,7 +103,11 @@ Rails.application.routes.draw do
       post :invite_user
     end
 
-    resources :campaigns
+    resources :campaigns do
+      member do
+        get :add_players_row
+      end
+    end
     resources :teams
     resources :teams, only: %i[create update destroy]
     resources :gaming_sessions

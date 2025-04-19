@@ -22,8 +22,8 @@ RSpec.describe("Show Game", type: :system) do
       visit game_path(game)
     end
 
-    it "should render title containing game_system name" do
-      expect(page).to have_css(".card-title", text: "Game Test")
+    it "should render title containing game title" do
+      expect(page).to have_css(".card-title", text: game.title)
     end
 
     it "should show selected list row" do

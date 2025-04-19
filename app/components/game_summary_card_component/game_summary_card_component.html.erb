@@ -1,45 +1,43 @@
 <div class="card mb-3">
   <div class="card-body">
     <h5 class="card-title">
-      <%= @game.game_system.name %>
+      <%= @game.title %>
       <%= state_badge(@game) %>
-      <% if @game.campaign %>
-        <br>
-        Campaign: <%= @game.campaign.name %>
-      <% end %>
 
     </h5>
-    <div class="session-game-list__game-player-list">
-      <div>Result: </div>
-      <% if @game.winners.any? %>
-        <div>Winners</div>
-        <% @game.winners.each do |winner| %>
-          <%= winner_badge(winner) %>
+    <% if @game.game_system.respond_to?(:scoring_system) %>
+      <div class="session-game-list__game-player-list">
+        <div>Result: </div>
+        <% if @game.winners.any? %>
+          <div>Winners</div>
+          <% @game.winners.each do |winner| %>
+            <%= winner_badge(winner) %>
+          <% end %>
+        <% else %>
+          <div>Draw</div>
         <% end %>
-      <% else %>
-        <div>Draw</div>
-      <% end %>
-    </div>
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <% @game.players.each do |player| %>
-            <th scope="col">
-              <%= player.display_name %>
-            </th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <% @game.players.each do |player| %>
-            <td>
-              <%= player.calculate_score %>
-            </td>
-          <% end %>
-        </tr>
-      </tbody>
-    </table>
+      </div>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <% @game.players.each do |player| %>
+              <th scope="col">
+                <%= player.display_name %>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @game.players.each do |player| %>
+              <td>
+                <%= player.calculate_score %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
     <%= link_to "View", @game, class: "card-link" %>
   </div>
 </div>

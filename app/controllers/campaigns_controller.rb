@@ -1,6 +1,6 @@
 class CampaignsController < ApplicationController
   include WithinGamingGroup
-  before_action :set_campaign, only: %i[show edit update destroy]
+  before_action :set_campaign, only: %i[show edit update destroy add_players_row]
 
   # GET /campaigns or /campaigns.json
   def index
@@ -61,6 +61,24 @@ class CampaignsController < ApplicationController
       format.html { redirect_to gaming_group_campaigns_url(@gaming_group), notice: "Campaign was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def add_players_row
+    users = @campaign.all_users
+    data = []
+    start_time = Time.now.to_i
+    helpers.fields Game.new do |game_form|
+      users.each_with_index do |user, index|
+        game_form.fields_for :players, Player.new(controller: user), child_index: start_time + index do |f|
+          data << turbo_stream.append(
+            :players,
+            partial: "players/form_row",
+            locals: {form: f, controller: user}
+          )
+        end
+      end
+    end
+    render turbo_stream: data
   end
 
   private

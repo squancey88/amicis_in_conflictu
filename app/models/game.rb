@@ -18,8 +18,18 @@ class Game < ApplicationRecord
   before_create(:setup_data)
   after_save(:check_finished)
 
+  def title
+    return "#{campaign.name} (Session: #{campaign_session_number})" if campaign
+    game_system.name
+  end
+
   def set_initial_data(**start_values)
     @initial_data = start_values
+  end
+
+  def campaign_session_number
+    all_sessions = Game.joins(gaming_session: :gaming_group).where({campaign:, gaming_session: {gaming_group: gaming_session.gaming_group}}).order(:created_at)
+    all_sessions.find_index(self) + 1
   end
 
   def setup_data

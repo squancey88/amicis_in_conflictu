@@ -1,5 +1,7 @@
 <%= form_with(model: character) do |form| %>
 
+  <%= hidden_field_tag :world_id, params[:world_id] if character.new_record? %>
+
   <%= render RecordFormWrapperComponent.new(record: character, form:) do |component| %>
 
     <% component.with_form_box(title: "Details") do %>

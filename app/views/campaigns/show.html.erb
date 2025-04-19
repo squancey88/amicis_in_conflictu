@@ -15,7 +15,7 @@
 ) do |component| %>
 
   <% component.with_header_buttons do %>
-    <%= button_link "New Character", new_character_path(world_id: @campaign.world.id, campaign_id: @campaign.id) if @campaign.world && @campaign.game_system.instance_of?(GameSystems::RolePlayingGame) %>
+    <%= bs_link_button "New Character", new_character_path(world_id: @campaign.world.id, campaign_id: @campaign.id) if @campaign.world && @campaign.game_system.instance_of?(GameSystems::RolePlayingGame) %>
   <% end %>
 
   <% component.with_box(title: "Details") do %>

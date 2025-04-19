@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ArmySelectorComponent < ViewComponent::Base
+class PlayerForms::Wargames::ArmySelectorComponent < ViewComponent::Base
   delegate :bootstrap_army_list_select, to: :helpers
 
   def initialize(game:, player_form:, current_player:, player_index:)
