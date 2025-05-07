@@ -1,8 +1,8 @@
-<% content_for :title, "Characters" %>
+<% content_for :title, @title %>
 
-<%= render Common::HeaderCardComponent.new(title: "Characters") do |header| %>
+<%= render Common::HeaderCardComponent.new(title: @title) do |header| %>
   <%= header.with_buttons do %>
-    <%= link_to "New character", new_character_path, class: %i[btn btn-primary] %>
+    <%= link_to "New character", new_character_path, class: %i[btn btn-primary] if @allow_creation %>
   <% end %>
 <% end %>
 

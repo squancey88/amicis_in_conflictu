@@ -7,6 +7,8 @@ class GameSystem < ApplicationRecord
 
   store_accessor :game_config, :finish_reasons
 
+  cattr_accessor :has_campaigns
+
   def setup_game_data
     {}
   end
@@ -27,6 +29,10 @@ class GameSystem < ApplicationRecord
 
   def self.category_name
     nil
+  end
+
+  def has_campaigns?
+    @@has_campaigns || false
   end
 
   def display_name

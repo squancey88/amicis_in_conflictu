@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe GameSystemsHelper, type: :helper do
   let(:wargame) { create(:wargame) }
-  let(:rpg) { create(:rpg) }
+  let(:rpg) { create(:role_playing_game) }
 
   before do
     wargame

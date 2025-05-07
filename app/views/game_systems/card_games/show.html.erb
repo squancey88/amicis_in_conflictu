@@ -1,0 +1,16 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @card_game,
+  title: @card_game.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_game_systems_card_game_path(@card_game)
+    },
+    {
+      text: "Delete",
+      link: game_systems_card_game_path(@card_game),
+      data: {turbo_event: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
+<% end %>

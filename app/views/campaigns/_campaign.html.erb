@@ -1,18 +1,28 @@
 <p>
-  <strong>Name:</strong>
-  <%= campaign.name %>
-</p>
-<p>
   <strong>Gaming group:</strong>
   <%= campaign.gaming_group %>
 </p>
+<% if campaign.game_master %>
+  <p>
+    <strong>Game master:</strong>
+    <%= campaign.game_master.display_name %>
+  </p>
+<% end %>
 <p>
   <strong>Game system:</strong>
   <%= campaign.game_system %>
 </p>
+<% if campaign.world %>
+  <p>
+    <strong>World:</strong>
+    <%= link_to campaign.world %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Starting <%= campaign.game_system.list_cost_name %>:</strong>
-  <%= campaign.list_start_cost %>
-</p>
+<% if campaign.game_system.respond_to?(:list_cost_name) %>
+  <p>
+    <strong>Starting <%= campaign.game_system.list_cost_name %>:</strong>
+    <%= campaign.list_start_cost %>
+  </p>
+<% end %>
 

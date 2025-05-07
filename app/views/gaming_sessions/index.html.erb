@@ -4,7 +4,8 @@
 
 <div id="gaming_sessions">
   <% @gaming_sessions.each do |gaming_session| %>
-    <%= render gaming_session %>
+    <%= labelled_attribute("Gaming group", gaming_session.gaming_group.name) %>
+
     <p>
       <%= link_to "Show this gaming session", gaming_group_gaming_session_path(@gaming_group, gaming_session) %>
     </p>

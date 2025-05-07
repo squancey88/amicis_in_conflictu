@@ -34,7 +34,16 @@ module HasGameConfig
       store_accessor :game_config, :has_timed_turns
     end
 
+    def config_can_have_campaigns
+      self.has_campaigns = true
+      game_config_schema.add_boolean_property(:allow_campaigns, true)
+      game_config_schema.add_boolean_property(:campaigns_have_worlds, true)
+      store_accessor :game_config, :allow_campaigns
+      store_accessor :game_config, :campaigns_have_worlds
+    end
+
     def config_has_campaign_list_attributes(&block)
+      config_can_have_campaigns
       game_config_schema.add_string_property(:list_cost_name, true)
       game_config_schema.add_boolean_property(:list_cost_change_in_game, true)
       store_accessor :game_config, :list_cost_name
