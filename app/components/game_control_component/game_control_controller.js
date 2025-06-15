@@ -5,9 +5,10 @@ export default class extends Controller {
   static targets = [ "globalNotes", "globalNotesBtn", 
     "eventNotes", "eventNotesBtn", 
     "combatTracker", "combatTrackerBtn",
-    "form" ];
+    "form", "status"];
   static values = {
     gameId: String,
+    touched: {type: Boolean, default: false}
   }
 
 
@@ -16,12 +17,21 @@ export default class extends Controller {
     this.setupToggleBtn(this.eventNotesBtnTarget, this.eventNotesTarget);
     this.setupToggleBtn(this.combatTrackerBtnTarget, this.combatTrackerTarget);
     this.debouncedRequest = debounce(this.saveForm, 5000);
+    this.updateStatus();
   }
 
   disconnect() {
     this.globalNotesBtnTarget.removeEventListener("click");
     this.eventNotesBtnTarget.removeEventListener("click");
     this.combatTrackerBtnTarget.removeEventListener("click");
+  }
+
+  touchedValueChanged() { 
+    this.updateStatus();
+  }
+
+  updateStatus() {
+    this.statusTarget.textContent = this.touchedValue ? "Not Synced" : "Synced";
   }
 
   setupToggleBtn(button, target){
@@ -41,6 +51,7 @@ export default class extends Controller {
 
   notesSaved() {
     console.log("notes were changed")
+    this.touchedValue = true;
     this.debouncedRequest();
   }
 
@@ -57,6 +68,7 @@ export default class extends Controller {
         }
       }
     ).then((response) => {
+      this.touchedValue = false;
       console.log(response)
     });
   }

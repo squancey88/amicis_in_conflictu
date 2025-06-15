@@ -1,9 +1,14 @@
-<%= render StandardLayoutBoxComponent.new(title: game_quest_event.title) do |component| %>
-  <% component.with_body do %>
+<%= render Common::AccordionItemComponent.new do |comp| %>
+
+  <% comp.with_header do %>
+    <%= game_quest_event.title %>
+  <% end %>
+
+  <% comp.with_body do %>
     <div class="d-flex flex-row gap-2">
       <div style="flex: 1 1 50%">
         <%= fields @game do |form| %>
-          <%= form.fields_for :game_quest_events, game_quest_event do |event_form| %>
+          <%= form.fields_for :game_quest_events, game_quest_event, child_index: index do |event_form| %>
             <%= render TextEditorComponent.new(form: event_form, attribute: :notes, save_triggers:["game-control#notesSaved"]) %>
           <% end %>
         <% end %>

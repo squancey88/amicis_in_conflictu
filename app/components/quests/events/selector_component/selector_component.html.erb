@@ -2,7 +2,10 @@
   data-quests-events-selector-game-id-value="<%= @game.id %>">
   <div class="form-floating">
     <%= select_tag :quest, options_from_collection_for_select(@world.quests, :id, :title), 
-      {include_blank: 'Select', class: "form-select", data: {action: "change->quests-events-selector#questSelected"}} %>
+      {include_blank: 'Select', class: "form-select", data: {
+        action: "change->quests-events-selector#questSelected",
+        'quests-events-selector-target': 'questsSelect'
+      }} %>
     <%= label_tag :quest, 'Quest' %>
   </div>
   <div class="form-floating">

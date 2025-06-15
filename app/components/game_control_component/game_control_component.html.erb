@@ -4,15 +4,19 @@
     "game-control-target": "form"
   } do |form| %>
     <div class="game-control__menu mb-2 d-flex flew-row gap-2">
-      <%= bs_icon_button icon: :journal, data: {
-        "game-control-target": "globalNotesBtn"
-      }, style: nil, title: "General Notes" %>
-      <%= bs_icon_button icon: "journal-richtext", data: {
-        "game-control-target": "eventNotesBtn"
-      }, style: nil, title: "Events"  %>
-      <%= bs_icon_button icon: "radioactive", data: {
-        "game-control-target": "combatTrackerBtn"
-      }, style: nil, title: "Combat"  %>
+      <div class="flex-row gap-2 flex-fill">
+        <%= bs_icon_button icon: :journal, data: {
+          "game-control-target": "globalNotesBtn"
+        }, style: nil, title: "General Notes" %>
+        <%= bs_icon_button icon: "journal-richtext", data: {
+          "game-control-target": "eventNotesBtn"
+        }, style: nil, title: "Events"  %>
+        <%= bs_icon_button icon: "radioactive", data: {
+          "game-control-target": "combatTrackerBtn"
+        }, style: nil, title: "Combat"  %>
+      </div>
+      <div data-game-control-target="status">
+      </div>
     </div>
 
     <div class="game-control__window border p-2">
@@ -23,7 +27,7 @@
       <% end %>
       <%= render WindowComponent.new(title: "Story", target: "eventNotes") do %>
         <%= render Quests::Events::SelectorComponent.new(game: @game) %>
-        <%= turbo_frame_tag "game_quest_events", src: quest_events_game_path(@game) %>
+        <%= turbo_frame_tag "game_quest_events", src: quest_events_game_path(@game), class: "accordion" %>
       <% end %>
       <%= render WindowComponent.new(title: "Combat", target: "combatTracker", show: false) do %>
       <% end %>

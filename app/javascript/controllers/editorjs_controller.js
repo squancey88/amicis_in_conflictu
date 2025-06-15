@@ -7,6 +7,9 @@ import EditorjsList from '@editorjs/list';
 export default class extends Controller {
 
   static targets = ['editor', 'formField'];
+  static values = {
+    minHeight: { type: Number, default: 200 }
+  }
 
   connect() {
     let initialState; 
@@ -18,6 +21,7 @@ export default class extends Controller {
 
     this.editor = new EditorJS({
       holder: this.editorTarget,
+      minHeight: this.minHeightValue,
       data: initialState,
       tools: {
         header: Header,
