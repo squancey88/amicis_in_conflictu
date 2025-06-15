@@ -4,6 +4,7 @@
   "dependencies": {
     "@editorjs/editorjs": "^2.29.1",
     "@editorjs/header": "^2.8.1",
+    "@editorjs/list": "^2.0.6",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.3",
     "@json-editor/json-editor": "^2.15.1",
@@ -12,6 +13,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "esbuild": "^0.20.1",
+    "lodash": "^4.17.21",
     "nodemon": "^3.1.0",
     "postcss": "^8.4.35",
     "postcss-cli": "^11.0.0",
@@ -26,5 +28,8 @@
     "build:css": "yarn build:css:compile && yarn build:css:prefix",
     "watch:css": "nodemon --verbose --watch ./app/assets/stylesheets/ --watch ./app/components/ -L --ext scss --exec \"yarn build:css\"",
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+  },
+  "devDependencies": {
+    "@editorjs/link-autocomplete": "^0.1.0"
   }
 }

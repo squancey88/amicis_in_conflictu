@@ -1,0 +1,10 @@
+
+<%= render Common::HeaderCardComponent.new(title: @game.campaign.name, subtitle: "Session: #{@game.campaign_session_number}") %>
+
+<div class="d-flex flex-row gap-2">
+  <% @game.campaign.player_characters.each_with_index do |character, index| %>
+    <%= render Characters::BadgeComponent.new(character:, game: @game, index:) %>
+  <% end %>
+</div>
+
+<%= render GameControlComponent.new(game: @game, player: @current_user_player) %>

@@ -1,0 +1,18 @@
+<%= render StandardLayoutBoxComponent.new(title: game_quest_event.title) do |component| %>
+  <% component.with_body do %>
+    <div class="d-flex flex-row gap-2">
+      <div style="flex: 1 1 50%">
+        <%= fields @game do |form| %>
+          <%= form.fields_for :game_quest_events, game_quest_event do |event_form| %>
+            <%= render TextEditorComponent.new(form: event_form, attribute: :notes, save_triggers:["game-control#notesSaved"]) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div style="flex: 1 1 50%">
+        <% game_quest_event.quest_event.quest_event_datum.each do |data| %>
+          <%= render data.dm_view %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

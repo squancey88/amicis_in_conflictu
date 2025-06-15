@@ -41,4 +41,26 @@ module GameSystemsHelper
       concat(form.label(attribute_name))
     end
   end
+
+  def game_system_edit_path(game_system)
+    case game_system
+    when GameSystems::Wargame
+      edit_game_systems_wargame_path(game_system)
+    when GameSystems::CardGame
+      edit_game_systems_card_game_path(game_system)
+    when GameSystems::RolePlayingGame
+      edit_game_systems_role_playing_game_path(game_system)
+    end
+  end
+
+  def game_system_show_path(game_system)
+    case game_system
+    when GameSystems::Wargame
+      game_systems_wargame_path(game_system)
+    when GameSystems::CardGame
+      game_systems_card_game_path(game_system)
+    when GameSystems::RolePlayingGame
+      game_systems_role_playing_game_path(game_system)
+    end
+  end
 end

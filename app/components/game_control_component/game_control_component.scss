@@ -1,0 +1,26 @@
+.game-control {
+
+
+  &__window{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  &__sub-window {
+    display: none;
+    flex: 1 1 auto;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  &__notes {
+    .text-editor-component {
+      width: 100%;
+    }
+
+  }
+
+}

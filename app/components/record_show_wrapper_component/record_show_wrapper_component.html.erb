@@ -1,5 +1,6 @@
 <%= render Common::HeaderCardComponent.new(title: @title) do |header| %>
   <%= header.with_buttons do %>
+    <%= header_buttons %>
     <%= render Common::MenuButtonComponent.new(menu_options: @menu_options, 
                 additional_classes: ["record-show-wrapper__header-menu"]) %>
   <% end %>
@@ -7,15 +8,21 @@
 
 <%= body %>
 
-<div class="<%= grid_classes(@row_cols) %>">
-  <% boxes.each do |box| %>
-    <div class="col">
-      <%= box %>
-    </div>
-  <% end %>
-  <% spaces.each do |space| %>
-    <div class="col">
-      <%= space %>
-    </div>
-  <% end %>
-</div>
+<%= tab_section %>
+
+<% if boxes.any? || spaces.any? %>
+
+  <div class="<%= grid_classes(@row_cols) %>">
+    <% boxes.each do |box| %>
+      <div class="col">
+        <%= box %>
+      </div>
+    <% end %>
+    <% spaces.each do |space| %>
+      <div class="col">
+        <%= space %>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>

@@ -1,0 +1,26 @@
+<%= form_with(model: @wargame) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: @wargame, form:) do |component| %>
+
+    <% component.with_form_box do %>
+      <%= render partial: "game_systems/base_fields", locals: {form:, game_system: @wargame} %>
+    <% end %>
+
+    <% component.with_form_box do %>
+
+      <h2>Unit Stat Definitions</h2>
+
+      <%= turbo_frame_tag :definition_list  do %>
+        <%= form.fields_for :unit_stat_definitions do |unit_stat_definition_form| %>
+          <%= render partial: "unit_stat_definitions/form_row", locals: {form: unit_stat_definition_form} %>
+        <% end %>
+      <% end %>
+
+      <%= link_to "Add Stat Definition", 
+        add_new_stat_row_game_systems_wargames_path, 
+        class: ['btn', 'btn-secondary'],
+        data: {turbo_frame: :definition_list, turbo_stream: true} %>
+
+    <% end %>
+  <% end %>
+<% end %>

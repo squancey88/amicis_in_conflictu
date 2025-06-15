@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_15_132434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.index ["user_id"], name: "index_army_lists_on_user_id"
   end
 
+  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.uuid "world_id", null: false
+    t.integer "visibility", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["world_id"], name: "index_articles_on_world_id"
+  end
+
   create_table "campaigns", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "gaming_group_id", null: false
@@ -51,8 +60,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.datetime "updated_at", null: false
     t.jsonb "config"
     t.integer "list_start_cost"
+    t.uuid "world_id"
+    t.uuid "game_master_id"
+    t.index ["game_master_id"], name: "index_campaigns_on_game_master_id"
     t.index ["game_system_id"], name: "index_campaigns_on_game_system_id"
     t.index ["gaming_group_id"], name: "index_campaigns_on_gaming_group_id"
+    t.index ["world_id"], name: "index_campaigns_on_world_id"
   end
 
   create_table "character_species_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -61,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.uuid "world_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "world_id"], name: "index_character_species_types_on_name_and_world_id", unique: true
     t.index ["world_id"], name: "index_character_species_types_on_world_id"
   end
 
@@ -69,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.uuid "world_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "world_id"], name: "index_character_types_on_name_and_world_id", unique: true
     t.index ["world_id"], name: "index_character_types_on_world_id"
   end
 
@@ -77,14 +92,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.string "family_name"
     t.jsonb "physical_description"
     t.uuid "world_id", null: false
-    t.uuid "born_during_id", null: false
+    t.uuid "born_during_id"
     t.uuid "character_type_id", null: false
     t.uuid "character_species_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "controlled_by_id"
+    t.uuid "campaign_id"
+    t.integer "visibility", default: 0
+    t.boolean "active", default: true
     t.index ["born_during_id"], name: "index_characters_on_born_during_id"
+    t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["character_species_type_id"], name: "index_characters_on_character_species_type_id"
     t.index ["character_type_id"], name: "index_characters_on_character_type_id"
+    t.index ["controlled_by_id"], name: "index_characters_on_controlled_by_id"
     t.index ["world_id"], name: "index_characters_on_world_id"
   end
 
@@ -108,6 +129,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.datetime "updated_at", null: false
     t.index ["attached_to_type", "attached_to_id"], name: "index_equipment_attachments_on_attached_to"
     t.index ["equipment_id"], name: "index_equipment_attachments_on_equipment_id"
+  end
+
+  create_table "game_quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.uuid "game_id", null: false
+    t.uuid "quest_event_id", null: false
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_quest_events_on_game_id"
+    t.index ["quest_event_id"], name: "index_game_quest_events_on_quest_event_id"
   end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -177,6 +210,38 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.boolean "surrendered", default: false
     t.index ["controller_type", "controller_id"], name: "index_players_on_controller"
     t.index ["game_id"], name: "index_players_on_game_id"
+  end
+
+  create_table "quest_event_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "quest_event_id", null: false
+    t.string "type"
+    t.jsonb "data"
+    t.integer "order"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quest_event_id"], name: "index_quest_event_data_on_quest_event_id"
+  end
+
+  create_table "quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.jsonb "blurb"
+    t.uuid "quest_id", null: false
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quest_id"], name: "index_quest_events_on_quest_id"
+  end
+
+  create_table "quests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.jsonb "blurb"
+    t.uuid "world_id", null: false
+    t.uuid "created_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_quests_on_created_by_id"
+    t.index ["world_id"], name: "index_quests_on_world_id"
   end
 
   create_table "team_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -414,6 +479,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "world_item_data", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "category"
+    t.string "type"
+    t.integer "visibility", default: 0
+    t.string "relates_to_type", null: false
+    t.uuid "relates_to_id", null: false
+    t.jsonb "data"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["relates_to_type", "relates_to_id"], name: "index_world_item_data_on_relates_to"
+  end
+
   create_table "worlds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "blurb"
@@ -429,16 +507,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
   add_foreign_key "army_lists", "armies"
   add_foreign_key "army_lists", "game_systems"
   add_foreign_key "army_lists", "users"
+  add_foreign_key "articles", "worlds"
   add_foreign_key "campaigns", "game_systems"
   add_foreign_key "campaigns", "gaming_groups"
+  add_foreign_key "campaigns", "users", column: "game_master_id"
   add_foreign_key "character_species_types", "worlds"
   add_foreign_key "character_types", "worlds"
   add_foreign_key "characters", "character_species_types"
   add_foreign_key "characters", "character_types"
   add_foreign_key "characters", "time_periods", column: "born_during_id"
+  add_foreign_key "characters", "users", column: "controlled_by_id"
   add_foreign_key "characters", "worlds"
   add_foreign_key "equipment", "game_systems"
   add_foreign_key "equipment_attachments", "equipment"
+  add_foreign_key "game_quest_events", "games"
+  add_foreign_key "game_quest_events", "quest_events"
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"
@@ -446,6 +529,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_213819) do
   add_foreign_key "player_armies", "army_lists"
   add_foreign_key "player_armies", "players"
   add_foreign_key "players", "games"
+  add_foreign_key "quest_event_data", "quest_events"
+  add_foreign_key "quest_events", "quests"
+  add_foreign_key "quests", "users", column: "created_by_id"
+  add_foreign_key "quests", "worlds"
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
   add_foreign_key "teams", "gaming_groups"

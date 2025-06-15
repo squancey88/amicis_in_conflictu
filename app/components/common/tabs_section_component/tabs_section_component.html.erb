@@ -1,0 +1,10 @@
+<ul class="nav nav-tabs" id="<%= @id %>">
+  <% tabs.each do |tab| %>
+    <%= tab.tab_html %>
+  <% end %>
+</ul>
+<div class="tab-content p-2" id="<%= @id %>-content">
+  <% tabs.each do |tab| %>
+    <%= tab %>
+  <% end %>
+</div>

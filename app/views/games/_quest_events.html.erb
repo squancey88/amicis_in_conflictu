@@ -1,0 +1,5 @@
+Events (<%= @game.game_quest_events.count %>)
+
+<% @game.game_quest_events.each do |game_quest_event| %>
+  <%= render partial: "game_quest_events/form", locals: { game_quest_event: } %>
+<% end %>

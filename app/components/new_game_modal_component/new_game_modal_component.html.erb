@@ -7,7 +7,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">New Game</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <%= content_tag :button, "", type: :button, class: "btn-close", data: {
+          bs_dismiss: :modal,
+          action: "new-game-modal#clearForm"
+          }, aria_label: "Close" %>
       </div>
       <%= form_with model: @new_game do |form| %>
 
@@ -16,9 +19,18 @@
         <div class="modal-body">
           <div class="form-floating mb-3">
             <%= game_system_select(form, :game_system_id, data: {
+              "new-game-modal-target": "gameSystemSelect",
               action: "new-game-modal#gameSystemSelected"
             }) %>
             <%= form.label :game_system_id %>
+          </div>
+
+          <div class="form-floating mb-3">
+            <%= form.select :campaign_id, options_for_select([['No Campaign', nil]]), {}, { class: "form-select", data: {
+              "new-game-modal-target": "campaignSelect",
+              action: "new-game-modal#campaignSelected"
+            }} %>
+            <%= form.label :campaign_id %>
           </div>
 
           <div class="input-group mb-3">
@@ -34,41 +46,25 @@
             </button>
           </div>
 
-          <div data-new-game-modal-target="playersList">
+          <div class="d-flex flex-row justify-content-between">
+            <h3>Players</h3>
+            <%= content_tag :button, type: :button, class: "btn btn-secondary", data: {
+              action: "new-game-modal#clearPlayers"
+              }, aria_label: "Clear players" do %>
+              Clear Players
+            <% end %>
           </div>
-
-          <div class="form-floating mb-3">
-            <%= form.select :campaign_id, options_for_select([['No Campaign', nil]]), {}, { class: "form-select", data: {
-              "new-game-modal-target": "campaignSelect"
-            }} %>
-            <%= form.label :campaign_id %>
-          </div>
-
-
+          <%= turbo_frame_tag :players %>
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <%= form.submit "Create Game", class: "btn btn-primary", data: {
             "new-game-modal-target": "submitBtn"
-          } %>
+          }, disabled: true %>
         </div>
       <% end %>
     </div>
   </div>
-  <template data-new-game-modal-target="playerTemplate">
-    <div class="player-row" data-player-index="%PLAYER_INDEX%" data-new-game-modal-target="playerRow">
-      <input type="hidden" value="%ID%" name="game[players_attributes][%PLAYER_INDEX%][controller_id]">
-      <input type="hidden" value="%TYPE%" name="game[players_attributes][%PLAYER_INDEX%][controller_type]">
-      <div>%NAME%</div>
-      <div>
-        <button type="button" class="btn" 
-          data-new-game-modal-player-index-param="%PLAYER_INDEX%"
-          data-action="click->new-game-modal#removePlayer">
-          <i class="bi bi-trash3"></i>
-        </button>
-      </div>
-    </div>
-  </template>
 </div>
 

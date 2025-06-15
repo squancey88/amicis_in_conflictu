@@ -29,6 +29,25 @@ class PlayersController < ApplicationController
     end
   end
 
+  def add_player_row
+    controller_params = params.permit(:controller_id, :type)
+    controller = case controller_params[:type]
+    when "Team"
+      Team.find(controller_params[:controller_id])
+    when "User"
+      User.find(controller_params[:controller_id])
+    end
+    helpers.fields Game.new do |game_form|
+      game_form.fields_for :players, Player.new(controller:), child_index: Time.now.to_i do |f|
+        render turbo_stream: turbo_stream.append(
+          :players,
+          partial: "players/form_row",
+          locals: {form: f, controller:}
+        )
+      end
+    end
+  end
+
   private
 
   def set_game_system

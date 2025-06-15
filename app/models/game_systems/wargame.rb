@@ -56,11 +56,11 @@ module GameSystems
       [
         {
           title: "Your Army",
-          component: ArmySelectorComponent
+          component: PlayerForms::Wargames::ArmySelectorComponent
         },
         {
           title: "Your Notes",
-          component: PlayerNotesComponent
+          component: PlayerForms::NotesComponent
         }
       ]
     end
