@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_08_134748) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_15_132434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_08_134748) do
     t.uuid "world_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "world_id"], name: "index_character_species_types_on_name_and_world_id", unique: true
     t.index ["world_id"], name: "index_character_species_types_on_world_id"
   end
 
@@ -82,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_08_134748) do
     t.uuid "world_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "world_id"], name: "index_character_types_on_name_and_world_id", unique: true
     t.index ["world_id"], name: "index_character_types_on_world_id"
   end
 

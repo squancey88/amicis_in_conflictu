@@ -1,4 +1,3 @@
-
 module Worlds
   class PopulateCreatureSpecies < ApplicationService
     attr_reader :world, :species_types
@@ -11,7 +10,7 @@ module Worlds
     def call
       species = case species_types
       when "dnd-5e"
-        dnd_5e()
+        dnd_5e
       end
 
       species.each do |type|
