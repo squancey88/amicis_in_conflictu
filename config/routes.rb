@@ -115,8 +115,11 @@ Rails.application.routes.draw do
 
   resources :games do
     member do
+      get :dm_mode
       get :add_xp_gain_applied_row
       get :add_unit_applied_modifier_row
+      get :quest_events
+      post :link_quest_event
     end
   end
   resources :users, only: %i[show update] do

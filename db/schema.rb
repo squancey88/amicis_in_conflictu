@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_18_101512) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_08_134748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_18_101512) do
     t.uuid "controlled_by_id"
     t.uuid "campaign_id"
     t.integer "visibility", default: 0
+    t.boolean "active", default: true
     t.index ["born_during_id"], name: "index_characters_on_born_during_id"
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["character_species_type_id"], name: "index_characters_on_character_species_type_id"
@@ -126,6 +127,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_18_101512) do
     t.datetime "updated_at", null: false
     t.index ["attached_to_type", "attached_to_id"], name: "index_equipment_attachments_on_attached_to"
     t.index ["equipment_id"], name: "index_equipment_attachments_on_equipment_id"
+  end
+
+  create_table "game_quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.uuid "game_id", null: false
+    t.uuid "quest_event_id", null: false
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_quest_events_on_game_id"
+    t.index ["quest_event_id"], name: "index_game_quest_events_on_quest_event_id"
   end
 
   create_table "game_systems", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -505,6 +518,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_18_101512) do
   add_foreign_key "characters", "worlds"
   add_foreign_key "equipment", "game_systems"
   add_foreign_key "equipment_attachments", "equipment"
+  add_foreign_key "game_quest_events", "games"
+  add_foreign_key "game_quest_events", "quest_events"
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"

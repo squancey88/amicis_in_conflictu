@@ -11,4 +11,8 @@ module PlayersHelper
   def winner_badge(player)
     content_tag(:div, player.display_name, class: ["badge", "text-bg-success"], title: army_list_str(player))
   end
+
+  def player_safe_color_array(count)
+    "#1f77b4".paint.palette.analogous(size: count, as: :hex)
+  end
 end

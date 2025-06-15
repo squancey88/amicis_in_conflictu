@@ -3,6 +3,7 @@ class Character < ApplicationRecord
   include WorldItem
   include WorldVisibility
   include TextLinkable
+  include Activatable
 
   register_link_search_fields :given_name, :family_name
 

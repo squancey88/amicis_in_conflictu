@@ -19,19 +19,15 @@
       <% component.with_body do %>
         <%= render StandardLayoutBoxComponent.new(title: "Game Status", classes: ['mb-2']) do %>
           <div class="form-control__finish_section">
-            <div class="d-flex flex-row gap-2">
-              <div class="flex-fill">
-                <%= state_select(form) %>
-              </div>
+            <div class="d-flex flex-md-row flex-column gap-2">
+              <%= state_select(form) %>
 
               <% if @game.game_system.finish_reasons %>
-                <div class="flex-fill">
-                  <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], 
-                    disabled: @game.editable?,
-                    data: {
-                      action: "game-form#finishChosen"
-                    }) %>
-                </div>
+                <%= finish_reason_select(@game.game_system, form, :finish_reason, classes: ["mb-3"], 
+                  disabled: @game.editable?,
+                  data: {
+                    action: "game-form#finishChosen"
+                  }) %>
               <% end %>
             </div>
 

@@ -1,0 +1,33 @@
+<div class="game-control border p-2 mt-2" data-controller="game-control"
+  data-game-control-game-id-value="<%= @game.id %>">
+  <%= form_with model: @game, data: {
+    "game-control-target": "form"
+  } do |form| %>
+    <div class="game-control__menu mb-2 d-flex flew-row gap-2">
+      <%= bs_icon_button icon: :journal, data: {
+        "game-control-target": "globalNotesBtn"
+      }, style: nil, title: "General Notes" %>
+      <%= bs_icon_button icon: "journal-richtext", data: {
+        "game-control-target": "eventNotesBtn"
+      }, style: nil, title: "Events"  %>
+      <%= bs_icon_button icon: "radioactive", data: {
+        "game-control-target": "combatTrackerBtn"
+      }, style: nil, title: "Combat"  %>
+    </div>
+
+    <div class="game-control__window border p-2">
+      <%= render WindowComponent.new(title: "Notes", target: "globalNotes") do %>
+        <%= form.fields_for :players, @player do |player_form| %>
+          <%= render TextEditorComponent.new(form: player_form, attribute: :notes, save_triggers:["game-control#notesSaved"], hide_label: true)%>
+        <% end %>
+      <% end %>
+      <%= render WindowComponent.new(title: "Story", target: "eventNotes") do %>
+        <%= render Quests::Events::SelectorComponent.new(game: @game) %>
+        <%= turbo_frame_tag "game_quest_events", src: quest_events_game_path(@game) %>
+      <% end %>
+      <%= render WindowComponent.new(title: "Combat", target: "combatTracker", show: false) do %>
+      <% end %>
+    </div>
+
+  <% end %>
+</div>

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       session[:original_user_id] = session[:user_id]
       session[:user_id] = user_id
     end
-    redirect_to root_url
+    redirect_to request.referer
   end
 
   def stop_emulation
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       session[:user_id] = session[:original_user_id]
       session.delete(:original_user_id)
     end
-    redirect_to root_url
+    redirect_to request.referer
   end
 
   private

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Quests::Events::Data::Forms::BaseComponent < ViewComponent::Base
+class Quests::Events::Data::BaseFormComponent < ViewComponent::Base
   erb_template <<~ERB
     <%= @form.hidden_field :id %>
     <%= @form.hidden_field :type %>

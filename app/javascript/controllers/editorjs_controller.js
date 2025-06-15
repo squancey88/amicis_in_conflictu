@@ -46,6 +46,7 @@ export default class extends Controller {
   save() {
     this.editor.save().then((outputData) => {
       this.formFieldTarget.value = JSON.stringify(outputData);
+      this.dispatch('editorSave')
     });
   }
 }

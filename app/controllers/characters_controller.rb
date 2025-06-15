@@ -26,9 +26,7 @@ class CharactersController < ApplicationController
 
   # GET /characters/new
   def new
-    unless @world_building
-      @character.campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
-    end
+    @character.campaign = Campaign.find(params[:campaign_id]) if @world_building && params[:campaign_id]
   end
 
   # GET /characters/1/edit

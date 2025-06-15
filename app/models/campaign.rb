@@ -9,6 +9,10 @@ class Campaign < ApplicationRecord
 
   validates :name, presence: true
 
+  def player_characters
+    characters.where.not(controlled_by: nil).are_active
+  end
+
   def player_users
     characters.includes(:controlled_by).map { _1.controlled_by }.uniq
   end

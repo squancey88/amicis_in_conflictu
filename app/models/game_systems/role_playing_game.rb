@@ -15,6 +15,10 @@ module GameSystems
           component: PlayerForms::RolePlayingGame::MyCharactersComponent
         },
         {
+          title: "DM Controls",
+          component: PlayerForms::RolePlayingGame::DmControlsComponent
+        },
+        {
           title: "Your Notes",
           component: PlayerForms::NotesComponent
         }

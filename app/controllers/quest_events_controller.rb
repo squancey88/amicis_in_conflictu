@@ -72,6 +72,6 @@ class QuestEventsController < ApplicationController
 
   def quest_event_params
     params.require(:quest_event).permit(:title, :blurb,
-      quest_event_datum_attributes: [:id, :type, :title, :data])
+      quest_event_datum_attributes: [:id, :type, :title, :content])
   end
 end

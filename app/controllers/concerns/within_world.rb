@@ -29,17 +29,13 @@ module WithinWorld
 
   def process_world
     set_world
-    unless @is_world_owner
-      if non_owner_actions.has_key?(action_name.to_sym)
-        action_details = non_owner_actions[action_name.to_sym]
-        if action_details[:require_world] && @world.nil?
-          redirect_to worlds_url
-        end
-
-        if action_details[:check]
-          redirect_to worlds_url unless send(action_details[:check])
-        end
+    if !@is_world_owner && non_owner_actions.has_key?(action_name.to_sym)
+      action_details = non_owner_actions[action_name.to_sym]
+      if action_details[:require_world] && @world.nil?
+        redirect_to worlds_url
       end
+
+      redirect_to worlds_url if action_details[:check] && !send(action_details[:check])
     end
   end
 

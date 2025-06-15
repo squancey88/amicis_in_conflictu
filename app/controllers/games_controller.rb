@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update destroy add_xp_gain_applied_row add_unit_applied_modifier_row]
-  before_action :set_user_player, only: %i[show add_xp_gain_applied_row add_unit_applied_modifier_row]
+  before_action :set_game, only: %i[show edit update destroy dm_mode add_xp_gain_applied_row add_unit_applied_modifier_row link_quest_event quest_events]
+  before_action :set_user_player, only: %i[show dm_mode add_xp_gain_applied_row add_unit_applied_modifier_row]
 
   # GET /games or /games.json
   def index
@@ -9,6 +9,10 @@ class GamesController < ApplicationController
 
   # GET /games/1 or /games/1.json
   def show
+  end
+
+  def dm_mode
+    redirect_to @game unless @game.campaign || @current_user != @game.campaign.game_master
   end
 
   # GET /games/new
@@ -83,6 +87,25 @@ class GamesController < ApplicationController
     end
   end
 
+  def quest_events
+    render turbo_stream: turbo_stream.append(
+      :game_quest_events,
+      partial: "games/quest_events",
+      locals: {game: @game}
+    )
+  end
+
+  def link_quest_event
+    quest_event_id = params.permit(:quest_event_id)[:quest_event_id]
+    quest_event = QuestEvent.find(quest_event_id)
+    @game_quest_event = GameQuestEvent.new(quest_event:, game: @game)
+    if @game_quest_event.save
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -103,7 +126,8 @@ class GamesController < ApplicationController
         player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy],
         game_data: {}],
       unit_xp_gain_applied_attributes: [:id, :unit_id, :unit_xp_gain_event_id],
-      unit_applied_modifier_attributes: [:id, :unit_id, :unit_stat_modifier_id]
+      unit_applied_modifier_attributes: [:id, :unit_id, :unit_stat_modifier_id],
+      game_quest_events_attributes: [:id, :notes]
     )
   end
 end

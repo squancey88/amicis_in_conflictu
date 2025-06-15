@@ -1,0 +1,21 @@
+<div class="d-flex flex-row gap-2" data-controller="quests-events-selector"
+  data-quests-events-selector-game-id-value="<%= @game.id %>">
+  <div class="form-floating">
+    <%= select_tag :quest, options_from_collection_for_select(@world.quests, :id, :title), 
+      {include_blank: 'Select', class: "form-select", data: {action: "change->quests-events-selector#questSelected"}} %>
+    <%= label_tag :quest, 'Quest' %>
+  </div>
+  <div class="form-floating">
+    <%= select_tag :events, nil, 
+      {include_blank: 'Select', class: "form-select", data: { 
+        'quests-events-selector-target': 'eventsSelect',
+        action: "change->quests-events-selector#eventSelected"
+      }} %>
+    <%= label_tag :events, 'Events' %>
+  </div>
+  <button type="button" disabled="disabled" class="<%= bootstrap_button_classes.join(" ") %>"
+    data-quests-events-selector-target="linkBtn"
+    data-action="click->quests-events-selector#linkEvent">
+    Link Event
+  </button>
+</div>

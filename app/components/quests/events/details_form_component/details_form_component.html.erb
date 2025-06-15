@@ -10,7 +10,7 @@
   <div class="accordion" id="accordionExample">
     <%= turbo_frame_tag :event_details do %>
       <%= @form.fields_for :quest_event_datum do |item_form| %>
-        <%= render Quests::Events::Data::Forms::TextSectionComponent.new(form: item_form) %>
+        <%= render Quests::Events::Data::TextSection::FormComponent.new(form: item_form) %>
       <% end %>
     <% end %>
   </div>

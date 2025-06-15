@@ -90,3 +90,4 @@ gem "view_component"
 gem "dotenv", groups: [:development, :test]
 gem "jwt"
 gem "rack-cors"
+gem "chroma"

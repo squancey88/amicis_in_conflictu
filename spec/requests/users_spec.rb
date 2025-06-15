@@ -64,7 +64,7 @@ RSpec.describe "Users", type: :request do
 
     describe "POST /emulate_user" do
       before do
-        post emulate_user_users_path, params: {user_id: admin_user.id}
+        post emulate_user_users_path, params: {user_id: admin_user.id}, headers: {HTTP_REFERER: root_url}
       end
 
       it "should redirect regular user" do
@@ -79,7 +79,7 @@ RSpec.describe "Users", type: :request do
 
     describe "POST /stop_emulation" do
       before do
-        post stop_emulation_users_path
+        post stop_emulation_users_path, headers: {HTTP_REFERER: root_url}
       end
 
       it "should redirect regular user" do
@@ -95,7 +95,7 @@ RSpec.describe "Users", type: :request do
 
     describe "POST /emulate_user" do
       before do
-        post emulate_user_users_path, params: {user_id: user.id}
+        post emulate_user_users_path, params: {user_id: user.id}, headers: {HTTP_REFERER: root_url}
       end
       it "should redirect user" do
         expect(response).to redirect_to(root_url)
@@ -109,8 +109,8 @@ RSpec.describe "Users", type: :request do
 
     describe "POST /stop_emulation" do
       before do
-        post emulate_user_users_path, params: {user_id: user.id}
-        post stop_emulation_users_path
+        post emulate_user_users_path, params: {user_id: user.id}, headers: {HTTP_REFERER: root_url}
+        post stop_emulation_users_path, headers: {HTTP_REFERER: root_url}
       end
 
       it "should redirect user" do

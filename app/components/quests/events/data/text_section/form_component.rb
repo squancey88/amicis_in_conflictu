@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Quests::Events::Data::Forms::TextSectionComponent < Quests::Events::Data::Forms::BaseComponent
+class Quests::Events::Data::TextSection::FormComponent < Quests::Events::Data::BaseFormComponent
   delegate :bootstrap_text_form,
     to: :helpers
 
