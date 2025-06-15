@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_15_132434) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_15_135600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_15_132434) do
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id", "quest_event_id"], name: "index_game_quest_events_on_game_id_and_quest_event_id", unique: true
     t.index ["game_id"], name: "index_game_quest_events_on_game_id"
     t.index ["quest_event_id"], name: "index_game_quest_events_on_quest_event_id"
   end

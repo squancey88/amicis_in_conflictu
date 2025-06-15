@@ -1,4 +1,5 @@
 require "rails_helper"
+
 RSpec.describe CampaignsHelper, type: :helper do
   let(:gaming_group) { create(:gaming_group) }
   it "should render campaign select" do

@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+When setting up on ubuntu, I needed to do
+    `sudo apt install chromium-chromedriver`

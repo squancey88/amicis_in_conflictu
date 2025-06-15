@@ -3,13 +3,13 @@
 require "rails_helper"
 
 RSpec.describe Quests::Events::Data::TextSection::DmViewComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:quest_event_datum) { create(:quest_event_data_text_section) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  before do
+    render_inline(described_class.new(quest_event_datum:))
+  end
+
+  it "should render title" do
+    expect(page).to have_css("h4", text: quest_event_datum.title)
+  end
 end

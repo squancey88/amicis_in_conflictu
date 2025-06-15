@@ -8,5 +8,9 @@ FactoryBot.define do
     character_type
     character_species_type
     visibility { 0 }
+
+    factory :player_character do
+      controlled_by { create(:user) }
+    end
   end
 end

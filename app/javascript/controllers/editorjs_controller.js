@@ -1,12 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
-import LinkAutocomplete from '@editorjs/link-autocomplete';
+import AutoLink from '../modules/editorjs/autolink';
 import EditorjsList from '@editorjs/list';
 
 export default class extends Controller {
 
   static targets = ['editor', 'formField'];
+  static values = {
+    minHeight: { type: Number, default: 200 },
+    searchParams: { type: Object, default: {} }
+  }
 
   connect() {
     let initialState; 
@@ -18,14 +22,16 @@ export default class extends Controller {
 
     this.editor = new EditorJS({
       holder: this.editorTarget,
+      minHeight: this.minHeightValue,
       data: initialState,
       tools: {
         header: Header,
         link: {
-          class: LinkAutocomplete,
+          class: AutoLink,
           config: {
             endpoint: '/text_editor/link',
-            queryParam: 'search'
+            queryParam: 'search',
+            additionalParams: this.searchParamsValue
           }
         },
         list: {

@@ -1,6 +1,5 @@
 .game-control {
 
-
   &__window{
     display: flex;
     flex-direction: row;
@@ -9,10 +8,24 @@
 
   &__sub-window {
     display: none;
-    flex: 1 1 auto;
+    flex-basis: 30%;
+    flex-direction: row;
+    gap: 1px;
 
     &.show {
-      display: block;
+      display: flex;
+    }
+
+    &-box {
+      flex: 1 1 auto;
+    }
+
+    &-handle {
+      flex:  0 0 5px;
+
+      &:hover {
+        background-color: var(--bs-gray-200);
+      }
     }
   }
 

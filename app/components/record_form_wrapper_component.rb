@@ -6,6 +6,7 @@ class RecordFormWrapperComponent < ViewComponent::Base
   renders_one :menu_items
   renders_many :form_boxes, "FormBoxComponent"
   renders_one :tab_section, Common::TabsSectionComponent
+  renders_many :notices, "FormNoticeComponent"
 
   def initialize(record:, form:, title: nil, row_cols: 2)
     @record = record
@@ -26,6 +27,20 @@ class RecordFormWrapperComponent < ViewComponent::Base
 
   def subtitle
     @record.class.model_name.human
+  end
+
+  class FormNoticeComponent < ViewComponent::Base
+    def initialize(notice: nil)
+      @notice = notice
+    end
+
+    def render?
+      @notice.present?
+    end
+
+    def call
+      content_tag :div, @notice
+    end
   end
 
   class FormBoxComponent < ViewComponent::Base

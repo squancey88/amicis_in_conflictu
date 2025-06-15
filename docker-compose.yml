@@ -33,6 +33,7 @@ services:
     environment:
       - DB_PASSWORD=password
       - WEBPACKER_DEV_SERVER_HOST=web
+      - DB_HOST=db
     stdin_open: true
     tty: true # Allow interactive byebug sessions
     restart: unless-stopped

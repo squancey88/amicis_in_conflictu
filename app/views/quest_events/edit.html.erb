@@ -2,24 +2,21 @@
 
 <%= form_with(model: @quest_event, url: [@quest, @quest_event]) do |form| %>
 
-  <%= render RecordFormWrapperComponent.new(record: @quest_event, form:) do |component| %>
+  <%= render RecordFormWrapperComponent.new(record: @quest_event, form:, row_cols: 1) do |component| %>
 
-    <% component.with_tab_section do |tab_section| %>
-
-      <% tab_section.with_tab(label: "Overview") do |tab| %>
-
-        <% tab.with_grid_box(title: "Details", as_box: true) do %>
+    <% component.with_form_box do %>
+      <div class="d-flex flex-row gap-2">
+        <div class="flex-fill">
           <%= bootstrap_text_field(form, :title) %>
-        <% end %>
+        </div>
+        <div class="flex-fill">
+          <%= render TextEditorComponent.new(form:, attribute: :blurb, min_height: 25) %>
+        </div>
+      </div>
+    <% end %>
 
-        <% tab.with_grid_box(title: "Blurb", as_box: true) do -%>
-          <%= render TextEditorComponent.new(form:, attribute: :blurb) %>
-        <% end %>
-      <% end %>
-
-      <% tab_section.with_tab(label: "Details") do |tab| %>
-        <%= render Quests::Events::DetailsFormComponent.new(quest_event: @quest_event, form:) %>
-      <% end %>
+    <% component.with_form_box do %>
+      <%= render Quests::Events::DetailsFormComponent.new(quest_event: @quest_event, form:) %>
     <% end %>
   <% end %>
 <% end %>

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['eventsSelect', 'linkBtn'];
+  static targets = ['questsSelect', 'eventsSelect', 'linkBtn'];
   static values = {
     gameId: String,
   }
@@ -37,7 +37,7 @@ export default class extends Controller {
   getEvents(questId) {
     this.disableLinkBtn();
     this.eventsSelectTarget.options.length = 1
-    fetch(`/quests/${questId}/quest_events.json`).then(
+    fetch(`/quests/${questId}/quest_events.json?game_id=${this.gameIdValue}`).then(
       (response) => {
         response.json().then((events) => {
           events.forEach(questEvent => {
@@ -52,19 +52,24 @@ export default class extends Controller {
   }
 
   linkEvent() {
+    const formData = new FormData()
+    formData.append('quest_event_id', this.selectedEvent);
+
     console.log("creating link:", this.gameIdValue, this.selectedEvent)
-    fetch(`/games/${this.gameIdValue}/link_quest_event.json`, {
+    fetch(`/games/${this.gameIdValue}/link_quest_event`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Accept": "text/vnd.turbo-stream.html",
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
       },
-      body: JSON.stringify({
-        quest_event_id: this.selectedEvent,
-      })
-    }).then((response) => {
-      response.json().then((body) => {
-        console.log(body);
-      })
+      body: formData
+    })
+    .then(r => r.text())
+    .then(html => {
+      Turbo.renderStreamMessage(html);
+      this.questsSelectTarget.selectedIndex = 0;
+      this.eventsSelectTarget.selectedIndex = 0;
+      this.eventsSelectTarget.options.length = 1;
     })
   }
 

@@ -1,8 +1,13 @@
 <%= form_with(model: character) do |form| %>
 
   <%= hidden_field_tag :world_id, params[:world_id] if character.new_record? %>
+  <%= form.hidden_field :campaign if character.new_record? %>
 
   <%= render RecordFormWrapperComponent.new(record: character, form:) do |component| %>
+
+    <% if character.campaign %>
+      <% component.with_notice(notice: "You are creating your character in #{character.campaign.name}") %>
+    <% end %>
 
     <% component.with_form_box(title: "Details") do %>
       <%= bootstrap_text_field(form, :given_name) %>

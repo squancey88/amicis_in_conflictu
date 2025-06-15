@@ -100,9 +100,11 @@ class GamesController < ApplicationController
     quest_event = QuestEvent.find(quest_event_id)
     @game_quest_event = GameQuestEvent.new(quest_event:, game: @game)
     if @game_quest_event.save
-      render json: {success: true}
-    else
-      render json: {success: false}
+      render turbo_stream: turbo_stream.append(
+        :game_quest_events,
+        partial: "game_quest_events/form",
+        locals: {game_quest_event: @game_quest_event, index: Time.now.to_i}
+      )
     end
   end
 
