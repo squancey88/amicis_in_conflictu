@@ -50,3 +50,28 @@ class Player < ApplicationRecord
     game.game_system.calculate_player_score(self)
   end
 end
+
+# == Schema Information
+#
+# Table name: players
+#
+#  id              :uuid             not null, primary key
+#  controller_type :string
+#  game_data       :jsonb
+#  notes           :jsonb
+#  result          :integer          default("not_set")
+#  surrendered     :boolean          default(FALSE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  controller_id   :uuid
+#  game_id         :uuid             not null
+#
+# Indexes
+#
+#  index_players_on_controller  (controller_type,controller_id)
+#  index_players_on_game_id     (game_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_id => games.id)
+#

@@ -15,3 +15,25 @@ class UnitStat < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: unit_stats
+#
+#  id                      :uuid             not null, primary key
+#  base_value              :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  unit_id                 :uuid             not null
+#  unit_stat_definition_id :uuid             not null
+#
+# Indexes
+#
+#  index_unit_stats_on_unit_id                  (unit_id)
+#  index_unit_stats_on_unit_stat_definition_id  (unit_stat_definition_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (unit_id => units.id)
+#  fk_rails_...  (unit_stat_definition_id => unit_stat_definitions.id)
+#

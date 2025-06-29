@@ -61,3 +61,34 @@ class ArmyList < ApplicationRecord
 
   def to_s = name
 end
+
+# == Schema Information
+#
+# Table name: army_lists
+#
+#  id             :uuid             not null, primary key
+#  cost           :integer
+#  details        :jsonb
+#  initial_values :jsonb
+#  name           :string
+#  starting_cost  :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  army_id        :uuid
+#  campaign_id    :uuid
+#  game_system_id :uuid             not null
+#  user_id        :uuid             not null
+#
+# Indexes
+#
+#  index_army_lists_on_army_id         (army_id)
+#  index_army_lists_on_campaign_id     (campaign_id)
+#  index_army_lists_on_game_system_id  (game_system_id)
+#  index_army_lists_on_user_id         (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (army_id => armies.id)
+#  fk_rails_...  (game_system_id => game_systems.id)
+#  fk_rails_...  (user_id => users.id)
+#

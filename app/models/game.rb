@@ -60,3 +60,30 @@ class Game < ApplicationRecord
     game_system.set_winners(self)
   end
 end
+
+# == Schema Information
+#
+# Table name: games
+#
+#  id                :uuid             not null, primary key
+#  data              :jsonb
+#  finish_reason     :string
+#  game_state        :integer          default("not_played")
+#  notes             :jsonb
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  campaign_id       :uuid
+#  game_system_id    :uuid             not null
+#  gaming_session_id :uuid             not null
+#
+# Indexes
+#
+#  index_games_on_campaign_id        (campaign_id)
+#  index_games_on_game_system_id     (game_system_id)
+#  index_games_on_gaming_session_id  (gaming_session_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_system_id => game_systems.id)
+#  fk_rails_...  (gaming_session_id => gaming_sessions.id)
+#
