@@ -5,7 +5,12 @@ class QuestEventsController < ApplicationController
   before_action :set_quest_event, only: %i[edit update destroy]
 
   def index
-    @quest_events = @quest.quest_events
+    @quest_events = if params[:game_id]
+      game = Game.find(params[:game_id])
+      @quest.quest_events.where.not(id: game.game_quest_events.select(:quest_event_id))
+    else
+      @quest.quest_events
+    end
   end
 
   def edit

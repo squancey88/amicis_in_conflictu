@@ -11,7 +11,7 @@ default: &default
 
 development:
   <<: *default
-  host: <%= ENV.fetch("DB_HOST", 'db') %>
+  host: <%= ENV.fetch("DB_HOST", 'localhost') %>
   username: postgres
   password: <%= ENV.fetch("DB_PASSWORD", '') %>
   database: gaming_night_tracker
@@ -21,7 +21,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: <%= ENV.fetch("DB_HOST", 'db') %>
+  host: <%= ENV.fetch("DB_HOST", 'localhost') %>
   username: postgres
   password: <%= ENV.fetch("DB_PASSWORD", '') %>
   database: gaming_night_tracker_test

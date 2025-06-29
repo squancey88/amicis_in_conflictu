@@ -2,13 +2,15 @@
 
 require "rails_helper"
 
-RSpec.describe PlayerForms::NotesComponent, type: :component do
+RSpec.describe PlayerForms::NotesComponent, type: :helper do
+  include ViewComponent::TestHelpers
+
   let(:game) { create(:game) }
 
   before do
-    form = double("form")
-    allow(form).to receive(:hidden_field).and_return "<input type='hidden' name='test'>".html_safe
-    render_inline(described_class.new(game:, player_form: form, current_player: nil, player_index: 0))
+    form_with model: game do |player_form|
+      render_inline(described_class.new(game:, player_form:, current_player: nil, player_index: 0))
+    end
   end
 
   it "should render the editor div" do

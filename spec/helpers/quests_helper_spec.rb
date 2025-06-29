@@ -11,5 +11,12 @@ require "rails_helper"
 #   end
 # end
 RSpec.describe QuestsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:world) { create(:world) }
+
+  it "should render quest select" do
+    form_res = form_with model: world do |form|
+      helper.quest_select(form, :quest_id, world)
+    end
+    expect(form_res).to have_css("select")
+  end
 end

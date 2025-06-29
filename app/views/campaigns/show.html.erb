@@ -32,6 +32,18 @@
     </ul>
   <% end %>
 
+  <% if current_user == @campaign.game_master %>
+    <% component.with_box(title: "Player Characters") do %>
+      <ul class="list-group">
+        <% @campaign.player_users do |player_user| %>
+          <li class="list-group-item">
+            <%= player_user.display_name %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+
   <% if @campaign.game_system.respond_to?(:campaign_list_attributes) && @campaign.game_master == current_user %>
     <% component.with_box do %>
       <h3>Config</h3>

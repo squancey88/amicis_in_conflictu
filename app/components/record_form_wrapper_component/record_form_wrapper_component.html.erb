@@ -11,6 +11,14 @@
   <% end %>
 <% end %>
 
+<% if notices %>
+  <div class="alert alert-secondary">
+    <% notices.each do |notice| %>
+      <%= notice %>
+    <% end %>
+  </div>
+<% end %>
+
 <%= tab_section if tab_section %>
 
 <% if form_boxes %>

@@ -3,13 +3,22 @@
 require "rails_helper"
 
 RSpec.describe Common::AccordionItemComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    render_inline(described_class.new) do |component|
+      component.with_header do
+        "Testing"
+      end
+      component.with_body do
+        "I am the body"
+      end
+    end
+  end
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  it "renders header" do
+    expect(page).to have_css("button.accordion-button", text: "Testing")
+  end
+
+  it "renders body" do
+    expect(page).to have_css("div.accordion-body", text: "I am the body")
+  end
 end

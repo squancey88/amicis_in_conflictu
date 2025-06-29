@@ -2,14 +2,23 @@
 
 require "rails_helper"
 
-RSpec.describe Quests::Events::DetailsFormComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Quests::Events::DetailsFormComponent, type: :helper do
+  include ViewComponent::TestHelpers
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  let(:quest) { create(:quest) }
+  let(:quest_event) { create(:quest_event, quest:) }
+
+  before do
+    form_with model: [quest, quest_event] do |form|
+      render_inline(described_class.new(quest_event:, form:))
+    end
+  end
+
+  it "renders an accordion" do
+    expect(page).to have_css("div.accordion")
+  end
+
+  it "renders new text section link" do
+    expect(page).to have_link("New Text Section", href: quest_event_data_new_text_section_path)
+  end
 end

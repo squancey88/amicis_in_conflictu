@@ -145,7 +145,7 @@ module GameSystems
         if game.game_system.list_cost_change_in_game
           campaign_data[:changes][:list_cost_change] = 0
         end
-        game.game_system.campaign_list_attributes.each do |attribute|
+        game.game_system.campaign_list_attributes&.each do |attribute|
           campaign_data[:changes][attribute["key"]] = nil
         end
         player_data[:campaign] = campaign_data
