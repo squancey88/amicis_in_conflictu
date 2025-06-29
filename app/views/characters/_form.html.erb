@@ -9,16 +9,40 @@
       <% component.with_notice(notice: "You are creating your character in #{character.campaign.name}") %>
     <% end %>
 
-    <% component.with_form_box(title: "Details") do %>
-      <%= bootstrap_text_field(form, :given_name) %>
-      <%= bootstrap_text_field(form, :family_name) %>
-      <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
-      <%= character_species_type_select(form, :character_species_type_id, @world) %>
-      <%= form.hidden_field :campaign_id unless @world_building %>
+    <% component.with_tab_section do |tab_section| %>
+
+      <% tab_section.with_tab(label: "Characteristics") do %>
+        <% component.with_form_box(title: "Details") do %>
+          <%= bootstrap_text_field(form, :given_name) %>
+          <%= bootstrap_text_field(form, :family_name) %>
+          <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
+          <%= character_species_type_select(form, :character_species_type_id, @world) %>
+          <%= form.hidden_field :campaign_id unless @world_building %>
+        <% end %>
+
+        <% component.with_form_box(title: "Descriptions") do %>
+          <%= render TextEditorComponent.new(form:, attribute: :physical_description) %>
+        <% end %>
+
+        <% component.with_form_box(title: "Additional Attributes") do %>
+          <%= form.fields_for :config do |config_form| %>
+            <% if character.world&.character_config %>
+              <% character.world.character_config["custom_fields"]&.each do |field| %>
+                <%= character_custom_field(config_form, field, character) %>
+              <% end %>
+            <% end %>
+            <% if character.character_type&.config %>
+              <% character.character_type.config["custom_fields"]&.each do |field| %>
+                <%= character_custom_field(config_form, field, character) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% tab_section.with_tab(label: "Background") do %>
+      <% end %>
     <% end %>
 
-    <% component.with_form_box(title: "Descriptions") do %>
-      <%= render TextEditorComponent.new(form:, attribute: :physical_description) %>
-    <% end %>
   <% end %>
 <% end %>

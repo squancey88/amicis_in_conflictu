@@ -11,7 +11,7 @@
   <% end %>
 <% end %>
 
-<% if notices %>
+<% if notices.any? %>
   <div class="alert alert-secondary">
     <% notices.each do |notice| %>
       <%= notice %>

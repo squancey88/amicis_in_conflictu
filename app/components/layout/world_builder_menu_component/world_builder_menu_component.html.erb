@@ -1,7 +1,7 @@
 <nav class="navbar" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <div>
-      <strong>Editing world:</strong> <%= link_to current_world.name, current_world %>
+      <strong>Editing world:</strong> <%= link_to current_world.name, build_world_path(current_world) %>
     </div>
     <div>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#worldBuilderMenu">
@@ -25,6 +25,10 @@
         <%= link_to new_article_path do %>
           <%= content_tag :i, nil, class: %w[bi bi-file-earmark-text] %>
           New Article
+        <% end %>
+        <%= link_to new_character_path do %>
+          <%= content_tag :i, nil, class: %w[bi bi-person-arms-up] %>
+          New Character
         <% end %>
       </div>
     </div>

@@ -3,7 +3,13 @@
 class TextEditorRenderComponent < ViewComponent::Base
   def initialize(model:, attribute:)
     json = model.send(attribute)
-    @data = JSON.parse(json) if json.present?
+    if json.present?
+      @data = if json.instance_of?(String)
+        JSON.parse(json)
+      else
+        json.as_json
+      end
+    end
   end
 
   def render?

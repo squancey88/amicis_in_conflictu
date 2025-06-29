@@ -2,7 +2,11 @@ require "rails_helper"
 
 RSpec.describe "/characters", type: :request do
   let(:user) { create(:user) }
-  let(:world) { create(:world, owner: user) }
+  let(:world) {
+    create(:world,
+      owner: user,
+      character_config: {"custom_fields" => [{"key" => "infected", "name" => "Infected", "type" => "boolean", "required" => true}]})
+  }
   let!(:character) { create(:character, world:) }
   let(:character_type) { create(:character_type, world:) }
   let(:character_species_type) { create(:character_species_type, world:) }
@@ -17,7 +21,11 @@ RSpec.describe "/characters", type: :request do
         given_name: Faker::Name.first_name,
         character_type_id: character_type.id,
         character_species_type_id: character_species_type.id,
-        born_during_id: time_period.id
+        born_during_id: time_period.id,
+        config: {
+          infected: true,
+          animal_form: "bear"
+        }
       }
     }
 
@@ -77,6 +85,11 @@ RSpec.describe "/characters", type: :request do
         it "sets the world correctly" do
           post characters_url, params: {character: valid_attributes}
           expect(Character.order(:created_at).last.world).to eq(world)
+        end
+
+        it "set config correctly" do
+          post characters_url, params: {character: valid_attributes}
+          expect(Character.order(:created_at).last.config).to eq({"infected" => "true", "animal_form" => "bear"})
         end
       end
 

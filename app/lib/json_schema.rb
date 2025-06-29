@@ -1,5 +1,8 @@
 class JsonSchema
-  def initialize
+  attr_reader :title
+
+  def initialize(title: "Config")
+    @title = title
     @properties = {}
   end
 
@@ -9,8 +12,8 @@ class JsonSchema
     add_property(name, :array, required, **extras)
   end
 
-  def add_string_property(name, required)
-    add_property(name, :string, required)
+  def add_string_property(name, required, title: nil)
+    add_property(name, :string, required, title:)
   end
 
   def add_boolean_property(name, required)
@@ -23,7 +26,7 @@ class JsonSchema
 
   def generate_schema
     {
-      title: "Config",
+      title:,
       type: :object,
       properties: @properties
     }

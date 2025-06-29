@@ -1,6 +1,9 @@
 class CharacterTypesController < ApplicationController
   include SimpleModel
   include WithinWorld
+  include HasJsonSchema
+
+  has_json_config :config
 
   private
 
@@ -9,6 +12,6 @@ class CharacterTypesController < ApplicationController
   end
 
   def record_params
-    params.require(:character_type).permit(:name)
+    params.require(:character_type).permit(:name, config: {})
   end
 end

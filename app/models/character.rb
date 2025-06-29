@@ -4,6 +4,7 @@ class Character < ApplicationRecord
   include WorldVisibility
   include TextLinkable
   include Activatable
+  include HasTextSection
 
   register_link_search_fields :given_name, :family_name
 
@@ -19,6 +20,9 @@ class Character < ApplicationRecord
 
   connect_world_items "WorldItemData::TextSection", :details
 
+  register_text_section :physical_description
+  register_text_section :history
+
   def full_name
     [given_name, family_name].join(" ")
   end
@@ -28,6 +32,42 @@ class Character < ApplicationRecord
   def link_path = character_path(self)
 
   def to_s = full_name
+
+  def self.character_config_schema
+    schema = JsonSchema.new(title: "Characater Settings")
+    schema.add_array_property("custom_fields", false, [
+      {
+        type: :object,
+        properties: {
+          name: {
+            title: "Field Name",
+            type: "string"
+          },
+          key: {
+            title: "Key (must be unique)",
+            type: "string",
+            pattern: "[A-Za-z0-9_]+"
+          },
+          required: {
+            title: "Required",
+            type: "boolean",
+            required: true,
+            default: false
+          },
+          type: {
+            type: "string",
+            default: "string",
+            enum: [
+              "string",
+              "integer",
+              "boolean"
+            ]
+          }
+        }
+      }
+    ], title: "Custom Fields")
+    schema
+  end
 end
 
 # == Schema Information
@@ -36,8 +76,10 @@ end
 #
 #  id                        :uuid             not null, primary key
 #  active                    :boolean          default(TRUE)
+#  config                    :jsonb
 #  family_name               :string
 #  given_name                :string
+#  history                   :jsonb
 #  physical_description      :jsonb
 #  visibility                :integer          default("gm_only")
 #  created_at                :datetime         not null
