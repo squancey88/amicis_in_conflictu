@@ -29,3 +29,40 @@ class Character < ApplicationRecord
 
   def to_s = full_name
 end
+
+# == Schema Information
+#
+# Table name: characters
+#
+#  id                        :uuid             not null, primary key
+#  active                    :boolean          default(TRUE)
+#  family_name               :string
+#  given_name                :string
+#  physical_description      :jsonb
+#  visibility                :integer          default("gm_only")
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  born_during_id            :uuid
+#  campaign_id               :uuid
+#  character_species_type_id :uuid             not null
+#  character_type_id         :uuid             not null
+#  controlled_by_id          :uuid
+#  world_id                  :uuid             not null
+#
+# Indexes
+#
+#  index_characters_on_born_during_id             (born_during_id)
+#  index_characters_on_campaign_id                (campaign_id)
+#  index_characters_on_character_species_type_id  (character_species_type_id)
+#  index_characters_on_character_type_id          (character_type_id)
+#  index_characters_on_controlled_by_id           (controlled_by_id)
+#  index_characters_on_world_id                   (world_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (born_during_id => time_periods.id)
+#  fk_rails_...  (character_species_type_id => character_species_types.id)
+#  fk_rails_...  (character_type_id => character_types.id)
+#  fk_rails_...  (controlled_by_id => users.id)
+#  fk_rails_...  (world_id => worlds.id)
+#

@@ -54,3 +54,28 @@ class Unit < ApplicationRecord
 
   def to_s = name
 end
+
+# == Schema Information
+#
+# Table name: units
+#
+#  id             :uuid             not null, primary key
+#  active         :boolean          default(TRUE), not null
+#  cost           :integer
+#  description    :string
+#  name           :string
+#  starting_xp    :integer          default(0), not null
+#  stat_modifiers :jsonb
+#  stats          :jsonb
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  army_list_id   :uuid             not null
+#
+# Indexes
+#
+#  index_units_on_army_list_id  (army_list_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (army_list_id => army_lists.id)
+#

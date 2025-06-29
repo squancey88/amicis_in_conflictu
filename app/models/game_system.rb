@@ -53,3 +53,24 @@ class GameSystem < ApplicationRecord
     []
   end
 end
+
+# == Schema Information
+#
+# Table name: game_systems
+#
+#  id             :uuid             not null, primary key
+#  competitive    :boolean
+#  edition        :string
+#  game_config    :jsonb
+#  has_armies     :boolean          default(FALSE)
+#  has_army_lists :boolean          default(FALSE)
+#  name           :string
+#  slug           :string
+#  type           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+# Indexes
+#
+#  index_game_systems_on_slug  (slug) UNIQUE
+#

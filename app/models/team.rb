@@ -12,3 +12,22 @@ class Team < ApplicationRecord
     name
   end
 end
+
+# == Schema Information
+#
+# Table name: teams
+#
+#  id              :uuid             not null, primary key
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  gaming_group_id :uuid             not null
+#
+# Indexes
+#
+#  index_teams_on_gaming_group_id  (gaming_group_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (gaming_group_id => gaming_groups.id)
+#
