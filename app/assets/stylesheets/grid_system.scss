@@ -1,0 +1,26 @@
+
+.aic-grid {
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @include media-breakpoint-down(lg) {
+    flex-direction: column;
+  }
+
+  > * {
+    flex: 0 0 calc(50% - 5px);
+  }
+
+  .full {
+    flex: 0 0 100%;
+  }
+
+  .quarter {
+    flex: 0 0 calc(25% - 2.5px);
+  }
+}
+
+
+

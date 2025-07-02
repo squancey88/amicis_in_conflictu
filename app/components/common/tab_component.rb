@@ -4,8 +4,6 @@ class Common::TabComponent < ViewComponent::Base
   attr_reader :id, :label
   attr_accessor :selected
 
-  delegate :grid_classes, to: :helpers
-
   renders_many :grid_boxes, Common::GridBoxComponent
 
   def initialize(label:, row_cols: 2)

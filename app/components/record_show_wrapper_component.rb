@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RecordShowWrapperComponent < ViewComponent::Base
-  delegate :grid_classes, to: :helpers
-
   renders_one :body
   renders_many :boxes, StandardLayoutBoxComponent
   renders_many :spaces

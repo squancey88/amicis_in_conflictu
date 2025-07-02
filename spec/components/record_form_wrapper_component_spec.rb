@@ -12,6 +12,6 @@ RSpec.describe RecordFormWrapperComponent, type: :component do
   end
 
   it "should render grid" do
-    expect(page).to have_css(".row-cols-md-2")
+    expect(page).to have_css(".aic-grid")
   end
 end

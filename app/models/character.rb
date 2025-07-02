@@ -12,6 +12,7 @@ class Character < ApplicationRecord
   belongs_to :born_during, class_name: :TimePeriod, optional: true
   belongs_to :character_type
   belongs_to :character_species_type
+  alias_method :species, :character_species_type
 
   belongs_to :controlled_by, class_name: :User, optional: true
   belongs_to :campaign, optional: true

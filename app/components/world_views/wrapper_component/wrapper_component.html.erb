@@ -1,0 +1,33 @@
+
+<div class="world-view-wrapper">
+
+  <div class="world-view-banner p-3 d-flex align-items-center">
+    <div class="flex-grow-1">
+      From: <%= link_to @world %>
+    </div>
+    <% if current_user == @world.owner %>
+      <div>
+        <%= link_to edit_polymorphic_path(@record), class: "btn btn-primary" do %>
+          <i class="bi bi-pencil"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="world-view-header border-bottom p-3">
+    <%= header %>
+  </div>
+
+  <div class="world-view-body p-4">
+    <%= body %>
+  </div>
+
+
+</div>
+<!-- Dosent work with current setup, as applied filter to text as well -->
+<svg>
+  <filter id="wavy2">
+    <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="5" seed="1"></feTurbulence>
+    <feDisplacementMap in="SourceGraphic" scale="20" />
+  </filter>
+</svg>

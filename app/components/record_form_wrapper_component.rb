@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RecordFormWrapperComponent < ViewComponent::Base
-  delegate :grid_classes, to: :helpers
-
   renders_one :menu_items
   renders_many :form_boxes, "FormBoxComponent"
   renders_one :tab_section, Common::TabsSectionComponent

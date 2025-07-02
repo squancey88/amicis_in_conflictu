@@ -9,7 +9,7 @@ RSpec.describe Common::GridBoxComponent, type: :component do
     end
 
     it "should render div" do
-      expect(page).to have_css("div.col")
+      expect(page).to have_css("div")
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe Common::GridBoxComponent, type: :component do
     end
 
     it "should render div" do
-      expect(page).to have_css("div.col")
+      expect(page).to have_css("div")
     end
 
     it "should render standard layout box" do

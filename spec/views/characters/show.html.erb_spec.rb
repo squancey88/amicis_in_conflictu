@@ -6,8 +6,8 @@ RSpec.describe "characters/show", type: :view do
     assign(:character, character)
   end
 
-  it "renders attributes in <p>" do
+  it "renders full name in <h1>" do
     render
-    expect(rendered).to have_css("p", text: /#{character.given_name}/)
+    expect(rendered).to have_css("h1", text: /#{character.full_name}/)
   end
 end
