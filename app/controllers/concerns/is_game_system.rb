@@ -2,9 +2,11 @@ module IsGameSystem
   extend ActiveSupport::Concern
 
   included do
+    include HasJsonSchema
     before_action :verify_admin
-    before_action :process_config_string, only: [:create, :update]
     before_action :set_record, only: [:show, :edit]
+
+    has_json_config :game_config
   end
 
   class_methods do
@@ -62,13 +64,6 @@ module IsGameSystem
   end
 
   private
-
-  def process_config_string
-    param_name = "game_systems_#{controller_name.singularize}"
-    if params[param_name]["game_config_json_string"]
-      params[param_name]["game_config"] = JSON.parse(params[param_name]["game_config_json_string"])
-    end
-  end
 
   def game_system_class
     "GameSystems::#{controller_name.classify}".constantize

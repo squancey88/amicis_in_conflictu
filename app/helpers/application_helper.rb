@@ -9,10 +9,6 @@ module ApplicationHelper
     column_row_classes.join(" ")
   end
 
-  def grid_classes(row_cols)
-    "row row-cols-md-#{row_cols} g-2 row-cols-1"
-  end
-
   def simple_text_to_rich(text)
     {
       time: DateTime.now.to_i,

@@ -13,6 +13,9 @@ class World < ApplicationRecord
 
   after_create :setup_player_type
 
+  store_accessor :config, :time_period_config
+  store_accessor :config, :character_config
+
   def player_type
     character_types.find_by(name: "Player")
   end
@@ -31,7 +34,7 @@ class World < ApplicationRecord
 
   def self.time_period_schema
     schema = JsonSchema.new
-    schema.add_string_property("Time Period Name", true)
+    schema.add_string_property("name", true, title: "Time Period Name")
     schema
   end
 end
@@ -40,13 +43,13 @@ end
 #
 # Table name: worlds
 #
-#  id                 :uuid             not null, primary key
-#  blurb              :string
-#  name               :string
-#  time_period_config :jsonb
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  owner_id           :uuid             not null
+#  id         :uuid             not null, primary key
+#  blurb      :string
+#  config     :jsonb
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  owner_id   :uuid             not null
 #
 # Indexes
 #

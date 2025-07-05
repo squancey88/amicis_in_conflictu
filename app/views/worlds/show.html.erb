@@ -1,16 +1,24 @@
 
 <%= content_tag :h1, @world.name %>
 
-<div class="<%= grid_classes(2) %>">
-  <div class="col">
-    <%= render StandardLayoutBoxComponent.new(title: "Articles") do %>
-      <ul class="list-group">
-        <% @world.articles.each do |article| %>
-          <li class="list-group-item">
-            <%= link_to article %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+<div class="aic-grid">
+  <%= render StandardLayoutBoxComponent.new(title: "Articles") do %>
+    <ul class="list-group">
+      <% @world.articles.each do |article| %>
+        <li class="list-group-item">
+          <%= link_to article %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= render StandardLayoutBoxComponent.new(title: "Characters") do %>
+    <ul class="list-group">
+      <% @world.characters.each do |character| %>
+        <li class="list-group-item">
+          <%= link_to character %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

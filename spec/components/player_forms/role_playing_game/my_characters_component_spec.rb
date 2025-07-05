@@ -2,9 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PlayerForms::RolePlayingGame::MyCharactersComponent, type: :helper do
-  include ViewComponent::TestHelpers
-
+RSpec.describe PlayerForms::RolePlayingGame::MyCharactersComponent, type: :component_form do
   let!(:campaign) { create(:campaign) }
   let(:game) { create(:game, campaign:) }
   let(:user) { create(:user) }

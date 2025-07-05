@@ -1,6 +1,11 @@
 class WorldsController < ApplicationController
+  include HasJsonSchema
+
   before_action :set_world, only: %i[show build edit update destroy start_editing]
   before_action :set_world_building, only: %i[build edit]
+
+  has_json_config :time_period_config
+  has_json_config :character_config
 
   # GET /worlds or /worlds.json
   def index
@@ -81,6 +86,8 @@ class WorldsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def world_params
-    params.require(:world).permit(:name, :blurb)
+    params.require(:world).permit(:name, :blurb,
+      time_period_config: {},
+      character_config: {})
   end
 end

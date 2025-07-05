@@ -1,23 +1,18 @@
-<%= render RecordShowWrapperComponent.new(
+<%= render WorldViews::WrapperComponent.new(
   record: @character,
-  title: @character.to_s,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_character_path(@character)
-    },
-    {
-      text: "Delete",
-      link: character_path(@character),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
 ) do |component| %>
 
-  <% component.with_box(title: "Details") do %>
-    <%= render @character %>
+  <% component.with_header do %>
+    <h1><%= @character.full_name %></h1>
+    <h2><%= @character.species.name %></h2>
   <% end %>
-  <% component.with_box(title: "Description") do %>
+
+  <% component.with_body do %>
+    <h3>Description</h3>
     <%= render TextEditorRenderComponent.new(model: @character, attribute: :physical_description) %>
+    <hr>
+
+    <h3>History</h3>
+    <%= render TextEditorRenderComponent.new(model: @character, attribute: :history) %>
   <% end %>
 <% end %>

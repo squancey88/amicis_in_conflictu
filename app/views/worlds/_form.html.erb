@@ -7,7 +7,13 @@
       <%= render TextEditorComponent.new(form:, attribute: :blurb) %>
     <% end %>
 
-    <% component.with_form_box do %>
+    <% component.with_form_box(title: "Character Settings") do %>
+      <%= render JsonEditorComponent.new(model: world,
+                                    attribute: :character_config,
+                                    schema: Character.character_config_schema) %>
+    <% end %>
+
+    <% component.with_form_box(title: "Time Config") do %>
       <%= render JsonEditorComponent.new(model: world,
                                     attribute: :time_period_config,
                                     schema: World.time_period_schema) %>

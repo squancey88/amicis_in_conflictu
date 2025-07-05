@@ -9,16 +9,43 @@
       <% component.with_notice(notice: "You are creating your character in #{character.campaign.name}") %>
     <% end %>
 
-    <% component.with_form_box(title: "Details") do %>
-      <%= bootstrap_text_field(form, :given_name) %>
-      <%= bootstrap_text_field(form, :family_name) %>
-      <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
-      <%= character_species_type_select(form, :character_species_type_id, @world) %>
-      <%= form.hidden_field :campaign_id unless @world_building %>
+    <% component.with_tab_section do |tab_section| %>
+
+      <% tab_section.with_tab(label: "Characteristics") do |tab| %>
+        <% tab.with_grid_box(title: "Details", as_box: true) do %>
+          <%= bootstrap_text_field(form, :given_name) %>
+          <%= bootstrap_text_field(form, :family_name) %>
+          <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
+          <%= character_species_type_select(form, :character_species_type_id, @world) %>
+          <%= form.hidden_field :campaign_id unless @world_building %>
+        <% end %>
+
+        <% tab.with_grid_box(title: "Descriptions", as_box: true) do %>
+          <%= render TextEditorComponent.new(form:, attribute: :physical_description) %>
+        <% end %>
+
+        <% tab.with_grid_box(title: "Additional Attributes", as_box: true) do %>
+          <%= form.fields_for :config do |config_form| %>
+            <% if character.world&.character_config %>
+              <% character.world.character_config["custom_fields"]&.each do |field| %>
+                <%= character_custom_field(config_form, field, character) %>
+              <% end %>
+            <% end %>
+            <% if character.character_type&.config %>
+              <% character.character_type.config["custom_fields"]&.each do |field| %>
+                <%= character_custom_field(config_form, field, character) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% tab_section.with_tab(label: "History") do |tab| %>
+        <% tab.with_grid_box(title: "History", as_box: true, span: :full) do %>
+          <%= render TextEditorComponent.new(form:, attribute: :history) %>
+        <% end %>
+      <% end %>
     <% end %>
 
-    <% component.with_form_box(title: "Descriptions") do %>
-      <%= render TextEditorComponent.new(form:, attribute: :physical_description) %>
-    <% end %>
   <% end %>
 <% end %>

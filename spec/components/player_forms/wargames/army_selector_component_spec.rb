@@ -2,9 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PlayerForms::Wargames::ArmySelectorComponent, type: :helper do
-  include ViewComponent::TestHelpers
-
+RSpec.describe PlayerForms::Wargames::ArmySelectorComponent, type: :component_form do
   let(:game_system) { create(:wargame) }
   let(:user) { create(:user) }
   let(:team_user) { create(:user) }

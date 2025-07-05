@@ -27,12 +27,19 @@ class TextEditorComponent < ViewComponent::Base
   end
 
   def call
+    content = @form.object.send(@attribute)
+    value = if content.instance_of?(String)
+      content
+    else
+      content.to_json
+    end
+
     content_tag(:div, class: "text-editor-component") do
       concat(content_tag(:div, class: "text-editor-component__wrapper mb-3", data:) do
         concat(content_tag(:div, label, class: "text-editor-component__label")) unless @hide_label
         concat(content_tag(:div, class: "text-editor-component__content mb-3") do
           concat(content_tag(:div, nil, data: {"editorjs-target": "editor"}))
-          concat(@form.hidden_field(@attribute, data: {"editorjs-target": "formField"}))
+          concat(@form.hidden_field(@attribute, value:, data: {"editorjs-target": "formField"}))
         end)
       end)
     end

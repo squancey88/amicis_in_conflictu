@@ -1,1 +1,5 @@
 <%= bootstrap_text_field(form, :name) %>
+
+<%= render JsonEditorComponent.new(model: @record,
+                              attribute: :config,
+                              schema: Character.character_config_schema) %>

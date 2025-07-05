@@ -14,13 +14,15 @@ class Common::GridBoxComponent < ViewComponent::Base
   ERB
 
   def initialize(span: nil, as_box: false, **box_options)
-    @span = span
+    @span = span&.to_sym
     @as_box = as_box
     @box_options = box_options
   end
 
   def col_class
-    return "col-md-#{@span}" if @span.presence
-    "col"
+    case @span
+    when :full
+      "full"
+    end
   end
 end

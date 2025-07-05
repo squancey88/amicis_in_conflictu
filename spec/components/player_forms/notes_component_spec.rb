@@ -2,9 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PlayerForms::NotesComponent, type: :helper do
-  include ViewComponent::TestHelpers
-
+RSpec.describe PlayerForms::NotesComponent, type: :component_form do
   let(:game) { create(:game) }
 
   before do
