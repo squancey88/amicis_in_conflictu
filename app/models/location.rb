@@ -1,0 +1,35 @@
+class Location < ApplicationRecord
+  belongs_to :located_in, class_name: :Location, dependent: :destroy, inverse_of: :locations
+  belongs_to :world
+  belongs_to :location_type
+
+  has_many :locations, inverse_of: :located_in, dependent: :destroy
+end
+
+# == Schema Information
+#
+# Table name: locations
+#
+#  id               :uuid             not null, primary key
+#  description      :jsonb
+#  history          :jsonb
+#  name             :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  located_in_id    :uuid             not null
+#  location_type_id :uuid             not null
+#  world_id         :uuid             not null
+#
+# Indexes
+#
+#  index_locations_on_located_in_id     (located_in_id)
+#  index_locations_on_location_type_id  (location_type_id)
+#  index_locations_on_name              (name) UNIQUE
+#  index_locations_on_world_id          (world_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (located_in_id => locations.id)
+#  fk_rails_...  (location_type_id => location_types.id)
+#  fk_rails_...  (world_id => worlds.id)
+#

@@ -2,7 +2,7 @@
 
 <%= render Common::HeaderCardComponent.new(title: "Time periods") do |header| %>
   <%= header.with_buttons do %>
-    <%= link_to "New time period", new_time_period_path, class: %i[btn btn-primary] %>
+    <%= link_to "New time period", new_world_time_period_path(@world), class: %i[btn btn-primary] %>
   <% end %>
 <% end %>
 
@@ -11,8 +11,8 @@
     <% @time_periods.each do |time_period| %>
       <%= render Common::CardWithMenuComponent.new(title: time_period,
         menu_options: [
-          {link: time_period, text: "Show", target: "_top"},
-          {link: edit_time_period_path(time_period), text: "Edit", target: "_top"}
+          {link: [time_period.world, time_period], text: "Show", target: "_top"},
+          {link: edit_world_time_period_path(time_period.world, time_period), text: "Edit", target: "_top"}
         ]) do |card| %>
       <% end %>
     <% end %>

@@ -4,11 +4,11 @@
   menu_options: [
     { 
       text: "Edit",
-      link: edit_quest_path(@quest)
+      link: edit_world_quest_path(@world, @quest)
     },
     {
       text: "Delete",
-      link: quest_path(@quest),
+      link: world_quest_path(@world, @quest),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
     }
   ]

@@ -6,7 +6,7 @@
     <ul class="list-group">
       <% @world.articles.each do |article| %>
         <li class="list-group-item">
-          <%= link_to article %>
+          <%= link_to article, [@world, article] %>
         </li>
       <% end %>
     </ul>
@@ -16,7 +16,7 @@
     <ul class="list-group">
       <% @world.characters.each do |character| %>
         <li class="list-group-item">
-          <%= link_to character %>
+          <%= link_to character, [@world, character] %>
         </li>
       <% end %>
     </ul>

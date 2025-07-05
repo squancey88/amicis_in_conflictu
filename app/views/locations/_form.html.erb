@@ -1,0 +1,16 @@
+<%= form_with(model: location) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: location, form:) do |component| %>
+
+    <% component.with_form_box do -%>
+
+                    <%= bootstrap_text_field(form, :name) %>
+                          <%= bootstrap_text_field(form, :description) %>
+                          <%= bootstrap_text_field(form, :history) %>
+                          <%= bootstrap_text_field(form, :located_in_id) %>
+                          <%= bootstrap_text_field(form, :world_id) %>
+                          <%= bootstrap_text_field(form, :location_type_id) %>
+            
+    <% end %>
+  <% end %>
+<% end %>

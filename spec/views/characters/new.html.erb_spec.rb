@@ -10,7 +10,7 @@ RSpec.describe "characters/new", type: :view do
   it "renders new character form" do
     render
 
-    assert_select "form[action=?][method=?]", characters_path, "post" do
+    assert_select "form[action=?][method=?]", world_characters_path(world), "post" do
       assert_select "input[name=?]", "character[given_name]"
       assert_select "input[name=?]", "character[family_name]"
     end

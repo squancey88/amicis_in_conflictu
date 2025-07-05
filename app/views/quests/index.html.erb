@@ -2,7 +2,7 @@
 
 <%= render Common::HeaderCardComponent.new(title: "Quests") do |header| %>
   <%= header.with_buttons do %>
-    <%= link_to "New quest", new_quest_path, class: %i[btn btn-primary] %>
+    <%= link_to "New quest", new_world_quest_path(@world), class: %i[btn btn-primary] %>
   <% end %>
 <% end %>
 
@@ -11,8 +11,8 @@
     <% @quests.each do |quest| %>
       <%= render Common::CardWithMenuComponent.new(title: quest,
         menu_options: [
-          {link: quest, text: "Show", target: "_top"},
-          {link: edit_quest_path(quest), text: "Edit", target: "_top"}
+          {link: [quest.world, quest], text: "Show", target: "_top"},
+          {link: edit_world_quest_path(quest.world, quest), text: "Edit", target: "_top"}
         ]) do |card| %>
         <% card.with_body do %>
           <%= render TextEditorRenderComponent.new(model: quest, attribute: :blurb) %>

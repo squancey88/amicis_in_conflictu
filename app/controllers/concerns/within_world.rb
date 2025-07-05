@@ -2,7 +2,7 @@ module WithinWorld
   extend ActiveSupport::Concern
 
   included do
-    prepend_before_action :process_world, except: [:show] # standard:disable Rails/LexicallyScopedActionFilter
+    prepend_before_action :process_world
     before_action :new_record, only: %i[new] # standard:disable Rails/LexicallyScopedActionFilter
     before_action :check_access, only: %i[edit update destroy] # standard:disable Rails/LexicallyScopedActionFilter
     class_attribute :non_owner_actions, default: {}
@@ -51,11 +51,7 @@ module WithinWorld
   private
 
   def world_id
-    if non_owner_actions.has_key?(action_name.to_sym)
-      session[:world_id].presence || params[:world_id]
-    else
-      session[:world_id]
-    end
+    session[:world_id].presence || params[:world_id]
   end
 
   def new_record(values = {})

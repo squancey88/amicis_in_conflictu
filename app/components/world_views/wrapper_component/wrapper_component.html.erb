@@ -7,7 +7,7 @@
     </div>
     <% if current_user == @world.owner %>
       <div>
-        <%= link_to edit_polymorphic_path(@record), class: "btn btn-primary" do %>
+        <%= link_to edit_polymorphic_path([@world, @record]), class: "btn btn-primary" do %>
           <i class="bi bi-pencil"></i>
         <% end %>
       </div>

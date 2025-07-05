@@ -2,7 +2,7 @@
 
 <%= render Common::HeaderCardComponent.new(title: @title) do |header| %>
   <%= header.with_buttons do %>
-    <%= link_to "New character", new_character_path, class: %i[btn btn-primary] if @allow_creation %>
+    <%= link_to "New character", new_world_character_path(@world), class: %i[btn btn-primary] if @allow_creation %>
   <% end %>
 <% end %>
 
@@ -11,8 +11,8 @@
     <% @characters.each do |character| %>
       <%= render Common::CardWithMenuComponent.new(title: character,
         menu_options: [
-          {link: character, text: "Show", target: "_top"},
-          {link: edit_character_path(character), text: "Edit", target: "_top"}
+          {link: [character.world, character], text: "Show", target: "_top"},
+          {link: edit_world_character_path(character.world, character), text: "Edit", target: "_top"}
         ]) do |card| %>
         <% card.with_body do %>
           <%= render character %>

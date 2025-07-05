@@ -1,8 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "articles/index", type: :view do
+  let(:world) { create(:world) }
   before(:each) do
-    assign(:articles, create_list(:article, 2, title: "Title"))
+    assign(:articles, create_list(:article, 2, title: "Title", world:))
+    assign(:world, world)
   end
 
   it "renders a list of articles" do

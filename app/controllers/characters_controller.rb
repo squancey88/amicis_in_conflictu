@@ -2,7 +2,6 @@ class CharactersController < ApplicationController
   include WithinWorld
 
   before_action :set_character, only: %i[show edit update destroy]
-  exempt_world_check :my
   allow_non_owner :new, :create
   allow_non_owner :destroy, :update, check: :is_owner, require_world: false
 
@@ -11,13 +10,6 @@ class CharactersController < ApplicationController
     @characters = @world.characters
     @allow_creation = true
     @title = "Characters"
-  end
-
-  def my
-    @characters = current_user.characters
-    @allow_creation = false
-    @title = "My Characters"
-    render :index
   end
 
   # GET /characters/1 or /characters/1.json
@@ -45,7 +37,7 @@ class CharactersController < ApplicationController
 
     respond_to do |format|
       if @character.save
-        format.html { redirect_to character_url(@character), notice: "Character was successfully created." }
+        format.html { redirect_to world_character_url(@world, @character), notice: "Character was successfully created." }
         format.json { render :show, status: :created, location: @character }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,7 +50,7 @@ class CharactersController < ApplicationController
   def update
     respond_to do |format|
       if @character.update(character_params)
-        format.html { redirect_to character_url(@character), notice: "Character was successfully updated." }
+        format.html { redirect_to world_character_url(@world, @character), notice: "Character was successfully updated." }
         format.json { render :show, status: :ok, location: @character }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -74,9 +66,9 @@ class CharactersController < ApplicationController
     respond_to do |format|
       format.html {
         if @is_world_owner
-          redirect_to characters_url, notice: "Character was successfully destroyed."
+          redirect_to world_url(@world), notice: "Character was successfully destroyed."
         else
-          redirect_to my_characters_url, notice: "Character was successfully destroyed."
+          redirect_to characters_user_url(current_user), notice: "Character was successfully destroyed."
         end
       }
       format.json { head :no_content }

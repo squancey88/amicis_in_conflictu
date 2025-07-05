@@ -22,11 +22,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= link_to new_article_path do %>
+        <%= link_to new_world_article_path(current_world) do %>
           <%= content_tag :i, nil, class: %w[bi bi-file-earmark-text] %>
           New Article
         <% end %>
-        <%= link_to new_character_path do %>
+        <%= link_to new_world_character_path(current_world) do %>
           <%= content_tag :i, nil, class: %w[bi bi-person-arms-up] %>
           New Character
         <% end %>

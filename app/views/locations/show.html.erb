@@ -1,0 +1,21 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @location,
+  title: @location.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_location_path(@location)
+    },
+    {
+      text: "Delete",
+      link: location_path(@location),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
+
+  <% component.with_box do %>
+
+    <%= render @location %>
+  <% end %>
+<% end %>

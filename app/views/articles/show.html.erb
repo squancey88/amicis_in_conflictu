@@ -4,11 +4,11 @@
   menu_options: [
     { 
       text: "Edit",
-      link: edit_article_path(@article)
+      link: edit_world_article_path(@world, @article)
     },
     {
       text: "Delete",
-      link: article_path(@article),
+      link: world_article_path(@world, @article),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
     }
   ],

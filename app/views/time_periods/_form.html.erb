@@ -1,4 +1,4 @@
-<%= form_with(model: time_period) do |form| %>
+<%= form_with(model: [@world, time_period]) do |form| %>
 
   <%= render RecordFormWrapperComponent.new(record: time_period, form:) do |component| %>
 
