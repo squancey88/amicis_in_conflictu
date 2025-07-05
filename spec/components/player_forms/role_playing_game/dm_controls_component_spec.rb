@@ -2,9 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe PlayerForms::RolePlayingGame::DmControlsComponent, type: :helper do
-  include ViewComponent::TestHelpers
-
+RSpec.describe PlayerForms::RolePlayingGame::DmControlsComponent, type: :component_form do
   let(:user) { create(:user) }
   let!(:campaign) { create(:campaign, game_master: user) }
   let(:game) { create(:game, campaign:) }
