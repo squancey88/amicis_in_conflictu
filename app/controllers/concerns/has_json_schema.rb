@@ -2,7 +2,7 @@ module HasJsonSchema
   extend ActiveSupport::Concern
 
   included do
-    prepend_before_action :process_config_string, only: [:create, :update]
+    prepend_before_action :process_config_string, only: [:create, :update] # standard:disable Rails/LexicallyScopedActionFilter
   end
 
   class_methods do
