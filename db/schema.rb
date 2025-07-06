@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_05_160723) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_06_133107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "api_keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.uuid "created_by_id", null: false
+    t.integer "expires_in_days", default: 31
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_api_keys_on_created_by_id"
+  end
 
   create_table "armies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -521,14 +530,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_05_160723) do
 
   create_table "worlds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.string "blurb"
     t.jsonb "config"
     t.uuid "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "blurb", default: {}
     t.index ["owner_id"], name: "index_worlds_on_owner_id"
   end
 
+  add_foreign_key "api_keys", "users", column: "created_by_id"
   add_foreign_key "armies", "armies", column: "parent_id"
   add_foreign_key "armies", "game_systems"
   add_foreign_key "army_lists", "armies"

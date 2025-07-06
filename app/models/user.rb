@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :characters, foreign_key: :controlled_by, dependent: :destroy, inverse_of: :controlled_by
   has_many :campaigns, foreign_key: :game_master, dependent: :destroy, inverse_of: :game_master
   has_many :worlds, foreign_key: :owner, dependent: :destroy, inverse_of: :owner
+  has_many :api_keys, foreign_key: :created_by, dependent: :destroy, inverse_of: :created_by
 
   has_many :user_players, foreign_key: "controller_id", inverse_of: :user, dependent: nil
 

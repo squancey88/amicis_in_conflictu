@@ -87,6 +87,7 @@ RSpec.configure do |config|
   config.include AicAuthHelper
   config.include WorldBuilderHelper
   config.include TextContentGenerator
+  config.include ActiveSupport::Testing::TimeHelpers
 
   config.include ViewComponent::TestHelpers, type: :component
   config.include ViewComponent::SystemTestHelpers, type: :component
