@@ -18,7 +18,6 @@ RSpec.describe LocationsController, type: :routing do
       expect(get: "/worlds/2/locations/1/edit").to route_to("locations#edit", id: "1", world_id: "2")
     end
 
-
     it "routes to #create" do
       expect(post: "/worlds/2/locations").to route_to("locations#create", world_id: "2")
     end

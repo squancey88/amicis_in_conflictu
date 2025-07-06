@@ -196,6 +196,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_05_160723) do
     t.uuid "world_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name", "world_id"], name: "index_location_types_on_name_and_world_id", unique: true
     t.index ["world_id"], name: "index_location_types_on_world_id"
   end
 
@@ -203,14 +204,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_05_160723) do
     t.string "name"
     t.jsonb "description"
     t.jsonb "history"
-    t.uuid "located_in_id", null: false
+    t.uuid "located_in_id"
     t.uuid "world_id", null: false
     t.uuid "location_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["located_in_id"], name: "index_locations_on_located_in_id"
     t.index ["location_type_id"], name: "index_locations_on_location_type_id"
-    t.index ["name"], name: "index_locations_on_name", unique: true
     t.index ["world_id"], name: "index_locations_on_world_id"
   end
 

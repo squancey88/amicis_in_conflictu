@@ -9,10 +9,6 @@ module WithinWorld
   end
 
   class_methods do
-    def exempt_world_check(*actions)
-      skip_before_action :process_world, only: actions
-    end
-
     def allow_non_owner(*actions, check: nil, require_world: true)
       actions.each do |action|
         non_owner_actions[action.to_sym] = {
@@ -43,15 +39,12 @@ module WithinWorld
     @world = World.find(world_id)
     @world_building = current_user == @world.owner
     @is_world_owner = current_user == @world.owner
-  rescue
-    @world = nil
-    @is_world_owner = false
   end
 
   private
 
   def world_id
-    session[:world_id].presence || params[:world_id]
+    params[:world_id]
   end
 
   def new_record(values = {})

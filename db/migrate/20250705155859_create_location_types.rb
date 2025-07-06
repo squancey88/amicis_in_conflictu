@@ -6,5 +6,7 @@ class CreateLocationTypes < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :location_types, [:name, :world_id], unique: true
   end
 end

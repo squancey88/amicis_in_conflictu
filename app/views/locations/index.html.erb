@@ -2,7 +2,7 @@
 
 <%= render Common::HeaderCardComponent.new(title: "Locations") do |header| %>
   <%= header.with_buttons do %>
-    <%= link_to "New location", new_location_path, class: %i[btn btn-primary] %>
+    <%= link_to "New location", new_world_location_path(@world), class: %i[btn btn-primary] %>
   <% end %>
 <% end %>
 
@@ -11,8 +11,8 @@
     <% @locations.each do |location| %>
       <%= render Common::CardWithMenuComponent.new(title: location,
         menu_options: [
-          {link: location, text: "Show", target: "_top"},
-          {link: edit_location_path(@location), text: "Edit", target: "_top"}
+          {link: [@world, location], text: "Show", target: "_top"},
+          {link: edit_world_location_path(@world, location), text: "Edit", target: "_top"}
         ]) do |card| %>
         <% card.with_body do %>
           <%= render location %>

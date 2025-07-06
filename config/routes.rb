@@ -20,11 +20,14 @@ Rails.application.routes.draw do
     end
     resources :character_types
     resources :character_species_types
-    resources :locations
     resources :location_types
+
     resources :characters
+    resources :locations
+
     resources :articles
     resources :time_periods
+
     resources :quests do
       resources :quest_events
     end

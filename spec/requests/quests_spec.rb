@@ -8,15 +8,13 @@ RSpec.describe "/quests", type: :request do
 
   let(:valid_attributes) {
     {
-      title: "Test quest",
-      world_id: world.id
+      title: "Test quest"
     }
   }
 
   let(:invalid_attributes) {
     {
-      title: nil,
-      world_id: world.id
+      title: nil
     }
   }
 
@@ -41,7 +39,7 @@ RSpec.describe "/quests", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_world_quest_url(quest)
+      get new_world_quest_url(world)
       expect(response).to be_successful
     end
   end

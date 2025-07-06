@@ -23,6 +23,7 @@ class LocationTypesController < ApplicationController
 
   def create
     @location_type = new_record(location_type_params)
+    @location_type.world = @world
 
     respond_to do |format|
       if @location_type.save
@@ -53,7 +54,7 @@ class LocationTypesController < ApplicationController
     @location_type.destroy!
 
     respond_to do |format|
-      format.html { redirect_to root_url, notice: "#{@location_type.class.model_name.human} was successfully destroyed." }
+      format.html { redirect_to world_url(@world), notice: "#{@location_type.class.model_name.human} was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,6 @@ class LocationTypesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def location_type_params
-    params.require(:location_type).permit(:name, :world_id)
+    params.require(:location_type).permit(:name)
   end
 end

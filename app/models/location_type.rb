@@ -18,7 +18,8 @@ end
 #
 # Indexes
 #
-#  index_location_types_on_world_id  (world_id)
+#  index_location_types_on_name_and_world_id  (name,world_id) UNIQUE
+#  index_location_types_on_world_id           (world_id)
 #
 # Foreign Keys
 #

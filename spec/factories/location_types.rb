@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :location_type do
-    name { "MyString" }
-    world { nil }
+    name { Faker::Lorem.word }
+    world
   end
 end

@@ -1,9 +1,13 @@
 class Location < ApplicationRecord
-  belongs_to :located_in, class_name: :Location, dependent: :destroy, inverse_of: :locations
+  belongs_to :located_in, class_name: :Location, dependent: :destroy, inverse_of: :locations, optional: true
   belongs_to :world
   belongs_to :location_type
 
   has_many :locations, inverse_of: :located_in, dependent: :destroy
+
+  validates :name, presence: true
+
+  def to_s = name
 end
 
 # == Schema Information
@@ -16,7 +20,7 @@ end
 #  name             :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  located_in_id    :uuid             not null
+#  located_in_id    :uuid
 #  location_type_id :uuid             not null
 #  world_id         :uuid             not null
 #
@@ -24,7 +28,6 @@ end
 #
 #  index_locations_on_located_in_id     (located_in_id)
 #  index_locations_on_location_type_id  (location_type_id)
-#  index_locations_on_name              (name) UNIQUE
 #  index_locations_on_world_id          (world_id)
 #
 # Foreign Keys

@@ -1,5 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Location, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "validations" do
+    it { should validate_presence_of(:name) }
+  end
+
+  context "attributes" do
+    it { should belong_to(:location_type) }
+    it { should belong_to(:world) }
+  end
 end

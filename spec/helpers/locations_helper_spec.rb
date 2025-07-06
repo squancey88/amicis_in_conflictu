@@ -1,15 +1,25 @@
-require 'rails_helper'
+require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the LocationsHelper. For example:
-#
-# describe LocationsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe LocationsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:world) { create(:world) }
+  let!(:location) { create(:location, world:, name: "Parent") }
+  let!(:child_location) { create(:location, world:, located_in: location, name: "Child") }
+
+  it "should render type select" do
+    form_res = form_with model: [world, Location.new] do |form|
+      helper.location_type_select(form, :location_type_id, world)
+    end
+    expect(form_res).to have_css("select")
+  end
+
+  it "should render located_in select" do
+    form_res = form_with model: [world, Location.new] do |form|
+      helper.located_in_select(form, :located_in, world)
+    end
+    expect(form_res).to have_css("select")
+    expect(form_res).to have_css("option", count: 3) # includes blank
+
+    expect(form_res).to have_text(" Parent")
+    expect(form_res).to have_text("-- Child")
+  end
 end
