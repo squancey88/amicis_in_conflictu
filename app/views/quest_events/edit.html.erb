@@ -1,6 +1,6 @@
 <% content_for :title, "Editing quest event" %>
 
-<%= form_with(model: @quest_event, url: [@quest, @quest_event]) do |form| %>
+<%= form_with(model: @quest_event, url: [@world, @quest, @quest_event]) do |form| %>
 
   <%= render RecordFormWrapperComponent.new(record: @quest_event, form:, row_cols: 1) do |component| %>
 

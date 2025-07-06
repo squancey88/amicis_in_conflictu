@@ -87,7 +87,7 @@ RSpec.shared_examples "within world model controller" do |path|
 
       it "to render the record" do
         patch update_path, params: update_params
-        expect(response).to be_successful
+        expect(response).to redirect_to(show_path)
       end
     end
 

@@ -30,7 +30,7 @@ class Character < ApplicationRecord
 
   def link_name = full_name
 
-  def link_path = character_path(self)
+  def link_path = world_character_path(world, self)
 
   def to_s = full_name
 

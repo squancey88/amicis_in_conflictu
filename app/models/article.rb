@@ -17,7 +17,7 @@ class Article < ApplicationRecord
 
   def link_name = title
 
-  def link_path = article_path(self)
+  def link_path = world_article_path(world, self)
 
   def to_s = title
 end
