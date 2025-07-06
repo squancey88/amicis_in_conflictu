@@ -1,4 +1,8 @@
 class World < ApplicationRecord
+  include HasTextSection
+
+  register_text_section :blurb
+
   belongs_to :owner, class_name: :User
 
   has_many :time_periods, dependent: :destroy
@@ -47,7 +51,7 @@ end
 # Table name: worlds
 #
 #  id         :uuid             not null, primary key
-#  blurb      :string
+#  blurb      :jsonb
 #  config     :jsonb
 #  name       :string
 #  created_at :datetime         not null

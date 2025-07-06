@@ -1,5 +1,5 @@
 class Location < ApplicationRecord
-  belongs_to :located_in, class_name: :Location, dependent: :destroy, inverse_of: :locations, optional: true
+  belongs_to :located_in, class_name: :Location, inverse_of: :locations, optional: true
   belongs_to :world
   belongs_to :location_type
 

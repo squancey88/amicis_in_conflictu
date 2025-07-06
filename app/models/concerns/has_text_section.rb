@@ -26,6 +26,8 @@ module HasTextSection
 
     def as_plain_text(name)
       data = send(name)
+      return "" unless data["blocks"]
+
       data["blocks"].filter_map do |block|
         case block["type"]
         when "paragraph"

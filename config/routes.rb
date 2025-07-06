@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     post "request_password_reset"
   end
 
+  namespace :api do
+    resources :worlds, only: [:index, :show] do
+      resources :characters, only: [:index, :show]
+    end
+  end
+
   resources :worlds do
     member do
       get :start_editing
