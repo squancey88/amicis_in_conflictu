@@ -7,7 +7,7 @@ RSpec.describe("Edit Article", type: :system) do
 
   before do
     allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(user)
-    visit edit_article_path(article)
+    visit edit_world_article_path(world, article)
   end
 
   it "should render title containing article title" do

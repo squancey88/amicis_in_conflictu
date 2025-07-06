@@ -4,11 +4,11 @@
   menu_options: [
     { 
       text: "Edit",
-      link: edit_time_period_path(@time_period)
+      link: edit_world_time_period_path(@world, @time_period)
     },
     {
       text: "Delete",
-      link: time_period_path(@time_period),
+      link: world_time_period_path(@world, @time_period),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
     }
   ]

@@ -25,6 +25,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def characters
+    @characters = current_user.characters
+    @allow_creation = false
+    @title = "My Characters"
+    render "characters/index"
+  end
+
   def emulate_user
     user_id = params.permit(:user_id)[:user_id]
     if User.find(user_id)

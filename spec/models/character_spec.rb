@@ -7,6 +7,7 @@ RSpec.describe Character, type: :model do
 
   context "attributes" do
     it { should belong_to(:character_type) }
+    it { should belong_to(:world) }
   end
 
   context "#text sections" do

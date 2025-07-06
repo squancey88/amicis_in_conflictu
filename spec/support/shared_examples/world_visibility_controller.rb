@@ -1,5 +1,5 @@
 RSpec.shared_examples "world visibility controller" do |path|
-  let(:base_path) { root_url + path }
+  let(:base_path) { world_path(world) + "/#{path}" }
   let(:show_path) { base_path + "/#{model.id}" }
   let(:new_path) { base_path + "/new" }
   let(:edit_path) { show_path + "/edit" }

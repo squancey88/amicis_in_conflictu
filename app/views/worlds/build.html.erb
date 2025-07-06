@@ -28,16 +28,16 @@
     <% tab_section.with_tab(label: "Time") do |tab| %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Time Periods",
           turbo_frame_id: "time_periods",
-          records_path: time_periods_path,
-          new_path: new_time_period_path
+          records_path: world_time_periods_path(@world),
+          new_path: new_world_time_period_path(@world)
         ) %>
     <% end %>
 
     <% tab_section.with_tab(label: "Quests") do |tab| %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Quests",
           turbo_frame_id: "quests",
-          records_path: quests_path,
-          new_path: new_quest_path
+          records_path: world_quests_path(@world),
+          new_path: new_world_quest_path(@world)
         ) %>
     <% end %>
 
@@ -45,15 +45,25 @@
       <% tab.with_grid_box do %>
         <%= render Common::EmbeddedIndexComponent.new(title: "Character Types",
             turbo_frame_id: "character_types",
-            records_path: character_types_path,
-            new_path: new_character_type_path
+            records_path: world_character_types_path(@world),
+            new_path: new_world_character_type_path(@world)
           ) %>
       <% end %>
       <% tab.with_grid_box do %>
         <%= render Common::EmbeddedIndexComponent.new(title: "Character Species",
             turbo_frame_id: "character_species_types",
-            records_path: character_species_types_path,
-            new_path: new_character_species_type_path
+            records_path: world_character_species_types_path(@world),
+            new_path: new_world_character_species_type_path(@world)
+          ) %>
+      <% end %>
+    <% end %>
+
+    <% tab_section.with_tab(label: "Location Settings") do |tab| %>
+      <% tab.with_grid_box do %>
+        <%= render Common::EmbeddedIndexComponent.new(title: "Location Types",
+            turbo_frame_id: "location_types",
+            records_path: world_location_types_path(@world),
+            new_path: new_world_location_type_path(@world)
           ) %>
       <% end %>
     <% end %>

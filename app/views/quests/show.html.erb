@@ -4,11 +4,11 @@
   menu_options: [
     { 
       text: "Edit",
-      link: edit_quest_path(@quest)
+      link: edit_world_quest_path(@world, @quest)
     },
     {
       text: "Delete",
-      link: quest_path(@quest),
+      link: world_quest_path(@world, @quest),
       data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
     }
   ]
@@ -30,8 +30,8 @@
     <% tab_section.with_tab(label: "Events") do |tab| %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Events",
           turbo_frame_id: "quest_events",
-          records_path: quest_quest_events_path(@quest),
-          new_path: new_quest_quest_event_path(@quest)
+          records_path: world_quest_quest_events_path(@world, @quest),
+          new_path: new_world_quest_quest_event_path(@world, @quest)
         ) %>
     <% end %>
   <% end %>

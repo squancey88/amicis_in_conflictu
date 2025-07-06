@@ -19,7 +19,7 @@ RSpec.describe WorldViews::WrapperComponent, type: :component do
     end
 
     it "should render edit link" do
-      expect(page).to have_link(href: "/characters/#{character.id}/edit")
+      expect(page).to have_link(href: "/worlds/#{world.id}/characters/#{character.id}/edit")
     end
   end
 

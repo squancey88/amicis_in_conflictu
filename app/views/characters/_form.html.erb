@@ -1,4 +1,4 @@
-<%= form_with(model: character) do |form| %>
+<%= form_with(model: [@world, character]) do |form| %>
 
   <%= hidden_field_tag :world_id, params[:world_id] if character.new_record? %>
   <%= form.hidden_field :campaign if character.new_record? %>

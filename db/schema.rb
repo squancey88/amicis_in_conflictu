@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_29_113300) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_05_160723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -189,6 +189,29 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_29_113300) do
     t.datetime "updated_at", null: false
     t.jsonb "notes"
     t.index ["gaming_group_id"], name: "index_gaming_sessions_on_gaming_group_id"
+  end
+
+  create_table "location_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "world_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "world_id"], name: "index_location_types_on_name_and_world_id", unique: true
+    t.index ["world_id"], name: "index_location_types_on_world_id"
+  end
+
+  create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.jsonb "description"
+    t.jsonb "history"
+    t.uuid "located_in_id"
+    t.uuid "world_id", null: false
+    t.uuid "location_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["located_in_id"], name: "index_locations_on_located_in_id"
+    t.index ["location_type_id"], name: "index_locations_on_location_type_id"
+    t.index ["world_id"], name: "index_locations_on_world_id"
   end
 
   create_table "player_armies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -529,6 +552,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_29_113300) do
   add_foreign_key "games", "game_systems"
   add_foreign_key "games", "gaming_sessions"
   add_foreign_key "gaming_sessions", "gaming_groups"
+  add_foreign_key "location_types", "worlds"
+  add_foreign_key "locations", "location_types"
+  add_foreign_key "locations", "locations", column: "located_in_id"
+  add_foreign_key "locations", "worlds"
   add_foreign_key "player_armies", "armies"
   add_foreign_key "player_armies", "army_lists"
   add_foreign_key "player_armies", "players"

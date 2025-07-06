@@ -5,11 +5,12 @@ require "rails_helper"
 RSpec.describe Quests::Events::DetailsFormComponent, type: :helper do
   include ViewComponent::TestHelpers
 
-  let(:quest) { create(:quest) }
+  let(:world) { create(:world) }
+  let(:quest) { create(:quest, world:) }
   let(:quest_event) { create(:quest_event, quest:) }
 
   before do
-    form_with model: [quest, quest_event] do |form|
+    form_with model: [world, quest, quest_event] do |form|
       render_inline(described_class.new(quest_event:, form:))
     end
   end

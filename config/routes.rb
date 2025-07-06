@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  resources :quests do
-    resources :quest_events
-  end
-  resources :articles
-  resources :time_periods
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
   get "forgot_password", to: "auth#forgot_password", as: :forgot_password
@@ -23,14 +18,21 @@ Rails.application.routes.draw do
       get :start_editing
       get :build
     end
-  end
-  resources :character_types
-  resources :character_species_types
-  resources :characters do
-    collection do
-      get :my
+    resources :character_types
+    resources :character_species_types
+    resources :location_types
+
+    resources :characters
+    resources :locations
+
+    resources :articles
+    resources :time_periods
+
+    resources :quests do
+      resources :quest_events
     end
   end
+
   namespace :world_item_data do
     get "new_text_section", as: :new_text_section
   end
@@ -125,6 +127,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show update] do
     member do
       get :campaigns
+      get :characters
     end
     collection do
       post :emulate_user

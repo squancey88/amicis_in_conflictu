@@ -15,7 +15,7 @@
 ) do |component| %>
 
   <% component.with_header_buttons do %>
-    <%= bs_link_button "New Character", new_character_path(world_id: @campaign.world.id, campaign_id: @campaign.id) if @campaign.world && @campaign.game_system.instance_of?(GameSystems::RolePlayingGame) %>
+    <%= bs_link_button "New Character", new_world_character_path(@campaign.world, campaign_id: @campaign.id) if @campaign.world && @campaign.game_system.instance_of?(GameSystems::RolePlayingGame) %>
   <% end %>
 
   <% component.with_box(title: "Details") do %>
@@ -26,7 +26,7 @@
     <ul class="list-group">
       <% current_user.characters.where(campaign: @campaign).each do |character| %>
         <li class="list-group-item">
-          <%= link_to character %>
+          <%= link_to character.full_name, [@campaign.world, character] %>
         </li>
       <% end %>
     </ul>

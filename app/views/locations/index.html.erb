@@ -1,0 +1,23 @@
+<% content_for :title, "Locations" %>
+
+<%= render Common::HeaderCardComponent.new(title: "Locations") do |header| %>
+  <%= header.with_buttons do %>
+    <%= link_to "New location", new_world_location_path(@world), class: %i[btn btn-primary] %>
+  <% end %>
+<% end %>
+
+<div id="locations">
+  <%= turbo_frame_tag :locations do %>
+    <% @locations.each do |location| %>
+      <%= render Common::CardWithMenuComponent.new(title: location,
+        menu_options: [
+          {link: [@world, location], text: "Show", target: "_top"},
+          {link: edit_world_location_path(@world, location), text: "Edit", target: "_top"}
+        ]) do |card| %>
+        <% card.with_body do %>
+          <%= render location %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

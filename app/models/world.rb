@@ -6,6 +6,9 @@ class World < ApplicationRecord
   has_many :character_species_types, dependent: :destroy
   has_many :characters, dependent: :destroy
 
+  has_many :location_types, dependent: :destroy
+  has_many :locations, dependent: :destroy
+
   has_many :articles, dependent: :destroy
   has_many :quests, dependent: :destroy
 

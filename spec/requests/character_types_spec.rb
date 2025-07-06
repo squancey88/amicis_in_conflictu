@@ -1,5 +1,5 @@
 require "rails_helper"
-require "support/shared_examples/simple_model_controller"
+require "support/shared_examples/within_world_model_controller"
 
 RSpec.describe "/character_types", type: :request do
   let(:user) { create(:user) }
@@ -27,5 +27,5 @@ RSpec.describe "/character_types", type: :request do
     start_world_builder_mode(world)
   end
 
-  it_should_behave_like "simple model controller", "character_types"
+  it_should_behave_like "within world model controller", "character_types"
 end

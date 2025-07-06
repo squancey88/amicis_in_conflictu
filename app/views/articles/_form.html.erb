@@ -1,4 +1,4 @@
-<%= form_with(model: article) do |form| %>
+<%= form_with(model: [@world, article]) do |form| %>
 
   <%= render RecordFormWrapperComponent.new(record: article, form:, row_cols: 1) do |component| %>
 

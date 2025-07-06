@@ -22,14 +22,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= link_to new_article_path do %>
-          <%= content_tag :i, nil, class: %w[bi bi-file-earmark-text] %>
-          New Article
-        <% end %>
-        <%= link_to new_character_path do %>
-          <%= content_tag :i, nil, class: %w[bi bi-person-arms-up] %>
-          New Character
-        <% end %>
+        <div class="d-flex flex-row flex-wrap gap-3">
+          <%= link_to new_world_article_path(current_world) do %>
+            <%= content_tag :i, nil, class: %w[bi bi-file-earmark-text] %>
+            New Article
+          <% end %>
+          <%= link_to new_world_character_path(current_world) do %>
+            <%= content_tag :i, nil, class: %w[bi bi-person-arms-up] %>
+            New Character
+          <% end %>
+          <%= link_to new_world_location_path(current_world) do %>
+            <%= content_tag :i, nil, class: %w[bi bi-pin-map] %>
+            New Location
+          <% end %>
+          <%= link_to new_world_quest_path(current_world) do %>
+            <%= content_tag :i, nil, class: %w[bi bi-map] %>
+            New Quest
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

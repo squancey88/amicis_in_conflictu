@@ -12,7 +12,7 @@ RSpec.describe "characters/edit", type: :view do
   it "renders the edit character form" do
     render
 
-    assert_select "form[action=?][method=?]", character_path(character), "post" do
+    assert_select "form[action=?][method=?]", world_character_path(world, character), "post" do
       assert_select "input[name=?]", "character[given_name]"
       assert_select "input[name=?]", "character[family_name]"
     end

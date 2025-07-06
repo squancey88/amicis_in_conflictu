@@ -1,0 +1,28 @@
+<%= render WorldViews::WrapperComponent.new(
+  record: @location,
+) do |component| %>
+
+  <% component.with_header do %>
+    <h1><%= @location.name %></h1>
+    <% if @location.located_in %>
+      <h2>Within: <%= link_to(@location.located_in, [@world, @location.located_in]) %></h2>
+    <% end %>
+  <% end %>
+
+  <% component.with_body do %>
+    <h3>Description</h3>
+    <%= render TextEditorRenderComponent.new(model: @location, attribute: :description) %>
+    <hr>
+
+    <h3>History</h3>
+    <%= render TextEditorRenderComponent.new(model: @location, attribute: :history) %>
+
+    <% if @location.locations.any? %>
+      <hr>
+      <h3>Locations</h3>
+      <% @location.locations.each do |child_location| %>
+        <%= link_to child_location, [@world, child_location] %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -5,10 +5,11 @@ require "rails_helper"
 RSpec.describe WorldItemData::Forms::TextSectionComponent, type: :helper do
   include ViewComponent::TestHelpers
 
-  let(:article) { create(:article) }
+  let(:world) { create(:world) }
+  let(:article) { create(:article, world:) }
 
   before do
-    form_with model: article do |form|
+    form_with model: [world, article] do |form|
       form.fields_for :sections do |section_form|
         render_inline(described_class.new(form: section_form))
       end

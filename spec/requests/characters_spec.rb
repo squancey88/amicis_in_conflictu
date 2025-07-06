@@ -43,28 +43,28 @@ RSpec.describe "/characters", type: :request do
 
     describe "GET /index" do
       it "renders a successful response" do
-        get characters_url
+        get world_characters_url(world)
         expect(response).to be_successful
       end
     end
 
     describe "GET /show" do
       it "renders a successful response" do
-        get character_url(character)
+        get world_character_url(world, character)
         expect(response).to be_successful
       end
     end
 
     describe "GET /new" do
       it "renders a successful response" do
-        get new_character_url
+        get new_world_character_url(world)
         expect(response).to be_successful
       end
     end
 
     describe "GET /edit" do
       it "renders a successful response" do
-        get edit_character_url(character)
+        get edit_world_character_url(world, character)
         expect(response).to be_successful
       end
     end
@@ -73,22 +73,22 @@ RSpec.describe "/characters", type: :request do
       context "with valid parameters" do
         it "creates a new Character" do
           expect {
-            post characters_url, params: {character: valid_attributes}
+            post world_characters_url(world), params: {character: valid_attributes}
           }.to change(Character, :count).by(1)
         end
 
         it "redirects to the created character" do
-          post characters_url, params: {character: valid_attributes}
-          expect(response).to redirect_to(character_url(Character.order(:created_at).last))
+          post world_characters_url(world), params: {character: valid_attributes}
+          expect(response).to redirect_to(world_character_url(world, Character.order(:created_at).last))
         end
 
         it "sets the world correctly" do
-          post characters_url, params: {character: valid_attributes}
+          post world_characters_url(world), params: {character: valid_attributes}
           expect(Character.order(:created_at).last.world).to eq(world)
         end
 
         it "set config correctly" do
-          post characters_url, params: {character: valid_attributes}
+          post world_characters_url(world), params: {character: valid_attributes}
           expect(Character.order(:created_at).last.config).to eq({"infected" => "true", "animal_form" => "bear"})
         end
       end
@@ -96,12 +96,12 @@ RSpec.describe "/characters", type: :request do
       context "with invalid parameters" do
         it "does not create a new Character" do
           expect {
-            post characters_url, params: {character: invalid_attributes}
+            post world_characters_url(world), params: {character: invalid_attributes}
           }.to change(Character, :count).by(0)
         end
 
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
-          post characters_url, params: {character: invalid_attributes}
+          post world_characters_url(world), params: {character: invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -116,21 +116,21 @@ RSpec.describe "/characters", type: :request do
         }
 
         it "updates the requested character" do
-          patch character_url(character), params: {character: new_attributes}
+          patch world_character_url(world, character), params: {character: new_attributes}
           character.reload
           expect(character.given_name).to eq("New given name")
         end
 
         it "redirects to the character" do
-          patch character_url(character), params: {character: new_attributes}
+          patch world_character_url(world, character), params: {character: new_attributes}
           character.reload
-          expect(response).to redirect_to(character_url(character))
+          expect(response).to redirect_to(world_character_url(world, character))
         end
       end
 
       context "with invalid parameters" do
         it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-          patch character_url(character), params: {character: invalid_attributes}
+          patch world_character_url(world, character), params: {character: invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -139,13 +139,13 @@ RSpec.describe "/characters", type: :request do
     describe "DELETE /destroy" do
       it "destroys the requested character" do
         expect {
-          delete character_url(character)
+          delete world_character_url(world, character)
         }.to change(Character, :count).by(-1)
       end
 
       it "redirects to the characters list" do
-        delete character_url(character)
-        expect(response).to redirect_to(characters_url)
+        delete world_character_url(world, character)
+        expect(response).to redirect_to(world_url(world))
       end
     end
   end
@@ -169,30 +169,23 @@ RSpec.describe "/characters", type: :request do
       sign_in(other_user)
     end
 
-    describe "GET /my" do
-      it "renders a successful response" do
-        get my_characters_url
-        expect(response).to be_successful
-      end
-    end
-
     describe "GET /show" do
       it "renders a successful response" do
-        get character_url(other_user_character)
+        get world_character_url(world, other_user_character)
         expect(response).to be_successful
       end
     end
 
     describe "GET /new" do
       it "renders a successful response" do
-        get new_character_url(world_id: world.id)
+        get new_world_character_url(world)
         expect(response).to be_successful
       end
     end
 
     describe "GET /edit" do
       it "renders a successful response" do
-        get edit_character_url(other_user_character)
+        get edit_world_character_url(world, other_user_character)
         expect(response).to be_successful
       end
     end
@@ -201,17 +194,17 @@ RSpec.describe "/characters", type: :request do
       context "with valid parameters" do
         it "creates a new Character" do
           expect {
-            post characters_url, params: {character: valid_attributes, world_id: world.id}
+            post world_characters_url(world), params: {character: valid_attributes}
           }.to change(Character, :count).by(1)
         end
 
         it "redirects to the created character" do
-          post characters_url, params: {character: valid_attributes, world_id: world.id}
-          expect(response).to redirect_to(character_url(Character.order(:created_at).last))
+          post world_characters_url(world), params: {character: valid_attributes}
+          expect(response).to redirect_to(world_character_url(world, Character.order(:created_at).last))
         end
 
         it "sets the world correctly" do
-          post characters_url, params: {character: valid_attributes, world_id: world.id}
+          post world_characters_url(world), params: {character: valid_attributes}
           expect(Character.order(:created_at).last.world).to eq(world)
         end
       end
@@ -219,12 +212,12 @@ RSpec.describe "/characters", type: :request do
       context "with invalid parameters" do
         it "does not create a new Character" do
           expect {
-            post characters_url, params: {character: invalid_attributes, world_id: world.id}
+            post world_characters_url(world), params: {character: invalid_attributes}
           }.to change(Character, :count).by(0)
         end
 
         it "renders a response with 422 status (i.e. to display the 'new' template)" do
-          post characters_url, params: {character: invalid_attributes, world_id: world.id}
+          post world_characters_url(world), params: {character: invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -239,21 +232,21 @@ RSpec.describe "/characters", type: :request do
         }
 
         it "updates the requested character" do
-          patch character_url(other_user_character), params: {character: new_attributes, world_id: world.id}
+          patch world_character_url(world, other_user_character), params: {character: new_attributes}
           other_user_character.reload
           expect(other_user_character.given_name).to eq("New given name")
         end
 
         it "redirects to the character" do
-          patch character_url(other_user_character), params: {character: new_attributes, world_id: world.id}
+          patch world_character_url(world, other_user_character), params: {character: new_attributes}
           other_user_character.reload
-          expect(response).to redirect_to(character_url(other_user_character))
+          expect(response).to redirect_to(world_character_url(world, other_user_character))
         end
       end
 
       context "with invalid parameters" do
         it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-          patch character_url(other_user_character), params: {character: invalid_attributes, world_id: world.id}
+          patch world_character_url(world, other_user_character), params: {character: invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -262,13 +255,13 @@ RSpec.describe "/characters", type: :request do
     describe "DELETE /destroy" do
       it "destroys the requested character" do
         expect {
-          delete character_url(other_user_character)
+          delete world_character_url(world, other_user_character)
         }.to change(Character, :count).by(-1)
       end
 
       it "redirects to the characters list" do
-        delete character_url(other_user_character)
-        expect(response).to redirect_to(my_characters_url)
+        delete world_character_url(world, other_user_character)
+        expect(response).to redirect_to(characters_user_url(other_user))
       end
     end
   end

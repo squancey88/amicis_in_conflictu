@@ -2,8 +2,8 @@
 
 <%= render Common::CardWithMenuComponent.new(title: @event.title,
   menu_options: [
-    {link: quest_quest_event_path(@event.quest, @event), text: "Show", target: "_top"},
-    {link: edit_quest_quest_event_path(@event.quest, @event), text: "Edit", target: "_top"}
+    {link: world_quest_quest_event_path(@event.quest.world, @event.quest, @event), text: "Show", target: "_top"},
+    {link: edit_world_quest_quest_event_path(@event.quest.world, @event.quest, @event), text: "Edit", target: "_top"}
   ]) do |card| %>
   <% card.with_body do %>
     <%= render TextEditorRenderComponent.new(model: @event, attribute: :blurb) %>

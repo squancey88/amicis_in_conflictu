@@ -26,7 +26,7 @@ class QuestEventsController < ApplicationController
     @quest_event = @quest.quest_events.new(quest_event_params)
     respond_to do |format|
       if @quest_event.save
-        format.html { redirect_to quest_url(@quest), notice: "Quest event was successfully created." }
+        format.html { redirect_to world_quest_url(@world, @quest), notice: "Quest event was successfully created." }
         format.json { render :show, status: :created, location: @quest_event }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class QuestEventsController < ApplicationController
   def update
     respond_to do |format|
       if @quest_event.update(quest_event_params)
-        format.html { redirect_to edit_quest_quest_event_url(@quest, @quest_event), notice: "Quest event was successfully updated." }
+        format.html { redirect_to edit_world_quest_quest_event_url(@world, @quest, @quest_event), notice: "Quest event was successfully updated." }
         format.json { render :show, status: :ok, location: @quest_event }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class QuestEventsController < ApplicationController
     @quest_event.destroy!
 
     respond_to do |format|
-      format.html { redirect_to quest_url(@quest), notice: "Quest was successfully destroyed." }
+      format.html { redirect_to world_quest_url(@world, @quest), notice: "Quest was successfully destroyed." }
       format.json { head :no_content }
     end
   end
