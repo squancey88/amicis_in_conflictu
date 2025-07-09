@@ -1,24 +1,16 @@
-<%= render RecordShowWrapperComponent.new(
+<%= render WorldViews::WrapperComponent.new(
   record: @article,
-  title: @article.to_s,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_world_article_path(@world, @article)
-    },
-    {
-      text: "Delete",
-      link: world_article_path(@world, @article),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ],
-  row_cols: 1
 ) do |component| %>
 
+  <% component.with_header do %>
+    <h1><%= @article.title %></h1>
+  <% end %>
 
-  <% component.with_space do %>
+
+  <% component.with_body do %>
     <% @article.sections.each do |section| %>
       <%= render WorldItemData::Views::TextSectionComponent.new(section:) %>
+      <hr />
     <% end %>
   <% end %>
 <% end %>

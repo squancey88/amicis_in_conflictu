@@ -1,10 +1,7 @@
 class Character < ApplicationRecord
-  include Rails.application.routes.url_helpers
   include WorldItem
   include WorldVisibility
-  include TextLinkable
   include Activatable
-  include HasTextSection
 
   register_link_search_fields :given_name, :family_name
 
@@ -21,16 +18,13 @@ class Character < ApplicationRecord
 
   connect_world_items "WorldItemData::TextSection", :details
 
-  register_text_section :physical_description
-  register_text_section :history
+  register_text_section :physical_description, :history, :player_notes, :shared_notes
 
   def full_name
     [given_name, family_name].join(" ")
   end
 
   def link_name = full_name
-
-  def link_path = world_character_path(world, self)
 
   def to_s = full_name
 
@@ -82,7 +76,10 @@ end
 #  given_name                :string
 #  history                   :jsonb
 #  physical_description      :jsonb
+#  player_notes              :jsonb
+#  shared_notes              :jsonb
 #  visibility                :integer          default("gm_only")
+#  world_owner_notes         :jsonb
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  born_during_id            :uuid

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_06_133107) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_09_183521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_06_133107) do
     t.integer "visibility", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "world_owner_notes", default: {}
     t.index ["world_id"], name: "index_articles_on_world_id"
   end
 
@@ -113,6 +114,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_06_133107) do
     t.boolean "active", default: true
     t.jsonb "config", default: {}
     t.jsonb "history", default: {}
+    t.jsonb "world_owner_notes", default: {}
+    t.jsonb "player_notes", default: {}
+    t.jsonb "shared_notes", default: {}
     t.index ["born_during_id"], name: "index_characters_on_born_during_id"
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["character_species_type_id"], name: "index_characters_on_character_species_type_id"
@@ -218,6 +222,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_06_133107) do
     t.uuid "location_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "world_owner_notes", default: {}
     t.index ["located_in_id"], name: "index_locations_on_located_in_id"
     t.index ["location_type_id"], name: "index_locations_on_location_type_id"
     t.index ["world_id"], name: "index_locations_on_world_id"

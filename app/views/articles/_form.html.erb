@@ -6,8 +6,12 @@
       <%= bootstrap_text_field(form, :title) %>
       <%= visiblity_select(form)  %>
     <% end %>
+
+    <% component.with_form_box(title: "Owner notes") do %>
+      <%= render TextEditorComponent.new(form:, attribute: :world_owner_notes) %>
+    <% end %>
   
-    <% component.with_form_box do -%>
+    <% component.with_form_box(span: :full) do -%>
       <%= link_to "Add New Section", 
         world_item_data_new_text_section_path(model: "Article", attribute: "sections"), 
         class: ['btn', 'btn-secondary'],

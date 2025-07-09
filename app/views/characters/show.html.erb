@@ -5,6 +5,23 @@
   <% component.with_header do %>
     <h1><%= @character.full_name %></h1>
     <h2><%= @character.species.name %></h2>
+    <% if @character.controlled_by.present? %>
+      <h3>Controlled by: <%= @character.controlled_by.display_name %></h3>
+    <% end %>
+  <% end %>
+
+  <% if @character.controlled_by %>
+    <% if current_user == @character.controlled_by %>
+      <% component.with_hidden_section(label: "Player notes", data: {"test-player-notes":true}) do %>
+        <%= render TextEditorRenderComponent.new(model: @character, attribute: :player_notes) %>
+      <% end %>
+    <% end %>
+
+    <% if current_user == @character.world.owner || current_user == @character.controlled_by %>
+      <% component.with_hidden_section(label: "Shared notes", data: {"test-shared-notes":true}) do %>
+        <%= render TextEditorRenderComponent.new(model: @character, attribute: :shared_notes) %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <% component.with_body do %>

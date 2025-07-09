@@ -102,6 +102,8 @@ class CharactersController < ApplicationController
       :physical_description, :character_type_id,
       :history,
       :character_species_type_id, :born_during_id,
-      :campaign_id, config: {})
+      :campaign_id,
+      :world_owner_notes, :player_notes, :shared_notes,
+      config: {})
   end
 end

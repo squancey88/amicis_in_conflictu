@@ -1,9 +1,8 @@
 class Article < ApplicationRecord
-  include Rails.application.routes.url_helpers
-
   include WorldItem
   include WorldVisibility
   include TextLinkable
+  include HasTextSection
 
   register_link_search_fields :title
 
@@ -17,8 +16,6 @@ class Article < ApplicationRecord
 
   def link_name = title
 
-  def link_path = world_article_path(world, self)
-
   def to_s = title
 end
 
@@ -26,12 +23,13 @@ end
 #
 # Table name: articles
 #
-#  id         :uuid             not null, primary key
-#  title      :string
-#  visibility :integer          default("gm_only")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  world_id   :uuid             not null
+#  id                :uuid             not null, primary key
+#  title             :string
+#  visibility        :integer          default("gm_only")
+#  world_owner_notes :jsonb
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  world_id          :uuid             not null
 #
 # Indexes
 #

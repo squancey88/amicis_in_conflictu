@@ -42,12 +42,15 @@ class RecordFormWrapperComponent < ViewComponent::Base
   end
 
   class FormBoxComponent < ViewComponent::Base
-    def initialize(title: nil)
+    delegate :span_to_aic_grid_class, to: :helpers
+
+    def initialize(title: nil, span: nil)
       @title = title
+      @span = span
     end
 
     def call
-      content_tag :div, class: %i[record-form-wrapper__box col] do
+      content_tag :div, class: ["record-form-wrapper__box", span_to_aic_grid_class(@span)] do
         content_tag :div, class: %i[card text-bg-light] do
           content_tag(:div, class: "record-form-wrapper__box-content card-body") do
             concat(content_tag(:h5, @title, class: "record-form-wrapper__box-title card-title")) if @title
