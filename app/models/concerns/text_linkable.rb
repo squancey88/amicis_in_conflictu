@@ -6,10 +6,6 @@ module TextLinkable
       raise NotImplementedError
     end
 
-    def link_path
-      raise NotImplementedError
-    end
-
     def link_description
       ""
     end
@@ -17,7 +13,7 @@ module TextLinkable
     def as_link
       {
         id:,
-        href: link_path,
+        href: "/worlds/#{world.id}/#{model_name.plural}/#{id}",
         name: link_name,
         description: link_description,
         crossReference: "linked",

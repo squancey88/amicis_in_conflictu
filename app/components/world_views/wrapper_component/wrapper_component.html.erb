@@ -18,6 +18,16 @@
     <%= header %>
   </div>
 
+  <% if @world.owner == current_user && !@record.world_owner_notes.empty? %> 
+    <%= render HiddenSection.new(label: "Owner Notes", data: {"test-world-owner-notes": true}) do %> 
+      <%= render TextEditorRenderComponent.new(model: @record, attribute: :world_owner_notes) %>
+    <% end %>
+  <% end %>
+
+  <% hidden_sections.each do |hidden_section| %>
+    <%= hidden_section %>
+  <% end %>
+
   <div class="world-view-body p-4">
     <%= body %>
   </div>

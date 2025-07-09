@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Common::GridBoxComponent < ViewComponent::Base
+  delegate :span_to_aic_grid_class, to: :helpers
+
   erb_template <<~ERB
     <% if @as_box %>
       <%= content_tag :div, class: col_class do %>
@@ -19,10 +21,5 @@ class Common::GridBoxComponent < ViewComponent::Base
     @box_options = box_options
   end
 
-  def col_class
-    case @span
-    when :full
-      "full"
-    end
-  end
+  def col_class = span_to_aic_grid_class(@span)
 end

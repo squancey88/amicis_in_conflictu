@@ -15,5 +15,9 @@
     <% component.with_form_box(title: "History") do %>
       <%= render TextEditorComponent.new(form:, attribute: :history) %>
     <% end %>
+
+    <% component.with_form_box(title: "Owner notes") do %>
+      <%= render TextEditorComponent.new(form:, attribute: :world_owner_notes) %>
+    <% end %>
   <% end %>
 <% end %>

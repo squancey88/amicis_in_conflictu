@@ -2,6 +2,13 @@ module WorldItem
   extend ActiveSupport::Concern
 
   included do
+    include HasTextSection
+    include TextLinkable
+    register_text_section :world_owner_notes
+
+    def link_path
+      polymorphic_path(world, self)
+    end
   end
 
   class_methods do

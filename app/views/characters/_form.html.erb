@@ -45,7 +45,24 @@
           <%= render TextEditorComponent.new(form:, attribute: :history) %>
         <% end %>
       <% end %>
-    <% end %>
 
+      <% tab_section.with_tab(label: "Notes") do |tab| %>
+        <% if @world.owner == current_user %>
+          <% tab.with_grid_box(title: "World Owner notes", as_box: true) do %>
+            <%= render TextEditorComponent.new(form:, attribute: :world_owner_notes) %>
+          <% end %>
+        <% end %>
+        <% if character.controlled_by.present? %>
+          <% if character.controlled_by == current_user %>
+            <% tab.with_grid_box(title: "Player notes", as_box: true) do %>
+              <%= render TextEditorComponent.new(form:, attribute: :player_notes) %>
+            <% end %>
+          <% end %>
+          <% tab.with_grid_box(title: "Shared notes", as_box: true) do %>
+            <%= render TextEditorComponent.new(form:, attribute: :shared_notes) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

@@ -30,4 +30,11 @@ module ApplicationHelper
       form.select(attribute, options_for_select(Precedence.map.map { |k, v| [v.titlecase, k] }),
         {include_blank: "Please Select"}, {class: "form-select"}))
   end
+
+  def span_to_aic_grid_class(span)
+    case span&.to_sym
+    when :full
+      "full"
+    end
+  end
 end

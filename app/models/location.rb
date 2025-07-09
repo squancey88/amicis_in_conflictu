@@ -1,4 +1,6 @@
 class Location < ApplicationRecord
+  include WorldItem
+
   belongs_to :located_in, class_name: :Location, inverse_of: :locations, optional: true
   belongs_to :world
   belongs_to :location_type
@@ -7,6 +9,10 @@ class Location < ApplicationRecord
 
   validates :name, presence: true
 
+  register_link_search_fields :name
+
+  def link_name = name
+
   def to_s = name
 end
 
@@ -14,15 +20,16 @@ end
 #
 # Table name: locations
 #
-#  id               :uuid             not null, primary key
-#  description      :jsonb
-#  history          :jsonb
-#  name             :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  located_in_id    :uuid
-#  location_type_id :uuid             not null
-#  world_id         :uuid             not null
+#  id                :uuid             not null, primary key
+#  description       :jsonb
+#  history           :jsonb
+#  name              :string
+#  world_owner_notes :jsonb
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  located_in_id     :uuid
+#  location_type_id  :uuid             not null
+#  world_id          :uuid             not null
 #
 # Indexes
 #
