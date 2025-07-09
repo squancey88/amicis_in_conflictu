@@ -1,4 +1,4 @@
-class AddHiddenNotesToWorlItems < ActiveRecord::Migration[7.1]
+class AddHiddenNotesToWorldItems < ActiveRecord::Migration[7.1]
   def change
     add_column :locations, :world_owner_notes, :jsonb, default: {}
     add_column :articles, :world_owner_notes, :jsonb, default: {}
