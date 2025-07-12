@@ -25,7 +25,7 @@
         <% end %>
 
         <% tab.with_grid_box(title: "Additional Attributes", as_box: true) do %>
-          <%= form.fields_for :config do |config_form| %>
+          <%= form.fields_for :config, OpenStruct.new(character.config) do |config_form| %>
             <% if character.world&.character_config %>
               <% character.world.character_config["custom_fields"]&.each do |field| %>
                 <%= character_custom_field(config_form, field, character) %>

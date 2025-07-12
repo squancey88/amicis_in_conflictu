@@ -55,7 +55,8 @@ class Character < ApplicationRecord
             enum: [
               "string",
               "integer",
-              "boolean"
+              "boolean",
+              "array"
             ]
           }
         }
