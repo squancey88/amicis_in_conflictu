@@ -30,7 +30,7 @@ class Character < ApplicationRecord
 
   def self.character_config_schema
     schema = JsonSchema.new(title: "Characater Settings")
-    schema.add_array_property("custom_fields", false, [
+    schema.add_array_property("custom_fields", false,
       {
         type: :object,
         properties: {
@@ -59,8 +59,7 @@ class Character < ApplicationRecord
             ]
           }
         }
-      }
-    ], title: "Custom Fields")
+      }, title: "Custom Fields")
     schema
   end
 end
