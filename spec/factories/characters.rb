@@ -4,6 +4,7 @@ FactoryBot.define do
     family_name { "MyString" }
     physical_description { {} }
     history { {} }
+    config { {} }
     world
     born_during { create(:time_period) }
     character_type

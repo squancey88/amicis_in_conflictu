@@ -43,6 +43,9 @@ module CharactersHelper
         value: value,
         label: field_data["name"],
         margin_bottom: 3)
+    when "array"
+      render(Forms::ArrayFieldComponent.new(form:, field: field_data["key"], label: field_data["name"],
+        required: field_data["required"]))
     end
   end
 end
