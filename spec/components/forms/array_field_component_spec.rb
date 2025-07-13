@@ -24,7 +24,7 @@ RSpec.describe Forms::ArrayFieldComponent, type: :component_form do
       end
 
       it "should render add button" do
-        expect(page).to have_css("[data-test-id='add-button']")
+        expect(page).to have_selector(:testid, "forms-array-field-component-add-button")
       end
 
       it "does not render input field" do
@@ -44,7 +44,7 @@ RSpec.describe Forms::ArrayFieldComponent, type: :component_form do
       end
 
       it "should render add button" do
-        expect(page).to have_css("[data-test-id='add-button']")
+        expect(page).to have_selector(:testid, "forms-array-field-component-add-button")
       end
 
       it "does render input field" do
@@ -52,10 +52,8 @@ RSpec.describe Forms::ArrayFieldComponent, type: :component_form do
       end
 
       it "should render remove button" do
-        expect(page).to have_css("[data-test-id='remove-button']")
+        expect(page).to have_selector(:testid, "forms-array-field-component-remove-button")
       end
-
-      # TODO add system tests
     end
   end
 end

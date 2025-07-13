@@ -23,7 +23,7 @@ class Forms::ArrayFieldComponent < ViewComponent::Base
           concat(content_tag(:div, label))
           concat(button("plus-square", "primary", data: {
             action: "click->forms-array-controller#addNewRow",
-            test_id: "add-button"
+            test_id: "forms-array-field-component-add-button"
           }))
         end
       )
@@ -53,7 +53,7 @@ class Forms::ArrayFieldComponent < ViewComponent::Base
       concat(form.text_field("#{field}][", value:, class: %i[form-control], required:))
       concat(button("x-square", "danger", data: {
         action: "click->forms-array-controller#removeRow",
-        test_id: "remove-button"
+        test_id: "forms-array-field-component-remove-button"
       }, disabled:))
     end
   end

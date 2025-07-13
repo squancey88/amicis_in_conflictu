@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :character do
-    given_name { "MyString" }
-    family_name { "MyString" }
+    given_name { Faker::Name.first_name }
+    family_name { Faker::Name.last_name }
     physical_description { {} }
     history { {} }
     config { {} }
     world
-    born_during { create(:time_period) }
-    character_type
-    character_species_type
+    born_during { create(:time_period, world:) }
+    character_type { create(:character_type, world:) }
+    character_species_type { create(:character_species_type, world:) }
     visibility { 0 }
     world_owner_notes { {} }
 
