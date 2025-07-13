@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :character_type do
-    name { "MyString" }
+    name { Faker::Lorem.word }
     config { nil }
     world
   end
