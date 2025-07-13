@@ -1,6 +1,8 @@
 FactoryBot.define do
+  sequence(:world_name) { |n| "World #{n}" }
+
   factory :world do
-    name { Faker::Lorem.word }
+    name { generate(:world_name) }
     blurb { {} }
     time_period_config { {} }
     owner { create(:user) }

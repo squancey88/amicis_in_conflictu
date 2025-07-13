@@ -31,6 +31,26 @@ RSpec.describe Forms::ArrayFieldComponent, type: :component_form do
         expect(page).not_to have_css("input[name='character[config][sub_domains][]']")
       end
     end
+
+    describe "when value is set" do
+      let(:character) {
+        create(:character, world:, config: {
+          "sub_domains" => ["Test 1"]
+        })
+      }
+
+      it "should render the wrapper div" do
+        expect(page).to have_css(".array-field")
+      end
+
+      it "should render add button" do
+        expect(page).to have_selector(:testid, "forms-array-field-component-add-button")
+      end
+
+      it "does render input field" do
+        expect(page).not_to have_field("input[name='character[config][sub_domains][]']", with: "Test 1")
+      end
+    end
   end
 
   describe "when required" do
