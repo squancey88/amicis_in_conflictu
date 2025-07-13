@@ -12,12 +12,12 @@ export default class extends Controller {
   }
 
   removeRow(e) {
-    if(this.requiredValue && this.fieldTargets.length > 1) {
-      e.currentTarget.parentElement.remove();
+    if(this.requiredValue) {
+      if(this.fieldTargets.length > 1) {
+        e.currentTarget.parentElement.remove();
+      }
     } else {
       e.currentTarget.parentElement.remove();
     }
   }
-
-
 }
