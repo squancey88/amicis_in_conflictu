@@ -3,7 +3,6 @@ class CharactersController < ApplicationController
 
   before_action :set_character, only: %i[show edit update destroy]
   allow_non_owner :new, :create
-  allow_non_owner :destroy, :update, check: :is_owner, require_world: false
 
   # GET /characters or /characters.json
   def index
@@ -77,23 +76,9 @@ class CharactersController < ApplicationController
 
   private
 
-  def check_access
-    set_character
-    if @character.controlled_by
-      redirect_to @character.world, notice: "Only owner can edit character" unless is_owner
-    else
-      super
-    end
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_character
     @character = Character.find(params[:id])
-  end
-
-  def is_owner
-    set_character
-    @character.controlled_by == current_user
   end
 
   # Only allow a list of trusted parameters through.

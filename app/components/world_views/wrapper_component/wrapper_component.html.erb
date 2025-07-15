@@ -5,7 +5,7 @@
     <div class="flex-grow-1">
       From: <%= link_to @world %>
     </div>
-    <% if current_user == @world.owner %>
+    <% if @record.can_edit?(current_user) %>
       <div>
         <%= link_to edit_polymorphic_path([@world, @record]), class: "btn btn-primary" do %>
           <i class="bi bi-pencil"></i>

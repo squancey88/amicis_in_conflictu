@@ -1,4 +1,6 @@
 class CharacterType < ApplicationRecord
+  include WorldEditable
+
   belongs_to :world
 
   validates :name, presence: true, uniqueness: {scope: :world}

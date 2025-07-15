@@ -1,4 +1,6 @@
 class Quest < ApplicationRecord
+  include WorldEditable
+
   belongs_to :world
   belongs_to :created_by, class_name: :User
   has_many :quest_events, dependent: :destroy

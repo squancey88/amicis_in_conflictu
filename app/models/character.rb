@@ -28,6 +28,14 @@ class Character < ApplicationRecord
 
   def to_s = full_name
 
+  def can_edit?(user)
+    if controlled_by
+      world.owner == user || controlled_by == user
+    else
+      world.owner == user
+    end
+  end
+
   def self.character_config_schema
     schema = JsonSchema.new(title: "Characater Settings")
     schema.add_array_property("custom_fields", false,
