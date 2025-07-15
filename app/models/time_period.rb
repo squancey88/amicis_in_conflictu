@@ -1,4 +1,6 @@
 class TimePeriod < ApplicationRecord
+  include WorldEditable
+
   belongs_to :world
 
   validates :order, :name, presence: true

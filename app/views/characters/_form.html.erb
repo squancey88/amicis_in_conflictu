@@ -6,7 +6,7 @@
   <%= render RecordFormWrapperComponent.new(record: character, form:) do |component| %>
 
     <% if character.campaign %>
-      <% component.with_notice(notice: "You are creating your character in #{character.campaign.name}") %>
+      <% component.with_notice(notice: "You are #{character.persisted? ? "updating" : "creating"} your character in #{character.campaign.name}") %>
     <% end %>
 
     <% component.with_tab_section do |tab_section| %>

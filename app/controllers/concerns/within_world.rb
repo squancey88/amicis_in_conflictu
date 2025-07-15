@@ -9,10 +9,10 @@ module WithinWorld
   end
 
   class_methods do
-    def allow_non_owner(*actions, check: nil, require_world: true)
+    def allow_non_owner(*actions, check: nil)
       actions.each do |action|
         non_owner_actions[action.to_sym] = {
-          check:, require_world:
+          check:
         }
       end
     end
@@ -20,31 +20,26 @@ module WithinWorld
 
   def check_access
     record = get_record
-    redirect_to record.world, notice: "No access" unless record.world.owner == current_user
+    redirect_to record.world, notice: "No access" unless record.can_edit?(current_user)
   end
 
   def process_world
     set_world
-    if !@is_world_owner && non_owner_actions.has_key?(action_name.to_sym)
-      action_details = non_owner_actions[action_name.to_sym]
-      if action_details[:require_world] && @world.nil?
-        redirect_to worlds_url
+    unless @is_world_owner
+      if non_owner_actions.has_key?(action_name.to_sym)
+        action_details = non_owner_actions[action_name.to_sym]
+
+        redirect_to worlds_url if action_details[:check] && !send(action_details[:check])
       end
-
-      redirect_to worlds_url if action_details[:check] && !send(action_details[:check])
     end
-  end
-
-  def set_world
-    @world = World.find(world_id)
-    @world_building = current_user == @world.owner
-    @is_world_owner = current_user == @world.owner
   end
 
   private
 
-  def world_id
-    params[:world_id]
+  def set_world
+    @world = World.find(params[:world_id])
+    @world_building = current_user == @world.owner
+    @is_world_owner = current_user == @world.owner
   end
 
   def new_record(values = {})

@@ -2,6 +2,7 @@ module WorldItem
   extend ActiveSupport::Concern
 
   included do
+    include WorldEditable
     include HasTextSection
     include TextLinkable
     register_text_section :world_owner_notes
