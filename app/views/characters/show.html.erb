@@ -3,8 +3,11 @@
 ) do |component| %>
 
   <% component.with_header do %>
-    <h1><%= @character.full_name %></h1>
-    <h2><%= @character.species.name %></h2>
+    <h1>
+      <%= @character.full_name %>
+      <%= " - '#{@character.nickname}'" if @nickname %>
+    </h1>
+    <h3><%= @character.species.name %></h3> 
     <% if @character.controlled_by.present? %>
       <h3>Controlled by: <%= @character.controlled_by.display_name %></h3>
     <% end %>
@@ -25,6 +28,10 @@
   <% end %>
 
   <% component.with_body do %>
+
+    <%= render Characters::CustomFieldGridViewComponent.new(character: @character) %>
+
+    
     <h3>Description</h3>
     <%= render TextEditorRenderComponent.new(model: @character, attribute: :physical_description) %>
     <hr>

@@ -1,0 +1,10 @@
+
+.character-custom-config {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .custom-field {
+    flex: 0 0 33%;
+  }
+}
