@@ -13,14 +13,16 @@
 
       <% tab_section.with_tab(label: "Characteristics") do |tab| %>
         <% tab.with_grid_box(title: "Details", as_box: true) do %>
+          <%= bootstrap_text_field(form, :title) %>
           <%= bootstrap_text_field(form, :given_name) %>
           <%= bootstrap_text_field(form, :family_name) %>
+          <%= bootstrap_text_field(form, :nickname) %>
           <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
           <%= character_species_type_select(form, :character_species_type_id, @world) %>
           <%= form.hidden_field :campaign_id unless @world_building %>
         <% end %>
 
-        <% tab.with_grid_box(title: "Descriptions", as_box: true) do %>
+        <% tab.with_grid_box(title: "Descriptions", as_box: true, height_limited: true) do %>
           <%= render TextEditorComponent.new(form:, attribute: :physical_description) %>
         <% end %>
 

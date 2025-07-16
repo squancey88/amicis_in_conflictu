@@ -17,15 +17,15 @@
   }
 
   &_content {
-    max-height: 400px;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-      display: none;
+    &.height-limited {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      max-height: 600px;
+      overflow-y: scroll;
+      /* Hide scrollbar for IE, Edge and Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
     }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
   }
 }

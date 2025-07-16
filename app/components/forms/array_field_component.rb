@@ -19,7 +19,7 @@ class Forms::ArrayFieldComponent < ViewComponent::Base
         forms_array_controller_required_value: required
       } do
       concat(
-        content_tag(:div, class: %i[d-flex flex-row gap-4 align-items-center]) do
+        content_tag(:div, class: %i[d-flex flex-row gap-4 align-items-center mb-3]) do
           concat(content_tag(:div, label))
           concat(button("plus-square", "primary", data: {
             action: "click->forms-array-controller#addNewRow",
