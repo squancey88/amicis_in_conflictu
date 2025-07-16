@@ -3,7 +3,7 @@ FactoryBot.define do
 
   factory :character_type do
     name { generate(:character_types_name) }
-    config { nil }
+    config { {} }
     world
   end
 end

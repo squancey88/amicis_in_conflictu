@@ -1,0 +1,13 @@
+<h3>Additonal Details</h3>
+<div class="character-custom-config">
+  <% if character.world.character_config %>
+    <% character.world.character_config["custom_fields"]&.each do |option| %>
+      <%= field_box(option) %>
+    <% end %>
+  <% end %>
+  <% character.character_type.config["custom_fields"]&.each do |option| %>
+    <%= field_box(option) %>
+  <% end %>
+</div>
+
+<hr />

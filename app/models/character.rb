@@ -21,7 +21,7 @@ class Character < ApplicationRecord
   register_text_section :physical_description, :history, :player_notes, :shared_notes
 
   def full_name
-    [given_name, family_name].join(" ")
+    [title, given_name, family_name].compact.join(" ")
   end
 
   def link_name = full_name
