@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_09_183521) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_16_192605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -117,6 +117,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_09_183521) do
     t.jsonb "world_owner_notes", default: {}
     t.jsonb "player_notes", default: {}
     t.jsonb "shared_notes", default: {}
+    t.string "nickname"
+    t.string "title"
     t.index ["born_during_id"], name: "index_characters_on_born_during_id"
     t.index ["campaign_id"], name: "index_characters_on_campaign_id"
     t.index ["character_species_type_id"], name: "index_characters_on_character_species_type_id"

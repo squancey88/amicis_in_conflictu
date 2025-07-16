@@ -83,9 +83,11 @@ end
 #  family_name               :string
 #  given_name                :string
 #  history                   :jsonb
+#  nickname                  :string
 #  physical_description      :jsonb
 #  player_notes              :jsonb
 #  shared_notes              :jsonb
+#  title                     :string
 #  visibility                :integer          default("gm_only")
 #  world_owner_notes         :jsonb
 #  created_at                :datetime         not null

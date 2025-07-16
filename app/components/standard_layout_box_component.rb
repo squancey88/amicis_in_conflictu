@@ -4,7 +4,7 @@ class StandardLayoutBoxComponent < ViewComponent::Base
   renders_one :body
   renders_one :menu
 
-  def initialize(title: nil, classes: [], height_limited: true)
+  def initialize(title: nil, classes: [], height_limited: false)
     @title = title
     @classes = classes
     @height_limited = height_limited

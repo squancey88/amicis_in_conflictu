@@ -4,6 +4,7 @@
       <strong>Editing world:</strong> <%= link_to current_world.name, build_world_path(current_world) %>
     </div>
     <div>
+      <%= link_to "View", current_world, class: %i[btn btn-primary] %>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#worldBuilderMenu">
         Add World Item 
       </button>
