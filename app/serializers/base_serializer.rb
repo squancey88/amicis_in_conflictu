@@ -17,7 +17,18 @@ class BaseSerializer
   attr_reader :object, :options
 
   def serialize_single(item)
-    raise NotImplementedError, "Subclasses must implement serialize_single"
+    attributes = {}
+    columns.each do |col|
+      attributes[col] = item.send(col) if include_attribute?(col)
+    end
+    included_additional_values(item, attributes)
+    attributes
+  end
+
+  def included_additional_values(item, attributes)
+    additional_values(item).each do |k, v|
+      attributes[k] = v if include_attribute?(k)
+    end
   end
 
   def include_attribute?(key)
@@ -30,6 +41,14 @@ class BaseSerializer
     else
       true
     end
+  end
+
+  def columns
+    raise NotImplementedError, "Subclasses must implement columns"
+  end
+
+  def additional_values(_item)
+    {}
   end
 
   # Helper for nested serialization

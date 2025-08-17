@@ -36,8 +36,23 @@ class Character < ApplicationRecord
     end
   end
 
+  def custom_fields_with_labels
+    fields = []
+    if world.character_config&.has_key?("custom_fields")
+      world.character_config["custom_fields"].each do |setting|
+        fields << extract_custom_field(setting, "world")
+      end
+    end
+    if character_type.config&.has_key?("custom_fields")
+      character_type.config["custom_fields"].each do |setting|
+        fields << extract_custom_field(setting, "character_type")
+      end
+    end
+    fields
+  end
+
   def self.character_config_schema
-    schema = JsonSchema.new(title: "Characater Settings")
+    schema = JsonSchema.new(title: "Character Settings")
     schema.add_array_property("custom_fields", false,
       {
         type: :object,
@@ -70,6 +85,15 @@ class Character < ApplicationRecord
         }
       }, title: "Custom Fields")
     schema
+  end
+
+  private
+
+  def extract_custom_field(setting, src)
+    {
+      value: config[setting["key"]].presence, label: setting["name"], key: setting["key"],
+      data_type: setting["type"], source: src
+    }
   end
 end
 
