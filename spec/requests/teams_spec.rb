@@ -39,34 +39,6 @@ RSpec.describe "/teams", type: :request do
     sign_in member
   end
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      get gaming_group_teams_url(gaming_group)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      get gaming_group_team_url(gaming_group, team)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_gaming_group_team_url(gaming_group)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      get edit_gaming_group_team_url(gaming_group, team)
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Team" do
@@ -77,7 +49,7 @@ RSpec.describe "/teams", type: :request do
 
       it "redirects to the created team" do
         post gaming_group_teams_url(gaming_group), params: {team: valid_attributes}
-        expect(response).to redirect_to(gaming_group_team_url(gaming_group, Team.order(:created_at).last))
+        expect(response).to redirect_to(gaming_group_url(gaming_group))
       end
     end
 
@@ -112,7 +84,7 @@ RSpec.describe "/teams", type: :request do
       it "redirects to the team" do
         patch gaming_group_team_url(gaming_group, team), params: {team: new_attributes}
         team.reload
-        expect(response).to redirect_to(gaming_group_team_url(gaming_group, team))
+        expect(response).to redirect_to(gaming_group_url(gaming_group))
       end
     end
 
@@ -133,7 +105,7 @@ RSpec.describe "/teams", type: :request do
 
     it "redirects to the teams list" do
       delete gaming_group_team_url(gaming_group, team)
-      expect(response).to redirect_to(gaming_group_teams_url(gaming_group))
+      expect(response).to redirect_to(gaming_group_url(gaming_group))
     end
   end
 end

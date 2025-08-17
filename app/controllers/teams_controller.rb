@@ -1,24 +1,6 @@
 class TeamsController < ApplicationController
   include WithinGamingGroup
-  before_action :set_team, only: %i[show edit update destroy]
-
-  # GET /teams or /teams.json
-  def index
-    @teams = Team.all
-  end
-
-  # GET /teams/1 or /teams/1.json
-  def show
-  end
-
-  # GET /teams/new
-  def new
-    @team = Team.new
-  end
-
-  # GET /teams/1/edit
-  def edit
-  end
+  before_action :set_team, only: %i[update destroy]
 
   # POST /teams or /teams.json
   def create
@@ -27,10 +9,10 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to gaming_group_team_url(@gaming_group, @team), notice: "Team was successfully created." }
+        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team not created.", status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -40,10 +22,10 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to gaming_group_team_url(@gaming_group, @team), notice: "Team was successfully updated." }
+        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team not updated.", status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +36,7 @@ class TeamsController < ApplicationController
     @team.destroy!
 
     respond_to do |format|
-      format.html { redirect_to gaming_group_teams_url(@gaming_group), notice: "Team was successfully destroyed." }
+      format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team was successfully destroyed." }
       format.json { head :no_content }
     end
   end
