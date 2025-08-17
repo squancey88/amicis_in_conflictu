@@ -92,7 +92,7 @@ class Character < ApplicationRecord
   def extract_custom_field(setting, src)
     {
       value: config[setting["key"]].presence, label: setting["name"], key: setting["key"],
-      data_type: setting["type"], source:
+      data_type: setting["type"], source: src
     }
   end
 end

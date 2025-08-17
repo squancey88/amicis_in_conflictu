@@ -47,7 +47,7 @@ class BaseSerializer
     raise NotImplementedError, "Subclasses must implement columns"
   end
 
-  def additional_values(item)
+  def additional_values(_item)
     {}
   end
 
