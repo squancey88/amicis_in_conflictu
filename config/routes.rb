@@ -116,7 +116,6 @@ Rails.application.routes.draw do
         get :add_players_row
       end
     end
-    resources :teams
     resources :teams, only: %i[create update destroy]
     resources :gaming_sessions
   end
