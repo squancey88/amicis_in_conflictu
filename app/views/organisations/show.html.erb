@@ -1,0 +1,21 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @organisation,
+  title: @organisation.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_world_organisation_path(@world, @organisation)
+    },
+    {
+      text: "Delete",
+      link: world_organisation_path(@world, @organisation),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
+
+  <% component.with_box do %>
+
+    <%= render @organisation %>
+  <% end %>
+<% end %>
