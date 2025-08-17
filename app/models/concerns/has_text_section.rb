@@ -26,6 +26,7 @@ module HasTextSection
 
     def as_plain_text(name)
       data = send(name)
+      return "" if data.nil?
       return "" unless data["blocks"]
 
       data["blocks"].filter_map do |block|

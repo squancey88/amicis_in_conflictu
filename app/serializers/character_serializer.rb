@@ -1,13 +1,15 @@
 class CharacterSerializer < BaseSerializer
   private
 
-  def serialize_single(character)
-    attributes = {}
+  def columns
+    %i[id given_name family_name physical_description_plain_text history_plain_text]
+  end
 
-    attributes[:id] = character.id if include_attribute?(:id)
-    attributes[:given_name] = character.given_name if include_attribute?(:given_name)
-    attributes[:family_name] = character.family_name if include_attribute?(:family_name)
-
-    attributes
+  def additional_values(item)
+    {
+      species: item.species.name,
+      type: item.character_type.name,
+      custom_fields: item.custom_fields_with_labels
+    }
   end
 end
