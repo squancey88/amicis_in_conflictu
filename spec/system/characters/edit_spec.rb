@@ -20,6 +20,23 @@ RSpec.describe("Edit Article", type: :system) do
     expect(page).to have_css("input[name='character[family_name]']")
   end
 
+  it "allows updating of main fields" do
+    fill_in "Title", with: "New Title"
+    fill_in "Nickname", with: "New Nickname"
+    fill_in "Given name", with: "New Name"
+    fill_in "Family name", with: "New Family Name"
+
+    click_on "Update Character"
+
+    expect(page).to have_current_path(world_character_path(world, character))
+
+    character.reload
+    expect(character.title).to eq("New Title")
+    expect(character.nickname).to eq("New Nickname")
+    expect(character.given_name).to eq("New Name")
+    expect(character.family_name).to eq("New Family Name")
+  end
+
   describe "custom array field" do
     it "should display add button" do
       expect(page).to have_selector(:testid, "forms-array-field-component-add-button")
