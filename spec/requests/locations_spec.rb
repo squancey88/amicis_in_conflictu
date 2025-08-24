@@ -4,8 +4,8 @@ RSpec.describe "/locations", type: :request do
   let(:user) { create(:user) }
   let(:world) { create(:world, owner: user) }
 
-  let(:location_type) { create(:location_type) }
-  let!(:location) { create(:location, world:) }
+  let(:location_type) { create(:location_type, world:) }
+  let!(:location) { create(:location, world:, location_type:) }
 
   let(:valid_attributes) {
     {

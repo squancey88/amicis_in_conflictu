@@ -32,6 +32,10 @@
             <%= content_tag :i, nil, class: %w[bi bi-person-arms-up] %>
             New Character
           <% end %>
+          <%= link_to new_world_organisation_path(current_world) do %>
+            <%= content_tag :i, nil, class: %w[bi bi-people] %>
+            New Organisation
+          <% end %>
           <%= link_to new_world_location_path(current_world) do %>
             <%= content_tag :i, nil, class: %w[bi bi-pin-map] %>
             New Location

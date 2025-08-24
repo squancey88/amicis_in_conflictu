@@ -31,4 +31,14 @@
       <% end %>
     </ul>
   <% end %>
+
+  <%= render StandardLayoutBoxComponent.new(title: "Organisations") do %>
+    <ul class="list-group">
+      <% @world.organisations.each do |organisation| %>
+        <li class="list-group-item">
+          <%= link_to organisation, [@world, organisation] %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

@@ -2,10 +2,10 @@ class LocationsController < ApplicationController
   include WithinWorld
 
   before_action :set_location, only: %i[show edit update destroy]
+  before_action :set_records, only: %i[index]
 
   # GET /locations or /locations.json
   def index
-    @locations = Location.all
   end
 
   # GET /locations/1 or /locations/1.json

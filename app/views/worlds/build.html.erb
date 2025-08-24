@@ -58,6 +58,16 @@
       <% end %>
     <% end %>
 
+    <% tab_section.with_tab(label: "Organisation Settings") do |tab| %>
+      <% tab.with_grid_box do %>
+        <%= render Common::EmbeddedIndexComponent.new(title: "Organisation Types",
+            turbo_frame_id: "organisation_types",
+            records_path: world_organisation_types_path(@world),
+            new_path: new_world_organisation_type_path(@world)
+          ) %>
+      <% end %>
+    <% end %>
+
     <% tab_section.with_tab(label: "Location Settings") do |tab| %>
       <% tab.with_grid_box do %>
         <%= render Common::EmbeddedIndexComponent.new(title: "Location Types",

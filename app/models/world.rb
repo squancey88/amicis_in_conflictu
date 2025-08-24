@@ -13,6 +13,9 @@ class World < ApplicationRecord
   has_many :location_types, dependent: :destroy
   has_many :locations, dependent: :destroy
 
+  has_many :organisation_types, dependent: :destroy
+  has_many :organisations, dependent: :destroy
+
   has_many :articles, dependent: :destroy
   has_many :quests, dependent: :destroy
 
