@@ -32,9 +32,11 @@ module HasTextSection
       data["blocks"].filter_map do |block|
         case block["type"]
         when "paragraph"
-          ActionController::Base.helpers.strip_tags(block["data"]["text"])
+          strip_tags(block["data"]["text"])
+        when "list"
+          list_to_plain_text(block["data"], style: block["data"]["style"])
         end
-      end.join(" ")
+      end.join("\n")
     end
   end
 
@@ -55,5 +57,26 @@ module HasTextSection
         send(:"#{text_section}=", JSON.parse(input_data))
       end
     end
+  end
+
+  def list_to_plain_text(block, str = "", style:, counter: nil)
+    block["items"].each_with_index do |item, index|
+      item_str = if style == "ordered"
+        item_number(counter, index + 1) + strip_tags(item["content"]) + "\n"
+      else
+        strip_tags(item["content"]) + "\n"
+      end
+      str += list_to_plain_text(item, item_str, style:, counter: index + 1)
+    end
+    str
+  end
+
+  def item_number(counter, index)
+    return "#{index}: " if counter.nil?
+    "#{counter}.#{index}: "
+  end
+
+  def strip_tags(str)
+    ActionController::Base.helpers.strip_tags(str)
   end
 end
