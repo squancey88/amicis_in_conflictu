@@ -2,10 +2,10 @@ class ArticlesController < ApplicationController
   include WorldVisibilityAccess
 
   before_action :set_article, only: %i[show edit update destroy]
+  before_action :set_records, only: %i[index]
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
   end
 
   # GET /articles/1 or /articles/1.json

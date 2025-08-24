@@ -1,23 +1,12 @@
 <% content_for :title, "Organisations" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Organisations") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New organisation", new_world_organisation_path(@world), class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
-
 <div id="organisations">
   <%= turbo_frame_tag :organisations do %>
-    <% @organisations.each do |organisation| %>
-      <%= render Common::CardWithMenuComponent.new(title: organisation,
-        menu_options: [
-          {link: world_organisation_url(@world, organisation), text: "Show", target: "_top"},
-          {link: edit_world_organisation_path(@world, organisation), text: "Edit", target: "_top"}
-        ]) do |card| %>
-        <% card.with_body do %>
-          <%= render organisation %>
-        <% end %>
+    <ul class="list-group">
+      <% @organisations.each do |organisation| %>
+          <%= render Organisations::ListItemComponent.new(organisation:) %>
       <% end %>
-    <% end %>
+    </ul>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% end %>
 </div>

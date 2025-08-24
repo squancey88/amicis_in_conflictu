@@ -1,13 +1,15 @@
 <%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
 
-  <% component.with_menu do%>
-    <%= render Common::MenuButtonComponent.new(
-      menu_options: [
-        { 
-          text: "New",
-          link: @new_path
-        }
-      ]) %>
+  <% if @new_path %>
+    <% component.with_menu do%>
+      <%= render Common::MenuButtonComponent.new(
+        menu_options: [
+          { 
+            text: "New",
+            link: @new_path
+          }
+        ]) %>
+    <% end %>
   <% end %>
 
   <% component.with_body do %>

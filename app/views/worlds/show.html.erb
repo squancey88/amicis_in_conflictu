@@ -2,43 +2,17 @@
 <%= content_tag :h1, @world.name %>
 
 <div class="aic-grid">
-  <%= render StandardLayoutBoxComponent.new(title: "Articles") do %>
-    <ul class="list-group">
-      <% @world.articles.each do |article| %>
-        <li class="list-group-item">
-          <%= link_to article, [@world, article] %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
 
-  <%= render StandardLayoutBoxComponent.new(title: "Characters") do %>
-    <ul class="list-group">
-      <% @world.characters.each do |character| %>
-        <li class="list-group-item">
-          <%= link_to character, [@world, character] %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%= render Common::EmbeddedIndexComponent.new(title: "Articles", turbo_frame_id: :articles,
+                                        records_path: world_articles_path(@world)) %>
 
-  <%= render StandardLayoutBoxComponent.new(title: "Locations") do %>
-    <ul class="list-group">
-      <% @world.locations.each do |location| %>
-        <li class="list-group-item">
-          <%= link_to location, [@world, location] %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%= render Common::EmbeddedIndexComponent.new(title: "Characters", turbo_frame_id: :characters,
+                                        records_path: world_characters_path(@world)) %>
 
-  <%= render StandardLayoutBoxComponent.new(title: "Organisations") do %>
-    <ul class="list-group">
-      <% @world.organisations.each do |organisation| %>
-        <li class="list-group-item">
-          <%= link_to organisation, [@world, organisation] %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <%= render Common::EmbeddedIndexComponent.new(title: "Locations", turbo_frame_id: :locations,
+                                        records_path: world_locations_path(@world)) %>
+
+  <%= render Common::EmbeddedIndexComponent.new(title: "Organisations", turbo_frame_id: :organisations,
+                                        records_path: world_organisations_path(@world)) %>
+
 </div>
