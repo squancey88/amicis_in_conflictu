@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
 
   # GET /characters or /characters.json
   def index
-    @characters = @world.characters
+    @pagy, @characters = pagy(@world.characters)
     @allow_creation = true
     @title = "Characters"
   end
