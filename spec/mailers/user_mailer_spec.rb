@@ -27,7 +27,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to include(forgot_password_url(params: {reset_password_token: user.reset_password_token}))
+      expect(mail.body.encoded).to include(password_reset_url(params: {reset_password_token: user.reset_password_token}))
     end
   end
 end
