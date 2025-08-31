@@ -7,6 +7,7 @@ class Organisation < ApplicationRecord
   validates :name, presence: true
 
   register_link_search_fields :name
+  register_text_section :description, :history
 
   def link_name = name
 
@@ -18,6 +19,8 @@ end
 # Table name: organisations
 #
 #  id                   :uuid             not null, primary key
+#  description          :jsonb
+#  history              :jsonb
 #  name                 :string
 #  world_owner_notes    :jsonb
 #  created_at           :datetime         not null

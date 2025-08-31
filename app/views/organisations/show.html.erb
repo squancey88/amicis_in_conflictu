@@ -1,21 +1,17 @@
-<%= render RecordShowWrapperComponent.new(
+<%= render WorldViews::WrapperComponent.new(
   record: @organisation,
-  title: @organisation.to_s,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_world_organisation_path(@world, @organisation)
-    },
-    {
-      text: "Delete",
-      link: world_organisation_path(@world, @organisation),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
 ) do |component| %>
 
-  <% component.with_box do %>
+  <% component.with_header do %>
+    <h1><%= @organisation.name %></h1>
+  <% end %>
 
-    <%= render @organisation %>
+  <% component.with_body do %>
+    <h3>Description</h3>
+    <%= render TextEditorRenderComponent.new(model: @organisation, attribute: :description) %>
+    <hr>
+
+    <h3>History</h3>
+    <%= render TextEditorRenderComponent.new(model: @organisation, attribute: :history) %>
   <% end %>
 <% end %>

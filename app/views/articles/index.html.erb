@@ -2,7 +2,7 @@
 
 <div id="articles">
   <%= turbo_frame_tag :articles do %>
-    <ul class="list-group">
+    <ul class="list-group mb-2">
       <% @articles.each do |article| %>
           <%= render Articles::ListItemComponent.new(article:) %>
       <% end %>
