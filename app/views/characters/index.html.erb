@@ -1,23 +1,12 @@
 <% content_for :title, @title %>
 
-<%= render Common::HeaderCardComponent.new(title: @title) do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New character", new_world_character_path(@world), class: %i[btn btn-primary] if @allow_creation %>
-  <% end %>
-<% end %>
-
 <div id="characters">
   <%= turbo_frame_tag :characters do %>
-    <% @characters.each do |character| %>
-      <%= render Common::CardWithMenuComponent.new(title: character,
-        menu_options: [
-          {link: [character.world, character], text: "Show", target: "_top"},
-          {link: edit_world_character_path(character.world, character), text: "Edit", target: "_top"}
-        ]) do |card| %>
-        <% card.with_body do %>
-          <%= render character %>
-        <% end %>
+    <ul class="list-group mb-2">
+      <% @characters.each do |character| %>
+        <%= render Characters::ListItemComponent.new(character:) %>
       <% end %>
-    <% end %>
+    </ul>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% end %>
 </div>

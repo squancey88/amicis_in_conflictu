@@ -10,7 +10,7 @@ class Location < ApplicationRecord
   validates :name, presence: true
 
   register_link_search_fields :name
-  register_text_section :history
+  register_text_section :description, :history
 
   def link_name = name
 

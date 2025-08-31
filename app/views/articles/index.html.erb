@@ -1,23 +1,12 @@
 <% content_for :title, "Articles" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Articles") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New article", new_world_article_path(@world), class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
-
 <div id="articles">
   <%= turbo_frame_tag :articles do %>
-    <% @articles.each do |article| %>
-      <%= render Common::CardWithMenuComponent.new(title: article,
-        menu_options: [
-          {link: [article.world, article], text: "Show", target: "_top"},
-          {link: edit_world_article_path(article.world, article), text: "Edit", target: "_top"}
-        ]) do |card| %>
-        <% card.with_body do %>
-          <%= render article %>
-        <% end %>
+    <ul class="list-group mb-2">
+      <% @articles.each do |article| %>
+          <%= render Articles::ListItemComponent.new(article:) %>
       <% end %>
-    <% end %>
+    </ul>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% end %>
 </div>
