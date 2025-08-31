@@ -68,18 +68,17 @@ class AuthController < ApplicationController
           redirect_to forgot_password_url(params: {reset_password_token: reset_params[:reset_password_token]})
         end
       else
-        redirect_to login_path
+        redirect_to login_path, params: {alert: "User not found"}
       end
     else
-      redirect_to login_path
+      redirect_to login_path, params: {alert: "No valid token"}
     end
   end
 
   def authenticate
     user = User.find_for_authentication(email: login_params[:email])
     if user
-      if user.valid_password?(login_params[:password])
-        user.migrate_to_secure_password(login_params[:password])
+      if user.authenticate_password_migration(login_params[:password])
         session[:user_id] = user.id
         redirect_to "/"
       else
