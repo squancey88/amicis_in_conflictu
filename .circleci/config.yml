@@ -41,7 +41,6 @@ jobs:
           name: Database setup
           command: bin/rails db:schema:load --trace
       - browser-tools/install-browser-tools:
-          chrome-version: 127.0.6533.88
           replace-existing-chrome: true
       - ruby/rspec-test
   standardrb:
