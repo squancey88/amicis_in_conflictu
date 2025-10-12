@@ -17,11 +17,12 @@ Rails.application.routes.draw do
     resources :worlds, only: [:index, :show] do
       resources :characters, only: [:index, :show]
     end
-    resources :gaming_groups, only: [:index] do
-      resources :gaming_sessions, only: [:index, :create] do
+    resources :gaming_groups, only: [:index, :show] do
+      resources :gaming_sessions, only: [:index, :create, :show] do
       end
     end
-    resources :games, only: [:show]
+    resources :games, only: [:show, :create, :update]
+    resources :game_systems, only: [:index]
   end
 
   resources :worlds do

@@ -38,7 +38,7 @@ RSpec.describe "/api/games", type: :request do
         expect(response).to have_http_status(:successful)
       end
 
-      it "returns array" do
+      it "returns hash" do
         expect(JSON.parse(response.body)).to be_an(Hash)
       end
     end

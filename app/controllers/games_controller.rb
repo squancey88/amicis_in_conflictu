@@ -116,7 +116,7 @@ class GamesController < ApplicationController
   end
 
   def has_access
-    redirect_to root_url if @game.gaming_group.is_user?(current_user)
+    redirect_to root_url unless @game.gaming_group.is_user?(current_user)
   end
 
   # Only allow a list of trusted parameters through.
