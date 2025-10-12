@@ -4,6 +4,8 @@ RSpec.describe("Show Game", type: :system) do
   let(:game_system) { create(:wargame, name: "Game Test") }
   let(:user) { create(:user) }
   let(:opponent) { create(:user) }
+  let(:gaming_group) { create(:gaming_group, members: [user, opponent]) }
+  let(:gaming_session) { create(:gaming_session, gaming_group:) }
 
   before do
     allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(user)
@@ -14,7 +16,7 @@ RSpec.describe("Show Game", type: :system) do
     let(:campaign) { create(:campaign, game_system:) }
     let(:army_list) { create(:army_list, user:, game_system:, campaign:) }
     let(:game) {
-      create(:game, game_system:, campaign:,
+      create(:game, game_system:, campaign:, gaming_group:,
         user_list: [user, opponent], army_list: [army_list, nil])
     }
 
