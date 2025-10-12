@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   belongs_to :gaming_session, dependent: nil
   belongs_to :game_system, dependent: nil
   belongs_to :campaign, dependent: nil, optional: true
+  has_one :gaming_group, through: :gaming_session
 
   has_many :players, dependent: :destroy
   has_many :unit_xp_gain_applied, dependent: :destroy

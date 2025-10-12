@@ -12,12 +12,22 @@ class BaseSerializer
     end
   end
 
+  def base_columns
+    [:id]
+  end
+
+  def timestamp_columns
+    [:created_at, :updated_at]
+  end
+
   private
 
   attr_reader :object, :options
 
   def serialize_single(item)
     attributes = {}
+    base_columns.each { attributes[_1] = item.send(_1) }
+    timestamp_columns.each { attributes[_1] = item.send(_1).to_s } unless options[:exclude_timestamps]
     columns.each do |col|
       attributes[col] = item.send(col) if include_attribute?(col)
     end

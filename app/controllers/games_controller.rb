@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy dm_mode add_xp_gain_applied_row add_unit_applied_modifier_row link_quest_event quest_events]
+  before_action :has_access, except: %i[index new create]
   before_action :set_user_player, only: %i[show dm_mode add_xp_gain_applied_row add_unit_applied_modifier_row]
 
   # GET /games or /games.json
@@ -31,10 +32,8 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.save
         format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
-        format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,10 +43,8 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.update(game_params)
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }
-        format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +56,6 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to gaming_group_gaming_session_url(session.gaming_group, session), notice: "Game was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -117,6 +113,10 @@ class GamesController < ApplicationController
 
   def set_user_player
     @current_user_player = @game.players.filter { _1.user_is_player?(current_user) }&.first
+  end
+
+  def has_access
+    redirect_to root_url if @game.gaming_group.is_user?(current_user)
   end
 
   # Only allow a list of trusted parameters through.

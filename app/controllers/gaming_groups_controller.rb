@@ -28,10 +28,8 @@ class GamingGroupsController < ApplicationController
       if @gaming_group.save
         UserGroupMembership.create!(gaming_group: @gaming_group, user: current_user, owner: true)
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Gaming group was successfully created." }
-        format.json { render :show, status: :created, location: @gaming_group }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @gaming_group.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,10 +39,8 @@ class GamingGroupsController < ApplicationController
     respond_to do |format|
       if @gaming_group.update(gaming_group_params)
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Gaming group was successfully updated." }
-        format.json { render :show, status: :ok, location: @gaming_group }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @gaming_group.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +51,6 @@ class GamingGroupsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to gaming_groups_url, notice: "Gaming group was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
