@@ -9,7 +9,7 @@ module Api
     end
 
     def show
-      render json: sessions.map { GamingSessionSerializer.new(@gaming_session).serialize }
+      render json: GamingSessionSerializer.new(@gaming_session).serialize
     end
 
     def create

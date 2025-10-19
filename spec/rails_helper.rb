@@ -9,6 +9,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 require "support/factory_bot"
 require "support/aic_auth_helper"
+require "support/api_helper"
 require "support/world_builder_helper"
 require "support/text_content_generator"
 require "support/capybara_selectors"
@@ -86,6 +87,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
   config.include AicAuthHelper
+  config.include ApiHelper
   config.include WorldBuilderHelper
   config.include TextContentGenerator
   config.include ActiveSupport::Testing::TimeHelpers

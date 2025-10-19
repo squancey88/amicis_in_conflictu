@@ -25,11 +25,26 @@ RSpec.describe "/api/gaming_groups", type: :request do
       end
 
       it "returns array" do
-        expect(JSON.parse(response.body)).to be_an(Array)
+        expect(json_body).to be_an(Array)
       end
 
       it "returns correct number of records" do
-        expect(JSON.parse(response.body).count).to eq 2
+        expect(json_body.count).to eq 2
+      end
+    end
+
+    describe "show" do
+      before do
+        get_with_token(user, api_gaming_group_path(gaming_group_as_user))
+      end
+
+      it "should be authorized" do
+        expect(response).to have_http_status(:successful)
+      end
+
+      it "returns data" do
+        expect(json_body).to be_an(Hash)
+        expect(json_body["id"]).to eq(gaming_group_as_user.id)
       end
     end
   end
