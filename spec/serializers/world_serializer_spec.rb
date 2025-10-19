@@ -11,7 +11,7 @@ RSpec.describe WorldSerializer do
   end
 
   it "respects only option" do
-    result = described_class.new(world, only: [:id, :name]).serialize
+    result = described_class.new(world, only: [:name], exclude_timestamps: true).serialize
 
     expect(result.keys).to contain_exactly(:id, :name)
   end

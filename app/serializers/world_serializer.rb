@@ -2,6 +2,6 @@ class WorldSerializer < BaseSerializer
   private
 
   def columns
-    %i[id name blurb]
+    %i[name blurb]
   end
 end

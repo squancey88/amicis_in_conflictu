@@ -8,4 +8,25 @@ module AicAuthHelper
     data = JSON.parse(response.body)
     data["token"]
   end
+
+  def get_with_token(user, path, params: {})
+    token = get_auth_token(user)
+    get path, params:, headers: {
+      "Authorization" => "Bearer #{token}"
+    }
+  end
+
+  def post_with_token(user, path, params: {})
+    token = get_auth_token(user)
+    post path, params:, headers: {
+      "Authorization" => "Bearer #{token}"
+    }
+  end
+
+  def patch_with_token(user, path, params: {})
+    token = get_auth_token(user)
+    patch path, params:, headers: {
+      "Authorization" => "Bearer #{token}"
+    }
+  end
 end

@@ -2,7 +2,7 @@ class CharacterSerializer < BaseSerializer
   private
 
   def columns
-    %i[id given_name family_name physical_description_plain_text history_plain_text]
+    %i[given_name family_name physical_description_plain_text history_plain_text]
   end
 
   def additional_values(item)

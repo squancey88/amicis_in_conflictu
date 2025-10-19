@@ -28,10 +28,8 @@ class GamingSessionsController < ApplicationController
       if @gaming_session.valid?
         @gaming_session.save!
         format.html { redirect_to gaming_group_gaming_session_url(@gaming_group, @gaming_session), notice: "Gaming session was successfully created." }
-        format.json { render :show, status: :created, location: @gaming_session }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @gaming_session.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,10 +39,8 @@ class GamingSessionsController < ApplicationController
     respond_to do |format|
       if @gaming_session.update(gaming_session_params)
         format.html { redirect_to gaming_group_gaming_session_url(@gaming_group, @gaming_session), notice: "Gaming session was successfully updated." }
-        format.json { render :show, status: :ok, location: @gaming_session }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @gaming_session.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +51,6 @@ class GamingSessionsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to gaming_group_gaming_sessions_url(@gaming_group), notice: "Gaming session was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

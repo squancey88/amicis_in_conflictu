@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   belongs_to :gaming_session, dependent: nil
   belongs_to :game_system, dependent: nil
   belongs_to :campaign, dependent: nil, optional: true
+  has_one :gaming_group, through: :gaming_session
 
   has_many :players, dependent: :destroy
   has_many :unit_xp_gain_applied, dependent: :destroy
@@ -17,8 +18,8 @@ class Game < ApplicationRecord
   accepts_nested_attributes_for :unit_applied_modifier
   accepts_nested_attributes_for :game_quest_events
 
-  before_create(:setup_data)
-  after_save(:check_finished)
+  before_create :setup_data
+  after_save :check_finished
 
   def title
     return "#{campaign.name} (Session: #{campaign_session_number})" if campaign
