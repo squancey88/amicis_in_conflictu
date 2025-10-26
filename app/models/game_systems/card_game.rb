@@ -21,6 +21,15 @@ module GameSystems
       has_timed_turns
     end
 
+    def game_data_form_components(game)
+      game_forms = []
+      game_forms << {
+        title: "External Data",
+        component: GameForms::ExternalTableDataComponent
+      }
+      game_forms
+    end
+
     def set_winners(game)
       if has_health?
         game.players.map { [_1, _1.game_data["current_health"]] }.each do |player, health|
@@ -39,7 +48,9 @@ module GameSystems
     end
 
     def setup_game_data
-      game_data = {}
+      game_data = {
+        external_data: {}
+      }
       game_data["turn_tracking"] = [] if has_timed_turns?
       game_data
     end

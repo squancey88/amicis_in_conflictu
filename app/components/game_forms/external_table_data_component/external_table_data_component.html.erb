@@ -1,0 +1,15 @@
+
+<div id="external-data-chart" style="width: 100%; height: 500px;"></div>
+
+<script type="text/javascript">
+  
+  var edataChart = echarts.init(document.getElementById('external-data-chart'));
+
+  var option = <%= raw(@parsed_data[:graph].to_json) %>;
+
+  edataChart.setOption(option);
+</script>
+
+<pre style="display: none;">
+  <%= JSON.pretty_generate(@game.data["external_data"]) %>
+</pre>

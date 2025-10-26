@@ -1,4 +1,4 @@
-<%= render Common::HeaderCardComponent.new(title: @title) do |header| %>
+<%= render Common::HeaderCardComponent.new(title: @title, subtitle: @subtitle) do |header| %>
   <%= header.with_buttons do %>
     <%= header_buttons %>
     <%= render Common::MenuButtonComponent.new(menu_options: @menu_options, 
