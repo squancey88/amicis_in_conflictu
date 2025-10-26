@@ -3,6 +3,7 @@
     <%= render RecordShowWrapperComponent.new(
       record: @game,
       title: @game.title,
+      subtitle: "Players: #{@game.players.map(&:display_name).join(", ")}",
       menu_options: [
         {
           text: "Delete",

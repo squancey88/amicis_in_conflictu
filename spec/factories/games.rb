@@ -3,6 +3,7 @@ FactoryBot.define do
     gaming_session
     game_system { create(:wargame) }
     campaign { nil }
+    data { {} }
 
     transient do
       player_count { 2 }
