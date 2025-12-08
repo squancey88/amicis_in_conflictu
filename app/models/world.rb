@@ -10,6 +10,7 @@ class World < ApplicationRecord
   has_many :character_species_types, dependent: :destroy
   has_many :characters, dependent: :destroy
 
+  has_many :maps, dependent: :destroy, class_name: "Mapping::Map"
   has_many :location_types, dependent: :destroy
   has_many :locations, dependent: :destroy
 

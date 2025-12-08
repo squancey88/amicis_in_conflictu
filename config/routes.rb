@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       get :start_editing
       get :build
     end
+    scope module: :mapping do
+      resources :maps
+    end
     resources :character_types
     resources :character_species_types
 

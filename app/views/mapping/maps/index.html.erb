@@ -1,0 +1,14 @@
+<% content_for :title, @title %>
+
+<%= bs_link_button "New Map", new_world_map_path(@world) %>
+
+<div id="maps">
+  <%= turbo_frame_tag :maps do %>
+    <ul class="list-group mb-2">
+      <% @maps.each do |map| %>
+        <%= link_to map.name, edit_world_map_path(@world, map) %>
+      <% end %>
+    </ul>
+    <%== pagy_bootstrap_nav(@pagy) %>
+  <% end %>
+</div>

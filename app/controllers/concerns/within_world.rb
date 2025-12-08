@@ -43,7 +43,7 @@ module WithinWorld
   end
 
   def new_record(values = {})
-    instance_variable_set(:"@#{controller_name.singularize}", controller_name.classify.constantize.new(world: @world, **values))
+    instance_variable_set(:"@#{controller_name.singularize}", controller_path.classify.constantize.new(world: @world, **values))
   end
 
   def set_records
@@ -52,6 +52,6 @@ module WithinWorld
   end
 
   def get_record
-    controller_name.classify.constantize.includes(world: :owner).find(params[:id])
+    controller_path.classify.constantize.includes(world: :owner).find(params[:id])
   end
 end

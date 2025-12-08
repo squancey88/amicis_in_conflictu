@@ -7,6 +7,8 @@ module WorldItem
     include TextLinkable
     register_text_section :world_owner_notes
 
+    belongs_to :world
+
     def link_path
       polymorphic_path(world, self)
     end

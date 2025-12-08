@@ -11,6 +11,7 @@ import NewGameModalController from '../../components/new_game_modal_component/ne
 import QuestEventsDetailsFormController from '../../components/quests/events/details_form_component/details_form_controller';
 import QuestEventsSelectorController from '../../components/quests/events/selector_component/selector_component_controller'
 import TurnBasedGameFormController from '../../components/game_forms/turn_based_component/turn_based_controller';
+import MapEditorController from '../../components/mapping/map/editor_component/editor_controller';
 
 application.register('army-selector', ArmySelectorController);
 application.register('campaign-and-army-selector', CampaignAndArmySelectorController);
@@ -20,6 +21,7 @@ application.register('game-control', GameControlController);
 application.register('game-form', GameFormController);
 application.register('game-forms-turn-based', TurnBasedGameFormController);
 application.register('json-editor', JsonEditorController);
+application.register('map-editor', MapEditorController);
 application.register('new-game-modal', NewGameModalController);
 application.register('quest-event-details-form', QuestEventsDetailsFormController);
 application.register('quests-events-selector', QuestEventsSelectorController);

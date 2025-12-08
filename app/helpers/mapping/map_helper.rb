@@ -1,0 +1,2 @@
+module Mapping::MapHelper
+end

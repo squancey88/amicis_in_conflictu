@@ -1,0 +1,9 @@
+<%= form_with(model: @map, url: world_maps_path(@world)) do |form| %>
+
+  <%= render RecordFormWrapperComponent.new(record: @map, form:) do |component| %>
+
+    <% component.with_form_box do %>
+      <%= bootstrap_text_field(form, :name) %>
+    <% end %>
+  <% end %>
+<% end %>
