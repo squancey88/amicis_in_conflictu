@@ -1,11 +1,30 @@
 <div data-controller="map-editor" class="mt-2">
   <div class="map-editor__panel">
     <div class="map-editor__canvas">
-
+      <svg 
+         data-map-editor-target="editorSvg"
+         data-action="
+           click->map-editor#svgClick
+           mousemove->map-editor#svgMove
+           wheel->map-editor#svgWheel
+         ">
+      </svg>
     </div>
 
     <div class="map-editor__controls">
-
+      <div data-map-editor-target="defaultControls" class="controls">
+        <%= bs_icon_button(icon: :heptagon, data: {
+          action: "click->map-editor#newPolygon"
+        }) %>
+      </div>
+      <div data-map-editor-target="drawingControls" class="controls hide">
+        <%= bs_icon_button(icon: "check-circle", data: {
+          action: "click->map-editor#finishDrawing"
+        }) %>
+        <%= bs_icon_button(icon: "x-circle", data: {
+          action: "click->map-editor#cancelDrawing"
+        }) %>
+      </div>
     </div>
   </div>
 </div>

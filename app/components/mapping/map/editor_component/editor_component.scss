@@ -9,9 +9,22 @@
 
   &__canvas {
     flex: 1 1 75%;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__controls {
-    flex: 0 0 25%;
+    flex: 0 0 150px;
+
+    .controls {
+      background-color: light-grey;
+
+      &.hide {
+        display: none;
+      } 
+    }
   }
 }
