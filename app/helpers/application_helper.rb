@@ -37,4 +37,11 @@ module ApplicationHelper
       "full"
     end
   end
+
+  def react_component(name, props)
+    content_tag :div, nil, data: {
+      react_component: name,
+      props: props.deep_transform_keys { |key| key.to_s.camelize(:lower) }
+    }
+  end
 end

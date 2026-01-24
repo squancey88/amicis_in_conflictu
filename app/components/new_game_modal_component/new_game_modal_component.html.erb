@@ -16,7 +16,9 @@
 
         <%= form.hidden_field :gaming_session_id %>
 
+
         <div class="modal-body">
+          <%= react_component("NewGameForm", game_form_props) %>
           <div class="form-floating mb-3">
             <%= game_system_select(form, :game_system_id, data: {
               "new-game-modal-target": "gameSystemSelect",
@@ -31,7 +33,7 @@
               action: "new-game-modal#campaignSelected"
             }} %>
             <%= form.label :campaign_id %>
-          </div>
+          </div> 
 
           <div class="input-group mb-3">
             <%= player_selection(@gaming_session.gaming_group, "player_select", { 

@@ -34,6 +34,12 @@ module GameSystemsHelper
     end
   end
 
+  def game_system_grouped_hashes(game_systems = GameSystem.all)
+    game_systems.group_by(&:category).each_with_object([]) do |(k, v), m|
+      m << {group_name: k, game_systems: v.map { |x| {name: x.display_name, id: x.id} }}
+    end
+  end
+
   def finish_reason_select(game_system, form, attribute_name, classes: [], disabled: false, data: {})
     content_tag(:div, class: classes + ["form-floating"]) do
       concat(form.select(attribute_name, game_system.finish_reasons,
