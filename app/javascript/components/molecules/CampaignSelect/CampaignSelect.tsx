@@ -2,7 +2,7 @@ import React from "react";
 import { CampaignsByGameSystem, Campaign } from "Types/common";
 import { Select, SelectProps } from "Atoms/Select";
 
-interface CampaignSelectProps extends SelectProps {
+export interface CampaignSelectProps extends SelectProps {
   campaignsByGameSystem: Array<CampaignsByGameSystem>;
   selectedId: string | undefined;
 }
