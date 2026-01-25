@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { GroupedGameSystems, Player } from "Types/common";
-import { PlayersSelector } from "Molecules/PlayersSelector";
+import {
+  PlayersSelector,
+  PlayersSelectorProps,
+} from "Molecules/PlayersSelector";
 import { GroupedGameSystemsSelect } from "Molecules/GroupedGameSystemsSelect";
-import { CampaignSelect } from "Molecules/CampaignSelect";
-import { PlayersSelectorProps } from "Molecules/PlayersSelector";
-import { CampaignSelectProps } from "Molecules/CampaignSelect";
+import { CampaignSelect, CampaignSelectProps } from "Molecules/CampaignSelect";
 
 interface NewGameFormProps extends CampaignSelectProps {
   groupedGameSystems: Array<GroupedGameSystems>;

@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Player } from "Types/common";
 
 export interface PlayersSelectorProps {
@@ -25,7 +24,7 @@ const PlayersSelector = ({
         (p) => p.id === currentSelection,
       );
 
-      if (player && !selectedPlayers.find((p) => p.id === player.id)) {
+      if (player && !selectedPlayers.some((p) => p.id === player.id)) {
         setSelectedPlayers([...selectedPlayers, player]);
         setCurrentSelection(""); // Reset selection after adding
       }

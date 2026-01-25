@@ -43,6 +43,9 @@ jobs:
       - browser-tools/install-browser-tools:
           replace-existing-chrome: true
       - ruby/rspec-test
+      - store_artifacts:
+        path: tmp/screenshots
+        destination: screenshots
 
   test-javascript:
     # Run Jest tests

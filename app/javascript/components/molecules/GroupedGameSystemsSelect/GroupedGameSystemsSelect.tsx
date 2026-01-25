@@ -10,8 +10,8 @@ const GroupedGameSystemsSelect = ({ groupedGameSystems, ...props }: Props) => {
     <div>
       <Select {...props}>
         <option value="">Please Select</option>
-        {groupedGameSystems.map((group, index) => (
-          <optgroup key={index} label={group.groupName}>
+        {groupedGameSystems.map((group) => (
+          <optgroup key={group.groupName} label={group.groupName}>
             {group.gameSystems.map((gameSystem) => (
               <option value={gameSystem.id} key={gameSystem.id}>
                 {gameSystem.name}
