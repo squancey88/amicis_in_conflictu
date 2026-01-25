@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def characters
-    @characters = current_user.characters
+    @pagy, @characters = pagy(current_user.characters)
     @allow_creation = false
     @title = "My Characters"
     render "characters/index"

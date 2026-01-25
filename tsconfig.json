@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "typeRoots": ["./node_modules/@types"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["app/javascript/*"],
+      "Atoms/*": ["app/javascript/components/atoms/*"],
+      "Molecules/*": ["app/javascript/components/molecules/*"],
+      "Organisms/*": ["app/javascript/components/organisms/*"],
+      "Types/*": ["app/javascript/components/types/*"]
+    }
+  },
+  "include": [
+    "app/javascript/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

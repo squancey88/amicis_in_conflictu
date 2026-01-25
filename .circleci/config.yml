@@ -43,6 +43,28 @@ jobs:
       - browser-tools/install-browser-tools:
           replace-existing-chrome: true
       - ruby/rspec-test
+      - store_artifacts:
+          path: tmp/screenshots
+          destination: screenshots
+      - store_artifacts:
+          path: coverage
+
+  test-javascript:
+    # Run Jest tests
+    docker:
+      - image: cimg/node:20.19.2
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          name: Run Jest tests
+          command: yarn test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: coverage
+
   standardrb:
     docker:
       - image: "cimg/ruby:3.3.0-node"
@@ -57,5 +79,6 @@ workflows:
   build-and-test:
     jobs:
       - test-ruby
+      - test-javascript
       - standardrb
   

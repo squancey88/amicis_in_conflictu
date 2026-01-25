@@ -12,11 +12,14 @@
     "autoprefixer": "^10.4.17",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "clsx": "^2.1.1",
     "esbuild": "^0.20.1",
     "lodash": "^4.17.21",
     "nodemon": "^3.1.0",
     "postcss": "^8.4.35",
     "postcss-cli": "^11.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "sass": "^1.71.1"
   },
   "browserslist": [
@@ -27,9 +30,23 @@
     "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
     "build:css": "yarn build:css:compile && yarn build:css:prefix",
     "watch:css": "nodemon --verbose --watch ./app/assets/stylesheets/ --watch ./app/components/ -L --ext scss --exec \"yarn build:css\"",
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.jsx=jsx --loader:.tsx=tsx --loader:.ts=ts",
+    "test": "jest"
   },
   "devDependencies": {
-    "@editorjs/link-autocomplete": "^0.1.0"
+    "@editorjs/link-autocomplete": "^0.1.0",
+    "@hotwired/stimulus": "^3.2.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "esbuild-jest": "^0.5.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "jest-junit": "^16.0.0",
+    "typescript": "^5.9.3"
   }
 }
