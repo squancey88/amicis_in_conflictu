@@ -1,21 +1,20 @@
-import { useState, React } from "react";
-
-interface PlayerCommonFields {
-  name: string;
-  id: string;
-  type: string;
-}
+import { useState, useEffect } from "react";
+import { Player } from "../../types/common";
 
 export interface PlayersSelectorProps {
-  users: Array<PlayerCommonFields>;
-  teams: Array<PlayerCommonFields>;
+  users: Array<Player>;
+  teams: Array<Player>;
   fieldName: string;
+  onChange?: (players: Array<Player>) => void;
 }
 
-const PlayersSelector = ({ users, teams, fieldName }: PlayersSelectorProps) => {
-  const [selectedPlayers, setSelectedPlayers] = useState<PlayerCommonFields[]>(
-    [],
-  );
+const PlayersSelector = ({
+  users,
+  teams,
+  fieldName,
+  onChange,
+}: PlayersSelectorProps) => {
+  const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
   const [currentSelection, setCurrentSelection] = useState<string>("");
 
   const handleAddPlayer = () => {
@@ -31,6 +30,10 @@ const PlayersSelector = ({ users, teams, fieldName }: PlayersSelectorProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    onChange?.(selectedPlayers);
+  }, [selectedPlayers, onChange]);
 
   return (
     <div>

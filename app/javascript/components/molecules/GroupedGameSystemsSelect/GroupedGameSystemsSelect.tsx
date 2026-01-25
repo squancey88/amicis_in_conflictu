@@ -1,4 +1,3 @@
-import { React } from "react";
 import { GroupedGameSystems } from "../../types/common";
 import { Select, SelectProps } from "../../atoms/Select";
 
@@ -6,14 +5,10 @@ interface Props extends SelectProps {
   groupedGameSystems: Array<GroupedGameSystems>;
 }
 
-const GroupedGameSystemsSelect = ({
-  groupedGameSystems,
-  label,
-  fieldName,
-}: Props) => {
+const GroupedGameSystemsSelect = ({ groupedGameSystems, ...props }: Props) => {
   return (
     <div>
-      <Select label={label} fieldName={fieldName}>
+      <Select {...props}>
         <option value="">Please Select</option>
         {groupedGameSystems.map((group, index) => (
           <optgroup key={index} label={group.groupName}>
