@@ -44,8 +44,8 @@ jobs:
           replace-existing-chrome: true
       - ruby/rspec-test
       - store_artifacts:
-        path: tmp/screenshots
-        destination: screenshots
+          path: tmp/screenshots
+          destination: screenshots
 
   test-javascript:
     # Run Jest tests
