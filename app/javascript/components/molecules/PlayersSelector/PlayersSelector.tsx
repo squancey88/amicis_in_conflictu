@@ -36,7 +36,7 @@ const PlayersSelector = ({
   }, [selectedPlayers, onChange]);
 
   return (
-    <div>
+    <div data-test-id="PlayerSelector">
       <div className="input-group mb-3">
         <select
           className="form-select"
@@ -60,6 +60,7 @@ const PlayersSelector = ({
           </optgroup>
         </select>
         <button
+          data-test-id="add-player"
           className="btn btn-outline-secondary"
           type="button"
           onClick={handleAddPlayer}

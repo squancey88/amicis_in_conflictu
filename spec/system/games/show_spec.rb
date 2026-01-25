@@ -8,7 +8,7 @@ RSpec.describe("Show Game", type: :system) do
   let(:gaming_session) { create(:gaming_session, gaming_group:) }
 
   before do
-    allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(user)
+    login(user)
   end
 
   context "with campaign and army_list" do
