@@ -26,7 +26,7 @@ const Select = ({ label, fieldName, onChange, children }: AllProps) => {
       >
         {children}
       </select>
-      <label htmlFor={fieldName}>{label}</label>
+      {hasLabel && <label htmlFor={fieldName}>{label}</label>}
     </div>
   );
 };
