@@ -20,7 +20,7 @@ class NewGameModalComponent < ViewComponent::Base
   def players_selector_props
     {
       field_name: "game[players_attributes]",
-      users: @gaming_session.gaming_group.members.map { {id: _1.id, name: _1.display_name, type: :User} },
+      users: @gaming_session.gaming_group.users.map { {id: _1.id, name: _1.display_name, type: :User} },
       teams: @gaming_session.gaming_group.teams.map { {id: _1.id, name: _1.name, type: :Team} }
     }
   end

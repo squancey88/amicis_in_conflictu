@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe("Show Game", type: :system) do
-  let(:game_system) { create(:wargame, name: "Game Show Test") }
   let(:user) { create(:user) }
   let(:opponent) { create(:user) }
   let(:gaming_group) { create(:gaming_group, members: [user, opponent]) }
@@ -35,6 +34,7 @@ RSpec.describe("Show Game", type: :system) do
 
     it "clicking on Add Army should add extra row" do
       click_on "Your Army"
+      expect(page).to have_text("Remove")
       expect(page).to have_css("select[name*='army_list_id']")
       click_on "Add Army"
       expect(page).to have_css("select[name*='army_list_id']", count: 2)

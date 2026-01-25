@@ -46,6 +46,8 @@ jobs:
       - store_artifacts:
           path: tmp/screenshots
           destination: screenshots
+      - store_artifacts:
+          path: coverage
 
   test-javascript:
     # Run Jest tests
