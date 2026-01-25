@@ -29,11 +29,6 @@ const NewGameForm = ({
   };
 
   const canSubmit = gameSystemId !== undefined && selectedPlayers.length > 1;
-  console.log({
-    gameSystemId,
-    playersLength: selectedPlayers.length,
-    canSubmit,
-  });
 
   // TODO add in campaign support for auto selection of players
 

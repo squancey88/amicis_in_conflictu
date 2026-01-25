@@ -47,6 +47,7 @@ RSpec.describe("Show Game", type: :system) do
 
     it "when clicking on Add XP Gain should show form row" do
       click_on "Add Modifier"
+      expect(page).to have_text("Destroy")
       expect(page).to have_css("select[name*='unit_id']")
     end
   end
