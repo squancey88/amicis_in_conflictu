@@ -1,12 +1,8 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
-import HelloWorld from "./components/HelloWorld.jsx";
-
-import NewGameForm from "./components/organisms/NewGameForm.js";
+import { NewGameForm } from "Organisms/NewGameForm";
 
 // Component registry
 const components = {
-  HelloWorld,
   NewGameForm,
 };
 

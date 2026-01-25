@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class NewGameModalComponent < ViewComponent::Base
-  delegate :game_system_select, :player_selection, :member_selection, :team_selection,
-    :turbo_frame_tag, :react_component, :game_system_grouped_hashes, :campaigns_grouped_by_game_system,
+  delegate :react_component, :game_system_grouped_hashes, :campaigns_grouped_by_game_system,
     to: :helpers
 
   def initialize(gaming_session:)

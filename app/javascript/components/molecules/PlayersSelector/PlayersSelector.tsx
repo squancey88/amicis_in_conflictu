@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Player } from "../../types/common";
+import { Player } from "Types/common";
 
 export interface PlayersSelectorProps {
   users: Array<Player>;

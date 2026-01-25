@@ -1,5 +1,5 @@
-import { GroupedGameSystems } from "../../types/common";
-import { Select, SelectProps } from "../../atoms/Select";
+import { GroupedGameSystems } from "Types/common";
+import { Select, SelectProps } from "Atoms/Select";
 
 interface Props extends SelectProps {
   groupedGameSystems: Array<GroupedGameSystems>;
