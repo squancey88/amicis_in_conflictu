@@ -9,6 +9,7 @@ export interface Campaign extends BaseFields {}
 
 export interface Player extends BaseFields {
   type: string;
+  armies: Array<Army>;
 }
 
 export interface ArmyList extends BaseFields {}

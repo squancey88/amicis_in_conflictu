@@ -39,6 +39,7 @@ const PlayersSelector = ({
     <div data-test-id="PlayerSelector">
       <div className="input-group mb-3">
         <select
+          name="player-select"
           className="form-select"
           value={currentSelection}
           onChange={(e) => setCurrentSelection(e.target.value)}
