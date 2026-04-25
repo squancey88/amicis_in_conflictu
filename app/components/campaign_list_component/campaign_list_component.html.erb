@@ -9,7 +9,7 @@
 
     <div class=mt-2>
       <%= form_with(url: new_gaming_group_campaign_path(@gaming_group), method: :get) do |form| %>
-        <%= bootstrap_game_system_select(form, :game_system_id) %> 
+        <%= game_system_select(form, :game_system_id) %> 
         <%= form.submit "New Campaign", class: "btn btn-primary" %>
       <% end %>
     </div>

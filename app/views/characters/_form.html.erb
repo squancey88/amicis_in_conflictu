@@ -13,10 +13,10 @@
 
       <% tab_section.with_tab(label: "Characteristics") do |tab| %>
         <% tab.with_grid_box(title: "Details", as_box: true) do %>
-          <%= bootstrap_text_field(form, :title) %>
-          <%= bootstrap_text_field(form, :given_name) %>
-          <%= bootstrap_text_field(form, :family_name) %>
-          <%= bootstrap_text_field(form, :nickname) %>
+          <%= form.text_field(:title) %>
+          <%= form.text_field(:given_name) %>
+          <%= form.text_field(:family_name) %>
+          <%= form.text_field(:nickname) %>
           <%= character_type_select(form, :character_type_id, @world) if @is_world_owner %>
           <%= character_species_type_select(form, :character_species_type_id, @world) %>
           <%= form.hidden_field :campaign_id unless @world_building %>

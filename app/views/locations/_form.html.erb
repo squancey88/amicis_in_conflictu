@@ -3,7 +3,7 @@
   <%= render RecordFormWrapperComponent.new(record: location, form:) do |component| %>
 
     <% component.with_form_box(title: "Details") do %>
-      <%= bootstrap_text_field(form, :name) %>
+      <%= form.text_field(:name) %>
       <%= located_in_select(form, :located_in_id, @world) %>
       <%= location_type_select(form, :location_type_id, @world) %>
     <% end %>

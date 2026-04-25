@@ -10,7 +10,7 @@ class Player < ApplicationRecord
   belongs_to :team, -> { where(players: {controller_type: "Team"}) }, foreign_key: "controller_id",
     inverse_of: :team_players, optional: true
 
-  enum result: {
+  enum :result, {
     not_set: 0,
     lost: 1,
     draw: 2,

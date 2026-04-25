@@ -3,7 +3,7 @@
   <%= render RecordFormWrapperComponent.new(record: article, form:, row_cols: 1) do |component| %>
 
     <% component.with_form_box do -%>
-      <%= bootstrap_text_field(form, :title) %>
+      <%= form.text_field(:title) %>
       <%= visiblity_select(form)  %>
     <% end %>
 

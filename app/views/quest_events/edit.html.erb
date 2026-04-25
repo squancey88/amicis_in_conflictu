@@ -7,7 +7,7 @@
     <% component.with_form_box do %>
       <div class="d-flex flex-row gap-2">
         <div class="flex-fill">
-          <%= bootstrap_text_field(form, :title) %>
+          <%= form.text_field(:title) %>
         </div>
         <div class="flex-fill">
           <%= render TextEditorComponent.new(form:, attribute: :blurb, min_height: 25) %>

@@ -5,12 +5,12 @@
     <% component.with_form_box do %>
 
       <%= form.hidden_field :game_system_id %>
-      <%= bootstrap_text_form(form, :name) %>
-      <%= bootstrap_text_form(form, :description) %>
-      <%= bootstrap_number_form(form, :cost) %>
+      <%= form.text_field(:name) %>
+      <%= form.text_field(:description) %>
+      <%= form.number_field(:cost) %>
 
-      <%= bootstrap_check_box(form, :attach_to_list) %>
-      <%= bootstrap_check_box(form, :attach_to_unit) %>
+      <%= form.check_box(:attach_to_list) %>
+      <%= form.check_box(:attach_to_unit) %>
     <% end %>
   <% end %>
 <% end %>

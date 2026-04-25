@@ -4,13 +4,11 @@ module WorldsHelper
   end
 
   def world_select_for_group(gaming_group, form, attribute_name, **)
-    bootstrap_field_wrapper(form, attribute_name,
-      bootstrapped_grouped_collection_select(form, attribute_name, gaming_group.users,
-        :worlds, :display_name, **))
+    form.grouped_collection_select(attribute_name, gaming_group.users,
+      :worlds, :display_name, **)
   end
 
   def world_select(form, attribute_name, **)
-    bootstrap_field_wrapper(form, attribute_name,
-      bootstrapped_collection_select(form, attribute_name, World.all, **))
+    form.collection_select(attribute_name, World.all, :id, :name, **)
   end
 end

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token, if: :json_request?
   before_action :authenticate_user
 
+  default_form_builder AICFormBuilder
+
   protected
 
   def json_request?

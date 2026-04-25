@@ -5,15 +5,9 @@ module UnitStatDefinitionHelper
       {include_blank: "Please Select"}, {class: "form-select", data:}
   end
 
-  def bootstrap_unit_stat_definition_select(game_system, form, attribute_name, data: {})
-    bootstrap_field_wrapper(form, attribute_name, unit_stat_definition_select(game_system, form, attribute_name))
-  end
-
   def unit_stat_definition_type_select(form)
-    bootstrap_field_wrapper(form, :stat_type,
-      form.select(:stat_type,
-        UnitStatDefinition.stat_types.keys.map { |key| [key.humanize.split.first, key] },
-        {}, {class: "form-select"}),
-      label: "Type")
+    form.select(:stat_type,
+      UnitStatDefinition.stat_types.keys.map { |key| [key.humanize.split.first, key] },
+      {}, {class: "form-select"})
   end
 end

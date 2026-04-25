@@ -1,27 +1,24 @@
 <%= content_tag :div, data: do %>
 
-  <%= bootstrap_field_wrapper(@form, @game_system_field,
-      game_systems_with_army_lists_select(@form, :game_system_id, include_blank: "Please Select",
+  <%= game_systems_with_army_lists_select(@form, :game_system_id, include_blank: "Please Select",
         data: { 
           campaign_and_army_selector_target: "gameSystemSelect",
           action: "campaign-and-army-selector#gameSystemSelected"
-        })) %>
+        }) %>
 
-  <%= bootstrap_field_wrapper(@form, @army_field,
-      @form.collection_select(@army_field, selected_armies, :id, :name, army_select_options, 
+  <%= @form.collection_select(@army_field, selected_armies, :id, :name, army_select_options, 
       {class: "form-control", 
         data: { 
           campaign_and_army_selector_target: "armySelect",
         }
-      })) %>
+      }) %>
 
-  <%= bootstrap_field_wrapper(@form, @campaign_field,
-      @form.collection_select(@campaign_field, selected_campaigns, :id, :name, {include_blank: "No Campaign"}, 
+  <%= @form.collection_select(@campaign_field, selected_campaigns, :id, :name, {include_blank: "No Campaign"}, 
       {class: "form-control", 
         data: { 
           campaign_and_army_selector_target: "campaignSelect",
         }
-      })) %>
+      }) %>
           
 
 <% end %>

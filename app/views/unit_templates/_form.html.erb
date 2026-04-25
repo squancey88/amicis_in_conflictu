@@ -5,15 +5,15 @@
     <% component.with_form_box do %>
       <%= form.hidden_field :game_system_id %>
       
-      <%= bootstrap_army_select(unit_template.game_system, form, :army_id) %>
-      <%= bootstrap_text_form(form, :name) %>
-      <%= bootstrap_number_form(form, :cost) %>
+      <%= army_select(unit_template.game_system, form, :army_id) %>
+      <%= form.text_field(:name) %>
+      <%= form.number_field(:cost) %>
       
       <h3>Stats</h3>
 
       <div class="form-row">
         <%= form.fields_for :unit_template_stats do |stats_form| %>
-          <%= bootstrap_number_form(stats_form, :base_value, 
+          <%= form.number_field(:base_value, 
             label: stats_form.object.unit_stat_definition.label,
             min: stats_form.object.unit_stat_definition.min,
             max: stats_form.object.unit_stat_definition.max) %>
