@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  username: <%= ENV.fetch("USER") %>
+  username: <%= ENV.fetch("USER", "postgres") %>
   database: "aic-dev"
 
 test:
