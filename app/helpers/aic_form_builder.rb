@@ -1,35 +1,35 @@
 class AICFormBuilder < ActionView::Helpers::FormBuilder
   def text_field(attribute, options = {})
     field_wrapper(attribute, ["form-floating"], options) do
-      super(attribute, class: "form-control")
+      super(attribute, options.except(:label).merge(class: "form-control"))
     end
   end
 
-  def number_field(attribute, option = {})
+  def number_field(attribute, options = {})
     field_wrapper(attribute, ["form-floating"], options) do
-      super(attribute, class: "form-control")
+      super(attribute, options.except(:label).merge(class: "form-control"))
     end
   end
 
   def password_field(attribute, options = {})
     field_wrapper(attribute, ["form-floating"], options) do
-      super(attribute, class: "form-control")
+      super(attribute, options.except(:label).merge(class: "form-control"))
     end
   end
 
   def email_field(attribute, options = {})
     field_wrapper(attribute, ["form-floating"], options) do
-      super(attribute, class: "form-control")
+      super(attribute, options.except(:label).merge(class: "form-control"))
     end
   end
 
   def check_box(attribute, options = {})
     field_wrapper(attribute, [], options, label_class: "mx-1") do
-      super(attribute)
+      super(attribute, options)
     end
   end
 
-  def label(attribute, options = {})
+  def label(attribute, content_or_options = nil, options = {}, &block)
     super
   end
 
@@ -67,7 +67,15 @@ class AICFormBuilder < ActionView::Helpers::FormBuilder
 
   def field_wrapper(attribute, classes, options, label_class: nil, margin_bottom: 3, &block)
     @template.content_tag :div, class: classes + ["mb-#{margin_bottom}"] do
-      block.call + label(options[:label].presence || attribute, class: label_class)
+      block.call + label_generator(attribute, options, label_class)
+    end
+  end
+
+  def label_generator(attribute, options, label_class)
+    if options[:label].present?
+      label(options[:label].parameterize, options[:label], class: label_class)
+    else
+      label(attribute, class: label_class)
     end
   end
 end

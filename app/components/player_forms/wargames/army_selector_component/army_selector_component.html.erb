@@ -1,7 +1,7 @@
 <div class="army-selector mb-3" data-controller="army-selector" 
   data-army-selector-player-index-value="<%= @player_index %>">
   <div id="player_armies">
-    <%= @form.fields_for :player_armies do |army_form| %>
+    <%= @form.fields_for :player_armies, builder: AICFormBuilder do |army_form| %>
       <%= render partial: "player_armies/form_row", locals: {
         form: army_form,
         game_system: @game_system
