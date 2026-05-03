@@ -35,7 +35,6 @@ RSpec.describe CharactersHelper, type: :helper do
           {"type" => "string", "key" => "test", "required" => true, "name" => "Test Field"},
           character)
       end
-      puts form_res
       expect(form_res).to have_css("input[name='character[test]'][type='text'][required]")
       expect(form_res).to have_css("label", text: "Test Field")
     end
