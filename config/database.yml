@@ -10,7 +10,7 @@ development:
 
 test:
   <<: *default
-  username: <%= ENV.fetch("USER") %>
+  username: <%= ENV.fetch("USER", "postgres") %>
   database: "aic-test"
 
 production:
