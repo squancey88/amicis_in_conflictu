@@ -33,6 +33,7 @@ RSpec.describe("Show Game", type: :system) do
     end
 
     it "clicking on Add Army should add extra row" do
+      expect(page).to have_text("Your Army")
       click_on "Your Army"
       expect(page).to have_text("Remove")
       expect(page).to have_css("select[name*='army_list_id']")

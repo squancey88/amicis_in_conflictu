@@ -14,6 +14,8 @@ RSpec.describe("Creating a Game", type: :system) do
   it "should create a game" do
     visit gaming_group_gaming_session_path(gaming_group, gaming_session)
 
+    expect(page).to have_text("New Game")
+
     click_on "New Game"
 
     select "Game Test", from: "Game System"
