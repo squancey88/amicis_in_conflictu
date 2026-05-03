@@ -10,7 +10,7 @@ class Player < ApplicationRecord
   belongs_to :team, -> { where(players: {controller_type: "Team"}) }, foreign_key: "controller_id",
     inverse_of: :team_players, optional: true
 
-  enum result: {
+  enum :result, {
     not_set: 0,
     lost: 1,
     draw: 2,
@@ -26,10 +26,6 @@ class Player < ApplicationRecord
   before_save(:process_player_data)
   before_create(:setup_game_data)
 
-  def setup_game_data
-    self.game_data = game.game_system.setup_player_data(game)
-  end
-
   def user_is_player?(user)
     if controller_type == "User"
       controller_id == user.id
@@ -38,16 +34,22 @@ class Player < ApplicationRecord
     end
   end
 
-  def process_player_data
-    game.game_system.update_player_data(self) if game_data
-  end
-
   def score_by_keys
     game.game_system.player_score_by_keys(self)
   end
 
   def calculate_score
     game.game_system.calculate_player_score(self)
+  end
+
+  private
+
+  def process_player_data
+    game.game_system.update_player_data(self) if game_data
+  end
+
+  def setup_game_data
+    self.game_data = game.game_system.setup_player_data(game)
   end
 end
 

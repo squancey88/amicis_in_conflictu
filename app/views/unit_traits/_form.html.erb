@@ -5,8 +5,8 @@
     <% component.with_form_box(title: "Details") do %>
 
       <%= form.hidden_field :game_system_id %>
-      <%= bootstrap_text_form(form, :name) %>
-      <%= bootstrap_check_box(form, :active) %>
+      <%= form.text_field(:name) %>
+      <%= form.check_box(:active) %>
 
       <%= render partial: "unit_trait_category_mappings/form_embed", locals: { record: unit_trait, form: } %>
     <% end %>

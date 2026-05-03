@@ -1,8 +1,7 @@
 module UnitTraitCategoriesHelper
   def unit_trait_category_select(form, attribute, game_system, data: {})
-    bootstrap_field_wrapper(form, attribute,
-      form.collection_select(attribute, game_system.unit_trait_categories.order(:name), :id, :name,
-        {include_blank: "Please Select"}, {class: "form-select", data:}))
+    form.collection_select(attribute, game_system.unit_trait_categories.order(:name), :id, :name,
+      {include_blank: "Please Select"}, {data:})
   end
 
   def unit_trait_category_list(record)

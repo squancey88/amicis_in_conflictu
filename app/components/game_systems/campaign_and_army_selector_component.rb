@@ -3,7 +3,6 @@
 class GameSystems::CampaignAndArmySelectorComponent < ViewComponent::Base
   delegate :current_user,
     :game_systems_with_army_lists_select,
-    :bootstrap_field_wrapper,
     to: :helpers
 
   def initialize(form:, game_system_field: :game_system_id, campaign_field: :campaign_id, army_field: :army_id)

@@ -4,19 +4,19 @@
 
     <% component.with_form_box do %>
 
-      <%= bootstrap_text_form(form, :name) %>
+      <%= form.text_field(:name) %>
 
-      <%= bootstrap_text_form(form, :description) %>
+      <%= form.text_field(:description) %>
 
-      <%= bootstrap_number_form(form, :cost) %>
+      <%= form.number_field(:cost) %>
 
-      <%= bootstrap_number_form(form, :starting_xp) %>
+      <%= form.number_field(:starting_xp) %>
 
       <h3>Stats</h3>
 
       <div class="form-row">
         <%= form.fields_for :unit_stats do |stats_form| %>
-          <%= bootstrap_number_form(stats_form, :base_value, 
+          <%= form.number_field(:base_value, 
             label: stats_form.object.unit_stat_definition.label,
             min: stats_form.object.unit_stat_definition.min,
             max: stats_form.object.unit_stat_definition.max) %>

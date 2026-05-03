@@ -4,7 +4,7 @@
     <div class="equipment-menu">
       <%= form_with url: attach_equipment_army_list_path(@army_list) do |f| %>
         <div class="equipment-menu__template-form">
-          <%= bootstrap_equipment_select(@army_list.game_system, f, :equipment_id) %>
+          <%= equipment_select(@army_list.game_system, f, :equipment_id) %>
           <%= f.submit "Attach", class: "btn btn-primary" %>
         </div>
       <% end %>

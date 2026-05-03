@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_31_140540) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_08_123702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -228,6 +228,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_140540) do
     t.index ["located_in_id"], name: "index_locations_on_located_in_id"
     t.index ["location_type_id"], name: "index_locations_on_location_type_id"
     t.index ["world_id"], name: "index_locations_on_world_id"
+  end
+
+  create_table "mapping_layers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "map_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["map_id"], name: "index_mapping_layers_on_map_id"
+  end
+
+  create_table "mapping_maps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "world_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["world_id"], name: "index_mapping_maps_on_world_id"
   end
 
   create_table "organisation_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -595,6 +611,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_31_140540) do
   add_foreign_key "locations", "location_types"
   add_foreign_key "locations", "locations", column: "located_in_id"
   add_foreign_key "locations", "worlds"
+  add_foreign_key "mapping_layers", "mapping_maps", column: "map_id"
+  add_foreign_key "mapping_maps", "worlds"
   add_foreign_key "organisation_types", "worlds"
   add_foreign_key "organisations", "organisation_types"
   add_foreign_key "organisations", "worlds"

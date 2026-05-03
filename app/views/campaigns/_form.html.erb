@@ -6,7 +6,7 @@
       <p>Game system: <%= campaign.game_system.name %></p>
       <%= form.hidden_field :game_system_id %>
 
-      <%= bootstrap_text_form(form, :name) %>
+      <%= form.text_field(:name) %>
       <%= gaming_group_user_select(@gaming_group, form, :game_master_id) %>
 
       <% if campaign.game_system.campaigns_have_worlds %>
@@ -14,12 +14,11 @@
       <% end %>
 
       <% if campaign.game_system.respond_to?(:list_cost_name) %>
-        <%= bootstrap_number_form(form, :list_start_cost, label: "Starting #{campaign.game_system.list_cost_name}") %>
+        <%= form.number_field(:list_start_cost, label: "Starting #{campaign.game_system.list_cost_name}") %>
 
         <%= form.fields_for :config do |config_form| %>
           <% campaign.game_system.campaign_list_attributes&.each do |attr| %>
-            <%= bootstrap_field_wrapper(config_form, attr["key"], 
-              config_form.number_field(attr["key"], value: campaign.config[attr["key"]], class: "form-control"), 
+            <%= config_form.number_field(attr["key"], value: campaign.config[attr["key"]], class: "form-control", 
               label: attr["name"]) %>
           <% end %>
         <% end %>

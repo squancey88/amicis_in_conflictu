@@ -5,15 +5,15 @@
     <% component.with_form_box(title: "Details") do %>
 
       <%= form.hidden_field :game_system_id %> 
-      <%= bootstrap_text_form(form, :name) %>
-      <%= bootstrap_number_form(form, :cost) %>
-      <%= bootstrap_check_box(form, :active) %>
+      <%= form.text_field(:name) %>
+      <%= form.number_field(:cost) %>
+      <%= form.check_box(:active) %>
 
 
-      <%= bootstrap_check_box(form, :repeatable) %>
-      <%= bootstrap_number_form(form, :repeat_cost) %>
-      <%= bootstrap_check_box(form, :increase_cost_by_additional_instances) %>
-      <%= bootstrap_number_form(form, :list_cost_increase) %>
+      <%= form.check_box(:repeatable) %>
+      <%= form.number_field(:repeat_cost) %>
+      <%= form.check_box(:increase_cost_by_additional_instances) %>
+      <%= form.number_field(:list_cost_increase) %>
     <% end %>
 
     <% component.with_form_box(title: "Stat Changes") do %>

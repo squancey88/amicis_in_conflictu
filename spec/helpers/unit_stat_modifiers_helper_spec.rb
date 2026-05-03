@@ -5,7 +5,7 @@ RSpec.describe UnitStatModifiersHelper, type: :helper do
   it "should return unit_stat_definition_select" do
     form_res = form_with model: UnitStatModifier.new do |form|
       form.fields_for :unit_stat_changes, UnitStatChange.new, child_index: Time.now.to_i do |ff|
-        helper.bootstrap_unit_stat_definition_select(game_system, ff, :unit_stat_definition_id)
+        helper.unit_stat_definition_select(game_system, ff, :unit_stat_definition_id)
       end
     end
     expect(form_res).to have_css("select")

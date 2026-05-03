@@ -1,10 +1,10 @@
-<%= bootstrap_text_form(form, :name)%>
-<%= bootstrap_text_form(form, :edition)%>
-<%= bootstrap_text_form(form, :slug)%>
+<%= form.text_field(:name)%>
+<%= form.text_field(:edition)%>
+<%= form.text_field(:slug)%>
 
-<%= bootstrap_check_box(form, :competitive) %>
-<%= bootstrap_check_box(form, :has_armies) %>
-<%= bootstrap_check_box(form, :has_army_lists) %>
+<%= form.check_box(:competitive) %>
+<%= form.check_box(:has_armies) %>
+<%= form.check_box(:has_army_lists) %>
 
 <%= render JsonEditorComponent.new(model: game_system,
                                   attribute: :game_config,

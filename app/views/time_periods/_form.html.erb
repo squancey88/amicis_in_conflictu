@@ -5,8 +5,8 @@
     <% component.with_form_box do %>
       <%= form.hidden_field(:world_id) %>
 
-      <%= bootstrap_text_field(form, :name) %>
-      <%= bootstrap_number_field(form, :order) %>
+      <%= form.text_field(:name) %>
+      <%= form.number_field(:order) %>
     <% end %>
     <% component.with_form_box do %>
       <%= render TextEditorComponent.new(form:, attribute: :description) %>

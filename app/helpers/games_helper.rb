@@ -17,8 +17,7 @@ module GamesHelper
   end
 
   def state_select(form)
-    bootstrap_field_wrapper(form, :game_state,
-      form.select(:game_state, Game.game_states.keys.map { |key| [key.humanize, key] }, {}, {class: "form-select"}))
+    form.select(:game_state, Game.game_states.keys.map { |key| [key.humanize, key] }, {}, {class: "form-select"})
   end
 
   def state_badge(game)

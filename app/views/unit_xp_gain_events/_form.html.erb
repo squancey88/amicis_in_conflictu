@@ -4,9 +4,9 @@
 
     <% component.with_form_box(title: "Details") do %>
 
-      <%= bootstrap_text_field(form, :name) %>
-      <%= bootstrap_number_field(form, :xp_gain) %>
-      <%= bootstrap_check_box(form, :active) %>
+      <%= form.text_field(:name) %>
+      <%= form.number_field(:xp_gain) %>
+      <%= form.check_box(:active) %>
       <%= form.hidden_field :game_system_id %>
             
     <% end %>

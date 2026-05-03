@@ -5,7 +5,7 @@
   <%= render RecordFormWrapperComponent.new(record: @quest_event, form:) do |component| %>
 
     <% component.with_form_box(title: "Details") do -%>
-      <%= bootstrap_text_field(form, :title) %>
+      <%= form.text_field(:title) %>
     <% end %>
 
     <% component.with_form_box(title: "Blurb") do -%>

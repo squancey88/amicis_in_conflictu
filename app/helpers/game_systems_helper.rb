@@ -6,10 +6,6 @@ module GameSystemsHelper
       {include_blank: "Please Select"}, {class: "form-select", data:}
   end
 
-  def bootstrap_game_system_select(form, attribute_name, data: {})
-    bootstrap_field_wrapper(form, attribute_name, game_system_select(form, attribute_name))
-  end
-
   def game_systems_with_army_select(form, attribute_name, include_blank: nil)
     options = {}
     options[:include_blank] = include_blank if include_blank
