@@ -13,7 +13,7 @@ jobs:
       - image: cimg/postgres:15.6
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_DB: gaming_night_tracker_test
+          POSTGRES_DB: aic-test
           POSTGRES_PASSWORD: password
     environment:
       RAILS_ENV: test
