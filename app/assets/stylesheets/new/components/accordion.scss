@@ -1,0 +1,26 @@
+
+.aic-accordion {
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+
+    .content { 
+      flex: 1 1 auto;
+    }
+  }
+
+  .body {
+    padding: 0.5rem;
+    border: 1px solid grey;
+
+    border-radius: 0 0 0.5rem 0.5rem;
+
+    &.hidden {
+      display: none;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TextEditorComponent < ViewComponent::Base
+  delegate :react_component, to: :helpers
+
   def initialize(form:, attribute:, label: nil, save_triggers: nil, hide_label: false, min_height: 200, search_params: {})
     @form = form
     @attribute = attribute
@@ -34,14 +36,12 @@ class TextEditorComponent < ViewComponent::Base
       content.to_json
     end
 
-    content_tag(:div, class: "text-editor-component") do
-      concat(content_tag(:div, class: "text-editor-component__wrapper mb-3", data:) do
-        concat(content_tag(:div, label, class: "text-editor-component__label")) unless @hide_label
-        concat(content_tag(:div, class: "text-editor-component__content mb-3") do
-          concat(content_tag(:div, nil, data: {"editorjs-target": "editor"}))
-          concat(@form.hidden_field(@attribute, value:, data: {"editorjs-target": "formField"}))
-        end)
-      end)
-    end
+    react_component("TextEditor", {
+      label: @label,
+      fieldName: @attribute,
+      minHeight: @min_height,
+      initialValue: value,
+      searchParams: @search_params
+    })
   end
 end

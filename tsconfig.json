@@ -15,11 +15,12 @@
     "typeRoots": ["./node_modules/@types"],
     "baseUrl": ".",
     "paths": {
-      "*": ["app/javascript/*"],
       "Atoms/*": ["app/javascript/components/atoms/*"],
       "Molecules/*": ["app/javascript/components/molecules/*"],
       "Organisms/*": ["app/javascript/components/organisms/*"],
-      "Types/*": ["app/javascript/components/types/*"]
+      "Types/*": ["app/javascript/components/types/*"],
+      "Modules/*": ["app/javascript/modules/*"],
+      "*": ["app/javascript/*"]
     }
   },
   "include": [

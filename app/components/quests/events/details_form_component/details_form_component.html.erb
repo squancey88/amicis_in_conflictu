@@ -1,4 +1,8 @@
 <div>
+  <%= react_component("QuestEventForm", {
+    data: @quest_event.quest_event_datum.map { QuestEventDatumSerializer.new(_1).serialize }
+  }) %>
+
   <%= render Common::HeaderCardComponent.new(title: "Event Details") do |header| %>
     <% header.with_buttons do %>
       <%= render Common::MenuButtonComponent.new(menu_options: [
@@ -6,6 +10,7 @@
       ]) %>
     <% end %>
   <% end %>
+
 
   <div class="accordion" id="accordionExample">
     <%= turbo_frame_tag :event_details do %>
@@ -15,3 +20,5 @@
     <% end %>
   </div>
 </div>
+
+<!-- Im here -->

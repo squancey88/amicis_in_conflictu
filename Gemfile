@@ -71,6 +71,8 @@ group :development do
   # gem "spring"
   gem "letter_opener_web", "~> 2.0"
   gem "rails-erd"
+  gem "guard-livereload"
+  gem "rack-livereload"
 end
 
 group :test do
