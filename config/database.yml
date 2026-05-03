@@ -5,17 +5,15 @@ default: &default
 
 development:
   <<: *default
-  host: <%= ENV.fetch("DB_HOST", 'localhost') %>
-  username: postgres
-  password: <%= ENV.fetch("DB_PASSWORD", '') %>
-  database: gaming_night_tracker
+  username: <%= ENV.fetch("USER", "postgres") %>
+  database: "aic-dev"
 
 test:
   <<: *default
-  host: <%= ENV.fetch("DB_HOST", 'localhost') %>
-  username: postgres
-  password: <%= ENV.fetch("DB_PASSWORD", '') %>
-  database: gaming_night_tracker_test
+  username:  <%= ENV.fetch("DB_USER") { ENV.fetch("USER", "postgres") } %>
+  host: <%= ENV.fetch("DB_HOST", nil) %>
+  password: <%= ENV.fetch("DB_PASSWORD", nil) %>
+  database: "aic-test"
 
 production:
   <<: *default
