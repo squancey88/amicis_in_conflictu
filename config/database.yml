@@ -11,6 +11,8 @@ development:
 test:
   <<: *default
   username: <%= ENV.fetch("USER", "postgres") %>
+  host: <%= ENV.fetch("DB_HOST", nil) %>
+  password: <%= ENV.fetch("DB_PASSWORD", nil) %>
   database: "aic-test"
 
 production:
