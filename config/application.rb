@@ -5,6 +5,7 @@ require "rails/all"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+Rails.autoloaders.main.ignore(Rails.root.join("lib/generators"))
 
 module GamingNightTracker
   class Application < Rails::Application
