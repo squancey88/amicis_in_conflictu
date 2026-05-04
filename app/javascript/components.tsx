@@ -14,11 +14,11 @@ const roots = new Map<Element, Root>();
 
 function mountComponents() {
   document.querySelectorAll("[data-react-component]").forEach((container) => {
-    const componentName = container.getAttribute("data-react-component");
+    const componentName = container.dataset.reactComponent;
     const Component = components[componentName!];
 
     if (Component) {
-      const props = JSON.parse(container.getAttribute("data-props") || "{}");
+      const props = JSON.parse(container.dataset.props || "{}");
 
       const root = roots.get(container) ?? createRoot(container);
       roots.set(container, root);

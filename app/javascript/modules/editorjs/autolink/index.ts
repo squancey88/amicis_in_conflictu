@@ -21,7 +21,7 @@ interface SearchResponse {
   items: SearchResponseItem[];
 }
 
-// LinkAutocomplete doesn't ship types so we declare what we use
+// NOSONAR typescript:S3854 - LinkAutocomplete doesn't ship types, cast is intentional
 declare class LinkAutocompleteBase {
   config: AutoLinkConfig;
   searchQueryParam: string;
@@ -31,7 +31,7 @@ declare class LinkAutocompleteBase {
 }
 
 export default class AutoLink extends (LinkAutocomplete as unknown as typeof LinkAutocompleteBase) {
-  private additionalParams: Record<string, string>;
+  readonly additionalParams: Record<string, string>;
 
   constructor({ config, api }: AutoLinkConstructorArgs) {
     super({ config, api });
