@@ -5,3 +5,7 @@ export interface QuestEventData {
   order: number;
   type: string;
 }
+
+export interface QuestEventDataTextSection extends QuestEventData {
+  content: string;
+}

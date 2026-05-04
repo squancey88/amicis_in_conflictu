@@ -24,9 +24,9 @@ RSpec.describe "characters/edit", type: :view do
     end
 
     it "renders correct notes sections" do
-      expect(rendered).not_to have_css("input[name='character[player_notes]']", visible: false)
-      expect(rendered).to have_css("input[name='character[world_owner_notes]']", visible: false)
-      expect(rendered).to have_css("input[name='character[shared_notes]']", visible: false)
+      expect(rendered).to have_component_with_props("TextEditor", {fieldName: "character[shared_notes]"})
+      expect(rendered).to have_component_with_props("TextEditor", {fieldName: "character[world_owner_notes]"})
+      expect(rendered).not_to have_component_with_props("TextEditor", {fieldName: "character[player_notes]"})
     end
   end
 
@@ -43,9 +43,9 @@ RSpec.describe "characters/edit", type: :view do
     end
 
     it "renders player notes" do
-      expect(rendered).to have_css("input[name='character[player_notes]']", visible: false)
-      expect(rendered).not_to have_css("input[name='character[world_owner_notes]']", visible: false)
-      expect(rendered).to have_css("input[name='character[shared_notes]']", visible: false)
+      expect(rendered).to have_component_with_props("TextEditor", {fieldName: "character[shared_notes]"})
+      expect(rendered).to have_component_with_props("TextEditor", {fieldName: "character[player_notes]"})
+      expect(rendered).not_to have_component_with_props("TextEditor", {fieldName: "character[world_owner_notes]"})
     end
   end
 end

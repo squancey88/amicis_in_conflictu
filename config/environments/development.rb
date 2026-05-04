@@ -82,7 +82,6 @@ Rails.application.configure do
   config.view_component.generate.sidecar = true
 
   config.web_console.whiny_requests = false
-  config.web_console.permissions = "0.0.0.0/0"
 
   config.view_component.previews.paths << Rails.root.join("previews/components")
 

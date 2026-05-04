@@ -80,16 +80,18 @@ const TextEditor = ({
   };
 
   return (
-    <div className="text-editor-component__wrapper mb-3">
-      <div className="text-editor-component__label">{label}</div>
-      <div className="text-editor-component__content mb-3">
-        <div ref={holderRef} />
-        <input
-          type="hidden"
-          name={fieldName}
-          ref={hiddenInputRef}
-          defaultValue={initialValue}
-        />
+    <div className="text-editor-component">
+      <div className="text-editor-component__wrapper mb-3">
+        <div className="text-editor-component__label">{label}</div>
+        <div className="text-editor-component__content mb-3">
+          <div ref={holderRef} />
+          <input
+            type="hidden"
+            name={fieldName}
+            ref={hiddenInputRef}
+            defaultValue={initialValue}
+          />
+        </div>
       </div>
     </div>
   );

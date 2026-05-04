@@ -18,16 +18,6 @@ class TextEditorComponent < ViewComponent::Base
     @attribute.to_s.humanize
   end
 
-  def data
-    {
-      controller: :editorjs,
-      "editorjs-min-height-value": @min_height
-    }.tap do |hash|
-      hash[:action] = @save_triggers.map { "editorjs:editorSave->#{_1}" }.join(" ") if @save_triggers
-      hash[:editorjs_search_params_value] = @search_params if @search_params.present?
-    end
-  end
-
   def call
     content = @form.object.send(@attribute)
     value = if content.instance_of?(String)
@@ -37,8 +27,8 @@ class TextEditorComponent < ViewComponent::Base
     end
 
     react_component("TextEditor", {
-      label: @label,
-      fieldName: @attribute,
+      label:,
+      fieldName: @form.field_name(@attribute),
       minHeight: @min_height,
       initialValue: value,
       searchParams: @search_params

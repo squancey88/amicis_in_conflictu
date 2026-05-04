@@ -2,10 +2,10 @@ import React from "react";
 import { Accordion } from "Atoms/Accordion";
 import { TextInput } from "Atoms/TextInput";
 import { TextEditor } from "Atoms/TextEditor";
-import { QuestEventTextSection } from "Types/events";
+import { QuestEventDataTextSection } from "Types/events";
 
 interface QuestEventTextSectionFormProps {
-  section: QuestEventTextSection;
+  section: QuestEventDataTextSection;
   index?: number;
   startOpen?: boolean;
 }
@@ -21,6 +21,8 @@ const QuestEventTextSectionForm = ({
 
   return (
     <Accordion title="Text Section" startOpen={startOpen}>
+      <input type="hidden" value={section.id} name={fieldName("id")} />
+      <input type="hidden" value={section.type} name={fieldName("type")} />
       <TextInput
         fieldName={fieldName("title")}
         label="Title"
@@ -29,7 +31,7 @@ const QuestEventTextSectionForm = ({
       <TextEditor
         fieldName={fieldName("content")}
         label="Details"
-        initialValue={section.details}
+        initialValue={section.content}
       />
     </Accordion>
   );

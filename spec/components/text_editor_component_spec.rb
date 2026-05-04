@@ -12,6 +12,17 @@ RSpec.describe TextEditorComponent, type: :helper do
   end
 
   it "should render the editor div" do
-    expect(page).to have_css(".text-editor-component")
+    expect(page).to have_css("[data-react-component='TextEditor']")
+  end
+
+  it "passes correct props to React" do
+    doc = Nokogiri::HTML(rendered_content)
+    node = doc.at_css("[data-react-component='TextEditor']")
+    props = JSON.parse(node["data-props"])
+
+    expect(props).to include(
+      "label" => "Notes",
+      "minHeight" => 200
+    )
   end
 end

@@ -1,12 +1,14 @@
 
 .aic-accordion {
+  @include component-spacing;
 
   .title {
     display: flex;
     flex-direction: row;
-    background-color: var(--primary-color);
+    background-color: var(--component-accent);
     padding: 0.5rem;
     border-radius: 0.5rem 0.5rem 0 0;
+    @include component-accent;
 
     .content { 
       flex: 1 1 auto;

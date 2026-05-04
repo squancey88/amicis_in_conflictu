@@ -1,4 +1,13 @@
 
 :root {
   --primary-color: #0dcaf0;
+  
+
+  --component-accent: #e3f2fd;
+  --component-accent-border: #000000;
+}
+
+@mixin component-accent {
+  background-color: var(--component-accent);
+  border: 1px solid var(--component-accent-border);
 }
