@@ -8,6 +8,7 @@ module.exports = {
     "^Molecules/(.*)$": "<rootDir>/app/javascript/components/molecules/$1",
     "^Organisms/(.*)$": "<rootDir>/app/javascript/components/organisms/$1",
     "^Types/(.*)$": "<rootDir>/app/javascript/types/$1",
+    "^Modules/(.*)$": "<rootDir>/app/javascript/modules/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   transform: {
