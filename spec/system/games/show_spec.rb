@@ -18,6 +18,7 @@ RSpec.describe("Show Game", type: :system) do
       create(:game, game_system:, campaign:, gaming_group:,
         user_list: [user, opponent], army_list: [army_list, nil])
     }
+    let!(:unit_xp_gain_event) { create(:unit_xp_gain_event, game_system:) }
 
     before do
       visit game_path(game)

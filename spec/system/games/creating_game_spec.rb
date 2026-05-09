@@ -5,7 +5,7 @@ RSpec.describe("Creating a Game", type: :system) do
   let!(:user) { create(:user, nickname: "User") }
   let!(:opponent) { create(:user, nickname: "Opponent") }
   let!(:gaming_group) { create(:gaming_group, members: [user, opponent]) }
-  let(:gaming_session) { create(:gaming_session, gaming_group:) }
+  let!(:gaming_session) { create(:gaming_session, gaming_group:) }
 
   before do
     login(user)
