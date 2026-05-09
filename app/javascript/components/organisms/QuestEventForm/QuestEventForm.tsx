@@ -2,6 +2,8 @@ import { Button } from "Atoms/Button";
 import React, { useState } from "react";
 import { QuestEventTextSectionForm } from "Molecules/QuestEventTextSectionForm";
 import { QuestEventData, QuestEventDataTextSection } from "Types/events";
+import { DragDropProvider, type DragEndEvent } from "@dnd-kit/react";
+import { move } from "@dnd-kit/helpers";
 
 interface SectionWrapper {
   data: QuestEventData;
@@ -27,24 +29,40 @@ const QuestEventForm = ({ data }: QuestEventFormProps) => {
   let newCount = 0;
 
   const handleAddClick = () => {
+    const key = `new-${newCount}`;
     setSections((prev) => [
       ...prev,
       {
-        data: {},
+        data: {
+          type: "QuestEventData::TextSection",
+          order: sections.length,
+        } as QuestEventData,
         new: true,
-        key: `new-${newCount}`,
+        key: key,
       } as SectionWrapper,
     ]);
     newCount++;
   };
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    if (event.canceled) return;
+
+    setSections((prev) =>
+      move(prev, event).map((section: SectionWrapper, i: number) => ({
+        ...section,
+        data: { ...section.data, order: i },
+      })),
+    );
+  };
+
   const renderSections = sections.map((section, index) => {
     return (
       <QuestEventTextSectionForm
+        id={section.key}
         key={section.key}
         section={section.data as QuestEventDataTextSection}
         index={index}
-        startOpen={true}
+        startOpen={false}
       />
     );
   });
@@ -60,7 +78,9 @@ const QuestEventForm = ({ data }: QuestEventFormProps) => {
         </div>
       </div>
 
-      <div>{renderSections}</div>
+      <DragDropProvider onDragEnd={handleDragEnd}>
+        {renderSections}
+      </DragDropProvider>
     </div>
   );
 };

@@ -1,2 +1,2 @@
-export { Accordion } from "./Accordion";
+export { ToggleSection } from "./ToggleSection";
 export { FieldWrapper } from "./FieldWrapper";

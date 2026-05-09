@@ -1,14 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Accordion } from ".";
+import { ToggleSection } from ".";
 import userEvent from "@testing-library/user-event";
 
-describe("Accordion", () => {
+describe("ToggleSection", () => {
   it("renders open", () => {
     render(
-      <Accordion title="Test title" startOpen={true}>
+      <ToggleSection title="Test title" startOpen={true}>
         <p>Some content</p>
-      </Accordion>,
+      </ToggleSection>,
     );
 
     expect(screen.getByRole("button")).toBeInTheDocument();
@@ -20,9 +20,9 @@ describe("Accordion", () => {
 
   it("renders closed", () => {
     render(
-      <Accordion title="Test title" startOpen={false}>
+      <ToggleSection title="Test title" startOpen={false}>
         <p>Some content</p>
-      </Accordion>,
+      </ToggleSection>,
     );
 
     expect(screen.getByRole("button")).toBeInTheDocument();
@@ -36,9 +36,9 @@ describe("Accordion", () => {
     const user = userEvent.setup();
 
     render(
-      <Accordion title="Test title" startOpen={true}>
+      <ToggleSection title="Test title" startOpen={true}>
         <p>Some content</p>
-      </Accordion>,
+      </ToggleSection>,
     );
 
     expect(screen.getByText("Some content").closest("body")).not.toHaveClass(

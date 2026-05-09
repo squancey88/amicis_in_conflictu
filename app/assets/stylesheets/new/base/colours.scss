@@ -4,10 +4,16 @@
   
 
   --component-accent: #e3f2fd;
-  --component-accent-border: #000000;
+  --component-border: #bdbdbd;
 }
 
 @mixin component-accent {
   background-color: var(--component-accent);
-  border: 1px solid var(--component-accent-border);
+  @include component-border;
+  border-width: 1px;
+}
+
+@mixin component-border {
+  border-color: var(--component-border);
+  border-style: solid;
 }
