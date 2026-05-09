@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { ToggleSection } from ".";
 import userEvent from "@testing-library/user-event";
 
@@ -13,9 +13,9 @@ describe("ToggleSection", () => {
 
     expect(screen.getByRole("button")).toBeInTheDocument();
     expect(screen.getByText("Test title")).toBeInTheDocument();
-    expect(screen.getByText("Some content").closest("body")).not.toHaveClass(
-      "hidden",
-    );
+    expect(
+      screen.getByText("Some content").closest(".aic-toggle-section"),
+    ).not.toHaveClass("closed");
   });
 
   it("renders closed", () => {
@@ -27,9 +27,9 @@ describe("ToggleSection", () => {
 
     expect(screen.getByRole("button")).toBeInTheDocument();
     expect(screen.getByText("Test title")).toBeInTheDocument();
-    expect(screen.getByText("Some content").closest(".body")).toHaveClass(
-      "hidden",
-    );
+    expect(
+      screen.getByText("Some content").closest(".aic-toggle-section"),
+    ).toHaveClass("closed");
   });
 
   it("toggles correctly", async () => {
@@ -40,15 +40,17 @@ describe("ToggleSection", () => {
         <p>Some content</p>
       </ToggleSection>,
     );
+    const body = screen.getByText("Some content").closest(".body")!;
 
-    expect(screen.getByText("Some content").closest("body")).not.toHaveClass(
-      "hidden",
-    );
+    expect(
+      screen.getByText("Some content").closest(".aic-toggle-section"),
+    ).not.toHaveClass("closed");
 
     await user.click(screen.getByRole("button"));
+    fireEvent.transitionEnd(body);
 
-    expect(screen.getByText("Some content").closest(".body")).toHaveClass(
-      "hidden",
-    );
+    expect(
+      screen.getByText("Some content").closest(".aic-toggle-section"),
+    ).toHaveClass("closed");
   });
 });
