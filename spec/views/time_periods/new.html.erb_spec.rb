@@ -21,8 +21,8 @@ RSpec.describe "time_periods/new", type: :view do
       assert_select "input[name=?]", "time_period[world_id]"
 
       assert_select "input[name=?]", "time_period[name]"
-
-      assert_select "input[name=?]", "time_period[description]"
     end
+
+    expect(rendered).to have_component_with_props("TextEditor", {fieldName: "time_period[description]"})
   end
 end

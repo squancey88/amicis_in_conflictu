@@ -1,0 +1,19 @@
+
+:root {
+  --primary-color: #0dcaf0;
+  
+
+  --component-accent: #e3f2fd;
+  --component-border: #bdbdbd;
+}
+
+@mixin component-accent {
+  background-color: var(--component-accent);
+  @include component-border;
+  border-width: 1px;
+}
+
+@mixin component-border {
+  border-color: var(--component-border);
+  border-style: solid;
+}

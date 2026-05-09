@@ -1,0 +1,9 @@
+import React from "react"
+import { render, screen } from "@testing-library/react"
+import { <%= class_name %> } from "."
+
+describe("<%= class_name %>", () => {
+  it("renders", () => {
+    render(<<%= class_name %> />)
+  })
+})

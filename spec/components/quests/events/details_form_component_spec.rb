@@ -16,10 +16,6 @@ RSpec.describe Quests::Events::DetailsFormComponent, type: :helper do
   end
 
   it "renders an accordion" do
-    expect(page).to have_css("div.accordion")
-  end
-
-  it "renders new text section link" do
-    expect(page).to have_link("New Text Section", href: quest_event_data_new_text_section_path)
+    expect(page).to have_css("[data-react-component='QuestEventForm']")
   end
 end

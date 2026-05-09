@@ -16,7 +16,7 @@
 
       <div class="form-row">
         <%= form.fields_for :unit_stats do |stats_form| %>
-          <%= form.number_field(:base_value, 
+          <%= stats_form.number_field(:base_value, 
             label: stats_form.object.unit_stat_definition.label,
             min: stats_form.object.unit_stat_definition.min,
             max: stats_form.object.unit_stat_definition.max) %>

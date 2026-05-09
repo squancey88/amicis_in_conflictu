@@ -1,0 +1,46 @@
+
+.aic-toggle-section {
+  @include component-spacing;
+
+  &.closed {
+    .title {
+      border-radius: 0.5rem;
+    }
+
+    .body {
+      border-width: 0;
+    }
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--component-accent);
+    border-radius: 0.5rem 0.5rem 0 0;
+    @include component-accent;
+    @include standard-padding;
+
+    .content { 
+      padding-left: $std_padding;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      align-items: center;
+    }
+  }
+
+  .body {
+    border-width: 0 1px 1px 1px;
+    @include component-border; 
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+
+    border-radius: 0 0 0.5rem 0.5rem;
+
+    .body-inner {
+      padding: 0.5rem;
+    }
+  }
+}

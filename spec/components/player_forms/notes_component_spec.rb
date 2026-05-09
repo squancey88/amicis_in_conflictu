@@ -12,6 +12,6 @@ RSpec.describe PlayerForms::NotesComponent, type: :component_form do
   end
 
   it "should render the editor div" do
-    expect(page).to have_css(".text-editor-component")
+    expect(page).to have_css("[data-react-component='TextEditor']")
   end
 end

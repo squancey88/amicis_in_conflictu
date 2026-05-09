@@ -14,6 +14,7 @@ require "support/form_builder"
 require "support/world_builder_helper"
 require "support/text_content_generator"
 require "support/capybara_selectors"
+require "support/react_checkers"
 require "view_component/test_helpers"
 require "view_component/system_test_helpers"
 require "capybara/rspec"
@@ -91,6 +92,7 @@ RSpec.configure do |config|
   config.include ApiHelper
   config.include WorldBuilderHelper
   config.include TextContentGenerator
+  config.include ReactCheckers
   config.include ActiveSupport::Testing::TimeHelpers
 
   config.include ViewComponent::TestHelpers, type: :component

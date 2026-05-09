@@ -1,0 +1,14 @@
+import React from "react"
+
+interface <%= class_name %>Props {
+}
+
+const <%= class_name %> = ({}: <%= class_name %>Props) => {
+  return (
+    <div>
+      <%= class_name %>
+    </div>
+  )
+}
+
+export default <%= class_name %>

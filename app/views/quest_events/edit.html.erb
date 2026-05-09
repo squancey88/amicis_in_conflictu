@@ -4,7 +4,7 @@
 
   <%= render RecordFormWrapperComponent.new(record: @quest_event, form:, row_cols: 1) do |component| %>
 
-    <% component.with_form_box do %>
+    <% component.with_form_box(span: :full) do %>
       <div class="d-flex flex-row gap-2">
         <div class="flex-fill">
           <%= form.text_field(:title) %>
@@ -15,13 +15,9 @@
       </div>
     <% end %>
 
-    <% component.with_form_box do %>
+    <% component.with_form_box(span: :full) do %>
       <%= render Quests::Events::DetailsFormComponent.new(quest_event: @quest_event, form:) %>
     <% end %>
   <% end %>
 <% end %>
-
-
-
-
 
