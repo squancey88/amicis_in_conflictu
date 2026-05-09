@@ -23,6 +23,7 @@ module.exports = {
       },
     ],
   },
+  transformIgnorePatterns: ["node_modules/(?!(@dnd-kit)/)"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json"],
   // Add test reporting for CircleCI
   reporters: [
