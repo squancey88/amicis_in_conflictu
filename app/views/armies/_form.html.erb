@@ -4,15 +4,8 @@
 
     <% component.with_form_box do %>
 
-      <div class="form-floating">
-        <%= form.text_field :name, class: "form-control mb-3", placeholder: "Name" %>
-        <%= form.label :name %>
-      </div>
-
-      <div class="form-floating">
-        <%= game_systems_with_army_select(form, :game_system_id) %>
-        <%= form.label :game_system_id %>
-      </div>
+      <%= form.text_field :name, placeholder: "Name" %>
+      <%= game_systems_with_army_select(form, :game_system_id) %>
 
     <% end %>
   <% end %>

@@ -1,4 +1,5 @@
 import React, { useId } from "react";
+import { FieldWrapper } from "Atoms/FieldWrapper";
 
 interface TextInputProps {
   fieldName: string;
@@ -10,7 +11,7 @@ const TextInput = ({ fieldName, label, value }: TextInputProps) => {
   const id = useId();
 
   return (
-    <div className="form-floating">
+    <FieldWrapper label={label} id={id}>
       <input
         className="form-control"
         type="text"
@@ -18,8 +19,7 @@ const TextInput = ({ fieldName, label, value }: TextInputProps) => {
         name={fieldName}
         defaultValue={value}
       />
-      <label htmlFor={id}>{label}</label>
-    </div>
+    </FieldWrapper>
   );
 };
 

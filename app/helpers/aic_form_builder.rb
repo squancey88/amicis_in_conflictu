@@ -15,6 +15,12 @@ class AICFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def datetime_field(attribute, options = {})
+    field_wrapper(attribute, [WRAPPER_CLASS], options) do
+      super(attribute, options.except(:label).merge(class: FORM_CONTROL_CLASS))
+    end
+  end
+
   def password_field(attribute, options = {})
     field_wrapper(attribute, [WRAPPER_CLASS], options) do
       super(attribute, options.except(:label).merge(class: FORM_CONTROL_CLASS))

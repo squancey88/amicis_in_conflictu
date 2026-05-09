@@ -44,6 +44,7 @@ RSpec.describe("Show Game", type: :system) do
 
     it "when clicking on Add XP Gain should show form row" do
       click_on "Add XP Gain"
+      expect(page).to have_text("Unit")
       expect(page).to have_css("turbo-frame#xp_gain_applied_row")
       expect(page).to have_css("select[name*='unit_xp_gain_event_id']")
     end
