@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe("Show Game", type: :system) do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   let(:opponent) { create(:user) }
   let(:gaming_group) { create(:gaming_group, members: [user, opponent]) }
   let(:gaming_session) { create(:gaming_session, gaming_group:) }
@@ -14,7 +14,7 @@ RSpec.describe("Show Game", type: :system) do
     let(:game_system) { create(:wargame, :turn_based_with_campaign, name: "Game Show Test") }
     let(:campaign) { create(:campaign, game_system:) }
     let(:army_list) { create(:army_list, user:, game_system:, campaign:) }
-    let(:game) {
+    let!(:game) {
       create(:game, game_system:, campaign:, gaming_group:,
         user_list: [user, opponent], army_list: [army_list, nil])
     }

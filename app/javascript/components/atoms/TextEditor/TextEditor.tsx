@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import AutoLink from "Modules/editorjs/autolink";

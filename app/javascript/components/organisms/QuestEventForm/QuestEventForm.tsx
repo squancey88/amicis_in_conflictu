@@ -1,6 +1,5 @@
-import React from "react";
 import { Button } from "Atoms/Button";
-import { useState } from "react";
+import React, { useState } from "react";
 import { QuestEventTextSectionForm } from "Molecules/QuestEventTextSectionForm";
 import { QuestEventData, QuestEventDataTextSection } from "Types/events";
 
