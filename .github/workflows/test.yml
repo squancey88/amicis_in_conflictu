@@ -37,7 +37,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.0
+          ruby-version: 3.3.6
           bundler-cache: true
 
       - name: Install JS dependencies
@@ -108,7 +108,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.3.0
+          ruby-version: 3.3.6
           bundler-cache: true
 
       - name: Run StandardRB
