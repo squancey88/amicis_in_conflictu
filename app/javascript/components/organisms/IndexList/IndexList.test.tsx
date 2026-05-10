@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { IndexList } from ".";
 import type { IndexRecord, DisplayConfigItem } from "Molecules/IndexItem";
+import useIndex from "Hooks/useIndex";
 
 interface TestRecord extends IndexRecord {
   name: string;

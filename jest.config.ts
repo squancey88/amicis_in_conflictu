@@ -15,7 +15,12 @@ const config: Config = {
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": ["jest-esbuild", {}],
+    "^.+\\.(js|jsx|ts|tsx)$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.json",
+      },
+    ],
   },
   transformIgnorePatterns: ["node_modules/(?!(@dnd-kit|@preact|.*\\.mjs$)/)"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json"],

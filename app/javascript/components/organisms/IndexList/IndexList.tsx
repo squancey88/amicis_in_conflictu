@@ -22,8 +22,6 @@ const IndexList = <T extends IndexRecord>({
 }: IndexListProps<T>) => {
   const { records, pagination, loading, error, loadPage } = useIndex(indexPath);
 
-  console.log(useIndex);
-
   return (
     <div className="aic-index-list">
       <div className="aic-title-with-buttons">
