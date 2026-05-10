@@ -22,7 +22,7 @@ const Pagination = ({ pagination, onChange }: PaginationProps) => {
   };
 
   return (
-    <div className="aic-pagination">
+    <div className="aic-pagination" role="navigation">
       <a onClick={() => handlePageChange(pagination.page - 1)}>
         <Icon name="caret-left-fill" />
       </a>

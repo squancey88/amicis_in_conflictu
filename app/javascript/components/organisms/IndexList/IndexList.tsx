@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   IndexItem,
   type IndexRecord,
   type DisplayConfigItem,
 } from "Molecules/IndexItem";
-import { Pagination, type PaginationValues } from "Atoms/Pagination";
-import { useIndex } from "../../hooks/useIndex";
+import { Pagination } from "Atoms/Pagination";
+import useIndex from "Hooks/useIndex";
 
-interface IndexListProps {
+interface IndexListProps<T extends IndexRecord> {
   title?: string;
   indexPath: string;
   newPath?: string;
-  displayConfig: Array<DisplayConfigItem<IndexRecord>>;
+  displayConfig: Array<DisplayConfigItem<T>>;
 }
 
-const IndexList = ({
+const IndexList = <T extends IndexRecord>({
   indexPath,
   title,
   newPath,
   displayConfig,
-}: IndexListProps) => {
+}: IndexListProps<T>) => {
   const { records, pagination, loading, error, loadPage } = useIndex(indexPath);
+
+  console.log(useIndex);
 
   return (
     <div className="aic-index-list">
@@ -29,10 +31,11 @@ const IndexList = ({
         <div className="buttons">{newPath && <a href={newPath}>New</a>}</div>
       </div>
       <div className="records">
+        {loading && <p>Loading...</p>}
         {records.map((record: IndexRecord) => (
           <IndexItem
             key={record.id}
-            record={record}
+            record={record as T}
             displayConfig={displayConfig}
           />
         ))}

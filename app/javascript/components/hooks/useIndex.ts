@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IndexRecord } from "Molecules/IndexItem";
 import { PaginationValues } from "Atoms/Pagination";
 
-export function useIndex(indexPath: string) {
+export default function useIndex(indexPath: string) {
   const [records, setRecords] = useState<Array<IndexRecord>>([]);
   const [pagination, setPagination] = useState<PaginationValues | null>(null);
   const [loading, setLoading] = useState(false);

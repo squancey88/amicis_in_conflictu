@@ -9,23 +9,15 @@ const config: Config = {
     "^Atoms/(.*)$": "<rootDir>/app/javascript/components/atoms/$1",
     "^Molecules/(.*)$": "<rootDir>/app/javascript/components/molecules/$1",
     "^Organisms/(.*)$": "<rootDir>/app/javascript/components/organisms/$1",
+    "^Hooks/(.*)$": "<rootDir>/app/javascript/components/hooks/$1",
     "^Types/(.*)$": "<rootDir>/app/javascript/types/$1",
     "^Modules/(.*)$": "<rootDir>/app/javascript/modules/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": [
-      "esbuild-jest",
-      {
-        sourcemap: true,
-        loaders: {
-          ".test.ts": "tsx",
-          ".test.tsx": "tsx",
-        },
-      },
-    ],
+    "^.+\\.(js|jsx|ts|tsx)$": ["jest-esbuild", {}],
   },
-  transformIgnorePatterns: ["node_modules/(?!(@dnd-kit|@preact)/)"],
+  transformIgnorePatterns: ["node_modules/(?!(@dnd-kit|@preact|.*\\.mjs$)/)"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json"],
   reporters: [
     "default",
