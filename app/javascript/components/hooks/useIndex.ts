@@ -12,7 +12,7 @@ export default function useIndex(indexPath: string) {
     setLoading(true);
     setError(null);
     try {
-      const url = new URL(indexPath, window.location.origin);
+      const url = new URL(indexPath, globalThis.location.origin);
       url.searchParams.set("page", String(page));
       const response = await fetch(url);
       if (!response.ok) throw new Error("Failed to fetch records");

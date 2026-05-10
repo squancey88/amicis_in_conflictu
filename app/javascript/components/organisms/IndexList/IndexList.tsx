@@ -20,7 +20,7 @@ const IndexList = <T extends IndexRecord>({
   newPath,
   displayConfig,
 }: IndexListProps<T>) => {
-  const { records, pagination, loading, error, loadPage } = useIndex(indexPath);
+  const { records, pagination, loading, loadPage } = useIndex(indexPath);
 
   return (
     <div className="aic-index-list">

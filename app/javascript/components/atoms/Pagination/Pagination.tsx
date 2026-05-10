@@ -22,15 +22,15 @@ const Pagination = ({ pagination, onChange }: PaginationProps) => {
   };
 
   return (
-    <div className="aic-pagination" role="navigation">
-      <a onClick={() => handlePageChange(pagination.page - 1)}>
+    <nav className="aic-pagination" role="navigation">
+      <button onClick={() => handlePageChange(pagination.page - 1)}>
         <Icon name="caret-left-fill" />
-      </a>
-      <a className="page">{pagination.page}</a>
-      <a onClick={() => handlePageChange(pagination.page + 1)}>
+      </button>
+      <button className="page">{pagination.page}</button>
+      <button onClick={() => handlePageChange(pagination.page + 1)}>
         <Icon name="caret-right-fill" />
-      </a>
-    </div>
+      </button>
+    </nav>
   );
 };
 
