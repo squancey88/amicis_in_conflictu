@@ -49,8 +49,8 @@ class UnitsController < ApplicationController
         format.html { redirect_to army_list_url(@army_list), notice: "Unit was successfully created." }
         format.json { render :show, status: :created, location: @unit }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @unit.errors, status: :unprocessable_content }
       end
     end
   end
@@ -62,8 +62,8 @@ class UnitsController < ApplicationController
         format.html { redirect_to army_list_url(@army_list), notice: "Unit was successfully updated." }
         format.json { render :show, status: :ok, location: @unit }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @unit.errors, status: :unprocessable_content }
       end
     end
   end

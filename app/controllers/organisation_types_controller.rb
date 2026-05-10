@@ -33,7 +33,7 @@ class OrganisationTypesController < ApplicationController
           redirect_to world_organisation_type_path(@organisation_type.world, @organisation_type), notice: "Organisation type was successfully created."
         }
       else
-        format.html { render "within_world/show_edit", status: :unprocessable_entity }
+        format.html { render "within_world/show_edit", status: :unprocessable_content }
       end
     end
   end
@@ -46,7 +46,7 @@ class OrganisationTypesController < ApplicationController
         }
       else
         format.html {
-          render "within_world/show_edit", status: :unprocessable_entity
+          render "within_world/show_edit", status: :unprocessable_content
         }
       end
     end

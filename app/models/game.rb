@@ -9,7 +9,7 @@ class Game < ApplicationRecord
   has_many :unit_applied_modifier, dependent: :destroy
   has_many :game_quest_events, dependent: :destroy
 
-  enum game_state: {not_played: 0, in_progress: 3, finished: 2, cancelled: 1}
+  enum :game_state, {not_played: 0, in_progress: 3, finished: 2, cancelled: 1}
 
   validates :players, presence: true
 

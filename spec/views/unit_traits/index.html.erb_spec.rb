@@ -11,6 +11,6 @@ RSpec.describe "unit_traits/index", type: :view do
   it "renders a list of unit_traits" do
     render
     cell_selector = "div>h5"
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Name"), count: 2
   end
 end

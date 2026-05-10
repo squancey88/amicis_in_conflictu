@@ -1,5 +1,6 @@
 class ConvertTraitDescriptionToJson < ActiveRecord::Migration[7.1]
   include ApplicationHelper
+
   def change
     add_column :unit_traits, :rich_description, :jsonb
 

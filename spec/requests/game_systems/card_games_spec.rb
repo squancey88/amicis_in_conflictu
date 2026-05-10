@@ -13,7 +13,7 @@ RSpec.describe "GameSystems::CardGames", type: :request do
     {
       name: "Test CardGame",
       slug: "test-card_game",
-      game_config_json_string: game_config.to_json.to_s
+      game_config_json_string: game_config.to_json
     }
   }
 

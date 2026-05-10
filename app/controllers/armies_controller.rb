@@ -1,5 +1,6 @@
 class ArmiesController < ApplicationController
   include GameSystemPart
+
   before_action :set_army, only: %i[show edit update destroy]
 
   # GET /armies or /armies.json
@@ -27,8 +28,8 @@ class ArmiesController < ApplicationController
         format.html { redirect_to army_url(@army), notice: "Army was successfully created." }
         format.json { render :show, status: :created, location: @army }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @army.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @army.errors, status: :unprocessable_content }
       end
     end
   end
@@ -40,8 +41,8 @@ class ArmiesController < ApplicationController
         format.html { redirect_to game_systems_wargame_url(@army.game_system), notice: "Army was successfully updated." }
         format.json { render :show, status: :ok, location: @army }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @army.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @army.errors, status: :unprocessable_content }
       end
     end
   end

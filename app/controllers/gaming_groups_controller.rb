@@ -29,7 +29,7 @@ class GamingGroupsController < ApplicationController
         UserGroupMembership.create!(gaming_group: @gaming_group, user: current_user, owner: true)
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Gaming group was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       end
     end
   end
@@ -40,7 +40,7 @@ class GamingGroupsController < ApplicationController
       if @gaming_group.update(gaming_group_params)
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Gaming group was successfully updated." }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
       end
     end
   end

@@ -3,6 +3,7 @@ module WorldVisibilityAccess
 
   included do
     include WithinWorld
+
     before_action :check_view_access, only: %i[show] # standard:disable Rails/LexicallyScopedActionFilter
   end
 

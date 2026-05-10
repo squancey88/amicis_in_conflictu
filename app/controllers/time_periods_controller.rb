@@ -25,8 +25,8 @@ class TimePeriodsController < ApplicationController
         format.html { redirect_to world_time_period_url(@world, @time_period), notice: "Time period was successfully created." }
         format.json { render :show, status: :created, location: @time_period }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @time_period.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @time_period.errors, status: :unprocessable_content }
       end
     end
   end
@@ -38,8 +38,8 @@ class TimePeriodsController < ApplicationController
         format.html { redirect_to world_time_period_url(@world, @time_period), notice: "Time period was successfully updated." }
         format.json { render :show, status: :ok, location: @time_period }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @time_period.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @time_period.errors, status: :unprocessable_content }
       end
     end
   end

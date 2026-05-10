@@ -10,6 +10,6 @@ RSpec.describe "equipment/index", type: :view do
   it "renders a list of equipment" do
     render
     cell_selector = "div>h5"
-    assert_select cell_selector, text: Regexp.new("Test".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("Test"), count: 2
   end
 end

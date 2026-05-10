@@ -29,8 +29,8 @@ class QuestEventsController < ApplicationController
         format.html { redirect_to world_quest_url(@world, @quest), notice: "Quest event was successfully created." }
         format.json { render :show, status: :created, location: @quest_event }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @quest_event.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @quest_event.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +41,8 @@ class QuestEventsController < ApplicationController
         format.html { redirect_to edit_world_quest_quest_event_url(@world, @quest, @quest_event), notice: "Quest event was successfully updated." }
         format.json { render :show, status: :ok, location: @quest_event }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @quest_event.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @quest_event.errors, status: :unprocessable_content }
       end
     end
   end

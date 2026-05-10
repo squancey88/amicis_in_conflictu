@@ -34,8 +34,8 @@ class UnitTemplatesController < ApplicationController
         format.html { redirect_to unit_template_url(@unit_template), notice: "Unit template was successfully created." }
         format.json { render :show, status: :created, location: @unit_template }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit_template.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @unit_template.errors, status: :unprocessable_content }
       end
     end
   end
@@ -47,8 +47,8 @@ class UnitTemplatesController < ApplicationController
         format.html { redirect_to unit_template_url(@unit_template), notice: "Unit template was successfully updated." }
         format.json { render :show, status: :ok, location: @unit_template }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit_template.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @unit_template.errors, status: :unprocessable_content }
       end
     end
   end

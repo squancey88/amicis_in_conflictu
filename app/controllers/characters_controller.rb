@@ -39,8 +39,8 @@ class CharactersController < ApplicationController
         format.html { redirect_to world_character_url(@world, @character), notice: "Character was successfully created." }
         format.json { render :show, status: :created, location: @character }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @character.errors, status: :unprocessable_content }
       end
     end
   end
@@ -52,8 +52,8 @@ class CharactersController < ApplicationController
         format.html { redirect_to world_character_url(@world, @character), notice: "Character was successfully updated." }
         format.json { render :show, status: :ok, location: @character }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @character.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @character.errors, status: :unprocessable_content }
       end
     end
   end
