@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "ostruct"
 
 RSpec.describe Forms::ArrayFieldComponent, type: :component_form do
   let(:world) { create(:world) }
