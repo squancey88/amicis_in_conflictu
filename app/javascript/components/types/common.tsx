@@ -1,15 +1,12 @@
-export interface GameSystem {
-  id: string;
+export interface GameSystem extends AICRecord {
   name: string;
 }
 
-export interface Campaign {
-  id: string;
+export interface Campaign extends AICRecord {
   name: string;
 }
 
-export interface Player {
-  name: string;
+export interface Player extends AICRecord {
   id: string;
   type: string;
 }
@@ -22,4 +19,10 @@ export interface GroupedGameSystems {
 export interface CampaignsByGameSystem {
   gameSystemId: string;
   campaigns: Array<Campaign>;
+}
+
+export interface AICRecord {
+  id: string;
+  created_at: string;
+  updated_at: string;
 }

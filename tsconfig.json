@@ -18,6 +18,7 @@
       "Atoms/*": ["app/javascript/components/atoms/*"],
       "Molecules/*": ["app/javascript/components/molecules/*"],
       "Organisms/*": ["app/javascript/components/organisms/*"],
+      "Hooks/*": ["app/javascript/components/hooks/*"],
       "Types/*": ["app/javascript/components/types/*"],
       "Modules/*": ["app/javascript/modules/*"],
       "*": ["app/javascript/*"]

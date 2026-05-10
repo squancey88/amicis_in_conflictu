@@ -7,6 +7,6 @@
           <%= render Articles::ListItemComponent.new(article:) %>
       <% end %>
     </ul>
-    <%== pagy_bootstrap_nav(@pagy) %>
+    <%== @pagy.series_nav(:bootstrap) %>
   <% end %>
 </div>

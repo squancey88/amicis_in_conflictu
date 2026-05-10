@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include AuthHelper
-  include Pagy::Backend
+  include Pagy::Method
 
   skip_before_action :verify_authenticity_token, if: :json_request?
   before_action :authenticate_user

@@ -1,0 +1,33 @@
+
+.aic-index-list {
+  @include standard-padding;
+
+  .records {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .index-item {
+      @include standard-padding;
+      border-radius: 0.5rem;
+      border: 1px solid var(--component-border);
+      display: flex;
+      flex-direction: row;
+
+      .attributes {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: row;
+        gap: 0.25rem;
+        align-items: center;
+      }
+
+      .menu {
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: row;
+        gap: 0.25rem;
+      }
+    }
+  }
+} 
