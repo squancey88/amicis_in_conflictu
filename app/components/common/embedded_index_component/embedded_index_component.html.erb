@@ -2,6 +2,7 @@
 <% if @react %>
 
   <%= react_component("IndexList", {
+    title: @title,
     index_path: @records_path,
     display_config: @display_config,
     new_path: @new_path

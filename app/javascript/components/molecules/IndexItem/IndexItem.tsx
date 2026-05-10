@@ -28,8 +28,12 @@ const IndexItem = <T extends IndexRecord>({
     <div className="index-item" id={record.id}>
       <div className="attributes">{attributes}</div>
       <div className="menu">
-        <a href={record.show_path}>View</a>
-        <a href={record.edit_path}>Edit</a>
+        <a className="btn btn-primary" href={record.show_path}>
+          View
+        </a>
+        <a className="btn btn-primary" href={record.edit_path}>
+          Edit
+        </a>
       </div>
     </div>
   );

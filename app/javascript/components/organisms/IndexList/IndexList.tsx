@@ -25,8 +25,16 @@ const IndexList = <T extends IndexRecord>({
   return (
     <div className="aic-index-list">
       <div className="aic-title-with-buttons">
-        <div className="content">{title}</div>
-        <div className="buttons">{newPath && <a href={newPath}>New</a>}</div>
+        <div className="content">
+          <h3>{title}</h3>
+        </div>
+        <div className="buttons">
+          {newPath && (
+            <a className="btn btn-primary" href={newPath}>
+              New
+            </a>
+          )}
+        </div>
       </div>
       <div className="records">
         {loading && <p>Loading...</p>}
