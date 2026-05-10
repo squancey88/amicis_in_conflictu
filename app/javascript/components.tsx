@@ -2,12 +2,14 @@ import { createRoot } from "react-dom/client";
 import { NewGameForm } from "Organisms/NewGameForm";
 import { QuestEventForm } from "Organisms/QuestEventForm";
 import { TextEditor } from "Atoms/TextEditor";
+import { IndexList } from "Organisms/IndexList";
 
 // Component registry
 const components = {
   NewGameForm,
   QuestEventForm,
   TextEditor,
+  IndexList,
 };
 
 const roots = new Map<Element, Root>();

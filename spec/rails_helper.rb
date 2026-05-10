@@ -98,7 +98,7 @@ RSpec.configure do |config|
   config.include ViewComponent::TestHelpers, type: :component
   config.include ViewComponent::SystemTestHelpers, type: :component
   config.include Capybara::RSpecMatchers, type: :component
-  config.include Pagy::Backend
+  config.include Pagy::Method
 
   config.include RSpec::Rails::HelperExampleGroup, type: :component_form
   config.include ViewComponent::TestHelpers, type: :component_form

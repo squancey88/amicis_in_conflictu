@@ -1,20 +1,32 @@
-<%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
 
-  <% if @new_path %>
-    <% component.with_menu do%>
-      <%= render Common::MenuButtonComponent.new(
-        menu_options: [
-          { 
-            text: "New",
-            link: @new_path
-          }
-        ]) %>
+<% if @react %>
+
+  <%= react_component("IndexList", {
+    index_path: @records_path,
+    display_config: @display_config,
+    new_path: @new_path
+  }) %>
+
+<% else %>
+
+  <%= render StandardLayoutBoxComponent.new(title: @title) do |component| %>
+
+    <% if @new_path %>
+      <% component.with_menu do%>
+        <%= render Common::MenuButtonComponent.new(
+          menu_options: [
+            { 
+              text: "New",
+              link: @new_path
+            }
+          ]) %>
+      <% end %>
     <% end %>
-  <% end %>
 
-  <% component.with_body do %>
-    <turbo-frame id="<%= @turbo_frame_id %>" src="<%= @records_path %>">
-      Loading...
-    </turbo-frame>
+    <% component.with_body do %>
+      <turbo-frame id="<%= @turbo_frame_id %>" src="<%= @records_path %>">
+        Loading...
+      </turbo-frame>
+    <% end %>
   <% end %>
 <% end %>

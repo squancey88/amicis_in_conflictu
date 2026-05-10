@@ -24,9 +24,10 @@
 
     <% tab_section.with_tab(label: "Armies") do %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Armies",
-          turbo_frame_id: "armies",
-          records_path: armies_path(game_system_id: @wargame.id),
-          new_path: new_army_path(game_system_id: @wargame.id)
+          records_path: api_game_system_armies_path(@wargame),
+          new_path: new_army_path(game_system_id: @wargame.id),
+          react: true,
+          display_config: [{attribute: :name}]
         )%>
     <% end %>
 

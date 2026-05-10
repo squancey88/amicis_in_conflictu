@@ -1,5 +1,6 @@
-export interface QuestEventData {
-  id: string;
+import { AICRecord } from "./common";
+
+export interface QuestEventData extends AICRecord {
   title: string;
   details: string;
   order: number;

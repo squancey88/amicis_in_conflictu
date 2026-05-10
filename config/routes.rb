@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       end
     end
     resources :games, only: [:show, :create, :update]
-    resources :game_systems, only: [:index]
+    resources :game_systems, only: [:index] do
+      scope module: :game_systems do
+        resources :armies, only: [:index]
+      end
+    end
   end
 
   resources :worlds do
