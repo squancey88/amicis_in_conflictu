@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Pagination, PaginationValues } from ".";
+import { Pagination } from ".";
 
 describe("Pagination", () => {
   const pagination = {
