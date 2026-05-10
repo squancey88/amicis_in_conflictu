@@ -47,7 +47,7 @@ class GamingGroup < ApplicationRecord
     if data.has_key?(model.id)
       model_results = data[model.id]
       model_results.each do |vk, vv|
-        case (vk[1])
+        case vk[1]
         when "won"
           row[1] = vv
         when "draw"

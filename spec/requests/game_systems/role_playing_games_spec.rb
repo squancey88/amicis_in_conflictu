@@ -13,7 +13,7 @@ RSpec.describe "GameSystems::RolePlayingGames", type: :request do
     {
       name: "Test RolePlayingGame",
       slug: "test-role_playing_game",
-      game_config_json_string: game_config.to_json.to_s
+      game_config_json_string: game_config.to_json
     }
   }
 

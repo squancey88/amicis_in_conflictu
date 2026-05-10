@@ -5,6 +5,7 @@ module WorldItem
     include WorldEditable
     include HasTextSection
     include TextLinkable
+
     register_text_section :world_owner_notes
 
     def link_path

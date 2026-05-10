@@ -3,6 +3,7 @@ module IsGameSystem
 
   included do
     include HasJsonSchema
+
     before_action :verify_admin
     before_action :set_record, only: [:show, :edit]
 
@@ -33,8 +34,8 @@ module IsGameSystem
         format.html { redirect_to record, notice: "Game system was successfully created." }
         format.json { render :show, status: :created, location: record }
       else
-        format.html { render "game_systems/#{controller_name}/form", status: :unprocessable_entity }
-        format.json { render json: record.errors, status: :unprocessable_entity }
+        format.html { render "game_systems/#{controller_name}/form", status: :unprocessable_content }
+        format.json { render json: record.errors, status: :unprocessable_content }
       end
     end
   end
@@ -47,8 +48,8 @@ module IsGameSystem
         format.html { redirect_to record, notice: "Game system was successfully updated." }
         format.json { render :show, status: :ok, location: record }
       else
-        format.html { render "game_systems/#{controller_name}/form", status: :unprocessable_entity }
-        format.json { render json: record.errors, status: :unprocessable_entity }
+        format.html { render "game_systems/#{controller_name}/form", status: :unprocessable_content }
+        format.json { render json: record.errors, status: :unprocessable_content }
       end
     end
   end

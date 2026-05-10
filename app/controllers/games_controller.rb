@@ -33,7 +33,7 @@ class GamesController < ApplicationController
       if @game.save
         format.html { redirect_to game_url(@game), notice: "Game was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       end
     end
   end
@@ -44,7 +44,7 @@ class GamesController < ApplicationController
       if @game.update(game_params)
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
       end
     end
   end

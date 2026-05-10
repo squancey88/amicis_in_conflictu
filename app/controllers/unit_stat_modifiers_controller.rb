@@ -28,8 +28,8 @@ class UnitStatModifiersController < ApplicationController
         format.html { redirect_to unit_stat_modifier_url(@unit_stat_modifier), notice: "Unit stat modifier was successfully created." }
         format.json { render :show, status: :created, location: @unit_stat_modifier }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit_stat_modifier.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @unit_stat_modifier.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +41,8 @@ class UnitStatModifiersController < ApplicationController
         format.html { redirect_to unit_stat_modifier_url(@unit_stat_modifier), notice: "Unit stat modifier was successfully updated." }
         format.json { render :show, status: :ok, location: @unit_stat_modifier }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit_stat_modifier.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @unit_stat_modifier.errors, status: :unprocessable_content }
       end
     end
   end

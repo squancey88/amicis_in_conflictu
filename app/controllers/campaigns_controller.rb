@@ -1,5 +1,6 @@
 class CampaignsController < ApplicationController
   include WithinGamingGroup
+
   before_action :set_campaign, only: %i[show edit update destroy add_players_row]
 
   # GET /campaigns or /campaigns.json
@@ -34,8 +35,8 @@ class CampaignsController < ApplicationController
         format.html { redirect_to gaming_group_campaign_url(@gaming_group, @campaign), notice: "Campaign was successfully created." }
         format.json { render :show, status: :created, location: @campaign }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @campaign.errors, status: :unprocessable_content }
       end
     end
   end
@@ -47,8 +48,8 @@ class CampaignsController < ApplicationController
         format.html { redirect_to gaming_group_campaign_url(@gaming_group, @campaign), notice: "Campaign was successfully updated." }
         format.json { render :show, status: :ok, location: @campaign }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @campaign.errors, status: :unprocessable_content }
       end
     end
   end

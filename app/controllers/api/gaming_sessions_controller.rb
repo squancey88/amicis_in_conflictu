@@ -20,7 +20,7 @@ module Api
         @gaming_session.save!
         render json: GamingSessionSerializer.new(@gaming_session).serialize
       else
-        render json: @gaming_session.errors, status: :unprocessable_entity
+        render json: @gaming_session.errors, status: :unprocessable_content
       end
     end
 

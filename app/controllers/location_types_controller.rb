@@ -31,7 +31,7 @@ class LocationTypesController < ApplicationController
           redirect_to world_location_type_path(@world, @location_type), notice: "Location type was successfully created."
         }
       else
-        format.html { render "within_world/show_edit", status: :unprocessable_entity }
+        format.html { render "within_world/show_edit", status: :unprocessable_content }
       end
     end
   end
@@ -44,7 +44,7 @@ class LocationTypesController < ApplicationController
         }
       else
         format.html {
-          render "within_world/show_edit", status: :unprocessable_entity
+          render "within_world/show_edit", status: :unprocessable_content
         }
       end
     end

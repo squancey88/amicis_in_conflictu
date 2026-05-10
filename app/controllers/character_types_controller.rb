@@ -33,7 +33,7 @@ class CharacterTypesController < ApplicationController
           redirect_to world_character_type_path(@character_type.world, @character_type), notice: "Character type was successfully created."
         }
       else
-        format.html { render "within_world/show_edit", status: :unprocessable_entity }
+        format.html { render "within_world/show_edit", status: :unprocessable_content }
       end
     end
   end
@@ -46,7 +46,7 @@ class CharacterTypesController < ApplicationController
         }
       else
         format.html {
-          render "within_world/show_edit", status: :unprocessable_entity
+          render "within_world/show_edit", status: :unprocessable_content
         }
       end
     end

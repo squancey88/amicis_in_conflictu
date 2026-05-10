@@ -30,8 +30,8 @@ class LocationsController < ApplicationController
         format.html { redirect_to world_location_url(@world, @location), notice: "Location was successfully created." }
         format.json { render :show, status: :created, location: @location }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @location.errors, status: :unprocessable_content }
       end
     end
   end
@@ -43,8 +43,8 @@ class LocationsController < ApplicationController
         format.html { redirect_to world_location_url(@world, @location), notice: "Location was successfully updated." }
         format.json { render :show, status: :ok, location: @location }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @location.errors, status: :unprocessable_content }
       end
     end
   end

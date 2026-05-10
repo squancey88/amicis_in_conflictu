@@ -9,8 +9,8 @@ class PlayersController < ApplicationController
         format.html { redirect_to game_url(@player.game), notice: "player was successfully updated." }
         format.json { render :show, status: :ok, location: @player }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @player.errors, status: :unprocessable_content }
       end
     end
   end

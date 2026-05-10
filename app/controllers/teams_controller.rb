@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   include WithinGamingGroup
+
   before_action :set_team, only: %i[update destroy]
 
   # POST /teams or /teams.json
@@ -12,8 +13,8 @@ class TeamsController < ApplicationController
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team was successfully created." }
         format.json { render :show, status: :created, location: @team }
       else
-        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team not created.", status: :unprocessable_entity }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team not created.", status: :unprocessable_content }
+        format.json { render json: @team.errors, status: :unprocessable_content }
       end
     end
   end
@@ -25,8 +26,8 @@ class TeamsController < ApplicationController
         format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team was successfully updated." }
         format.json { render :show, status: :ok, location: @team }
       else
-        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team not updated.", status: :unprocessable_entity }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.html { redirect_to gaming_group_url(@gaming_group), notice: "Team not updated.", status: :unprocessable_content }
+        format.json { render json: @team.errors, status: :unprocessable_content }
       end
     end
   end

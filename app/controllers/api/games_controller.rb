@@ -13,7 +13,7 @@ module Api
       if @game.save
         render json: GameSerializer.new(@game).serialize
       else
-        render json: @game.errors, status: :unprocessable_entity
+        render json: @game.errors, status: :unprocessable_content
       end
     end
 
@@ -21,7 +21,7 @@ module Api
       if @game.update(game_params)
         render json: GameSerializer.new(@game).serialize
       else
-        render json: @game.errors, status: :unprocessable_entity
+        render json: @game.errors, status: :unprocessable_content
       end
     end
 

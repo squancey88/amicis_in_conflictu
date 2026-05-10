@@ -29,8 +29,8 @@ class UnitXpGainEventsController < ApplicationController
         format.html { redirect_to unit_xp_gain_event_url(@unit_xp_gain_event), notice: "Unit xp gain method was successfully created." }
         format.json { render :show, status: :created, location: @unit_xp_gain_event }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit_xp_gain_event.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @unit_xp_gain_event.errors, status: :unprocessable_content }
       end
     end
   end
@@ -42,8 +42,8 @@ class UnitXpGainEventsController < ApplicationController
         format.html { redirect_to unit_xp_gain_event_url(@unit_xp_gain_event), notice: "Unit xp gain method was successfully updated." }
         format.json { render :show, status: :ok, location: @unit_xp_gain_event }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit_xp_gain_event.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @unit_xp_gain_event.errors, status: :unprocessable_content }
       end
     end
   end

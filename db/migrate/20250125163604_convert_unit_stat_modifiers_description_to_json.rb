@@ -1,5 +1,6 @@
 class ConvertUnitStatModifiersDescriptionToJson < ActiveRecord::Migration[7.1]
   include ApplicationHelper
+
   def change
     add_column :unit_stat_modifiers, :rich_description, :jsonb
 

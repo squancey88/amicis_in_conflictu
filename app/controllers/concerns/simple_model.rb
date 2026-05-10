@@ -32,7 +32,7 @@ module SimpleModel
           redirect_to @record, notice: "#{@record.class.model_name.human} was successfully created."
         }
       else
-        format.html { render "common/simple_show_edit", status: :unprocessable_entity }
+        format.html { render "common/simple_show_edit", status: :unprocessable_content }
       end
     end
   end
@@ -45,7 +45,7 @@ module SimpleModel
         }
       else
         format.html {
-          render "common/simple_show_edit", status: :unprocessable_entity
+          render "common/simple_show_edit", status: :unprocessable_content
         }
       end
     end

@@ -1,5 +1,6 @@
 class GamingSessionsController < ApplicationController
   include WithinGamingGroup
+
   before_action :set_gaming_session, only: %i[show edit update destroy]
 
   def index
@@ -29,7 +30,7 @@ class GamingSessionsController < ApplicationController
         @gaming_session.save!
         format.html { redirect_to gaming_group_gaming_session_url(@gaming_group, @gaming_session), notice: "Gaming session was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       end
     end
   end
@@ -40,7 +41,7 @@ class GamingSessionsController < ApplicationController
       if @gaming_session.update(gaming_session_params)
         format.html { redirect_to gaming_group_gaming_session_url(@gaming_group, @gaming_session), notice: "Gaming session was successfully updated." }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
       end
     end
   end

@@ -1,5 +1,6 @@
 class UnitTraitsController < ApplicationController
   include GameSystemPart
+
   before_action :set_unit_trait, only: %i[show edit update destroy]
 
   # GET /unit_traits or /unit_traits.json
@@ -28,8 +29,8 @@ class UnitTraitsController < ApplicationController
         format.html { redirect_to game_systems_wargame_url(@unit_trait.game_system), notice: "Unit trait was successfully created." }
         format.json { render :show, status: :created, location: @unit_trait }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit_trait.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @unit_trait.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +42,8 @@ class UnitTraitsController < ApplicationController
         format.html { redirect_to game_systems_wargame_url(@unit_trait.game_system), notice: "Unit trait was successfully updated." }
         format.json { render :show, status: :ok, location: @unit_trait }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit_trait.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @unit_trait.errors, status: :unprocessable_content }
       end
     end
   end
