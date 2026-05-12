@@ -18,6 +18,8 @@ RSpec.describe("Creating a Game", type: :system) do
 
     click_on "New Game"
 
+    expect(page).to have_button("Create Game", disabled: true)
+
     select "Game Test", from: "Game System"
 
     within(find(:testid, "PlayerSelector")) do
