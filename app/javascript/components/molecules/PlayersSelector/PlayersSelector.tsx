@@ -72,7 +72,10 @@ const PlayersSelector = ({
       {selectedPlayers.length > 0 && (
         <div className="mt-3">
           <h6>Selected Players:</h6>
-          <div className="d-flex flex-column gap-2">
+          <div
+            data-test-id="selected-players"
+            className="d-flex flex-column gap-2"
+          >
             {selectedPlayers.map((player, index) => (
               <div
                 key={player.id}
