@@ -4,6 +4,6 @@ FactoryBot.define do
     game_config { {} }
     edition { "1st" }
     competitive { false }
-    slug { Faker::Internet.slug }
+    slug { SecureRandom.uuid }
   end
 end
