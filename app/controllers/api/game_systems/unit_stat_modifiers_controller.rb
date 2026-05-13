@@ -1,11 +1,11 @@
 module Api
   module GameSystems
-    class ArmiesController < BaseController
+    class UnitStatModifiersController < BaseController
       before_action :set_game_system
       def index
-        @pagy, @records = pagy(@game_system.armies)
+        @pagy, @records = pagy(@game_system.unit_stat_modifiers)
         render json: {
-          records: ::GameSystems::ArmySerializer.new(@records).serializable_hash,
+          records: ::GameSystems::UnitStatModifierSerializer.new(@records).serializable_hash,
           pagination: @pagy.data_hash
         }
       end

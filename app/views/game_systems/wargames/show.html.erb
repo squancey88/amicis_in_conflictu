@@ -75,9 +75,10 @@
 
     <% tab_section.with_tab(label: "Stat Modifiers") do %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Stat Modifiers",
-          turbo_frame_id: "unit_stat_modifiers",
-          records_path: unit_stat_modifiers_path(game_system_id: @wargame.id),
-          new_path: new_unit_stat_modifier_path(game_system_id: @wargame.id)
+          records_path: api_game_system_unit_stat_modifiers_path(@wargame),
+          new_path: new_unit_stat_modifier_path(game_system_id: @wargame.id),
+          react: true,
+          display_config: [{attribute: :name}]
         ) %>
     <% end %>
   <% end %>
