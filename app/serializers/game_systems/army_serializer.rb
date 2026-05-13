@@ -1,5 +1,5 @@
 module GameSystems
-  class ArmiesSerializer
+  class ArmySerializer
     include Alba::Resource
     include Rails.application.routes.url_helpers
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe GameSystems::ArmiesSerializer do
+RSpec.describe GameSystems::ArmySerializer do
   let(:army) { create(:army) }
 
   let(:result) { JSON.parse(described_class.new(army).serialize) }

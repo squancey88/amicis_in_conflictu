@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :game_systems, only: [:index] do
       scope module: :game_systems do
         resources :armies, only: [:index]
+        resources :unit_stat_modifiers, only: [:index]
       end
     end
   end
