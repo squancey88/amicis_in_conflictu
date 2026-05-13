@@ -6,7 +6,7 @@ FactoryBot.define do
     }
     edition { "1st" }
     competitive { true }
-    slug { Faker::Internet.slug }
+    slug { SecureRandom.uuid }
 
     trait :has_health do
       game_config {

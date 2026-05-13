@@ -6,7 +6,7 @@ RSpec.describe "/location_types", type: :request do
   let!(:location_type) { create(:location_type, world:) }
 
   let(:valid_attributes) {
-    {name: Faker::Lorem.word}
+    {name: Faker::Lorem.unique.word}
   }
 
   let(:invalid_attributes) {
