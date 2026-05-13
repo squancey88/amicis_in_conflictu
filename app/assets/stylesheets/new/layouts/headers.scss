@@ -1,8 +1,13 @@
 .aic-title-with-buttons {
-  @include component-spacing;
+  @include component-spacing(2);
 
   display: flex;
   flex-direction: row;
+
+  &.page-header {
+    padding-bottom: $std_spacer;
+    border-bottom: 2px solid var(--accent-color);
+  }
 
   .content {
     flex: 1 1 auto;
@@ -14,5 +19,7 @@
     flex: 0 1 auto;
     display: flex;
     align-items: center;
+    gap: 0.25rem;
   }
 }
+
