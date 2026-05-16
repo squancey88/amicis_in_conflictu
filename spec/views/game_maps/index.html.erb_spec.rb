@@ -1,15 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "game_maps/index", type: :view do
   before(:each) do
-    assign(:game_maps, [
-      GameMap.create!(),
-      GameMap.create!()
-    ])
+    assign(:game_maps, create_list(:game_map, 2))
   end
 
   it "renders a list of game_maps" do
     render
-    cell_selector = 'div>p'
+    "div>p"
   end
 end

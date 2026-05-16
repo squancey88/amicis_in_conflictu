@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "game_maps/new", type: :view do
   before(:each) do
-    assign(:game_map, GameMap.new())
+    assign(:game_map, GameMap.new)
   end
 
   it "renders new game_map form" do

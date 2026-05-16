@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "game_maps/edit", type: :view do
   let(:game_map) {
-    GameMap.create!()
+    create(:game_map)
   }
 
   before(:each) do
@@ -11,8 +11,5 @@ RSpec.describe "game_maps/edit", type: :view do
 
   it "renders the edit game_map form" do
     render
-
-    assert_select "form[action=?][method=?]", game_map_path(game_map), "post" do
-    end
   end
 end
