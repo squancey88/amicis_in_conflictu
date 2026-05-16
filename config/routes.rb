@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :game_maps
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
   get "forgot_password", to: "auth#forgot_password", as: :forgot_password

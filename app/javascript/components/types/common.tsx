@@ -26,3 +26,5 @@ export interface AICRecord {
   created_at: string;
   updated_at: string;
 }
+
+export type MapTypes = "hex_grid" | "hex_diamond" | "svg";

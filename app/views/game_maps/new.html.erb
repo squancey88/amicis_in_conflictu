@@ -1,0 +1,7 @@
+<% content_for :title, "New game map" %>
+
+<%= form_with model: @game_map do |form| %>
+  <%= react_component("NewGameMapForm", {
+    types: GameMap::TYPES
+  }) %>
+<% end %>
