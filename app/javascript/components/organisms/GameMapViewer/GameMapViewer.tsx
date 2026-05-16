@@ -34,6 +34,8 @@ const HexDiamondViewer = ({ config }: { config: HexDiamondConfig }) => {
               className="hexagon"
               key={colIndex}
               onClick={() => handleHexPick(rowIndex, colIndex)}
+              onKeyDown={() => handleHexPick(rowIndex, colIndex)}
+              role="button"
             />
           ))}
         </div>
