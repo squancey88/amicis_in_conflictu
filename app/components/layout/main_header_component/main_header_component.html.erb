@@ -2,29 +2,7 @@
   <a class="icon" href="<%= root_path %>">
     <%= image_tag "amicis_in_conflictu_logo.svg" %>
   </a>
-  <div class="links">
-    <%= link_to "My groups", "" %>
-    <!--
-    <button class="nav-link dropdown-toggle" href="<%= gaming_groups_path %>" 
-      data-bs-toggle="dropdown" aria-expanded="false">
-      My Groups
-    </button>
-    <ul class="dropdown-menu">
-      <% current_user.gaming_groups.each do |group| %>
-        <li><a class="dropdown-item" href="<%= gaming_group_path(group) %>"><%= group.name %></a></li>
-      <% end %>
-      <% unless current_user.gaming_groups.empty? %>
-        <li><hr class="dropdown-divider"></li>
-      <% end %>
-      <li><a class="dropdown-item" href="<%= new_gaming_group_path %>">New Group</a></li>
-    </ul>
-    -->
-    <% menu_links.each do |menu_link| %>
-      <% if(see_link(menu_link)) %>
-          <%= link_to menu_link[:name], menu_link[:url] %>
-      <% end %>
-    <% end %>
-  </div>
+  <%= react_component("HeaderMenu", { items: menu_links }) %>
   <div class="menu">
     <%= link_to user_path(current_user) do %>
       <i class="bi bi-person-circle"></i>

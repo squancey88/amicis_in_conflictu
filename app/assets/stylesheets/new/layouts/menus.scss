@@ -2,3 +2,25 @@
 
 }
 
+
+.aic-dropdown-menu {
+  position: relative;
+
+  .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    margin-top: 0.25rem;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+
+    a {
+      padding: 0.5rem;
+      display: block;
+    } 
+  }
+}
