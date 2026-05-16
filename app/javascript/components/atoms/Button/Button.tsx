@@ -3,7 +3,7 @@ import React from "react";
 interface ButtonProps {
   label?: string;
   icon?: string;
-  type?: "submit" | "button" | undefined;
+  type?: "submit" | "button";
   onClick?: () => void;
   variant: "primary" | "secondary";
 }

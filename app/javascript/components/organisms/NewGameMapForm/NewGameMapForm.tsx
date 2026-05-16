@@ -43,7 +43,9 @@ const NewGameMapForm = ({ types }: NewGameMapFormProps) => {
       >
         <option value={undefined}>--</option>
         {types.map((item) => (
-          <option value={item}>{item}</option>
+          <option key={item} value={item}>
+            {item}
+          </option>
         ))}
       </Select>
 

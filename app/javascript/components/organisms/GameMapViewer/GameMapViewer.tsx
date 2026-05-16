@@ -27,21 +27,17 @@ const HexDiamondViewer = ({ config }: { config: HexDiamondConfig }) => {
 
   return (
     <div className="hexagon-diamond">
-      {[...Array(height)].map((_x, rowIndex) => {
-        return (
-          <div className="row" key={rowIndex}>
-            {[...Array(hexPerRow(rowIndex))].map((_x, colIndex) => {
-              return (
-                <div
-                  className="hexagon"
-                  key={colIndex}
-                  onClick={() => handleHexPick(rowIndex, colIndex)}
-                ></div>
-              );
-            })}
-          </div>
-        );
-      })}
+      {Array.from({ length: height }, (_, rowIndex) => (
+        <div className="row" key={rowIndex}>
+          {Array.from({ length: hexPerRow(rowIndex) }, (_, colIndex) => (
+            <div
+              className="hexagon"
+              key={colIndex}
+              onClick={() => handleHexPick(rowIndex, colIndex)}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
@@ -49,7 +45,7 @@ const HexDiamondViewer = ({ config }: { config: HexDiamondConfig }) => {
 const GameMapViewer = ({ mapType, config }: GameMapViewerProps) => {
   return (
     <div>
-      <div className="game_map">
+      <div className="game-map">
         {mapType == "hex_diamond" && <HexDiamondViewer config={config} />}
       </div>
       <div></div>
