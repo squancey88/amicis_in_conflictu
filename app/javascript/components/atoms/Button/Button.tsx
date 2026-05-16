@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 
 interface ButtonProps {
@@ -5,7 +6,7 @@ interface ButtonProps {
   icon?: string;
   type?: "submit" | "button";
   onClick?: () => void;
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
 }
 
 const Button = ({
@@ -14,13 +15,16 @@ const Button = ({
   type = "button",
   onClick,
   variant,
+  ...props
 }: ButtonProps) => {
-  const classes = `btn btn-${variant}`;
+  const classes = classNames("btn", {
+    [`btn-${variant}`]: variant !== undefined,
+  });
 
   return (
-    <button onClick={onClick} className={classes} type={type}>
+    <button onClick={onClick} className={classes} type={type} {...props}>
       {label}
-      {icon && <i className={`bi bi-${icon}`} />}
+      {icon && <i className={`bi bi-${icon} ms-1`} />}
     </button>
   );
 };
