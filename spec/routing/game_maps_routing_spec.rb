@@ -18,7 +18,6 @@ RSpec.describe GameMapsController, type: :routing do
       expect(get: "/game_maps/1/edit").to route_to("game_maps#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/game_maps").to route_to("game_maps#create")
     end

@@ -1,7 +1,9 @@
 class GameMap < ApplicationRecord
-  TYPES = [:hex_grid, :hex_diamond, :svg]
+  TYPES = ["hex_grid", "hex_diamond", "svg"]
 
   belongs_to :owner, class_name: :User
+
+  validates :map_type, inclusion: {in: TYPES}
 
   def to_s = name
 end

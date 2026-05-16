@@ -47,6 +47,7 @@ class GameMapsController < ApplicationController
   # DELETE /game_maps/1 or /game_maps/1.json
   def destroy
     @game_map.destroy!
+    redirect_to game_maps_path
   end
 
   private
