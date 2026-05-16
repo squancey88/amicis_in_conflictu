@@ -1,0 +1,23 @@
+<% content_for :title, "Game maps" %>
+
+<%= render Common::HeaderCardComponent.new(title: "Game maps") do |header| %>
+  <%= header.with_buttons do %>
+    <%= link_to "New game map", new_game_map_path, class: %i[btn btn-primary] %>
+  <% end %>
+<% end %>
+
+<div id="game_maps">
+  <%= turbo_frame_tag :game_maps do %>
+    <% @game_maps.each do |game_map| %>
+      <%= render Common::CardWithMenuComponent.new(title: game_map,
+        menu_options: [
+          {link: game_map, text: "Show", target: "_top"},
+          {link: edit_game_map_path(@game_map), text: "Edit", target: "_top"}
+        ]) do |card| %>
+        <% card.with_body do %>
+          <%= render game_map %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

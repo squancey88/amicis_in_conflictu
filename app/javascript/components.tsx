@@ -3,6 +3,8 @@ import { NewGameForm } from "Organisms/NewGameForm";
 import { QuestEventForm } from "Organisms/QuestEventForm";
 import { TextEditor } from "Atoms/TextEditor";
 import { IndexList } from "Organisms/IndexList";
+import { NewGameMapForm } from "Organisms/NewGameMapForm";
+import { GameMapViewer } from "Organisms/GameMapViewer";
 
 // Component registry
 const components = {
@@ -10,6 +12,8 @@ const components = {
   QuestEventForm,
   TextEditor,
   IndexList,
+  NewGameMapForm,
+  GameMapViewer,
 };
 
 const roots = new Map<Element, Root>();

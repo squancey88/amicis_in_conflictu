@@ -1,0 +1,21 @@
+<%= render RecordShowWrapperComponent.new(
+  record: @game_map,
+  title: @game_map.to_s,
+  menu_options: [
+    { 
+      text: "Edit",
+      link: edit_game_map_path(@game_map)
+    },
+    {
+      text: "Delete",
+      link: game_map_path(@game_map),
+      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+    }
+  ]
+) do |component| %>
+
+  <%= component.with_body do %>
+    <%= react_component("GameMapViewer", GameMapSerializer.new(@game_map).as_json) %> 
+  <% end %>
+  
+<% end %>

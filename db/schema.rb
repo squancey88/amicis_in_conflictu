@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_08_123702) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -147,6 +147,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_123702) do
     t.datetime "updated_at", null: false
     t.index ["attached_to_type", "attached_to_id"], name: "index_equipment_attachments_on_attached_to"
     t.index ["equipment_id"], name: "index_equipment_attachments_on_equipment_id"
+  end
+
+  create_table "game_maps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "map_type"
+    t.string "name"
+    t.jsonb "config"
+    t.uuid "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_game_maps_on_owner_id"
   end
 
   create_table "game_quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -602,6 +612,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_123702) do
   add_foreign_key "characters", "worlds"
   add_foreign_key "equipment", "game_systems"
   add_foreign_key "equipment_attachments", "equipment"
+  add_foreign_key "game_maps", "users", column: "owner_id"
   add_foreign_key "game_quest_events", "games"
   add_foreign_key "game_quest_events", "quest_events"
   add_foreign_key "games", "game_systems"
