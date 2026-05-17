@@ -1,14 +1,6 @@
-<nav class="aic-main-nav">
-  <a class="icon" href="<%= root_path %>">
-    <%= image_tag "amicis_in_conflictu_logo.svg" %>
-  </a>
-  <%= react_component("HeaderMenu", { items: menu_links }) %>
-  <div class="menu">
-    <%= link_to user_path(current_user) do %>
-      <i class="bi bi-person-circle"></i>
-    <% end %>
-    <%= button_to logout_path, method: :post do %>
-      <i class="bi bi-box-arrow-right"></i>
-    <% end %>
-  </div>
-</nav>
+<%= react_component("HeaderMenu", { 
+  items: menu_links,
+  logo_href: root_path,
+  logo_path: image_url("amicis_in_conflictu_logo.svg"),
+  user_path: user_path(current_user)
+}) %>

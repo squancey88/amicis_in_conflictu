@@ -23,4 +23,14 @@
       display: block;
     } 
   }
+
+  &.mobile {
+    .sub-menu {
+      position: relative;
+      box-shadow: none;
+      border: none;
+
+    }
+
+  }
 }

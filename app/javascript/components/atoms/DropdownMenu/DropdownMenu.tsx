@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "Atoms/Button";
+import useBreakpoint from "Hooks/useBreakpoint";
+import classNames from "classnames";
 
 export interface DropDownMenuItem {
   label: string;
@@ -9,11 +11,17 @@ export interface DropDownMenuItem {
 interface DropdownMenuProps {
   label: string;
   items: Array<DropDownMenuItem>;
+  flatOnMobile?: boolean;
 }
 
-const DropdownMenu = ({ label, items }: DropdownMenuProps) => {
+const DropdownMenu = ({
+  label,
+  items,
+  flatOnMobile = false,
+}: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { isMobile } = useBreakpoint();
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
@@ -42,7 +50,10 @@ const DropdownMenu = ({ label, items }: DropdownMenuProps) => {
   ));
 
   return (
-    <div className="aic-dropdown-menu" ref={ref}>
+    <div
+      className={classNames("aic-dropdown-menu", { mobile: isMobile })}
+      ref={ref}
+    >
       <Button
         aria-expanded={isOpen}
         aria-haspopup="true"
