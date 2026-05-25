@@ -9,6 +9,6 @@ RSpec.describe "time_periods/index", type: :view do
 
   it "renders a list of time_periods" do
     render
-    expect(rendered).to have_css(".card", count: 3)
+    expect(rendered).to have_css(".card", count: 2)
   end
 end

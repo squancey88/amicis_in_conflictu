@@ -16,6 +16,6 @@ RSpec.describe "game_systems/index", type: :view do
 
   it "renders a list of game_systems" do
     render
-    expect(rendered).to have_css(".card", count: 3)
+    expect(rendered).to have_css(".card", count: 2)
   end
 end

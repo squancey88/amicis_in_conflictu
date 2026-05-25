@@ -26,7 +26,6 @@ const HeaderMenu = ({
 }: HeaderMenuProps) => {
   const { isMobile } = useBreakpoint();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  console.log("HeaderMenu rendering", isMobile);
 
   return (
     <nav
