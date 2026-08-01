@@ -26,6 +26,10 @@ class Game < ApplicationRecord
     game_system.name
   end
 
+  def user_player(user)
+    players.find { _1.user_is_player?(user) }
+  end
+
   def set_initial_data(**start_values)
     @initial_data = start_values
   end
