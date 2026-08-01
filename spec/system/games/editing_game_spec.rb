@@ -33,6 +33,7 @@ RSpec.describe("Creating a Game", type: :system) do
     it "can finish game, but then resume and edit again" do
       visit game_path(game)
 
+      expect(page).to have_text("Turn Details")
       click_on "Add Turn"
 
       expect(page).to have_css("input[name*='turns']", count: 4)
@@ -57,7 +58,6 @@ RSpec.describe("Creating a Game", type: :system) do
       visit game_path(game)
 
       expect(page).to have_text("Turn Details")
-
       click_on "Add Turn"
 
       expect(page).to have_css("input[name*='turns']", count: 4)
@@ -112,6 +112,7 @@ RSpec.describe("Creating a Game", type: :system) do
       it "can finish game, but then resume and edit again" do
         visit game_path(game)
 
+        expect(page).to have_text("Turn Details")
         click_on "Add Turn"
 
         expect(page).to have_css("input[name*='turns']", count: 4)
@@ -136,7 +137,6 @@ RSpec.describe("Creating a Game", type: :system) do
         visit game_path(game)
 
         expect(page).to have_text("Turn Details")
-
         click_on "Add Turn"
 
         expect(page).to have_css("input[name*='turns']", count: 4)
