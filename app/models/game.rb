@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   belongs_to :campaign, dependent: nil, optional: true
   has_one :gaming_group, through: :gaming_session
 
-  has_many :players, dependent: :destroy
+  has_many :players, -> { order(id: :asc) }, dependent: :destroy
   has_many :unit_xp_gain_applied, dependent: :destroy
   has_many :unit_applied_modifier, dependent: :destroy
   has_many :game_quest_events, dependent: :destroy

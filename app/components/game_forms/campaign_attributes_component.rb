@@ -13,7 +13,7 @@ class GameForms::CampaignAttributesComponent < ViewComponent::Base
   end
 
   def field_name(key)
-    players_attributes_form_name(@player_index, "[game_data][campaign][changes][#{key}]")
+    players_attributes_form_name(@player_index, "[campaign][changes][#{key}]")
   end
 
   def get_value(key)
