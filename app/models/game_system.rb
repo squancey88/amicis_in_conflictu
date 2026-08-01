@@ -1,6 +1,7 @@
 class GameSystem < ApplicationRecord
   has_many :games, dependent: nil
   has_many :armies, dependent: :destroy
+  has_many :game_objectives, dependent: :destroy
 
   validates :name, :slug, presence: true
   validates :slug, uniqueness: true
