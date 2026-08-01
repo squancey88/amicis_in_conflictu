@@ -13,7 +13,7 @@ class GameForms::TurnBasedComponent < ViewComponent::Base
   end
 
   def turn_field_name(player_index, key)
-    players_attributes_form_name(player_index, "[game_data][turns][][#{key}]")
+    players_attributes_form_name(player_index, "[turns][][#{key}]")
   end
 
   def turn_field(player, player_index, turn_field, turn_index = nil)

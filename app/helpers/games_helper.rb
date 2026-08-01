@@ -17,7 +17,10 @@ module GamesHelper
   end
 
   def state_select(form)
-    form.select(:game_state, Game.game_states.keys.map { |key| [key.humanize, key] }, {}, {class: "form-select"})
+    content_tag(:div, class: ["form-floating"]) do
+      concat(form.select(:game_state, Game.game_states.keys.map { |key| [key.humanize, key] }, {}, {class: "form-select"}))
+      concat(form.label(:game_state))
+    end
   end
 
   def state_badge(game)

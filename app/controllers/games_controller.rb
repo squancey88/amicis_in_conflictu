@@ -121,15 +121,24 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(
+    permitted = params.require(:game).permit(
       :gaming_session_id, :game_system_id, :campaign_id,
       :game_state, :finish_reason,
       players_attributes: [:id, :controller_id, :controller_type, :notes, :surrendered,
-        player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy],
-        game_data: {}],
+        campaign: {},
+        player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy]],
       unit_xp_gain_applied_attributes: [:id, :unit_id, :unit_xp_gain_event_id],
       unit_applied_modifier_attributes: [:id, :unit_id, :unit_stat_modifier_id],
       game_quest_events_attributes: [:id, :notes]
     )
+
+    params[:game][:players_attributes]&.each do |index, player|
+      if player[:turns].present?
+        permitted[:players_attributes][index][:turns] =
+          player[:turns].map { |t| t.permit! }
+      end
+    end
+
+    permitted
   end
 end

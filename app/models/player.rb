@@ -21,7 +21,7 @@ class Player < ApplicationRecord
 
   delegate :display_name, to: :controller
 
-  store_accessor :game_data, :turns
+  store_accessor :game_data, :turns, :campaign
 
   before_save(:process_player_data)
   before_create(:setup_game_data)
