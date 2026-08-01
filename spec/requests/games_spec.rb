@@ -11,10 +11,10 @@ RSpec.describe "/games", type: :request do
     {
       gaming_session_id: gaming_session.id,
       game_system_id: game_system.id,
-      players_attributes: [
-        {controller_id: user.id, controller_type: "User"},
-        {controller_id: user2.id, controller_type: "User"}
-      ]
+      players_attributes: {
+        "0" => {controller_id: user.id, controller_type: "User"},
+        "1" => {controller_id: user2.id, controller_type: "User"}
+      }
     }
   }
 
@@ -107,15 +107,15 @@ RSpec.describe "/games", type: :request do
       it "should upate player data" do
         game = Game.create! valid_attributes
         player = game.players.first
-        data = [{
-          id: player.id,
-          game_data: {
+        data = {
+          "0" => {
+            id: player.id,
             turns: [
               {primary: 5, seconday: 10},
               {primary: 20, seconday: 10}
             ]
           }
-        }]
+        }
         patch game_url(game), params: {game: {players_attributes: data}}
         player.reload
         expect(player.game_data["turns"].first["primary"]).to eq("5")
