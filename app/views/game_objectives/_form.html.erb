@@ -4,6 +4,14 @@
 
     <% component.with_form_box do -%>
 
+      <%= form.text_field :name, placeholder: "Name" %>
+
+      <%= react_component("ScoringKeySelector", { 
+        grouped_game_systems: @grouped_game_systems,
+        model_name: "game_objective",
+        selectedScoringKey: game_objective.scoring_key,
+        selectedGameSystemId: game_objective.game_system.id
+      }) %>
       
     <% end %>
   <% end %>

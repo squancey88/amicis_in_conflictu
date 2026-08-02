@@ -1,5 +1,5 @@
 class GameObjectivesController < ApplicationController
-  before_action :set_game_objective, only: %i[ show edit update destroy ]
+  before_action :set_game_objective, only: %i[show edit update destroy]
 
   # GET /game_objectives or /game_objectives.json
   def index
@@ -13,10 +13,14 @@ class GameObjectivesController < ApplicationController
   # GET /game_objectives/new
   def new
     @game_objective = GameObjective.new
+    @game_objective.game_system = GameSystem.find(params[:game_system_id]) if params[:game_system_id]
+
+    @grouped_game_systems = grouped_game_systems.as_json
   end
 
   # GET /game_objectives/1/edit
   def edit
+    @grouped_game_systems = grouped_game_systems.as_json
   end
 
   # POST /game_objectives or /game_objectives.json
@@ -28,8 +32,8 @@ class GameObjectivesController < ApplicationController
         format.html { redirect_to @game_objective, notice: "Game objective was successfully created." }
         format.json { render :show, status: :created, location: @game_objective }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @game_objective.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @game_objective.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +45,8 @@ class GameObjectivesController < ApplicationController
         format.html { redirect_to @game_objective, notice: "Game objective was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @game_objective }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @game_objective.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @game_objective.errors, status: :unprocessable_content }
       end
     end
   end
@@ -58,13 +62,20 @@ class GameObjectivesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game_objective
-      @game_objective = GameObjective.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def game_objective_params
-      params.fetch(:game_objective, {})
+  def grouped_game_systems
+    GameSystem.where(has_objectives: true).group_by(&:category).map do |k, v|
+      {groupName: k, gameSystems: GameSystemSerializer.new(v).as_json}
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_game_objective
+    @game_objective = GameObjective.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def game_objective_params
+    params.require(:game_objective).permit(:name, :game_system_id, :scoring_key)
+  end
 end

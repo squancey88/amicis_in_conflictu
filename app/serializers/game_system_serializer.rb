@@ -1,7 +1,5 @@
-class GameSystemSerializer < BaseSerializer
-  private
+class GameSystemSerializer
+  include Alba::Resource
 
-  def columns
-    %i[type competitive name slug edition]
-  end
+  attributes :id, :name, :created_at, :updated_at, :type, :competitive, :slug, :edition, :scoring_keys
 end

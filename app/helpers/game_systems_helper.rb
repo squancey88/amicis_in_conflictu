@@ -6,6 +6,14 @@ module GameSystemsHelper
       {include_blank: "Please Select"}, {class: "form-select", data:}
   end
 
+  def game_systems_with_objectives(form, attribute_name, include_blank: nil)
+    options = {}
+    options[:include_blank] = include_blank if include_blank
+    form.select attribute_name,
+      grouped_options_for_select(game_system_grouped_options(GameSystem.where(has_objectives: true))),
+      options, {class: "form-select"}
+  end
+
   def game_systems_with_army_select(form, attribute_name, include_blank: nil)
     options = {}
     options[:include_blank] = include_blank if include_blank
@@ -65,4 +73,6 @@ module GameSystemsHelper
       game_systems_role_playing_game_path(game_system)
     end
   end
+
+  private
 end

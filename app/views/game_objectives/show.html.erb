@@ -15,7 +15,13 @@
 ) do |component| %>
 
   <% component.with_box do %>
-
-    <%= render @game_objective %>
+    <p>
+      <strong>Game system:</strong>
+      <%= @game_objective.game_system.name %>
+    </p>
+    <p>
+      <strong>Scoring Key:</strong>
+      <%= @game_objective.scoring_key %>
+    </p>
   <% end %>
 <% end %>

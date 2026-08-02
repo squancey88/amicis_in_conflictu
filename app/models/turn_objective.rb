@@ -1,6 +1,8 @@
 class TurnObjective < ApplicationRecord
   belongs_to :game_objective
   belongs_to :player
+
+  validates :game_objective, uniqueness: {scope: [:player, :turn]}
 end
 
 # == Schema Information
@@ -17,8 +19,9 @@ end
 #
 # Indexes
 #
-#  index_turn_objectives_on_game_objective_id  (game_objective_id)
-#  index_turn_objectives_on_player_id          (player_id)
+#  idx_on_game_objective_id_player_id_turn_33934352d0  (game_objective_id,player_id,turn) UNIQUE
+#  index_turn_objectives_on_game_objective_id          (game_objective_id)
+#  index_turn_objectives_on_player_id                  (player_id)
 #
 # Foreign Keys
 #

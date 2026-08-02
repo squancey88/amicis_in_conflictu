@@ -1,6 +1,8 @@
 module Api
   module GameSystems
     class GameObjectivesController < BaseController
+      before_action :set_game_system, only: %i[index]
+
       def index
         @pagy, @records = pagy(@game_system.game_objectives)
         render json: {

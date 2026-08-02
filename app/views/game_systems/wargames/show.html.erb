@@ -22,6 +22,15 @@
       <% end %>
     <% end %>
 
+    <% tab_section.with_tab(label: "Objectives") do %>
+      <%= render Common::EmbeddedIndexComponent.new(title: "Objectives",
+          records_path: api_game_system_game_objectives_path(@wargame),
+          new_path: new_game_objective_path(game_system_id: @wargame.id),
+          react: true,
+          display_config: [{attribute: :name}]
+        ) %>
+    <% end %>
+
     <% tab_section.with_tab(label: "Armies") do %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Armies",
           records_path: api_game_system_armies_path(@wargame),

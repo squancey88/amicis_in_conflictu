@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_01_165119) do
+ActiveRecord::Schema[7.1].define(version: 2026_08_02_093446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -163,9 +163,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_01_165119) do
     t.string "name"
     t.uuid "game_system_id", null: false
     t.jsonb "description"
+    t.string "scoring_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_system_id"], name: "index_game_objectives_on_game_system_id"
+    t.index ["name", "game_system_id"], name: "index_game_objectives_on_name_and_game_system_id", unique: true
   end
 
   create_table "game_quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -192,6 +194,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_01_165119) do
     t.string "slug"
     t.boolean "has_armies", default: false
     t.boolean "has_army_lists", default: false
+    t.boolean "has_objectives", default: false
     t.index ["slug"], name: "index_game_systems_on_slug", unique: true
   end
 
@@ -378,6 +381,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_01_165119) do
     t.integer "points_scored"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_objective_id", "player_id", "turn"], name: "idx_on_game_objective_id_player_id_turn_33934352d0", unique: true
     t.index ["game_objective_id"], name: "index_turn_objectives_on_game_objective_id"
     t.index ["player_id"], name: "index_turn_objectives_on_player_id"
   end

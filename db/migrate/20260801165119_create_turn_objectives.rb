@@ -8,5 +8,7 @@ class CreateTurnObjectives < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :turn_objectives, [:game_objective_id, :player_id, :turn], unique: true
   end
 end

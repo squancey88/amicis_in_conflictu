@@ -6,6 +6,7 @@ import { IndexList } from "Organisms/IndexList";
 import { NewGameMapForm } from "Organisms/NewGameMapForm";
 import { GameMapViewer } from "Organisms/GameMapViewer";
 import { HeaderMenu } from "Organisms/HeaderMenu";
+import { ScoringKeySelector } from "./components/organisms/ScoringKeySelector";
 
 // Component registry
 const components = {
@@ -16,6 +17,7 @@ const components = {
   NewGameMapForm,
   GameMapViewer,
   HeaderMenu,
+  ScoringKeySelector,
 };
 
 const roots = new Map<Element, Root>();

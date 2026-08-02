@@ -1,5 +1,6 @@
 export interface GameSystem extends AICRecord {
   name: string;
+  scoringKeys?: Array<string>;
 }
 
 export interface Campaign extends AICRecord {
