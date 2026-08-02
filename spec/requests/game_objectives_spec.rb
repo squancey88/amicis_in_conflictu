@@ -56,7 +56,7 @@ RSpec.describe "/game_objectives", type: :request do
 
       it "redirects to the created game_objective" do
         post game_objectives_url, params: {game_objective: valid_attributes}
-        expect(response).to redirect_to(game_objective_url(GameObjective.last))
+        expect(response).to redirect_to(game_objective_url(GameObjective.order(:created_at).last))
       end
     end
 

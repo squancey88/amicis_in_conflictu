@@ -1,9 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "game_objectives/edit", type: :view do
-  let(:game_objective) {
-    GameObjective.create!
-  }
+  let(:game_objective) { create(:game_objective) }
 
   before(:each) do
     assign(:game_objective, game_objective)
