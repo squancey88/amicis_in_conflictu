@@ -1,7 +1,7 @@
 class GameObjective < ApplicationRecord
   belongs_to :game_system
 
-  validates :name, uniqueness: {scope: :game_system}
+  validates :name, uniqueness: {scope: :game_system_id}
   validates :name, :scoring_key, presence: true
 
   def to_s = name

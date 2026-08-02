@@ -10,7 +10,7 @@
         grouped_game_systems: @grouped_game_systems,
         model_name: "game_objective",
         selectedScoringKey: game_objective.scoring_key,
-        selectedGameSystemId: game_objective.game_system.id
+        selectedGameSystemId: game_objective.game_system&.id
       }) %>
       
     <% end %>

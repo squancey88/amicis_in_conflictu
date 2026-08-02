@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :game_objective do
-    name { "MyString" }
-    game_system { nil }
+    name { Faker::Lorem.word }
     description { "" }
+    scoring_key { "primary" }
+
+    game_system { create(:wargame) }
   end
 end

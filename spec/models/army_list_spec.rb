@@ -5,10 +5,7 @@ RSpec.describe ArmyList, type: :model do
     it { should belong_to(:user) }
   end
   context "validation" do
-    it "should require user" do
-      army_list = ArmyList.new(name: "test")
-      expect(army_list.valid?).to be false
-    end
+    it { should validate_presence_of(:name) }
   end
 
   context "cost calculations" do
