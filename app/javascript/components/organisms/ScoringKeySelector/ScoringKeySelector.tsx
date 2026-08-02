@@ -35,8 +35,6 @@ const ScoringKeySelector = ({
       const match = group.gameSystems.find((gameSystem) => gameSystem.id == id);
       if (match) {
         setSelectedGameSystem(match);
-
-        return;
       }
     });
   };

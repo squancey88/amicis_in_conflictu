@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "game_objectives/new", type: :view do
   before(:each) do
-    assign(:game_objective, GameObjective.new())
+    assign(:game_objective, GameObjective.new)
   end
 
   it "renders new game_objective form" do

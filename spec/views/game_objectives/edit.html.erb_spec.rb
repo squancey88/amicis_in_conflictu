@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "game_objectives/edit", type: :view do
   let(:game_objective) {
-    GameObjective.create!()
+    GameObjective.create!
   }
 
   before(:each) do
