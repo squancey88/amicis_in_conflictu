@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :game_objective do
-    name { Faker::Lorem.word }
+    sequence(:name) { |n| "#{Faker::Lorem.word} Objective #{n}" }
     description { "" }
     scoring_key { "primary" }
 

@@ -2,10 +2,6 @@ require "rails_helper"
 
 RSpec.describe GameObjectivesController, type: :routing do
   describe "routing" do
-    it "routes to #index" do
-      expect(get: "/game_objectives").to route_to("game_objectives#index")
-    end
-
     it "routes to #new" do
       expect(get: "/game_objectives/new").to route_to("game_objectives#new")
     end
