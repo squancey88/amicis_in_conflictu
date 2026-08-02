@@ -1,6 +1,12 @@
 export interface GameSystem extends AICRecord {
   name: string;
   scoringKeys?: Array<string>;
+  scoringValues?: Array<{
+    name: string;
+    key: string;
+    scoring: boolean;
+    type: string;
+  }>;
 }
 
 export interface Campaign extends AICRecord {
@@ -10,6 +16,7 @@ export interface Campaign extends AICRecord {
 export interface Player extends AICRecord {
   id: string;
   type: string;
+  displayName: string;
 }
 
 export interface GroupedGameSystems {
