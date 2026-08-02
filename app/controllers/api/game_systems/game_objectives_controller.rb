@@ -6,7 +6,7 @@ module Api
       def index
         @pagy, @records = pagy(@game_system.game_objectives)
         render json: {
-          records: ::GameSystems::GameObjectiveSerialiser.new(@records).serializable_hash,
+          records: GameObjectiveSerializer.new(@records, with_traits: [:with_paths]).serializable_hash,
           pagination: @pagy.data_hash
         }
       end

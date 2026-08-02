@@ -13,20 +13,9 @@ class GameForms::TurnBasedComponent < ViewComponent::Base
 
   def component_data
     {
-      players: player_data,
-      game_system: GameSystemSerializer.new(@game_system).as_json,
+      players: PlayerSerializer.new(@game.players).as_json,
+      game_system: GameSystemSerializer.new(@game_system, with_traits: [:with_objectives]).as_json,
       editable: @game.editable?
     }
-  end
-
-  def player_data
-    @game.players.map do |player|
-      {
-        id: player.id,
-        type: player.controller_type,
-        displayName: player.display_name,
-        turns: player.turns
-      }
-    end
   end
 end

@@ -40,6 +40,7 @@ class GamesController < ApplicationController
 
   # PATCH/PUT /games/1 or /games/1.json
   def update
+    console
     respond_to do |format|
       if @game.update(game_params)
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }
@@ -124,9 +125,12 @@ class GamesController < ApplicationController
     permitted = params.require(:game).permit(
       :gaming_session_id, :game_system_id, :campaign_id,
       :game_state, :finish_reason,
-      players_attributes: [:id, :controller_id, :controller_type, :notes, :surrendered,
+      players_attributes: [
+        :id, :controller_id, :controller_type, :notes, :surrendered,
         campaign: {},
-        player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy]],
+        player_armies_attributes: [:id, :army_id, :army_list_id, :_destroy],
+        turn_objectives_attributes: [:id, :turn, :points_scored, :game_objective_id]
+      ],
       unit_xp_gain_applied_attributes: [:id, :unit_id, :unit_xp_gain_event_id],
       unit_applied_modifier_attributes: [:id, :unit_id, :unit_stat_modifier_id],
       game_quest_events_attributes: [:id, :notes]
