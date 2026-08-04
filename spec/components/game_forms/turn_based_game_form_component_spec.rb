@@ -6,16 +6,6 @@ RSpec.describe GameForms::TurnBasedComponent, type: :component do
   let(:game_system) { create(:wargame, :turn_based) }
   let(:game) { create(:game, game_system:) }
 
-  context "without data" do
-    before do
-      render_inline(described_class.new(game:, form: nil, user_player: nil))
-    end
-
-    it "should render add new turn button" do
-      expect(page).to have_css(".btn", text: "Add Turn")
-    end
-  end
-
   context "with data" do
     before do
       player1 = game.players.first
@@ -35,8 +25,13 @@ RSpec.describe GameForms::TurnBasedComponent, type: :component do
       render_inline(described_class.new(game:, form: nil, user_player: nil))
     end
 
-    it "should render the correct number of inputs" do
-      expect(page).to have_css('input[type="number"]', count: 8)
+    it "should render turn based react component" do
+      expect(page).to have_css("div")
+      expect(rendered_content).to have_component_with_props("TurnBasedGameForm", {
+        players: PlayerSerializer.new(game.players).as_json,
+        game_system: GameSystemSerializer.new(game_system, with_traits: [:with_objectives]).as_json,
+        editable: true
+      })
     end
   end
 end

@@ -14,8 +14,9 @@ module ReactCheckers
 end
 
 RSpec::Matchers.define :have_component_with_props do |component_name, expected_props|
-  match do |rendered_content|
-    doc = Nokogiri::HTML(rendered_content)
+  match do |source|
+    html = source.respond_to?(:native) ? source.native.to_s : source.to_s
+    doc = Nokogiri::HTML(html)
     nodes = doc.css("[data-react-component='#{component_name}']")
 
     nodes.any? do |node|
