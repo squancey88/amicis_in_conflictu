@@ -1,13 +1,13 @@
 <div class="<%= box_classes %>">
   <% if @title || menu %>
-    <div class="standard-box_header card-header">
-      <div class="standard-box_header-text">
+    <div class="header">
+      <div class="text">
         <% if @title %>
-          <h5 class="card-title"><%= @title %></h5>
+          <h5 class="title"><%= @title %></h5>
         <% end %>
       </div>
       <% if menu %>
-        <div class="standard-box_menu">
+        <div class="menu">
           <%= menu %>
         </div>
       <% end %>

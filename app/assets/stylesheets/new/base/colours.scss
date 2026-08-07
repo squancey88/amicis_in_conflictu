@@ -7,6 +7,7 @@
 
   --component-accent: #e3f2fd;
   --component-border: #bdbdbd;
+  --component-background: #fafafa;
 }
 
 @mixin component-accent {
@@ -18,4 +19,8 @@
 @mixin component-border {
   border-color: var(--component-border);
   border-style: solid;
+}
+
+@mixin component-coloured {
+  background-color: var(--component-background);
 }
