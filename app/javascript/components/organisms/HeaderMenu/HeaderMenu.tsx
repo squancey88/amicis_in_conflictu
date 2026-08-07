@@ -71,9 +71,11 @@ const HeaderMenu = ({
             <a href={userPath}>
               <i className="bi bi-person-circle"></i>
             </a>
-            <a href={""}>
-              <i className="bi bi-box-arrow-right"></i>
-            </a>
+            <form className="button_to" method="post" action="/logout">
+              <button type="submit">
+                <i className="bi bi-box-arrow-right"></i>
+              </button>
+            </form>
           </div>
         </div>
       )}
