@@ -16,15 +16,24 @@
 
     .text {
       flex: 1 1 70%;
+      display: flex;
+      flex-direction: column;
 
       .title {
+        margin-bottom: 0px;
+        @include heading-text;
+      }
 
+      .subtitle {
+        margin-bottom: 0px;
+        @include secondary-text;
       }
     }
 
     .menu {
       flex: 0 1 30%;
       display: flex;
+      gap: 0.25rem;
       flex-direction: row;
       justify-content: flex-end;
       align-items: flex-start;
