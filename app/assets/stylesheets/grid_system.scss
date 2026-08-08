@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   gap: 10px;
 
-  @include media-breakpoint-down(lg) {
+  @include breakpoint-down(lg) {
     flex-direction: column;
   }
 

@@ -7,6 +7,7 @@
   
   .header {
     @include standard-padding;
+    @include component-coloured-dark; 
     display: flex;
     flex-direction: row;
     border-width: 0px 0px 1px 0px;

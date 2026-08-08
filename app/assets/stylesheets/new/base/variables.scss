@@ -1,8 +1,6 @@
-
 $std_spacer: 0.5rem;
 
 $std_padding: 0.5rem;
-
 
 @mixin component-spacing($count: 1) {
   margin-bottom: ($count * 0.5rem);

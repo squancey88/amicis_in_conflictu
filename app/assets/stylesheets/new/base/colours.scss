@@ -1,31 +1,57 @@
+$orange: (50: #fdf6f1, 100: #fae9dd, 200: #f5d1b7, 300: #efb489, 400: #e89356,
+          500: #e06f1d, 600: #bb5e1a, 700: #924b17, 800: #6a3814, 900: #452712);
+$plum: (50: #f5f1f3, 100: #e5dce0, 200: #c7b5bd, 300: #a58693, 400: #7c5164,
+          500: #511730, 600: #46162a, 700: #3a1423, 800: #2e131c, 900: #231216);
+$sage: (50: #fafbf9, 100: #f3f4ef, 200: #e6e8dd, 300: #d6d9c8, 400: #c4c8b0,
+          500: #b1b695, 600: #95987d, 700: #757762, 800: #565647, 900: #3a382e);
+$gray: (50: #fafafa, 100: #f3f3f2, 200: #e5e4e1, 300: #d3d0cc, 400: #b3aea7,
+        500: #8a8378, 600: #787268, 700: #615b53, 800: #49443e, 900: #332e2a);
+
+@function color($palette, $shade: 500) {
+  @return map-get($palette, $shade);
+}
+
+$primary: $orange;
+$secondary: $sage;
+$accent: $plum;
+
+$primary-color: color($primary, 500);
+$accent-color: color($accent, 500);
+
+$component-background: color($gray, 50);
+$component-border: color($gray, 300);
+$component-accent: #e3f2fd;
+
 
 :root {
-  --primary-color: #0dcaf0;
-  --accent-color: #e06f1d;
+  --primary-color: #{$primary-color};
+  --accent-color: #{$accent-color};
 
-  --font-grey: #595959;
+  --component-accent: #{$component-accent};
+  --component-border: #{$component-border};
+  --component-background: #{$component-background};
 
-  --component-accent: #e3f2fd;
-  --component-border: #bdbdbd;
-  --component-background: #fafafa;
-
-  --admin-accent: #e8801e;
+  --admin-accent: #{color($secondary, 500)};
 
   --text-heading: #000000;
-  --text-secondary: #707070;
+  --text-secondary: #{color($gray, 700)};
 }
 
 @mixin component-accent {
-  background-color: var(--component-accent);
+  background-color: $component-accent;
   @include component-border;
   border-width: 1px;
 }
 
 @mixin component-border {
-  border-color: var(--component-border);
+  border-color: $component-border;
   border-style: solid;
 }
 
 @mixin component-coloured {
-  background-color: var(--component-background);
+  background-color: $component-background;
+}
+
+@mixin component-coloured-dark {
+  background-color: color($gray, 200);
 }

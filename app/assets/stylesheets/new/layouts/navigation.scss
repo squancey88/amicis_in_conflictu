@@ -1,5 +1,6 @@
 .aic-main-nav {
   @include standard-padding;
+  border-bottom: 2px solid var(--accent-color);
 
   display: flex;
   flex-direction: row;
@@ -56,7 +57,7 @@
       align-items: center;
 
       a, button {
-        color: var(--font-grey);
+        color: var(--text-secondary);
         text-decoration: none;
         padding: 0.5rem;
         border: none;

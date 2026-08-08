@@ -39,8 +39,8 @@
     <%= render Layout::WorldBuilderMenuComponent.new(world_building: @world_building) %>
     <%= render Common::FlashHandlerComponent.new(flash) %>
 
-    <div class="container-fluid mt-2">
+    <main class="main-body">
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>
