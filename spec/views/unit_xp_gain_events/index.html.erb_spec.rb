@@ -12,6 +12,6 @@ RSpec.describe "unit_xp_gain_events/index", type: :view do
 
   it "renders a list of unit_xp_gain_events" do
     render
-    expect(rendered).to have_css(".card", count: 2)
+    expect(rendered).to have_css(".aic-card", count: 2)
   end
 end

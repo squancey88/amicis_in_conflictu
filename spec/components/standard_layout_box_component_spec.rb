@@ -6,6 +6,6 @@ RSpec.describe StandardLayoutBoxComponent, type: :component do
   end
 
   it "should render the title" do
-    expect(page).to have_css(".standard-box_header-text", text: "test")
+    expect(page).to have_css(".header", text: "test")
   end
 end

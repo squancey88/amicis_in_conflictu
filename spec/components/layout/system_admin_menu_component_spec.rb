@@ -13,7 +13,7 @@ RSpec.describe Layout::SystemAdminMenuComponent, type: :component do
     end
 
     it "should render" do
-      expect(page).to have_css(".navbar")
+      expect(page).to have_css(".admin-menu")
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe Layout::SystemAdminMenuComponent, type: :component do
     end
 
     it "should not render" do
-      expect(page).not_to have_css(".navbar")
+      expect(page).not_to have_css(".admin-menu")
     end
   end
 end

@@ -11,6 +11,6 @@ RSpec.describe "armies/index", type: :view do
   end
 
   it "renders a list of armies" do
-    expect(rendered).to have_css(".card", count: 2)
+    expect(rendered).to have_css(".aic-card", count: 2)
   end
 end
