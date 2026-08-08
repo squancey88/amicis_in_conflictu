@@ -8,7 +8,7 @@
       flex-direction: column;
       gap: 2px;
 
-      @include media-breakpoint-up(md) {
+      @include breakpoint-up(md) {
         flex-direction: row;
       }
     }

@@ -7,6 +7,6 @@ RSpec.describe "worlds/index", type: :view do
 
   it "renders a list of worlds" do
     render
-    expect(rendered).to have_css(".card", count: 3)
+    expect(rendered).to have_css(".aic-card", count: 2)
   end
 end

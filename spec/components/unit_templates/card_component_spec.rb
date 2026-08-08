@@ -10,6 +10,6 @@ RSpec.describe UnitTemplates::CardComponent, type: :component do
   end
 
   it "should render card" do
-    expect(page).to have_css(".card")
+    expect(page).to have_css(".aic-card")
   end
 end

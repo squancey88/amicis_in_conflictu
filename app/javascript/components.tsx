@@ -5,6 +5,7 @@ import { TextEditor } from "Atoms/TextEditor";
 import { IndexList } from "Organisms/IndexList";
 import { NewGameMapForm } from "Organisms/NewGameMapForm";
 import { GameMapViewer } from "Organisms/GameMapViewer";
+import { HeaderMenu } from "Organisms/HeaderMenu";
 
 // Component registry
 const components = {
@@ -14,6 +15,7 @@ const components = {
   IndexList,
   NewGameMapForm,
   GameMapViewer,
+  HeaderMenu,
 };
 
 const roots = new Map<Element, Root>();

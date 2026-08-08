@@ -23,7 +23,7 @@ RSpec.describe Common::GridBoxComponent, type: :component do
     end
 
     it "should render standard layout box" do
-      expect(page).to have_css(".standard-box_header-text", text: "test")
+      expect(page).to have_css(".header", text: "test")
     end
   end
 end

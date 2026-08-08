@@ -11,11 +11,11 @@ class StandardLayoutBoxComponent < ViewComponent::Base
   end
 
   def box_classes
-    (["card", "text-bg-light"] + @classes).join(" ")
+    (["aic-card"] + @classes).join(" ")
   end
 
   def content_classes
-    classes = %w[standard-box_content card-body]
+    classes = %w[body]
     classes << "height-limited" if @height_limited
     classes.join(" ")
   end

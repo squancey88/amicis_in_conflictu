@@ -13,6 +13,6 @@ RSpec.describe "units/index", type: :view do
 
   it "renders a list of units" do
     render
-    expect(rendered).to have_css(".card", count: 2)
+    expect(rendered).to have_css(".aic-card", count: 2)
   end
 end
