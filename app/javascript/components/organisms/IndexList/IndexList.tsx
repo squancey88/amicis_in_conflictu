@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  IndexItem,
-  type IndexRecord,
-  type DisplayConfigItem,
-} from "Molecules/IndexItem";
+import { IndexItem, type IndexRecord, type DisplayConfigItem } from "Molecules/IndexItem";
 import { Pagination } from "Atoms/Pagination";
 import useIndex from "Hooks/useIndex";
 
@@ -39,11 +35,7 @@ const IndexList = <T extends IndexRecord>({
       <div className="records">
         {loading && <p>Loading...</p>}
         {records.map((record: IndexRecord) => (
-          <IndexItem
-            key={record.id}
-            record={record as T}
-            displayConfig={displayConfig}
-          />
+          <IndexItem key={record.id} record={record as T} displayConfig={displayConfig} />
         ))}
       </div>
       {pagination && <Pagination pagination={pagination} onChange={loadPage} />}

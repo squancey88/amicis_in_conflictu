@@ -1,44 +1,37 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { GameObjective, GameSystem } from "Types/common";
 import { Button } from "Atoms/Button";
-import { Select } from "Atoms/Select";
+import { Select, type SelectProps } from "Atoms/Select";
 
-interface GameObjectiveSelectorProps {
+interface GameObjectiveSelectorProps extends SelectProps {
   gameSystem: Required<GameSystem>;
   alreadyUsed?: Array<GameObjective>;
   onSelect: (gameObjective: GameObjective) => void;
 }
 
+const buildGroupedObjectives = (
+  gameSystem: Required<GameSystem>,
+  alreadyUsed: Array<GameObjective>,
+) =>
+  gameSystem.scoringValues.map((score) => ({
+    groupName: score.name,
+    objectives: gameSystem.gameObjectives
+      .filter((objective) => objective.scoringKey === score.key)
+      .map((objective) => ({
+        objective,
+        disabled: alreadyUsed.some((used) => used.id === objective.id),
+      })),
+  }));
+
 const GameObjectiveSelector = ({
   gameSystem,
   alreadyUsed = [],
   onSelect,
+  ...props
 }: GameObjectiveSelectorProps) => {
   const [selected, setSelected] = useState<string | undefined>(undefined);
-  const [groupedObjectives, setGroupObjectives] = useState<
-    Array<{
-      groupName: string;
-      objectives: Array<{ objective: GameObjective; disabled: boolean }>;
-    }>
-  >([]);
 
-  useEffect(() => {
-    setGroupObjectives(
-      gameSystem.scoringValues.map((score) => {
-        return {
-          groupName: score.name,
-          objectives: gameSystem.gameObjectives
-            .filter((objective) => objective.scoringKey === score.key)
-            .map((objective) => {
-              return {
-                objective: objective,
-                disabled: alreadyUsed.some((used) => used.id === objective.id),
-              };
-            }),
-        };
-      }),
-    );
-  }, [gameSystem, alreadyUsed]);
+  const groupedObjectives = buildGroupedObjectives(gameSystem, alreadyUsed);
 
   const handleClick = () => {
     const match = gameSystem.gameObjectives.find(
@@ -54,9 +47,11 @@ const GameObjectiveSelector = ({
     setSelected(event.target.value);
   };
 
+  const { testId, ...selectProps } = props;
+
   return (
-    <div>
-      <Select fieldName="" onChange={handleChange}>
+    <div data-testId={testId}>
+      <Select {...selectProps} onChange={handleChange}>
         <option value="">Please Select</option>
         {groupedObjectives.map((objectiveGroup) => (
           <optgroup

@@ -12,7 +12,6 @@ export interface TurnObjective extends AICRecord {
 export interface GameSystem extends AICRecord {
   name: string;
   gameObjectives?: Array<GameObjective>;
-  scoringKeys?: Array<string>;
   scoringValues?: Array<{
     name: string;
     key: string;
@@ -45,8 +44,8 @@ export interface CampaignsByGameSystem {
 
 export interface AICRecord {
   id: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type MapTypes = "hex_grid" | "hex_diamond" | "svg";

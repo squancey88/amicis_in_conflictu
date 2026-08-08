@@ -35,10 +35,11 @@ module ApplicationHelper
     end
   end
 
-  def react_component(name, props)
+  def react_component(name, props, html_props = {})
     content_tag :div, nil, data: {
       react_component: name,
+      turbo_permanent: true,
       props: props.deep_transform_keys { |key| key.to_s.camelize(:lower) }
-    }
+    }, **html_props
   end
 end

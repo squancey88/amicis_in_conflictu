@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { IndexRecord } from "Molecules/IndexItem";
 import { PaginationValues } from "Atoms/Pagination";
+
+export interface APIResponse {
+  records: Array<IndexRecord>;
+  pagination: PaginationValues;
+}
 
 export default function useIndex(indexPath: string) {
   const [records, setRecords] = useState<Array<IndexRecord>>([]);
@@ -8,27 +13,30 @@ export default function useIndex(indexPath: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getRecords = async (page = 1) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const url = new URL(indexPath, globalThis.location.origin);
-      url.searchParams.set("page", String(page));
-      const response = await fetch(url);
-      if (!response.ok) throw new Error("Failed to fetch records");
-      const data = await response.json();
-      setRecords(data.records);
-      setPagination(data.pagination);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const getRecords = useCallback(
+    async (page = 1) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const url = new URL(indexPath, globalThis.location.origin);
+        url.searchParams.set("page", String(page));
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch records");
+        const data: APIResponse = (await response.json()) as APIResponse;
+        setRecords(data.records);
+        setPagination(data.pagination);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [indexPath],
+  );
 
   useEffect(() => {
-    getRecords();
-  }, [indexPath]);
+    void getRecords();
+  }, [getRecords]);
 
   return { records, pagination, loading, error, loadPage: getRecords };
 }

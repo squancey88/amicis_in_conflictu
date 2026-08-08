@@ -2,18 +2,19 @@ import { ChangeEvent, useState } from "react";
 import { GameSystem, Player } from "Types/common";
 import { Button } from "Atoms/Button";
 import { TextInput } from "Atoms/TextInput";
+import { TurnBasedGameTableHeader } from "../../molecules/TurnBasedGameTableHeader";
 
-interface RawTurnDataGameFormProps {
+interface RawScoreTurnFormProps {
   players: Array<Required<Player>>;
   gameSystem: Required<GameSystem>;
   editable: boolean;
 }
 
-const RawTurnDataGameForm = ({
+const RawScoreTurnForm = ({
   players,
   gameSystem,
   editable,
-}: RawTurnDataGameFormProps) => {
+}: RawScoreTurnFormProps) => {
   const [playerData, setPlayerData] =
     useState<Array<Required<Player>>>(players);
 
@@ -169,29 +170,7 @@ const RawTurnDataGameForm = ({
 
       <div className="table-responsive">
         <table className="turn-grid table">
-          <thead>
-            <tr className="turn-grid__row">
-              <th scope="col" className="turn-grid__cell-counter">
-                Turn
-              </th>
-              {players.map((player, player_index) => {
-                return (
-                  <th
-                    key={player.id}
-                    scope="col"
-                    className="turn-grid__cell-player"
-                  >
-                    {player.displayName}
-                    <input
-                      type="hidden"
-                      name={`${fieldName(player_index)}[id]`}
-                      value={player.id}
-                    />
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
+          <TurnBasedGameTableHeader playerData={playerData} />
           {turnRows}
           <tfoot className="table-group-divider">
             {byScoreRow}
@@ -203,4 +182,4 @@ const RawTurnDataGameForm = ({
   );
 };
 
-export default RawTurnDataGameForm;
+export default RawScoreTurnForm;

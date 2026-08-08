@@ -1,9 +1,9 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import { TurnBasedGameForm } from "."
+import { RawScoreTurnForm } from "."
 
-describe("TurnBasedGameForm", () => {
+describe("RawScoreTurnForm", () => {
   it("renders", () => {
-    render(<TurnBasedGameForm />)
+    render(<RawScoreTurnForm />)
   })
 })

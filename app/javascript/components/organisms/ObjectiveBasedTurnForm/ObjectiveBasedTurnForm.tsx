@@ -3,18 +3,19 @@ import { GameSystem, Player, TurnObjective, GameObjective } from "Types/common";
 import { Button } from "Atoms/Button";
 import { TextInput } from "Atoms/TextInput";
 import { GameObjectiveSelector } from "Molecules/GameObjectiveSelector";
+import { TurnBasedGameTableHeader } from "../../molecules/TurnBasedGameTableHeader";
 
-interface ObjectiveTurnDataProps {
+interface ObjectiveBasedTurnFormProps {
   players: Array<Required<Player>>;
   gameSystem: Required<GameSystem>;
   editable: boolean;
 }
 
-const ObjectiveTurnData = ({
+const ObjectiveBasedTurnForm = ({
   players,
   gameSystem,
   editable,
-}: ObjectiveTurnDataProps) => {
+}: ObjectiveBasedTurnFormProps) => {
   const [playerData, setPlayerData] =
     useState<Array<Required<Player>>>(players);
 
@@ -203,11 +204,13 @@ const ObjectiveTurnData = ({
                     objectiveRow(objective, playerIndex, index),
                   )}
                 <GameObjectiveSelector
+                  fieldName={`player-${playerIndex}-turn-${turn}-selector`}
                   gameSystem={gameSystem}
                   alreadyUsed={player.turnObjectives
                     .filter((o) => o.turn === turn)
                     .map((o) => o.gameObjective)}
                   onSelect={(e) => handleAddObjective(playerIndex, turn, e)}
+                  testId={`player-${playerIndex}-turn-${turn}-selector`}
                 />
               </>
             </td>
@@ -236,29 +239,7 @@ const ObjectiveTurnData = ({
 
       <div className="table-responsive">
         <table className="turn-grid table">
-          <thead>
-            <tr className="turn-grid__row">
-              <th scope="col" className="turn-grid__cell-counter">
-                Turn
-              </th>
-              {playerData.map((player, playerIndex) => {
-                return (
-                  <th
-                    key={player.id}
-                    scope="col"
-                    className="turn-grid__cell-player"
-                  >
-                    {player.displayName}
-                    <input
-                      type="hidden"
-                      name={`game[players_attributes][${playerIndex}][id]`}
-                      value={player.id}
-                    />
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
+          <TurnBasedGameTableHeader playerData={playerData} />
           {turnRows}
           <tfoot className="table-group-divider">
             {byScoreRow}
@@ -270,4 +251,4 @@ const ObjectiveTurnData = ({
   );
 };
 
-export default ObjectiveTurnData;
+export default ObjectiveBasedTurnForm;

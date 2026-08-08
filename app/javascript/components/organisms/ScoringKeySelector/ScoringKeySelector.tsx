@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { GameSystem, type GroupedGameSystems } from "Types/common";
 import { GroupedGameSystemsSelect } from "../../molecules";
 import { Select } from "../../atoms/Select";
@@ -10,40 +10,34 @@ interface ScoringKeySelectorProps {
   groupedGameSystems: Array<GroupedGameSystems>;
 }
 
+const findGameSystemById = (
+  groupedGameSystems: Array<GroupedGameSystems>,
+  id: string,
+): GameSystem | undefined =>
+  groupedGameSystems
+    .flatMap((group) => group.gameSystems)
+    .find((gameSystem) => gameSystem.id === id);
+
 const ScoringKeySelector = ({
   modelName,
   groupedGameSystems,
   selectedGameSystemId,
   selectedScoringKey,
 }: ScoringKeySelectorProps) => {
-  const [selectedGameSystem, setSelectedGameSystem] = useState<
-    GameSystem | undefined
-  >();
-  const [currentScoringKey, setCurrentScoringKey] = useState<
-    string | undefined
-  >(selectedScoringKey);
+  const [manualGameSystemId, setManualGameSystemId] = useState<string | undefined>(undefined);
+  const [currentScoringKey, setCurrentScoringKey] = useState<string | undefined>(
+    selectedScoringKey,
+  );
 
-  const handleGameSystemChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setGameSystemById(event.target.value);
+  const activeGameSystemId = manualGameSystemId ?? selectedGameSystemId;
+  const selectedGameSystem = activeGameSystemId
+    ? findGameSystemById(groupedGameSystems, activeGameSystemId)
+    : undefined;
+
+  const handleGameSystemChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setManualGameSystemId(event.target.value);
     setCurrentScoringKey(undefined);
   };
-
-  const setGameSystemById = (id: string) => {
-    groupedGameSystems.forEach((group) => {
-      const match = group.gameSystems.find((gameSystem) => gameSystem.id == id);
-      if (match) {
-        setSelectedGameSystem(match);
-      }
-    });
-  };
-
-  useEffect(() => {
-    if (selectedGameSystemId) {
-      setGameSystemById(selectedGameSystemId);
-    }
-  }, [selectedGameSystemId, groupedGameSystems]);
 
   return (
     <div>
@@ -62,7 +56,8 @@ const ScoringKeySelector = ({
         selectedValue={currentScoringKey}
       >
         <option value="">--Please Select--</option>
-        {selectedGameSystem?.scoringKeys?.map((key) => {
+        {selectedGameSystem?.scoringValues?.map((value) => {
+          const key = value.key;
           return (
             <option key={key} value={key}>
               {key}

@@ -1,16 +1,38 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import PlayersSelector from "./PlayersSelector";
 
 describe("PlayersSelector", () => {
   const mockUsers = [
-    { id: "1", name: "John Doe", type: "User" },
-    { id: "2", name: "Jane Smith", type: "User" },
+    {
+      id: "1",
+      name: "John Doe",
+      type: "User",
+      createdAt: "",
+      updatedAt: "",
+      displayName: "John",
+    },
+    {
+      id: "2",
+      name: "Jane Smith",
+      type: "User",
+      createdAt: "",
+      updatedAt: "",
+      displayName: "Jane",
+    },
   ];
 
-  const mockTeams = [{ id: "3", name: "Team A", type: "Team" }];
+  const mockTeams = [
+    {
+      id: "3",
+      name: "Team A",
+      type: "Team",
+      createdAt: "",
+      updatedAt: "",
+      displayName: "Team A",
+    },
+  ];
 
   it("renders the select dropdown", () => {
     render(
@@ -24,7 +46,7 @@ describe("PlayersSelector", () => {
     expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
-  it("adds a player when button is clicked", () => {
+  it("adds a player when button is clicked", async () => {
     const user = userEvent.setup();
 
     render(
@@ -38,9 +60,10 @@ describe("PlayersSelector", () => {
     const select = screen.getByRole("combobox");
     const addButton = screen.getByRole("button");
 
-    user.selectOptions(select, "1");
-    user.click(addButton);
+    await user.selectOptions(select, "John Doe");
+    await user.click(addButton);
 
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    const playerRows = screen.getAllByTestId("player-row");
+    expect(within(playerRows[0]).getByText("John Doe")).toBeInTheDocument();
   });
 });

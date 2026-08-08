@@ -8,6 +8,7 @@ export interface SelectProps {
   selectedValue?: string;
   required?: boolean;
   disabled?: boolean;
+  testId?: string;
 }
 
 interface AllProps extends SelectProps {
@@ -22,6 +23,7 @@ const Select = ({
   required = false,
   disabled = false,
   children,
+  testId,
 }: AllProps) => {
   const hasLabel = label !== undefined;
 
@@ -37,6 +39,7 @@ const Select = ({
         required={required}
         disabled={disabled}
         value={selectedValue}
+        data-testid={testId}
       >
         {children}
       </select>

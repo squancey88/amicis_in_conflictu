@@ -1,5 +1,5 @@
-import React from "react";
 import { Icon } from "Atoms/Icon";
+import { APIResponse } from "Hooks/useIndex";
 
 export interface PaginationValues {
   count: number;
@@ -10,7 +10,7 @@ export interface PaginationValues {
 
 interface PaginationProps {
   pagination: PaginationValues;
-  onChange: (page: number) => void;
+  onChange: (page: number) => Promise<APIResponse>;
 }
 
 const Pagination = ({ pagination, onChange }: PaginationProps) => {
@@ -18,7 +18,7 @@ const Pagination = ({ pagination, onChange }: PaginationProps) => {
     if (targetPage < 1) return;
     if (targetPage > pagination.last) return;
 
-    onChange(targetPage);
+    void onChange(targetPage);
   };
 
   return (
