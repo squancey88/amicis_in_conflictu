@@ -24,7 +24,9 @@ class GameForms::TurnBasedComponent < ViewComponent::Base
   def component_data
     {
       players: PlayerSerializer.new(game.players).as_json,
-      game_system: GameSystemSerializer.new(game_system, with_traits: [:with_objectives]).as_json,
+      game_system: GameSystemSerializer.new(game_system, with_traits: [
+        (:with_objectives if component_name == "ObjectiveBasedTurnForm")
+      ].compact).as_json,
       editable: game.editable?
     }
   end

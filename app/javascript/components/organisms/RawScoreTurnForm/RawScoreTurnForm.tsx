@@ -76,7 +76,7 @@ const RawScoreTurnForm = ({ players, gameSystem, editable }: RawScoreTurnFormPro
       <td>By Score</td>
       {playerData.map((player, playerIndex) => {
         return (
-          <td className="turn-grid__cell-total" key={`${playerIndex}-by-score`}>
+          <td className="turn-grid__cell-total" key={`${player.id}-by-score`}>
             <div className="turn-grid__cell-total-wrapper">
               {gameSystem.scoringValues.map((score) => {
                 return (

@@ -1,12 +1,14 @@
 module ReactCheckers
   def props_for(rendered_content, component_name)
-    doc = Nokogiri::HTML(rendered_content)
+    html = rendered_content.respond_to?(:native) ? rendered_content.native.to_s : source.to_s
+    doc = Nokogiri::HTML(html)
     node = doc.at_css("[data-react-component='#{component_name}']")
     JSON.parse(node["data-props"])
   end
 
   def all_props_for(rendered_content, component_name)
-    doc = Nokogiri::HTML(rendered_content)
+    html = rendered_content.respond_to?(:native) ? rendered_content.native.to_s : source.to_s
+    doc = Nokogiri::HTML(html)
     doc.css("[data-react-component='#{component_name}']").map do |node|
       JSON.parse(node["data-props"])
     end
@@ -26,7 +28,8 @@ RSpec::Matchers.define :have_component_with_props do |component_name, expected_p
   end
 
   failure_message do |rendered_content|
-    doc = Nokogiri::HTML(rendered_content)
+    html = rendered_content.respond_to?(:native) ? rendered_content.native.to_s : source.to_s
+    doc = Nokogiri::HTML(html)
     nodes = doc.css("[data-react-component='#{component_name}']")
 
     if nodes.empty?

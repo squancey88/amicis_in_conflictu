@@ -7,6 +7,7 @@ FactoryBot.define do
     edition { "1st" }
     competitive { true }
     slug { SecureRandom.uuid }
+    has_objectives { false }
 
     trait :turn_based do
       game_config {

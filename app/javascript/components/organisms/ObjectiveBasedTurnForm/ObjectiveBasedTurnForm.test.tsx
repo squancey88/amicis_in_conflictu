@@ -31,7 +31,7 @@ describe("ObjectiveBasedTurnForm", () => {
 
       await user.click(screen.getByRole("button", { name: "Add Turn" }));
 
-      expect(screen.getAllByRole("combobox").length).toBe(2);
+      expect(screen.getAllByRole("combobox")).toHaveLength(2);
     });
 
     it("total scores are correct", () => {
@@ -105,7 +105,7 @@ describe("ObjectiveBasedTurnForm", () => {
 
       await user.click(screen.getByRole("button", { name: "Add Turn" }));
 
-      expect(screen.getAllByRole("combobox").length).toBe(4);
+      expect(screen.getAllByRole("combobox")).toHaveLength(4);
     });
 
     it("total scores are correct", () => {

@@ -155,19 +155,17 @@ const ObjectiveBasedTurnForm = ({ players, gameSystem, editable }: ObjectiveBase
         {playerData.map((player, playerIndex) => {
           return (
             <td className="turn-grid__cell-inputs" key={`${playerIndex}-${turnIndex}-cell`}>
-              <>
-                {player.turnObjectives
-                  .map((objective, index) => ({ objective, index }))
-                  .filter(({ objective }) => objective.turn === turn)
-                  .map(({ objective, index }) => objectiveRow(objective, playerIndex, index))}
-                <GameObjectiveSelector
-                  fieldName={`player-${playerIndex}-turn-${turn}-selector`}
-                  gameSystem={gameSystem}
-                  alreadyUsed={player.turnObjectives.filter((o) => o.turn === turn).map((o) => o.gameObjective)}
-                  onSelect={(e) => handleAddObjective(playerIndex, turn, e)}
-                  testId={`player-${playerIndex}-turn-${turn}-selector`}
-                />
-              </>
+              {player.turnObjectives
+                .map((objective, index) => ({ objective, index }))
+                .filter(({ objective }) => objective.turn === turn)
+                .map(({ objective, index }) => objectiveRow(objective, playerIndex, index))}
+              <GameObjectiveSelector
+                fieldName={`player-${playerIndex}-turn-${turn}-selector`}
+                gameSystem={gameSystem}
+                alreadyUsed={player.turnObjectives.filter((o) => o.turn === turn).map((o) => o.gameObjective)}
+                onSelect={(e) => handleAddObjective(playerIndex, turn, e)}
+                testId={`player-${playerIndex}-turn-${turn}-selector`}
+              />
             </td>
           );
         })}
