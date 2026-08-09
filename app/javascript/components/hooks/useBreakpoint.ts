@@ -7,6 +7,7 @@ const BREAKPOINTS = {
 
 const useBreakpoint = () => {
   const getBreakpoint = () => {
+    if (typeof window === "undefined") return "desktop";
     const width = window.innerWidth;
     if (width < BREAKPOINTS.mobile) return "mobile";
     if (width < BREAKPOINTS.tablet) return "tablet";
@@ -16,17 +17,10 @@ const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState(getBreakpoint);
 
   useEffect(() => {
-    const queries = [
-      window.matchMedia(`(max-width: ${BREAKPOINTS.mobile - 1}px)`),
-      window.matchMedia(
-        `(min-width: ${BREAKPOINTS.mobile}px) and (max-width: ${BREAKPOINTS.tablet - 1}px)`,
-      ),
-    ];
-
     const handler = () => setBreakpoint(getBreakpoint());
-    queries.forEach((q) => q.addEventListener("change", handler));
-    return () =>
-      queries.forEach((q) => q.removeEventListener("change", handler));
+    window.addEventListener("resize", handler);
+    handler(); // sync in case viewport changed between initial render and mount
+    return () => window.removeEventListener("resize", handler);
   }, []);
 
   return {

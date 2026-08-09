@@ -9,7 +9,6 @@ import GameFormController from "../../components/game_form_component/game_form_c
 import JsonEditorController from "./json_editor_controller";
 import QuestEventsDetailsFormController from "../../components/quests/events/details_form_component/details_form_controller";
 import QuestEventsSelectorController from "../../components/quests/events/selector_component/selector_component_controller";
-import TurnBasedGameFormController from "../../components/game_forms/turn_based_component/turn_based_controller";
 
 application.register("army-selector", ArmySelectorController);
 application.register(
@@ -20,7 +19,6 @@ application.register("editorjs", EditorController);
 application.register("forms-array-controller", FormsArrayFieldController);
 application.register("game-control", GameControlController);
 application.register("game-form", GameFormController);
-application.register("game-forms-turn-based", TurnBasedGameFormController);
 application.register("json-editor", JsonEditorController);
 application.register(
   "quest-event-details-form",

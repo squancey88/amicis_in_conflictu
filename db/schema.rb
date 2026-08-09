@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
+ActiveRecord::Schema[7.1].define(version: 2026_08_02_093446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -159,6 +159,17 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
     t.index ["owner_id"], name: "index_game_maps_on_owner_id"
   end
 
+  create_table "game_objectives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "game_system_id", null: false
+    t.jsonb "description"
+    t.string "scoring_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_system_id"], name: "index_game_objectives_on_game_system_id"
+    t.index ["name", "game_system_id"], name: "index_game_objectives_on_name_and_game_system_id", unique: true
+  end
+
   create_table "game_quest_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "started_at"
     t.datetime "ended_at"
@@ -183,6 +194,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
     t.string "slug"
     t.boolean "has_armies", default: false
     t.boolean "has_army_lists", default: false
+    t.boolean "has_objectives", default: false
     t.index ["slug"], name: "index_game_systems_on_slug", unique: true
   end
 
@@ -360,6 +372,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["world_id"], name: "index_time_periods_on_world_id"
+  end
+
+  create_table "turn_objectives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "game_objective_id", null: false
+    t.uuid "player_id", null: false
+    t.integer "turn"
+    t.integer "points_scored"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_objective_id", "player_id", "turn"], name: "idx_on_game_objective_id_player_id_turn_33934352d0", unique: true
+    t.index ["game_objective_id"], name: "index_turn_objectives_on_game_objective_id"
+    t.index ["player_id"], name: "index_turn_objectives_on_player_id"
   end
 
   create_table "unit_applied_modifiers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -613,6 +637,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
   add_foreign_key "equipment", "game_systems"
   add_foreign_key "equipment_attachments", "equipment"
   add_foreign_key "game_maps", "users", column: "owner_id"
+  add_foreign_key "game_objectives", "game_systems"
   add_foreign_key "game_quest_events", "games"
   add_foreign_key "game_quest_events", "quest_events"
   add_foreign_key "games", "game_systems"
@@ -639,6 +664,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_16_140213) do
   add_foreign_key "team_members", "users"
   add_foreign_key "teams", "gaming_groups"
   add_foreign_key "time_periods", "worlds"
+  add_foreign_key "turn_objectives", "game_objectives"
+  add_foreign_key "turn_objectives", "players"
   add_foreign_key "unit_applied_modifiers", "games"
   add_foreign_key "unit_applied_modifiers", "unit_stat_modifiers"
   add_foreign_key "unit_applied_modifiers", "units"

@@ -3,6 +3,7 @@ class Player < ApplicationRecord
   belongs_to :controller, polymorphic: true
   has_many :player_armies, dependent: :destroy
   has_many :armies, through: :player_armies, dependent: nil
+  has_many :turn_objectives, dependent: :destroy
 
   belongs_to :user, -> { where(players: {controller_type: "User"}) }, foreign_key: "controller_id",
     inverse_of: :user_players, optional: true
@@ -18,6 +19,7 @@ class Player < ApplicationRecord
   }
 
   accepts_nested_attributes_for :player_armies, allow_destroy: true
+  accepts_nested_attributes_for :turn_objectives, allow_destroy: true
 
   delegate :display_name, to: :controller
 

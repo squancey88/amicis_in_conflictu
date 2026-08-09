@@ -54,7 +54,7 @@ class Game < ApplicationRecord
   end
 
   def editable?
-    finished? || cancelled?
+    !(finished? || cancelled?)
   end
 
   def winners

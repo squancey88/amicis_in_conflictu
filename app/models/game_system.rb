@@ -1,6 +1,7 @@
 class GameSystem < ApplicationRecord
   has_many :games, dependent: nil
   has_many :armies, dependent: :destroy
+  has_many :game_objectives, dependent: :destroy
 
   validates :name, :slug, presence: true
   validates :slug, uniqueness: true
@@ -64,6 +65,7 @@ end
 #  game_config    :jsonb
 #  has_armies     :boolean          default(FALSE)
 #  has_army_lists :boolean          default(FALSE)
+#  has_objectives :boolean          default(FALSE)
 #  name           :string
 #  slug           :string
 #  type           :string

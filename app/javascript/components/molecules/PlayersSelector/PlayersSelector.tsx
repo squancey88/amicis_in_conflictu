@@ -36,7 +36,7 @@ const PlayersSelector = ({
   }, [selectedPlayers, onChange]);
 
   return (
-    <div data-test-id="PlayerSelector">
+    <div data-testid="PlayerSelector">
       <div className="input-group mb-3">
         <select
           className="form-select"
@@ -60,7 +60,7 @@ const PlayersSelector = ({
           </optgroup>
         </select>
         <button
-          data-test-id="add-player"
+          data-testid="add-player"
           className="btn btn-outline-secondary"
           type="button"
           onClick={handleAddPlayer}
@@ -73,13 +73,14 @@ const PlayersSelector = ({
         <div className="mt-3">
           <h6>Selected Players:</h6>
           <div
-            data-test-id="selected-players"
+            data-testid="selected-players"
             className="d-flex flex-column gap-2"
           >
             {selectedPlayers.map((player, index) => (
               <div
                 key={player.id}
                 className="d-flex flex-row justify-content-between"
+                data-testid="player-row"
               >
                 {player.name}
                 <input

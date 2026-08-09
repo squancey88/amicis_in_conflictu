@@ -19,6 +19,7 @@ module GameSystems
     # Only allow a list of trusted parameters through.
     def game_system_params
       params.require(:game_systems_wargame).permit(:name, :slug, :edition, :competitive, :has_armies, :has_army_lists,
+        :has_objectives,
         game_config: {},
         unit_stat_definitions_attributes: [:id, :name, :label, :stat_type, :min, :max, :sort])
     end

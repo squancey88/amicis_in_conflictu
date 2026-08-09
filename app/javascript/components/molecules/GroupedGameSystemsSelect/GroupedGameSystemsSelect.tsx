@@ -3,12 +3,17 @@ import { Select, SelectProps } from "Atoms/Select";
 
 interface Props extends SelectProps {
   groupedGameSystems: Array<GroupedGameSystems>;
+  selectedValue?: string;
 }
 
-const GroupedGameSystemsSelect = ({ groupedGameSystems, ...props }: Props) => {
+const GroupedGameSystemsSelect = ({
+  groupedGameSystems,
+  selectedValue,
+  ...props
+}: Props) => {
   return (
     <div>
-      <Select {...props}>
+      <Select selectedValue={selectedValue} {...props}>
         <option value="">Please Select</option>
         {groupedGameSystems.map((group) => (
           <optgroup key={group.groupName} label={group.groupName}>

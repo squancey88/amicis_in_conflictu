@@ -37,6 +37,7 @@ end
 #  game_config    :jsonb
 #  has_armies     :boolean          default(FALSE)
 #  has_army_lists :boolean          default(FALSE)
+#  has_objectives :boolean          default(FALSE)
 #  name           :string
 #  slug           :string
 #  type           :string

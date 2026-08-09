@@ -79,15 +79,15 @@ module GameSystems
     end
 
     def calculate_player_score(player)
-      score = 0
       if has_turns?
-        player.game_data["turns"].each do |turn|
-          scoring_keys.each do |key|
-            score += turn[key].to_i
-          end
+        if has_objectives?
+          return turn_data_score(player) if player.turns.any?
+
+          objective_data_score(player)
+        else
+          turn_data_score(player)
         end
       end
-      score
     end
 
     def set_winners(game)
@@ -152,6 +152,20 @@ module GameSystems
       end
       player_data
     end
+
+    private
+
+    def objective_data_score(player)
+      player.turn_objectives.sum(&:points_scored)
+    end
+
+    def turn_data_score(player)
+      player.turns.sum do |turn|
+        scoring_keys.sum do |key|
+          turn[key].to_i
+        end
+      end
+    end
   end
 end
 
@@ -165,6 +179,7 @@ end
 #  game_config    :jsonb
 #  has_armies     :boolean          default(FALSE)
 #  has_army_lists :boolean          default(FALSE)
+#  has_objectives :boolean          default(FALSE)
 #  name           :string
 #  slug           :string
 #  type           :string

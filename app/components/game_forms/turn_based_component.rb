@@ -1,27 +1,45 @@
 # frozen_string_literal: true
 
 class GameForms::TurnBasedComponent < ViewComponent::Base
-  delegate :players_attributes_form_name,
-    :input_field_of_type,
+  delegate :react_component,
     to: :helpers
 
   def initialize(game:, form:, user_player:)
     @game = game
     @game_system = @game.game_system
-    @turn_count = @game.players.first.turns.length
-    @scoring_values = @game_system.scoring_values
   end
 
-  def turn_field_name(player_index, key)
-    players_attributes_form_name(player_index, "[turns][][#{key}]")
-  end
-
-  def turn_field(player, player_index, turn_field, turn_index = nil)
-    field_name = turn_field_name(player_index, turn_field["key"])
-    value = player ? player.turns[turn_index][turn_field["key"]] : nil
-    content_tag(:div, class: "form-floating") do
-      concat(input_field_of_type(turn_field["type"], field_name, turn_field["name"], value, disabled: @game.editable?))
-      concat(label_tag(field_name, turn_field["name"]))
+  def component_name
+    if game_system.has_objectives?
+      if has_turn_data
+        "RawScoreTurnForm"
+      else
+        "ObjectiveBasedTurnForm"
+      end
+    else
+      "RawScoreTurnForm"
     end
+  end
+
+  def component_data
+    {
+      players: PlayerSerializer.new(game.players).as_json,
+      game_system: GameSystemSerializer.new(game_system, with_traits: [
+        (:with_objectives if component_name == "ObjectiveBasedTurnForm")
+      ].compact).as_json,
+      editable: game.editable?
+    }
+  end
+
+  def call
+    react_component(component_name, component_data)
+  end
+
+  private
+
+  attr_accessor :game_system, :game
+
+  def has_turn_data
+    @game.players.first.turns.length > 0
   end
 end

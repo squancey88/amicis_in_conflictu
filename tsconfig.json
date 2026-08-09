@@ -21,6 +21,7 @@
       "Hooks/*": ["app/javascript/components/hooks/*"],
       "Types/*": ["app/javascript/components/types/*"],
       "Modules/*": ["app/javascript/modules/*"],
+      "Test/*": ["app/javascript/test/*"],
       "*": ["app/javascript/*"]
     }
   },

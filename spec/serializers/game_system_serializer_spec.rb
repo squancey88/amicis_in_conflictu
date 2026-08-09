@@ -1,12 +1,28 @@
 require "rails_helper"
 
 RSpec.describe GameSystemSerializer do
-  let(:game_system) { create(:wargame) }
+  let(:result) { described_class.new(game_system).as_json }
 
-  it "serializes world attributes" do
-    result = described_class.new(game_system).serialize
+  context "Wargame" do
+    let(:game_system) { create(:wargame) }
 
-    expect(result[:id]).to eq(game_system.id)
-    expect(result[:name]).to eq(game_system.name)
+    it "serializes attributes" do
+      expect(result["id"]).to eq(game_system.id)
+      expect(result["name"]).to eq(game_system.name)
+      expect(result["scoring_keys"]).to eq(game_system.scoring_keys)
+    end
+  end
+
+  context "Card Game" do
+    let(:game_system) { create(:card_game) }
+
+    it "serializes attributes" do
+      expect(result["id"]).to eq(game_system.id)
+      expect(result["name"]).to eq(game_system.name)
+    end
+
+    it "does not have scoring_keys" do
+      expect(result).not_to have_key("scoring_keys")
+    end
   end
 end

@@ -1,5 +1,23 @@
+export interface GameObjective extends AICRecord {
+  name: string;
+  scoringKey: string;
+}
+
+export interface TurnObjective extends AICRecord {
+  turn: number;
+  pointsScored: number;
+  gameObjective: GameObjective;
+}
+
 export interface GameSystem extends AICRecord {
   name: string;
+  gameObjectives?: Array<GameObjective>;
+  scoringValues?: Array<{
+    name: string;
+    key: string;
+    scoring: boolean;
+    type: string;
+  }>;
 }
 
 export interface Campaign extends AICRecord {
@@ -9,6 +27,9 @@ export interface Campaign extends AICRecord {
 export interface Player extends AICRecord {
   id: string;
   type: string;
+  displayName: string;
+  turns?: Array<Record<string, number>>;
+  turnObjectives?: Array<TurnObjective>;
 }
 
 export interface GroupedGameSystems {
@@ -23,8 +44,8 @@ export interface CampaignsByGameSystem {
 
 export interface AICRecord {
   id: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type MapTypes = "hex_grid" | "hex_diamond" | "svg";

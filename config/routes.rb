@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :game_maps
   get "login", to: "auth#login", as: :login
   get "invite", to: "auth#invite", as: :invite
   get "forgot_password", to: "auth#forgot_password", as: :forgot_password
@@ -26,6 +25,7 @@ Rails.application.routes.draw do
     resources :game_systems, only: [:index] do
       scope module: :game_systems do
         resources :armies, only: [:index]
+        resources :game_objectives, only: [:index]
         resources :unit_stat_modifiers, only: [:index]
       end
     end
@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       resources :quest_events
     end
   end
+  resources :game_maps
 
   namespace :world_item_data do
     get "new_text_section", as: :new_text_section
@@ -95,6 +96,7 @@ Rails.application.routes.draw do
   end
   resources :equipment
 
+  resources :game_objectives, except: %i[index]
   resources :unit_traits
   resources :unit_trait_categories do
     collection do

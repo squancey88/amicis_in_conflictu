@@ -5,13 +5,26 @@ export interface SelectProps {
   label?: string;
   fieldName: string;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  selectedValue?: string;
+  required?: boolean;
+  disabled?: boolean;
+  testId?: string;
 }
 
 interface AllProps extends SelectProps {
   children: ReactNode;
 }
 
-const Select = ({ label, fieldName, onChange, children }: AllProps) => {
+const Select = ({
+  label,
+  fieldName,
+  onChange,
+  selectedValue,
+  required = false,
+  disabled = false,
+  children,
+  testId,
+}: AllProps) => {
   const hasLabel = label !== undefined;
 
   const wrapperClass = hasLabel ? "form-floating" : "input-group";
@@ -23,6 +36,10 @@ const Select = ({ label, fieldName, onChange, children }: AllProps) => {
         id={fieldName}
         name={fieldName}
         onChange={(e) => onChange?.(e)}
+        required={required}
+        disabled={disabled}
+        value={selectedValue}
+        data-testid={testId}
       >
         {children}
       </select>

@@ -6,6 +6,9 @@ import { IndexList } from "Organisms/IndexList";
 import { NewGameMapForm } from "Organisms/NewGameMapForm";
 import { GameMapViewer } from "Organisms/GameMapViewer";
 import { HeaderMenu } from "Organisms/HeaderMenu";
+import { ScoringKeySelector } from "./components/organisms/ScoringKeySelector";
+import { RawScoreTurnForm } from "./components/organisms/RawScoreTurnForm";
+import { ObjectiveBasedTurnForm } from "./components/organisms/ObjectiveBasedTurnForm";
 
 // Component registry
 const components = {
@@ -16,6 +19,9 @@ const components = {
   NewGameMapForm,
   GameMapViewer,
   HeaderMenu,
+  ScoringKeySelector,
+  RawScoreTurnForm,
+  ObjectiveBasedTurnForm,
 };
 
 const roots = new Map<Element, Root>();

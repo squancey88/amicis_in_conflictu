@@ -5,10 +5,12 @@ interface TextInputProps {
   fieldName: string;
   label: string;
   value: string;
+  disabled?: boolean;
+  testId?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextInput = ({ fieldName, label, value, onChange }: TextInputProps) => {
+const TextInput = ({ fieldName, label, value, disabled = false, onChange, testId }: TextInputProps) => {
   const id = useId();
 
   return (
@@ -18,8 +20,10 @@ const TextInput = ({ fieldName, label, value, onChange }: TextInputProps) => {
         type="text"
         id={id}
         name={fieldName}
+        disabled={disabled}
         onChange={onChange}
         defaultValue={value}
+        data-testid={testId}
       />
     </FieldWrapper>
   );
