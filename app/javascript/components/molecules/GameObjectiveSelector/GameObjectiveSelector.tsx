@@ -9,10 +9,7 @@ interface GameObjectiveSelectorProps extends SelectProps {
   onSelect: (gameObjective: GameObjective) => void;
 }
 
-const buildGroupedObjectives = (
-  gameSystem: Required<GameSystem>,
-  alreadyUsed: Array<GameObjective>,
-) =>
+const buildGroupedObjectives = (gameSystem: Required<GameSystem>, alreadyUsed: Array<GameObjective>) =>
   gameSystem.scoringValues.map((score) => ({
     groupName: score.name,
     objectives: gameSystem.gameObjectives
@@ -23,20 +20,13 @@ const buildGroupedObjectives = (
       })),
   }));
 
-const GameObjectiveSelector = ({
-  gameSystem,
-  alreadyUsed = [],
-  onSelect,
-  ...props
-}: GameObjectiveSelectorProps) => {
+const GameObjectiveSelector = ({ gameSystem, alreadyUsed = [], onSelect, ...props }: GameObjectiveSelectorProps) => {
   const [selected, setSelected] = useState<string | undefined>(undefined);
 
   const groupedObjectives = buildGroupedObjectives(gameSystem, alreadyUsed);
 
   const handleClick = () => {
-    const match = gameSystem.gameObjectives.find(
-      (objective) => objective.id === selected,
-    );
+    const match = gameSystem.gameObjectives.find((objective) => objective.id === selected);
     if (match) {
       onSelect(match);
       setSelected(undefined);
@@ -50,21 +40,14 @@ const GameObjectiveSelector = ({
   const { testId, ...selectProps } = props;
 
   return (
-    <div data-testId={testId}>
+    <div data-testid={testId}>
       <Select {...selectProps} onChange={handleChange}>
         <option value="">Please Select</option>
         {groupedObjectives.map((objectiveGroup) => (
-          <optgroup
-            key={objectiveGroup.groupName}
-            label={objectiveGroup.groupName}
-          >
+          <optgroup key={objectiveGroup.groupName} label={objectiveGroup.groupName}>
             {objectiveGroup.objectives.map((value) => {
               return (
-                <option
-                  value={value.objective.id}
-                  key={value.objective.id}
-                  disabled={value.disabled}
-                >
+                <option value={value.objective.id} key={value.objective.id} disabled={value.disabled}>
                   {value.objective.name}
                 </option>
               );

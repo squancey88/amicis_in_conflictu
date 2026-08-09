@@ -11,13 +11,8 @@ interface ObjectiveBasedTurnFormProps {
   editable: boolean;
 }
 
-const ObjectiveBasedTurnForm = ({
-  players,
-  gameSystem,
-  editable,
-}: ObjectiveBasedTurnFormProps) => {
-  const [playerData, setPlayerData] =
-    useState<Array<Required<Player>>>(players);
+const ObjectiveBasedTurnForm = ({ players, gameSystem, editable }: ObjectiveBasedTurnFormProps) => {
+  const [playerData, setPlayerData] = useState<Array<Required<Player>>>(players);
 
   const maxTurnFromPlayer = (): number => {
     return Math.max(
@@ -41,10 +36,7 @@ const ObjectiveBasedTurnForm = ({
   };
 
   const playerTotal = (playerIndex: number): number => {
-    return playerData[playerIndex].turnObjectives.reduce(
-      (t, o) => t + Number(o.pointsScored),
-      0,
-    );
+    return playerData[playerIndex].turnObjectives.reduce((t, o) => t + Number(o.pointsScored), 0);
   };
 
   const handleAddTurn = () => {
@@ -56,7 +48,7 @@ const ObjectiveBasedTurnForm = ({
       <td>Total</td>
       {playerData.map((_, playerIndex) => {
         return (
-          <td key={`${playerIndex}-total`} className="turn-grid__cell-total">
+          <td key={`${playerIndex}-total`} className="turn-grid__cell-total" data-testid={`total-score-${playerIndex}`}>
             {playerTotal(playerIndex)}
           </td>
         );
@@ -76,6 +68,7 @@ const ObjectiveBasedTurnForm = ({
                   <div
                     className="score-container"
                     key={`${playerIndex}-${score.key}-summary`}
+                    data-testid={`${score.key}-summary-${playerIndex}`}
                   >
                     {score.name}: {playerScoreByKey(playerIndex, score.key)}
                   </div>
@@ -88,11 +81,7 @@ const ObjectiveBasedTurnForm = ({
     </tr>
   );
 
-  const handleAddObjective = (
-    playerIndex: number,
-    turn: number,
-    objective: GameObjective,
-  ) => {
+  const handleAddObjective = (playerIndex: number, turn: number, objective: GameObjective) => {
     setPlayerData((prev) => {
       return prev.map((player, index) => {
         if (index !== playerIndex) return player;
@@ -111,20 +100,14 @@ const ObjectiveBasedTurnForm = ({
     });
   };
 
-  const handleChange = (
-    playerIndex: number,
-    turn: number,
-    objective: GameObjective,
-    newScore: number,
-  ) => {
+  const handleChange = (playerIndex: number, turn: number, objective: GameObjective, newScore: number) => {
     setPlayerData((prev) => {
       return prev.map((player, index) => {
         if (index !== playerIndex) return player;
         return {
           ...player,
           turnObjectives: player.turnObjectives.map((o) => {
-            if (o.turn !== turn || o.gameObjective.id !== objective.id)
-              return o;
+            if (o.turn !== turn || o.gameObjective.id !== objective.id) return o;
             return {
               ...o,
               pointsScored: newScore,
@@ -135,49 +118,28 @@ const ObjectiveBasedTurnForm = ({
     });
   };
 
-  const objectiveRow = (
-    turnObjective: TurnObjective,
-    playerIndex: number,
-    recordIndex: number,
-  ) => {
+  const objectiveRow = (turnObjective: TurnObjective, playerIndex: number, recordIndex: number) => {
     return (
-      <div
-        key={
-          turnObjective.id ??
-          `${playerIndex}-${turnObjective.turn}-${turnObjective.gameObjective.id}`
-        }
-      >
+      <div key={turnObjective.id ?? `${playerIndex}-${turnObjective.turn}-${turnObjective.gameObjective.id}`}>
         <div>{turnObjective.gameObjective.name}</div>
         {turnObjective.id && (
-          <input
-            type="hidden"
-            name={`${fieldName(playerIndex, recordIndex)}[id]`}
-            value={turnObjective.id}
-          />
+          <input type="hidden" name={`${fieldName(playerIndex, recordIndex)}[id]`} value={turnObjective.id} />
         )}
         <input
           type="hidden"
           name={`${fieldName(playerIndex, recordIndex)}[game_objective_id]`}
           value={turnObjective.gameObjective.id}
         />
-        <input
-          type="hidden"
-          name={`${fieldName(playerIndex, recordIndex)}[turn]`}
-          value={turnObjective.turn}
-        />
+        <input type="hidden" name={`${fieldName(playerIndex, recordIndex)}[turn]`} value={turnObjective.turn} />
         <TextInput
           fieldName={`${fieldName(playerIndex, recordIndex)}[points_scored]`}
           label="Scored"
-          disabled={editable}
+          disabled={!editable}
           onChange={(e) =>
-            handleChange(
-              playerIndex,
-              turnObjective.turn,
-              turnObjective.gameObjective,
-              Number(e.target.value),
-            )
+            handleChange(playerIndex, turnObjective.turn, turnObjective.gameObjective, Number(e.target.value))
           }
           value={`${turnObjective.pointsScored ?? ""}`}
+          testId={`input-player-${playerIndex}-turn-${turnObjective.turn}-objective-${turnObjective.gameObjective.id}`}
         />
       </div>
     );
@@ -192,23 +154,16 @@ const ObjectiveBasedTurnForm = ({
         </th>
         {playerData.map((player, playerIndex) => {
           return (
-            <td
-              className="turn-grid__cell-inputs"
-              key={`${playerIndex}-${turnIndex}-cell`}
-            >
+            <td className="turn-grid__cell-inputs" key={`${playerIndex}-${turnIndex}-cell`}>
               <>
                 {player.turnObjectives
                   .map((objective, index) => ({ objective, index }))
                   .filter(({ objective }) => objective.turn === turn)
-                  .map(({ objective, index }) =>
-                    objectiveRow(objective, playerIndex, index),
-                  )}
+                  .map(({ objective, index }) => objectiveRow(objective, playerIndex, index))}
                 <GameObjectiveSelector
                   fieldName={`player-${playerIndex}-turn-${turn}-selector`}
                   gameSystem={gameSystem}
-                  alreadyUsed={player.turnObjectives
-                    .filter((o) => o.turn === turn)
-                    .map((o) => o.gameObjective)}
+                  alreadyUsed={player.turnObjectives.filter((o) => o.turn === turn).map((o) => o.gameObjective)}
                   onSelect={(e) => handleAddObjective(playerIndex, turn, e)}
                   testId={`player-${playerIndex}-turn-${turn}-selector`}
                 />
@@ -220,22 +175,11 @@ const ObjectiveBasedTurnForm = ({
     );
   };
 
-  const turnRows = (
-    <tbody>
-      {Array.from({ length: turnCount }).map((_, turnIndex) =>
-        turnRow(turnIndex),
-      )}
-    </tbody>
-  );
+  const turnRows = <tbody>{Array.from({ length: turnCount }).map((_, turnIndex) => turnRow(turnIndex))}</tbody>;
 
   return (
     <div className="game-form-turn-based">
-      <Button
-        label="Add Turn"
-        icon="plus-square"
-        variant="primary"
-        onClick={handleAddTurn}
-      />
+      <Button label="Add Turn" icon="plus-square" variant="primary" onClick={handleAddTurn} />
 
       <div className="table-responsive">
         <table className="turn-grid table">

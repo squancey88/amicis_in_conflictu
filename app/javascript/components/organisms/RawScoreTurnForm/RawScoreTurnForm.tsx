@@ -10,13 +10,8 @@ interface RawScoreTurnFormProps {
   editable: boolean;
 }
 
-const RawScoreTurnForm = ({
-  players,
-  gameSystem,
-  editable,
-}: RawScoreTurnFormProps) => {
-  const [playerData, setPlayerData] =
-    useState<Array<Required<Player>>>(players);
+const RawScoreTurnForm = ({ players, gameSystem, editable }: RawScoreTurnFormProps) => {
+  const [playerData, setPlayerData] = useState<Array<Required<Player>>>(players);
 
   const fieldName = (index: number) => {
     return `game[players_attributes][${index}]`;
@@ -24,13 +19,13 @@ const RawScoreTurnForm = ({
 
   const playerScoreByKey = (playerIndex: number, key: string) => {
     return playerData[playerIndex].turns.reduce((acc, turn) => {
-      return acc + Number(turn[key]);
+      return acc + Number(turn[key] ?? 0);
     }, 0);
   };
 
   const playerTotal = (playerIndex: number): number => {
     return playerData[playerIndex].turns.reduce((acc, turn) => {
-      return acc + Object.values(turn).reduce((t, v) => t + Number(v), 0);
+      return acc + Object.values(turn).reduce((t, v) => t + Number(v ?? 0), 0);
     }, 0);
   };
 
@@ -68,7 +63,7 @@ const RawScoreTurnForm = ({
       <td>Total</td>
       {playerData.map((_, playerIndex) => {
         return (
-          <td key={`${playerIndex}-total`} className="turn-grid__cell-total">
+          <td key={`${playerIndex}-total`} className="turn-grid__cell-total" data-testid={`total-score-${playerIndex}`}>
             {playerTotal(playerIndex)}
           </td>
         );
@@ -88,6 +83,7 @@ const RawScoreTurnForm = ({
                   <div
                     className="score-container"
                     key={`${playerIndex}-${score.key}-summary`}
+                    data-testid={`${score.key}-summary-${playerIndex}`}
                   >
                     {playerScoreByKey(playerIndex, score.key)}
                   </div>
@@ -100,11 +96,7 @@ const RawScoreTurnForm = ({
     </tr>
   );
 
-  const turnNumberInput = (
-    turnIndex: number,
-    playerIndex: number,
-    player: Required<Player>,
-  ) => {
+  const turnNumberInput = (turnIndex: number, playerIndex: number, player: Required<Player>) => {
     return (
       <div className="turn-grid__cell-inputs-wrapper">
         {gameSystem.scoringValues.map((score) => {
@@ -119,11 +111,10 @@ const RawScoreTurnForm = ({
               key={`${playerIndex}-${turnIndex}-${score.key}`}
               fieldName={`${fieldName(playerIndex)}[turns][][${score.key}]`}
               label={score.name}
-              disabled={editable}
-              onChange={(e) =>
-                handleScoreChange(e, playerIndex, turnIndex, score.key)
-              }
+              disabled={!editable}
+              onChange={(e) => handleScoreChange(e, playerIndex, turnIndex, score.key)}
               value={currentScore}
+              testId={`input-${score.key}-turn-${turnIndex + 1}-player-${playerIndex}`}
             />
           );
         })}
@@ -139,10 +130,7 @@ const RawScoreTurnForm = ({
         </th>
         {playerData.map((player, playerIndex) => {
           return (
-            <td
-              className="turn-grid__cell-inputs"
-              key={`${playerIndex}-${turnIndex}-cell`}
-            >
+            <td className="turn-grid__cell-inputs" key={`${playerIndex}-${turnIndex}-cell`}>
               {turnNumberInput(turnIndex, playerIndex, player)}
             </td>
           );
@@ -151,22 +139,11 @@ const RawScoreTurnForm = ({
     );
   };
 
-  const turnRows = (
-    <tbody>
-      {Array.from({ length: playerData[0].turns.length }).map((_, turnIndex) =>
-        turnRow(turnIndex),
-      )}
-    </tbody>
-  );
+  const turnRows = <tbody>{playerData[0].turns.map((_, turnIndex) => turnRow(turnIndex))}</tbody>;
 
   return (
     <div className="game-form-turn-based">
-      <Button
-        label="Add Turn"
-        icon="plus-square"
-        variant="primary"
-        onClick={handleAddTurn}
-      />
+      <Button label="Add Turn" icon="plus-square" variant="primary" onClick={handleAddTurn} />
 
       <div className="table-responsive">
         <table className="turn-grid table">
