@@ -61,9 +61,9 @@ const RawScoreTurnForm = ({ players, gameSystem, editable }: RawScoreTurnFormPro
   const totalRow = (
     <tr>
       <td>Total</td>
-      {playerData.map((_, playerIndex) => {
+      {playerData.map((player, playerIndex) => {
         return (
-          <td key={`${playerIndex}-total`} className="turn-grid__cell-total" data-testid={`total-score-${playerIndex}`}>
+          <td key={`${player.id}-total`} className="turn-grid__cell-total" data-testid={`total-score-${playerIndex}`}>
             {playerTotal(playerIndex)}
           </td>
         );
@@ -74,7 +74,7 @@ const RawScoreTurnForm = ({ players, gameSystem, editable }: RawScoreTurnFormPro
   const byScoreRow = (
     <tr>
       <td>By Score</td>
-      {playerData.map((_, playerIndex) => {
+      {playerData.map((player, playerIndex) => {
         return (
           <td className="turn-grid__cell-total" key={`${playerIndex}-by-score`}>
             <div className="turn-grid__cell-total-wrapper">
@@ -82,7 +82,7 @@ const RawScoreTurnForm = ({ players, gameSystem, editable }: RawScoreTurnFormPro
                 return (
                   <div
                     className="score-container"
-                    key={`${playerIndex}-${score.key}-summary`}
+                    key={`${player.id}-${score.key}-summary`}
                     data-testid={`${score.key}-summary-${playerIndex}`}
                   >
                     {playerScoreByKey(playerIndex, score.key)}

@@ -46,9 +46,9 @@ const ObjectiveBasedTurnForm = ({ players, gameSystem, editable }: ObjectiveBase
   const totalRow = (
     <tr>
       <td>Total</td>
-      {playerData.map((_, playerIndex) => {
+      {playerData.map((player, playerIndex) => {
         return (
-          <td key={`${playerIndex}-total`} className="turn-grid__cell-total" data-testid={`total-score-${playerIndex}`}>
+          <td key={`${player.id}-total`} className="turn-grid__cell-total" data-testid={`total-score-${playerIndex}`}>
             {playerTotal(playerIndex)}
           </td>
         );
@@ -59,15 +59,15 @@ const ObjectiveBasedTurnForm = ({ players, gameSystem, editable }: ObjectiveBase
   const byScoreRow = (
     <tr>
       <td>By Score</td>
-      {playerData.map((_, playerIndex) => {
+      {playerData.map((player, playerIndex) => {
         return (
-          <td className="turn-grid__cell-total" key={`${playerIndex}-by-score`}>
+          <td className="turn-grid__cell-total" key={`${player.id}-by-score`}>
             <div className="turn-grid__cell-total-wrapper">
               {gameSystem.scoringValues.map((score) => {
                 return (
                   <div
                     className="score-container"
-                    key={`${playerIndex}-${score.key}-summary`}
+                    key={`${player.id}-${score.key}-summary`}
                     data-testid={`${score.key}-summary-${playerIndex}`}
                   >
                     {score.name}: {playerScoreByKey(playerIndex, score.key)}
