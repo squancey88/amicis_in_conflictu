@@ -1,66 +1,18 @@
-import { ComponentProps } from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ObjectiveBasedTurnForm } from ".";
 import userEvent from "@testing-library/user-event";
-import { GameObjective, GameSystem, Player } from "Types/common";
+import type { Player } from "Types/common";
+import { gameObjectiveFactory, gameSystemFactory, playerFactory, turnObjectiveFactory } from "Test/factories";
 
 describe("ObjectiveBasedTurnForm", () => {
-  const objective1: GameObjective = {
-    id: "go-beacon",
-    name: "Beacon",
-    scoringKey: "secondary",
-    createdAt: "",
-    updatedAt: "",
-  };
-  const objective2: GameObjective = {
-    id: "go-purge",
-    name: "Purge",
-    scoringKey: "primary",
-    createdAt: "",
-    updatedAt: "",
-  };
-  const gameSystem: Required<GameSystem> = {
-    id: "1",
-    name: "Test system",
-    scoringValues: [
-      {
-        name: "Primary",
-        key: "primary",
-        type: "number",
-        scoring: true,
-      },
-      {
-        name: "Seconday",
-        key: "secondary",
-        type: "number",
-        scoring: true,
-      },
-    ],
-    gameObjectives: [objective1, objective2],
-    createdAt: "",
-    updatedAt: "",
-  };
+  const objective1 = gameObjectiveFactory.build({ scoringKey: "secondary", name: "Beacon", id: "go-beacon" });
+  const objective2 = gameObjectiveFactory.build({ scoringKey: "primary", name: "Purge", id: "go-purge" });
+  const gameSystem = gameSystemFactory.build({ gameObjectives: [objective1, objective2] });
 
   describe("New game", () => {
     const players = [
-      {
-        id: "1",
-        displayName: "Player 1",
-        type: "User",
-        turns: [],
-        turnObjectives: [],
-        createdAt: "",
-        updatedAt: "",
-      },
-      {
-        id: "2",
-        displayName: "Player 2",
-        type: "User",
-        turns: [],
-        turnObjectives: [],
-        createdAt: "",
-        updatedAt: "",
-      },
+      playerFactory.build({ displayName: "Player 1" }),
+      playerFactory.build({ displayName: "Player 2" }),
     ];
 
     it("renders key parts", () => {
@@ -127,42 +79,14 @@ describe("ObjectiveBasedTurnForm", () => {
 
   describe("In progress game", () => {
     const players: Array<Required<Player>> = [
-      {
-        id: "1",
+      playerFactory.build({
         displayName: "Player 1",
-        type: "User",
-        turns: [],
-        turnObjectives: [
-          {
-            id: "1",
-            gameObjective: objective1,
-            turn: 1,
-            pointsScored: 4,
-            createdAt: "",
-            updatedAt: "",
-          },
-        ],
-        createdAt: "",
-        updatedAt: "",
-      },
-      {
-        id: "2",
+        turnObjectives: [turnObjectiveFactory.build({ gameObjective: objective1, turn: 1, pointsScored: 4 })],
+      }),
+      playerFactory.build({
         displayName: "Player 2",
-        type: "User",
-        turns: [],
-        turnObjectives: [
-          {
-            id: "2",
-            gameObjective: objective2,
-            turn: 1,
-            pointsScored: 7,
-            createdAt: "",
-            updatedAt: "",
-          },
-        ],
-        createdAt: "",
-        updatedAt: "",
-      },
+        turnObjectives: [turnObjectiveFactory.build({ gameObjective: objective2, turn: 1, pointsScored: 7 })],
+      }),
     ];
 
     it("renders key parts", () => {

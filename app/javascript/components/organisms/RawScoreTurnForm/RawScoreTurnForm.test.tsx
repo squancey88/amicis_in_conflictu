@@ -1,51 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import { RawScoreTurnForm } from ".";
-import { GameSystem } from "Types/common";
 import userEvent from "@testing-library/user-event";
+import { gameSystemFactory, playerFactory } from "Test/factories";
 
 describe("RawScoreTurnForm", () => {
-  const gameSystem: Required<GameSystem> = {
-    id: "1",
-    name: "Test system",
-    scoringValues: [
-      {
-        name: "Primary",
-        key: "primary",
-        type: "number",
-        scoring: true,
-      },
-      {
-        name: "Seconday",
-        key: "secondary",
-        type: "number",
-        scoring: true,
-      },
-    ],
-    gameObjectives: [],
-    createdAt: "",
-    updatedAt: "",
-  };
+  const gameSystem = gameSystemFactory.build();
 
   describe("New game", () => {
     const players = [
-      {
-        id: "1",
-        displayName: "Player 1",
-        type: "User",
-        turns: [],
-        turnObjectives: [],
-        createdAt: "",
-        updatedAt: "",
-      },
-      {
-        id: "2",
-        displayName: "Player 2",
-        type: "User",
-        turns: [],
-        turnObjectives: [],
-        createdAt: "",
-        updatedAt: "",
-      },
+      playerFactory.build({ displayName: "Player 1" }),
+      playerFactory.build({ displayName: "Player 2" }),
     ];
 
     it("renders key parts", () => {
@@ -97,30 +61,20 @@ describe("RawScoreTurnForm", () => {
 
   describe("Previous game", () => {
     const players = [
-      {
-        id: "1",
+      playerFactory.build({
         displayName: "Player 1",
-        type: "User",
         turns: [
           { primary: 10, secondary: 5 },
           { primary: 4, secondary: 2 },
         ],
-        turnObjectives: [],
-        createdAt: "",
-        updatedAt: "",
-      },
-      {
-        id: "2",
+      }),
+      playerFactory.build({
         displayName: "Player 2",
-        type: "User",
         turns: [
           { primary: 1, secondary: 4 },
           { primary: 8, secondary: 3 },
         ],
-        turnObjectives: [],
-        createdAt: "",
-        updatedAt: "",
-      },
+      }),
     ];
 
     it("renders key parts", () => {

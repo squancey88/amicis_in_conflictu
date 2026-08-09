@@ -12,6 +12,7 @@ const config: Config = {
     "^Hooks/(.*)$": "<rootDir>/app/javascript/components/hooks/$1",
     "^Types/(.*)$": "<rootDir>/app/javascript/types/$1",
     "^Modules/(.*)$": "<rootDir>/app/javascript/modules/$1",
+    "^Test/(.*)$": "<rootDir>/app/javascript/test/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   transform: {
@@ -22,7 +23,7 @@ const config: Config = {
       },
     ],
   },
-  transformIgnorePatterns: ["node_modules/(?!(@dnd-kit|@preact|.*\\.mjs$)/)"],
+  transformIgnorePatterns: ["node_modules/(?!(@dnd-kit|@preact|@faker-js/faker|.*\\.mjs$)/)"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json"],
   reporters: [
     "default",
@@ -34,10 +35,7 @@ const config: Config = {
       },
     ],
   ],
-  collectCoverageFrom: [
-    "app/javascript/**/*.{js,jsx,ts,tsx}",
-    "!app/javascript/**/*.test.{js,jsx,ts,tsx}",
-  ],
+  collectCoverageFrom: ["app/javascript/**/*.{js,jsx,ts,tsx}", "!app/javascript/**/*.test.{js,jsx,ts,tsx}"],
   coverageDirectory: "coverage",
 };
 
