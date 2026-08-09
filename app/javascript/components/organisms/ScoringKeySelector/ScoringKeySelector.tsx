@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GameSystem, type GroupedGameSystems } from "Types/common";
-import { GroupedGameSystemsSelect } from "../../molecules";
-import { Select } from "../../atoms/Select";
+import { GroupedGameSystemsSelect } from "Molecules/GroupedGameSystemsSelect";
+import { Select } from "Atoms/Select";
 
 interface ScoringKeySelectorProps {
   modelName: string;
@@ -10,13 +10,8 @@ interface ScoringKeySelectorProps {
   groupedGameSystems: Array<GroupedGameSystems>;
 }
 
-const findGameSystemById = (
-  groupedGameSystems: Array<GroupedGameSystems>,
-  id: string,
-): GameSystem | undefined =>
-  groupedGameSystems
-    .flatMap((group) => group.gameSystems)
-    .find((gameSystem) => gameSystem.id === id);
+const findGameSystemById = (groupedGameSystems: Array<GroupedGameSystems>, id: string): GameSystem | undefined =>
+  groupedGameSystems.flatMap((group) => group.gameSystems).find((gameSystem) => gameSystem.id === id);
 
 const ScoringKeySelector = ({
   modelName,
@@ -25,9 +20,7 @@ const ScoringKeySelector = ({
   selectedScoringKey,
 }: ScoringKeySelectorProps) => {
   const [manualGameSystemId, setManualGameSystemId] = useState<string | undefined>(undefined);
-  const [currentScoringKey, setCurrentScoringKey] = useState<string | undefined>(
-    selectedScoringKey,
-  );
+  const [currentScoringKey, setCurrentScoringKey] = useState<string | undefined>(selectedScoringKey);
 
   const activeGameSystemId = manualGameSystemId ?? selectedGameSystemId;
   const selectedGameSystem = activeGameSystemId
@@ -53,17 +46,19 @@ const ScoringKeySelector = ({
         label="Scoring Key"
         fieldName={`${modelName}[scoring_key]`}
         disabled={!selectedGameSystem}
+        onChange={(e) => setCurrentScoringKey(e.target.value)}
         selectedValue={currentScoringKey}
       >
         <option value="">--Please Select--</option>
-        {selectedGameSystem?.scoringValues?.map((value) => {
-          const key = value.key;
-          return (
-            <option key={key} value={key}>
-              {key}
-            </option>
-          );
-        })}
+        {selectedGameSystem?.scoringValues
+          ?.filter((x) => x.scoring === true)
+          .map((value) => {
+            return (
+              <option key={value.key} value={value.key}>
+                {value.name}
+              </option>
+            );
+          })}
       </Select>
     </div>
   );
