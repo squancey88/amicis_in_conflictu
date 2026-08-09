@@ -1,0 +1,8 @@
+<%= render Common::HeaderCardComponent.new(
+  title: @show_presenter.title,
+  subtitle: @show_presenter.subtitle
+) do |header| %>
+  <%= header.with_buttons do %>
+    <%= render Common::MenuButtonComponent.new(menu_options: @show_presenter.menu_options) %>
+  <% end %>
+<% end %>
