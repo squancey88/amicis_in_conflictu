@@ -13,5 +13,9 @@
     text-align: center;
     cursor: pointer;
     background-color: #ffffff;
+
+    &.active {
+      background-color: color($secondary, 500);
+    }
   }
 }

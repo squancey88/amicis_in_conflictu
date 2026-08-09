@@ -6,7 +6,7 @@
 
   &.page-header {
     padding-bottom: $std_spacer;
-    border-bottom: 2px solid var(--accent-color);
+    border-bottom: 3px solid color($accent, 500);
   }
 
   .content {

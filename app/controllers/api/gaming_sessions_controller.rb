@@ -5,7 +5,14 @@ module Api
 
     def index
       sessions = @gaming_group.gaming_sessions
-      render json: sessions.map { GamingSessionSerializer.new(_1).serialize }
+      sessions = sessions.previous.order(start_time: :desc) if params.dig(:filters, :previous)
+
+      @pagy, @records = pagy(sessions)
+
+      render json: {
+        records: GamingSessionSerializer.new(@records).serializable_hash,
+        pagination: @pagy.data_hash
+      }
     end
 
     def show

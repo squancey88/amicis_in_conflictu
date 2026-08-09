@@ -10,7 +10,7 @@
 
 <div id="game_systems">
   <% @game_systems.each do |game_system| %>
-    <%= render Common::CardWithMenuComponent.new(title: "#{game_system.name}",
+    <%= render Common::CardWithMenuComponent.new(title: "#{game_system.name} - #{game_system.edition}",
       subtitle: game_system.class.category_name.singularize,
       menu_options: [
         {link: game_system_show_path(game_system), text: "Show", target: "_top"},
