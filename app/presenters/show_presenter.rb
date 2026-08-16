@@ -1,4 +1,6 @@
 class ShowPresenter < ApplicationPresenter
+  include Rails.application.routes.url_helpers
+
   def title
     record.to_s
   end
@@ -8,6 +10,34 @@ class ShowPresenter < ApplicationPresenter
   end
 
   def menu_options
-    []
+    options = []
+    if edit_path
+      options << {
+        text: "Edit",
+        link: edit_path
+      }
+    end
+    unless record_path && can_delete?
+      options << {
+        text: "Delete",
+        link: record_path,
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      }
+    end
+    options
+  end
+
+  private
+
+  def edit_path
+    nil
+  end
+
+  def record_path
+    nil
+  end
+
+  def can_delete?
+    false
   end
 end

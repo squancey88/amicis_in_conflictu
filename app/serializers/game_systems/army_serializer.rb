@@ -1,9 +1,8 @@
 module GameSystems
-  class ArmySerializer
-    include Alba::Resource
+  class ArmySerializer < BaseResource
     include Rails.application.routes.url_helpers
 
-    attributes :id, :name, :created_at, :updated_at
+    attributes :name
 
     attribute :edit_path do |resource|
       edit_army_path(resource)

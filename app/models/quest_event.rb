@@ -1,6 +1,7 @@
 class QuestEvent < ApplicationRecord
   belongs_to :quest
   has_many :quest_event_datum, -> { order(:order) }, dependent: :destroy, inverse_of: :quest_event
+  has_one :world, through: :quest
 
   validates :title, presence: true
 

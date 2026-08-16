@@ -29,6 +29,7 @@ const Pagination = ({ pagination, onChange }: PaginationProps) => {
     const page = pageIndex + 1;
     return (
       <button
+        type="button"
         className={classNames("page", currentPage === page ? "active" : "")}
         key={page}
         onClick={() => handlePageChange(page)}
@@ -40,11 +41,11 @@ const Pagination = ({ pagination, onChange }: PaginationProps) => {
 
   return (
     <nav className="aic-pagination" role="navigation">
-      <button onClick={() => handlePageChange(pagination.page - 1)}>
+      <button type="button" onClick={() => handlePageChange(pagination.page - 1)}>
         <Icon name="caret-left-fill" />
       </button>
       {pageList}
-      <button onClick={() => handlePageChange(pagination.page + 1)}>
+      <button type="button" onClick={() => handlePageChange(pagination.page + 1)}>
         <Icon name="caret-right-fill" />
       </button>
     </nav>

@@ -15,10 +15,7 @@ interface IndexItemProps<T extends IndexRecord> {
   displayConfig: Array<DisplayConfigItem<T>>;
 }
 
-const IndexItem = <T extends IndexRecord>({
-  record,
-  displayConfig,
-}: IndexItemProps<T>) => {
+const IndexItem = <T extends IndexRecord>({ record, displayConfig }: IndexItemProps<T>) => {
   const attributes = displayConfig.map((config: DisplayConfigItem<T>) => {
     const value = record[config.attribute];
     return <div key={String(value)}>{String(value)}</div>;

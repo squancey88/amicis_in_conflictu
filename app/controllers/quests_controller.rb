@@ -10,6 +10,7 @@ class QuestsController < ApplicationController
 
   # GET /quests/1 or /quests/1.json
   def show
+    @presenter = QuestPresenter.new(view_context, @quest)
   end
 
   # GET /quests/new
