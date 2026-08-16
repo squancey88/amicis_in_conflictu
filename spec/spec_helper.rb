@@ -18,6 +18,8 @@ require "simplecov"
 SimpleCov.start "rails" do
   add_group "Components", "app/components"
   add_group "Views", "app/views"
+  add_group "Presenters", "app/presenters"
+  add_group "Serializers", "app/serializers"
   enable_coverage_for_eval
 
   current_branch = `git rev-parse --abbrev-ref HEAD`
