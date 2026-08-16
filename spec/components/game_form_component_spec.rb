@@ -8,7 +8,7 @@ RSpec.describe GameFormComponent, type: :component do
 
   before do
     allow_any_instance_of(AuthHelper).to receive(:current_user).and_return(user1)
-    render_inline described_class.new(game:)
+    render_inline described_class.new(game:, presenter: GamePresenter.new(double, game))
   end
 
   it "should render the GameForms::TurnBasedComponent" do

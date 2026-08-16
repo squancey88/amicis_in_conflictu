@@ -27,6 +27,7 @@ RSpec.describe "/api/gaming_groups/:id/gaming_sessions", type: :request do
 
   describe "with jwt login" do
     describe "index" do
+      let(:json_data) { JSON.parse(response.body) }
       before do
         get_with_token(user, api_gaming_group_gaming_sessions_path(gaming_group))
       end
@@ -35,12 +36,16 @@ RSpec.describe "/api/gaming_groups/:id/gaming_sessions", type: :request do
         expect(response).to have_http_status(:successful)
       end
 
-      it "returns array" do
-        expect(json_body).to be_an(Array)
+      it "returns array of records" do
+        expect(json_data["records"]).to be_an(Array)
       end
 
       it "returns correct number of records" do
-        expect(json_body.count).to eq 1
+        expect(json_data["records"].count).to eq 1
+      end
+
+      it "returns pagination" do
+        expect(json_data["pagination"]["count"]).to eq(1)
       end
     end
 
