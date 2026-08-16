@@ -1,26 +1,6 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @unit_template,
-  title: @unit_template.name,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_unit_template_path(@unit_template)
-    },
-    {
-      text: "Delete",
-      link: unit_template_path(@unit_template),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
+<%= render Common::ShowHeaderComponent.new(presenter: @presenter) %>
 
-  <% component.with_box do %>
-
-    <%= render @unit_template %>
-  <% end %>
-  <% component.with_box do %>
-    <%= render Units::StatRowComponent.new(unit_stats: @unit_template.unit_template_stats) %>
-    <%= traits_list(@unit_template) %>
-    <%= unit_trait_category_list(@unit_template) %>
-  <% end %>
-<% end %>
+<%= render @unit_template %>
+<%= render Units::StatRowComponent.new(unit_stats: @unit_template.unit_template_stats) %>
+<%= traits_list(@unit_template) %>
+<%= unit_trait_category_list(@unit_template) %>

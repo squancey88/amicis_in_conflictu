@@ -10,6 +10,7 @@ class UnitTemplatesController < ApplicationController
 
   # GET /unit_templates/1 or /unit_templates/1.json
   def show
+    @presenter = UnitTemplatePresenter.new(view_context, @unit_template)
   end
 
   # GET /unit_templates/new

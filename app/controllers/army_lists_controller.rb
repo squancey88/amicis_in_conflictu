@@ -8,6 +8,7 @@ class ArmyListsController < ApplicationController
 
   # GET /army_lists/1 or /army_lists/1.json
   def show
+    @presenter = ArmyListPresenter.new(view_context, @army_list)
   end
 
   # GET /army_lists/new

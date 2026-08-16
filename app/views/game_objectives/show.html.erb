@@ -1,27 +1,10 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @game_objective,
-  title: @game_objective.to_s,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_game_objective_path(@game_objective)
-    },
-    {
-      text: "Delete",
-      link: game_objective_path(@game_objective),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
+<%= render Common::ShowHeaderComponent.new(presenter: @presenter) %>
 
-  <% component.with_box do %>
-    <p>
-      <strong>Game system:</strong>
-      <%= @game_objective.game_system.name %>
-    </p>
-    <p>
-      <strong>Scoring Key:</strong>
-      <%= @game_objective.scoring_key %>
-    </p>
-  <% end %>
-<% end %>
+<p>
+  <strong>Game system:</strong>
+  <%= @game_objective.game_system.name %>
+</p>
+<p>
+  <strong>Scoring Key:</strong>
+  <%= @game_objective.scoring_key %>
+</p>

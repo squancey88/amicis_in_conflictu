@@ -9,6 +9,7 @@ class UnitTraitsController < ApplicationController
 
   # GET /unit_traits/1 or /unit_traits/1.json
   def show
+    @presenter = UnitTraitPresenter.new(view_context, @unit_trait)
   end
 
   # GET /unit_traits/new

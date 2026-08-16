@@ -1,21 +1,3 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @unit_stat_modifier,
-  title: @unit_stat_modifier.name,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_unit_stat_modifier_path(@unit_stat_modifier)
-    },
-    {
-      text: "Delete",
-      link: unit_stat_modifier_path(@unit_stat_modifier),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
+<%= render Common::ShowHeaderComponent.new(presenter: @presenter) %>
 
-  <% component.with_box(title: "Details") do %>
-
-    <%= render @unit_stat_modifier %>
-  <% end %>
-<% end %>
+<%= render @unit_stat_modifier %>

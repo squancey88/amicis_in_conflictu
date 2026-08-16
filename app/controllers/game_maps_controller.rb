@@ -8,6 +8,7 @@ class GameMapsController < ApplicationController
 
   # GET /game_maps/1 or /game_maps/1.json
   def show
+    @presenter = GameMapPresenter.new(view_context, @game_map)
   end
 
   # GET /game_maps/new

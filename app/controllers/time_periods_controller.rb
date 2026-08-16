@@ -10,6 +10,7 @@ class TimePeriodsController < ApplicationController
 
   # GET /time_periods/1 or /time_periods/1.json
   def show
+    @presenter = TimePeriodPresenter.new(view_context, @time_period)
   end
 
   # GET /time_periods/1/edit

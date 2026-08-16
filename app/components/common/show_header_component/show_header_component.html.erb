@@ -3,6 +3,9 @@
   subtitle: @presenter.subtitle
 ) do |header| %>
   <%= header.with_buttons do %>
+    <% @presenter.header_buttons.each do |button| %>
+      <%= content_tag :a, button[:label], href: button[:href], class: "btn btn-primary" %>
+    <% end %>
     <%= render Common::MenuButtonComponent.new(menu_options: @presenter.menu_options) %>
   <% end %>
 <% end %>

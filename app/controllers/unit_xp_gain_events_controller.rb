@@ -9,6 +9,7 @@ class UnitXpGainEventsController < ApplicationController
 
   # GET /unit_xp_gain_events/1 or /unit_xp_gain_events/1.json
   def show
+    @presenter = UnitXpGainEventPresenter.new(view_context, @unit_xp_gain_event)
   end
 
   # GET /unit_xp_gain_events/new

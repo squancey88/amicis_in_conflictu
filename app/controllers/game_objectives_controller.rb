@@ -8,6 +8,7 @@ class GameObjectivesController < ApplicationController
 
   # GET /game_objectives/1 or /game_objectives/1.json
   def show
+    @presenter = GameObjectivePresenter.new(view_context, @game_objective)
   end
 
   # GET /game_objectives/new

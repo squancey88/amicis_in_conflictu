@@ -17,7 +17,7 @@ class ShowPresenter < ApplicationPresenter
         link: edit_path
       }
     end
-    unless record_path && can_delete?
+    if record_path && can_delete?
       options << {
         text: "Delete",
         link: record_path,
@@ -25,6 +25,10 @@ class ShowPresenter < ApplicationPresenter
       }
     end
     options
+  end
+
+  def header_buttons
+    []
   end
 
   private
