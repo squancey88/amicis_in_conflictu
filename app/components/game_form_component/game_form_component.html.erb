@@ -1,6 +1,6 @@
 <div data-controller="game-form">
   <%= form_with model: @game do |form| %>
-    <%= render Common::ShowHeaderComponent.new(presenter: @presenter) do |header| %> 
+    <%= render Common::PageHeaderComponent.new(presenter: @presenter) do |header| %> 
       <% header.with_control do %>
         <%= form.submit class: "btn btn-primary" %>
       <% end %>

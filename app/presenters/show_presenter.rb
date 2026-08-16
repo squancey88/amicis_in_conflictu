@@ -1,6 +1,11 @@
 class ShowPresenter < ApplicationPresenter
   include Rails.application.routes.url_helpers
 
+  def initialize(view_context, record)
+    super(view_context)
+    @record = record
+  end
+
   def title
     record.to_s
   end
@@ -32,6 +37,8 @@ class ShowPresenter < ApplicationPresenter
   end
 
   private
+
+  attr_accessor :record
 
   def edit_path
     nil

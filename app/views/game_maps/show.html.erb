@@ -1,2 +1,2 @@
-<%= render Common::ShowHeaderComponent.new(presenter: @presenter) %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 <%= react_component("GameMapViewer", GameMapSerializer.new(@game_map).as_json) %> 

@@ -15,6 +15,7 @@ class GamesController < ApplicationController
 
   def dm_mode
     redirect_to @game unless @game.campaign || @current_user != @game.campaign.game_master
+    @presenter = GameDmPresenter.new(view_context, @game)
   end
 
   # GET /games/new

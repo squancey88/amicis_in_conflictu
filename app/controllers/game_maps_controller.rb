@@ -4,6 +4,7 @@ class GameMapsController < ApplicationController
   # GET /game_maps or /game_maps.json
   def index
     @game_maps = GameMap.all
+    @presenter = GameMapsPresenter.new(view_context)
   end
 
   # GET /game_maps/1 or /game_maps/1.json

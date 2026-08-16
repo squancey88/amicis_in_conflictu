@@ -1,10 +1,6 @@
 <% content_for :title, "Time periods" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Time periods") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New time period", new_world_time_period_path(@world), class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="time_periods">
   <%= turbo_frame_tag :time_periods do %>

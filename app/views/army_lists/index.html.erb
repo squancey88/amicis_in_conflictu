@@ -1,10 +1,6 @@
 <% content_for :title, "Army lists" %>
 
-<%= render Common::HeaderCardComponent.new(title: "My Army Lists") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New Army List", new_army_list_path, class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
+<%= render Common::PageTitleComponent.new(presenter: @presenter) %>
 
 <div id="army_lists">
   <% @army_lists.each do |army_list| %>

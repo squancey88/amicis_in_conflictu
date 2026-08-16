@@ -1,10 +1,6 @@
 <%% content_for :title, "<%= human_name.pluralize %>" %>
 
-<%%= render Common::HeaderCardComponent.new(title: "<%= human_name.pluralize %>") do |header| %>
-  <%%= header.with_buttons do %>
-    <%%= link_to "New <%= human_name.downcase %>", <%= new_helper(type: :path) %>, class: %i[btn btn-primary] %>
-  <%% end %>
-<%% end %>
+<%%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="<%= plural_table_name %>">
   <%%= turbo_frame_tag :<%= plural_table_name %> do %>

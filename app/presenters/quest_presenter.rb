@@ -1,4 +1,8 @@
 class QuestPresenter < ShowPresenter
+  def index_title
+    "Quests"
+  end
+
   private
 
   def edit_path

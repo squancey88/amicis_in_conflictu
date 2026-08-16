@@ -11,20 +11,7 @@ class RecordFormWrapperComponent < ViewComponent::Base
     @form = form
     @title = title
     @row_cols = row_cols
-  end
-
-  def title
-    return @title if @title
-    return prefix if @record.new_record?
-    "#{prefix} - #{@record}"
-  end
-
-  def prefix
-    @record.new_record? ? "New" : "Edit"
-  end
-
-  def subtitle
-    @record.class.model_name.human
+    @presenter = FormPresenter.new(nil, record, title:)
   end
 
   class FormNoticeComponent < ViewComponent::Base

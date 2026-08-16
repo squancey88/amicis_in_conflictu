@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Common::ShowHeaderComponent < ViewComponent::Base
+class Common::PageHeaderComponent < ViewComponent::Base
   renders_one :control
 
   def initialize(presenter:)

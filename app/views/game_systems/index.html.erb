@@ -1,12 +1,6 @@
 <% content_for :title, "Game systems" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Game Systems") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New wargame", new_game_systems_wargame_path, class: %i[btn btn-primary] %>
-    <%= link_to "New card game", new_game_systems_card_game_path, class: %i[btn btn-primary] %>
-    <%= link_to "New RPG", new_game_systems_role_playing_game_path, class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="game_systems">
   <% @game_systems.each do |game_system| %>
