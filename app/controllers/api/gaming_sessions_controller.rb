@@ -4,8 +4,8 @@ module Api
     before_action :set_gaming_session, only: %i[show]
 
     def index
-      sessions = @gaming_group.gaming_sessions
-      sessions = sessions.previous.order(start_time: :desc) if params.dig(:filters, :previous)
+      sessions = @gaming_group.gaming_sessions.order(start_time: :desc)
+      sessions = sessions.previous if params.dig(:filters, :previous)
 
       @pagy, @records = pagy(sessions)
 
