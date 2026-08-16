@@ -3,11 +3,8 @@ module Api
     class ArmiesController < BaseController
       before_action :set_game_system
       def index
-        @pagy, @records = pagy(@game_system.armies)
-        render json: {
-          records: ::GameSystems::ArmySerializer.new(@records).serializable_hash,
-          pagination: @pagy.data_hash
-        }
+        pagy, records = pagy(@game_system.armies)
+        paginated_json(::GameSystems::ArmySerializer.new(records), pagy)
       end
 
       private

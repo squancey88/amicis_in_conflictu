@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "worlds/index", type: :view do
   before(:each) do
     assign(:worlds, create_list(:world, 2))
+    assign(:presenter, WorldsPresenter.new(double))
   end
 
   it "renders a list of worlds" do

@@ -12,6 +12,7 @@ RSpec.describe "game_systems/index", type: :view do
         slug: "name-test-2"
       )
     ])
+    assign(:presenter, GameSystemsPresenter.new(double))
   end
 
   it "renders a list of game_systems" do

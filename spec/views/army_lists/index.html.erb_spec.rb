@@ -6,6 +6,7 @@ RSpec.describe "army_lists/index", type: :view do
   before(:each) do
     assign(:army_lists, create_list(:army_list, 2, name: "Name", army:))
     assign(:army, army)
+    assign(:presenter, ArmyListsPresenter.new(double))
   end
 
   it "renders a list of army_lists" do

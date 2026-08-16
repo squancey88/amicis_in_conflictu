@@ -4,12 +4,14 @@ module Api
       before_action :set_world
 
       def index
-        render json: CharacterSerializer.new(@world.characters).serialize
+        pagy, records = pagy(@world.characters)
+
+        paginated_json(::Worlds::CharacterSerializer.new(records, params: {pagy:}), pagy)
       end
 
       def show
         @character = @world.characters.find(params[:id])
-        render json: CharacterSerializer.new(@character).serialize
+        render json: ::Worlds::CharacterSerializer.new(@character).serialize
       end
 
       private

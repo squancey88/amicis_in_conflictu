@@ -1,6 +1,6 @@
 <% content_for :title, "Game maps" %>
 
-<%= render Common::PageTitle.new(presenter: @presenter) %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="game_maps">
   <%= turbo_frame_tag :game_maps do %>

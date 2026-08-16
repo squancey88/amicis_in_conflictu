@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     resources :worlds, only: [:index, :show] do
       scope module: :worlds do
         resources :characters, only: [:index, :show]
+        resources :locations, only: [:index, :show]
+        resources :organisations, only: [:index, :show]
+        resources :articles, only: [:index, :show]
         resources :quests, only: [:index, :show] do
           scope module: :quests do
             resources :quest_events, only: [:index, :show]

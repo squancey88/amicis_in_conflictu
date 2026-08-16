@@ -1,6 +1,6 @@
 <% content_for :title, "Army lists" %>
 
-<%= render Common::PageTitleComponent.new(presenter: @presenter) %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="army_lists">
   <% @army_lists.each do |army_list| %>
