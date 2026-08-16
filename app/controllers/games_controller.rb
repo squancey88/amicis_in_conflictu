@@ -10,6 +10,7 @@ class GamesController < ApplicationController
 
   # GET /games/1 or /games/1.json
   def show
+    @presenter = GamePresenter.new(view_context, @game)
   end
 
   def dm_mode

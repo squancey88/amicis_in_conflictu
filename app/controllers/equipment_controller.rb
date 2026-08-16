@@ -9,6 +9,7 @@ class EquipmentController < ApplicationController
 
   # GET /equipment/1 or /equipment/1.json
   def show
+    @presenter = EquipmentPresenter.new(view_context, @equipment)
   end
 
   # GET /equipment/new

@@ -17,6 +17,7 @@ class WorldsController < ApplicationController
   end
 
   def build
+    @presenter = WorldPresenter.new(view_context, @world)
   end
 
   # GET /worlds/new

@@ -1,9 +1,13 @@
 class GamePresenter < ShowPresenter
-  private
-
-  def edit_path
-    edit_game_path(record)
+  def title
+    record.title
   end
+
+  def subtitle
+    record.players.map(&:display_name).join(", ")
+  end
+
+  private
 
   def record_path
     game_path(record)

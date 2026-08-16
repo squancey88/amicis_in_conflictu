@@ -2,6 +2,10 @@ module GameSystems
   class WargamesController < ApplicationController
     include IsGameSystem
 
+    def show
+      @presenter = GameSystems::WargamePresenter.new(view_context, @wargame)
+    end
+
     def add_new_stat_row
       helpers.fields GameSystems::Wargame.new do |f|
         f.fields_for :unit_stat_definitions, UnitStatDefinition.new, child_index: Time.now.to_i do |ff|
