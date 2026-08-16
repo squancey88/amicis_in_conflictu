@@ -9,10 +9,19 @@
     border-bottom: 3px solid color($accent, 500);
   }
 
+  &.section-header {
+    border-bottom: 2px solid color($accent, 500);
+    padding-bottom: 0.25rem;
+  }
+
   .content {
     flex: 1 1 auto;
     display: flex;
     align-items: center;
+
+    h1, h2, h3, h4, h5 {
+      margin: 0;
+    }
   }
   
   .buttons {

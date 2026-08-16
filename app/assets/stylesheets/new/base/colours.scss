@@ -37,21 +37,3 @@ $component-accent: #e3f2fd;
   --text-secondary: #{color($gray, 700)};
 }
 
-@mixin component-accent {
-  background-color: $component-accent;
-  @include component-border;
-  border-width: 1px;
-}
-
-@mixin component-border {
-  border-color: $component-border;
-  border-style: solid;
-}
-
-@mixin component-coloured {
-  background-color: $component-background;
-}
-
-@mixin component-coloured-dark {
-  background-color: color($gray, 200);
-}

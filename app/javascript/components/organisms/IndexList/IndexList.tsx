@@ -1,4 +1,3 @@
-import React from "react";
 import { IndexItem, type IndexRecord, type DisplayConfigItem } from "Molecules/IndexItem";
 import { Pagination } from "Atoms/Pagination";
 import useIndex from "Hooks/useIndex";
@@ -10,17 +9,12 @@ interface IndexListProps<T extends IndexRecord> {
   displayConfig: Array<DisplayConfigItem<T>>;
 }
 
-const IndexList = <T extends IndexRecord>({
-  indexPath,
-  title,
-  newPath,
-  displayConfig,
-}: IndexListProps<T>) => {
+const IndexList = <T extends IndexRecord>({ indexPath, title, newPath, displayConfig }: IndexListProps<T>) => {
   const { records, pagination, loading, loadPage } = useIndex(indexPath);
 
   return (
     <div className="aic-index-list">
-      <div className="aic-title-with-buttons">
+      <div className="aic-title-with-buttons section-header">
         <div className="content">
           <h3>{title}</h3>
         </div>
