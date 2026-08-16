@@ -1,16 +1,14 @@
 .aic-card {
   @include component-spacing;
-  @include component-border; 
-  @include component-coloured; 
   border-width: 1px;
   border-radius: 0.25rem;
+  background-color: color($gray, 50);
   
   .header {
     @include standard-padding;
-    @include component-coloured-dark; 
     display: flex;
     flex-direction: row;
-    border-width: 0px 0px 1px 0px;
+    border-width: 0px 0px 2px 0px;
     border-style: solid;
     border-color: var(--accent-color);
     

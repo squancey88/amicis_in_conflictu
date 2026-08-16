@@ -1,10 +1,6 @@
 <% content_for :title, "Quests" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Quests") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New quest", new_world_quest_path(@world), class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="quests">
   <%= turbo_frame_tag :quests do %>

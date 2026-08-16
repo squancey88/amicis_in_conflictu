@@ -1,57 +1,38 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @campaign,
-  title: @campaign.name,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_gaming_group_campaign_path(@gaming_group, @campaign)
-    },
-    {
-      text: "Delete",
-      link: gaming_group_campaign_path(@gaming_group, @campaign),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
-  <% component.with_header_buttons do %>
-    <%= bs_link_button "New Character", new_world_character_path(@campaign.world, campaign_id: @campaign.id) if @campaign.world && @campaign.game_system.instance_of?(GameSystems::RolePlayingGame) %>
-  <% end %>
+<%= render StandardLayoutBoxComponent.new(title: "Details") do |component| %>
+  <%= render @campaign %>
+<% end %>
 
-  <% component.with_box(title: "Details") do %>
-    <%= render @campaign %>
-  <% end %>
+<%= render StandardLayoutBoxComponent.new(title: "My Character") do |component| %>
+  <ul class="list-group">
+    <% current_user.characters.where(campaign: @campaign).each do |character| %>
+      <li class="list-group-item">
+        <%= link_to character.full_name, [@campaign.world, character] %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
-  <% component.with_box(title: "My Characters") do %>
+<% if current_user == @campaign.game_master %>
+  <%= render StandardLayoutBoxComponent.new(title: "Player Characters") do |component| %>
     <ul class="list-group">
-      <% current_user.characters.where(campaign: @campaign).each do |character| %>
+      <% @campaign.player_users do |player_user| %>
         <li class="list-group-item">
-          <%= link_to character.full_name, [@campaign.world, character] %>
+          <%= player_user.display_name %>
         </li>
       <% end %>
     </ul>
   <% end %>
+<% end %>
 
-  <% if current_user == @campaign.game_master %>
-    <% component.with_box(title: "Player Characters") do %>
-      <ul class="list-group">
-        <% @campaign.player_users do |player_user| %>
-          <li class="list-group-item">
-            <%= player_user.display_name %>
-          </li>
-        <% end %>
-      </ul>
+<% if @campaign.game_system.respond_to?(:campaign_list_attributes) && @campaign.game_master == current_user %>
+  <%= render StandardLayoutBoxComponent.new(title: "Config") do |component| %>
+    <h3>Config</h3>
+
+    <% @campaign.game_system.campaign_list_attributes&.each do |attr| %>
+      <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
     <% end %>
-  <% end %>
 
-  <% if @campaign.game_system.respond_to?(:campaign_list_attributes) && @campaign.game_master == current_user %>
-    <% component.with_box do %>
-      <h3>Config</h3>
-
-      <% @campaign.game_system.campaign_list_attributes&.each do |attr| %>
-        <p><%= attr["name"] %>: <%= @campaign.config[attr["key"]] %></p>
-      <% end %>
-
-    <% end %>
   <% end %>
 <% end %>

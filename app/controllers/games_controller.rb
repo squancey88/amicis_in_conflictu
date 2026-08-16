@@ -10,10 +10,12 @@ class GamesController < ApplicationController
 
   # GET /games/1 or /games/1.json
   def show
+    @presenter = GamePresenter.new(view_context, @game)
   end
 
   def dm_mode
     redirect_to @game unless @game.campaign || @current_user != @game.campaign.game_master
+    @presenter = GameDmPresenter.new(view_context, @game)
   end
 
   # GET /games/new

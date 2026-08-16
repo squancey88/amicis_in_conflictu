@@ -14,6 +14,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1 or /campaigns/1.json
   def show
+    @presenter = CampaignPresenter.new(view_context, @campaign)
   end
 
   # GET /campaigns/new

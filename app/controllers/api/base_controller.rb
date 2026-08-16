@@ -5,6 +5,18 @@ class Api::BaseController < ApplicationController
 
   protected
 
+  def paginated_json records, pagy
+    render json: {
+      records: records.as_json,
+      pagination: {
+        page: pagy.page,
+        count: pagy.count,
+        limit: pagy.limit,
+        last: pagy.last
+      }
+    }
+  end
+
   def authenticate_api_access
     unless current_user
       authenticate_or_request_with_http_token do |token, options|

@@ -1,5 +1,5 @@
 
-<%= render Common::HeaderCardComponent.new(title: @game.campaign.name, subtitle: "Session: #{@game.campaign_session_number}") %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter)
 
 <div class="d-flex flex-row gap-2">
   <%= render Characters::BadgeComponent.with_collection(@game.campaign.player_characters, game: @game) %>

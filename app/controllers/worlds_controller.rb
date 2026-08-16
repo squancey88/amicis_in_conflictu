@@ -10,6 +10,7 @@ class WorldsController < ApplicationController
   # GET /worlds or /worlds.json
   def index
     @worlds = World.all
+    @presenter = WorldsPresenter.new(view_context)
   end
 
   # GET /worlds/1 or /worlds/1.json
@@ -17,6 +18,7 @@ class WorldsController < ApplicationController
   end
 
   def build
+    @presenter = WorldPresenter.new(view_context, @world)
   end
 
   # GET /worlds/new

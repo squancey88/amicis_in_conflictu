@@ -1,0 +1,26 @@
+@mixin component-accent {
+  background-color: $component-accent;
+  @include component-border;
+  border-width: 1px;
+}
+
+@mixin component-border {
+  border-color: $component-border;
+  border-style: solid;
+}
+
+@mixin component-coloured {
+  background-color: $component-background;
+}
+
+@mixin component-coloured-dark {
+  background-color: color($gray, 200);
+}
+
+@mixin boxed {
+  @include component-border;
+
+  border-radius: 0.5rem;
+  background-color: color($gray, 100);
+  border-width: 1px;
+}

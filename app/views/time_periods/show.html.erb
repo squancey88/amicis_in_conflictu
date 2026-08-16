@@ -1,24 +1,4 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @time_period,
-  title: @time_period.to_s,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_world_time_period_path(@world, @time_period)
-    },
-    {
-      text: "Delete",
-      link: world_time_period_path(@world, @time_period),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
+<%= render @time_period %>
 
-  <% component.with_box(title: "Details") do %>
-    <%= render @time_period %>
-  <% end %>
-
-  <% component.with_box(title: "Description") do %>
-    <%= render TextEditorRenderComponent.new(model: @time_period, attribute: :description) %>
-  <% end %>
-<% end %>
+<%= render TextEditorRenderComponent.new(model: @time_period, attribute: :description) %>

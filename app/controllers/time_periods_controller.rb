@@ -6,10 +6,12 @@ class TimePeriodsController < ApplicationController
   # GET /time_periods or /time_periods.json
   def index
     @time_periods = @world.time_periods.order(:order)
+    @presenter = TimePeriodsPresenter.new(view_context, @world)
   end
 
   # GET /time_periods/1 or /time_periods/1.json
   def show
+    @presenter = TimePeriodPresenter.new(view_context, @time_period)
   end
 
   # GET /time_periods/1/edit

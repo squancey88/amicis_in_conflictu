@@ -2,11 +2,9 @@
   model_name: @record.model_name.human, 
   errors: @record.errors) %>
 
-<%= render Common::HeaderCardComponent.new(title:, subtitle:) do |header| %>
-  <%= header.with_menu_items do %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) do |header| %>
+  <%= header.with_control do %>
     <%= menu_items %>
-  <% end %>
-  <%= header.with_buttons do %>
     <%= @form.submit(class: "btn btn-primary") %>
   <% end %>
 <% end %>

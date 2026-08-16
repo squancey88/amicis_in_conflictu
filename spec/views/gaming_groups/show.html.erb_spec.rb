@@ -1,10 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "gaming_groups/show", type: :view do
+  let(:gaming_group) { create(:gaming_group, name: "Name") }
+
   before(:each) do
-    assign(:gaming_group, GamingGroup.create!(
-      name: "Name"
-    ))
+    assign(:gaming_group, gaming_group)
+    assign(:presenter, GamingGroupPresenter.new(double, gaming_group))
+
     allow(view).to receive(:current_user) { create(:user) }
   end
 

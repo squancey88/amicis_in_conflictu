@@ -9,6 +9,7 @@ class UnitStatModifiersController < ApplicationController
 
   # GET /unit_stat_modifiers/1 or /unit_stat_modifiers/1.json
   def show
+    @presenter = UnitStatModifierPresenter.new(view_context, @unit_stat_modifier)
   end
 
   # GET /unit_stat_modifiers/new

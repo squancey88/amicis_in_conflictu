@@ -5,6 +5,7 @@ RSpec.describe "time_periods/index", type: :view do
   before(:each) do
     assign(:time_periods, create_list(:time_period, 2, world:))
     assign(:world, world)
+    assign(:presenter, TimePeriodsPresenter.new(double, world))
   end
 
   it "renders a list of time_periods" do

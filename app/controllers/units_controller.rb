@@ -10,6 +10,7 @@ class UnitsController < ApplicationController
 
   # GET /units/1 or /units/1.json
   def show
+    @presenter = UnitPresenter.new(view_context, @unit)
   end
 
   # GET /units/new

@@ -2,9 +2,11 @@ require "rails_helper"
 
 RSpec.describe "quests/show", type: :view do
   let(:world) { create(:world) }
+  let(:quest) { create(:quest, title: "Title", world:) }
   before(:each) do
-    assign(:quest, create(:quest, title: "Title", world:))
     assign(:world, world)
+    assign(:quest, quest)
+    assign(:presenter, QuestPresenter.new(double, quest))
   end
 
   it "renders attributes in <p>" do

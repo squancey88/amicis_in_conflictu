@@ -4,10 +4,12 @@ class ArmyListsController < ApplicationController
   # GET /army_lists or /army_lists.json
   def index
     @army_lists = current_user.army_lists
+    @presenter = ArmyListsPresenter.new(view_context)
   end
 
   # GET /army_lists/1 or /army_lists/1.json
   def show
+    @presenter = ArmyListPresenter.new(view_context, @army_list)
   end
 
   # GET /army_lists/new

@@ -1,0 +1,17 @@
+<div class="aic-title-with-buttons page-header">
+  <div class="content">
+    <div>
+      <h5 class="card-title"><%= @presenter.title %></h2>
+      <% if @presenter.subtitle %>
+        <h6 class="card-subtitle mb-2 text-body-secondary"><%= @presenter.subtitle %></h6>
+      <% end %>
+    </div>
+  </div>
+  <div class="buttons">
+    <%= control %>
+    <% @presenter.header_buttons.each do |button| %>
+      <%= content_tag :a, button[:label], href: button[:href], class: "btn btn-primary" %>
+    <% end %>
+    <%= render Common::MenuButtonComponent.new(menu_options: @presenter.menu_options) if @presenter.menu_options.any? %>
+  </div>
+</div>

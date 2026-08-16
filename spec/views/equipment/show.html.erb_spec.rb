@@ -1,8 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "equipment/show", type: :view do
+  let(:equipment) { create(:equipment) }
   before(:each) do
-    assign(:equipment, create(:equipment))
+    assign(:equipment, equipment)
+    assign(:presenter, EquipmentPresenter.new(double, equipment))
   end
 
   it "renders attributes in <p>" do

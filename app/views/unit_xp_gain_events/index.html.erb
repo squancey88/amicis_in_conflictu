@@ -1,11 +1,5 @@
 <% content_for :title, "Unit xp gain events" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Unit xp gain events") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New unit xp gain method", new_unit_xp_gain_event_path, class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
-
 <div id="unit_xp_gain_events">
   <%= turbo_frame_tag :unit_xp_gain_events do %>
     <% @unit_xp_gain_events.each do |unit_xp_gain_event| %>

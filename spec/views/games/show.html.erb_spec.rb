@@ -7,6 +7,7 @@ RSpec.describe "games/show", type: :view do
 
   before(:each) do
     assign(:game, game)
+    assign(:presenter, GamePresenter.new(double, game))
     allow(view).to receive(:current_user) { create(:user) }
     render
   end

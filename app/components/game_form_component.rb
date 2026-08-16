@@ -3,9 +3,10 @@
 class GameFormComponent < ViewComponent::Base
   delegate :current_user, :finish_reason_select, :state_select, to: :helpers
 
-  def initialize(game:)
+  def initialize(game:, presenter:)
     @game = game
     @game_system = game.game_system
+    @presenter = presenter
   end
 
   def before_render

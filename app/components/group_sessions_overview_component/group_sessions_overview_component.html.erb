@@ -11,13 +11,12 @@
       <% end %>
     <% end %>
     <% tab_section.with_tab(label: "Previous") do %>
-      <% @gaming_group.gaming_sessions.previous.limit(10).order(start_time: :desc).each do |session| %>
-        <div class="card">
-          <div class="card-body">
-            <%= link_to(l(session.start_time), gaming_group_gaming_session_path(@gaming_group, session)) %>
-          </div>
-        </div>
-      <% end %>
+      <%= render Common::EmbeddedIndexComponent.new(
+        title: "Sessions",
+        records_path: api_gaming_group_gaming_sessions_path(gaming_group_id: @gaming_group.id, params:{ filters: { previous: true }}),
+        react: true,
+        display_config: [{attribute: :pretty_time}]
+      ) %>
     <% end %>
     <% tab_section.with_tab(label: "Calendar") do %>
       Coming soon...

@@ -15,7 +15,17 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :worlds, only: [:index, :show] do
-      resources :characters, only: [:index, :show]
+      scope module: :worlds do
+        resources :characters, only: [:index, :show]
+        resources :locations, only: [:index, :show]
+        resources :organisations, only: [:index, :show]
+        resources :articles, only: [:index, :show]
+        resources :quests, only: [:index, :show] do
+          scope module: :quests do
+            resources :quest_events, only: [:index, :show]
+          end
+        end
+      end
     end
     resources :gaming_groups, only: [:index, :show] do
       resources :gaming_sessions, only: [:index, :create, :show] do

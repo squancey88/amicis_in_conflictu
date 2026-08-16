@@ -1,6 +1,7 @@
 
 .aic-index-list {
   @include standard-padding;
+  @include boxed;
 
   .records {
     display: flex;

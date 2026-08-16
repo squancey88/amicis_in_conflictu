@@ -10,6 +10,7 @@ class GamingGroupsController < ApplicationController
 
   # GET /gaming_groups/1 or /gaming_groups/1.json
   def show
+    @presenter = GamingGroupPresenter.new(view_context, @gaming_group)
   end
 
   # GET /gaming_groups/new

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>AIC</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-prefetch" content="false">
     <%= csrf_meta_tags %>
@@ -27,20 +27,26 @@
   </head>
 
   <body>
-    <% if Rails.env.production? %>
-      <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe title="GTM" src="https://www.googletagmanager.com/ns.html?id=GTM-MBHZRKCH"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      <!-- End Google Tag Manager (noscript) -->
-    <% end %>
-    <%= render Layout::MainHeaderComponent.new %>
-    <%= render Layout::SystemAdminMenuComponent.new %>
-    <%= render Layout::GameSystemMenuComponent.new(game_system: @game_system) %>
-    <%= render Layout::WorldBuilderMenuComponent.new(world_building: @world_building) %>
-    <%= render Common::FlashHandlerComponent.new(flash) %>
-
-    <main class="main-body">
-      <%= yield %>
-    </main>
+    <div class="site-container">
+      <% if Rails.env.production? %>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe title="GTM" src="https://www.googletagmanager.com/ns.html?id=GTM-MBHZRKCH"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      <% end %>
+      <header>
+        <%= render Layout::MainHeaderComponent.new %>
+        <%= render Layout::SystemAdminMenuComponent.new %>
+        <%= render Layout::GameSystemMenuComponent.new(game_system: @game_system) %>
+        <%= render Layout::WorldBuilderMenuComponent.new(world_building: @world_building) %>
+      </header>
+      <main class="main-body">
+        <%= render Common::FlashHandlerComponent.new(flash) %>
+        <%= yield %>
+      </main>
+      <footer>
+        &copy; Squancey Software
+      </footer>
+    </div>
   </body>
 </html>

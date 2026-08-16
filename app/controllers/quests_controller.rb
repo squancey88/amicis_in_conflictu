@@ -6,10 +6,12 @@ class QuestsController < ApplicationController
   # GET /quests or /quests.json
   def index
     @quests = @world.quests
+    @presenter = QuestsPresenter.new(view_context, @world)
   end
 
   # GET /quests/1 or /quests/1.json
   def show
+    @presenter = QuestPresenter.new(view_context, @quest)
   end
 
   # GET /quests/new

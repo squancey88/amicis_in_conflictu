@@ -1,38 +1,23 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @quest,
-  title: @quest.to_s,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_world_quest_path(@world, @quest)
-    },
-    {
-      text: "Delete",
-      link: world_quest_path(@world, @quest),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
-  <% component.with_tab_section do |tab_section| %>
+<%= render Common::TabsSectionComponent.new do |tab_section| %>
+  <% tab_section.with_tab(label: "Overview") do |tab| %>
 
-    <% tab_section.with_tab(label: "Overview") do |tab| %>
-
-      <% tab.with_grid_box(title: "Details", as_box: true) do %>
-        <%= labelled_attribute("World", @quest.world.name) %>
-      <% end %>
-
-      <% tab.with_grid_box(title: "Blurb", as_box: true) do %>
-        <%= render TextEditorRenderComponent.new(model: @quest, attribute: :blurb) %>
-      <% end %>
+    <% tab.with_grid_box(title: "Details", as_box: true) do %>
+      <%= labelled_attribute("World", @quest.world.name) %>
     <% end %>
 
-    <% tab_section.with_tab(label: "Events") do |tab| %>
-      <%= render Common::EmbeddedIndexComponent.new(title: "Events",
-          turbo_frame_id: "quest_events",
-          records_path: world_quest_quest_events_path(@world, @quest),
-          new_path: new_world_quest_quest_event_path(@world, @quest)
-        ) %>
+    <% tab.with_grid_box(title: "Blurb", as_box: true) do %>
+      <%= render TextEditorRenderComponent.new(model: @quest, attribute: :blurb) %>
     <% end %>
+  <% end %>
+
+  <% tab_section.with_tab(label: "Events") do |tab| %>
+    <%= render Common::EmbeddedIndexComponent.new(title: "Events",
+        records_path: api_world_quest_quest_events_path(@world, @quest),
+        new_path: new_world_quest_quest_event_path(@world, @quest),
+        react: true,
+        display_config: [{attribute: :title}]
+      ) %>
   <% end %>
 <% end %>

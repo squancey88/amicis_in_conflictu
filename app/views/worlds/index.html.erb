@@ -1,10 +1,6 @@
 <% content_for :title, "Worlds" %>
 
-<%= render Common::HeaderCardComponent.new(title: "Your worlds") do |header| %>
-  <%= header.with_buttons do %>
-    <%= link_to "New world", new_world_path, class: %i[btn btn-primary] %>
-  <% end %>
-<% end %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
 <div id="worlds">
   <% @worlds.each do |world| %>

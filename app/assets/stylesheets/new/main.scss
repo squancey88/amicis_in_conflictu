@@ -12,6 +12,7 @@
 @import "layouts/navigation";
 @import "layouts/headers";
 
+@import "components/mixins";
 @import "components/accordion";
 @import "components/admin_menu";
 @import "components/buttons";
@@ -26,3 +27,4 @@ body {
 
   box-sizing: border-box;
 }
+

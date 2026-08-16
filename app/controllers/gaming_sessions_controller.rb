@@ -9,6 +9,7 @@ class GamingSessionsController < ApplicationController
 
   # GET /gaming_sessions/1 or /gaming_sessions/1.json
   def show
+    @presenter = GamingSessionPresenter.new(view_context, @gaming_session)
   end
 
   # GET /gaming_sessions/new

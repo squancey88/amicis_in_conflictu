@@ -2,6 +2,10 @@ module GameSystems
   class CardGamesController < ApplicationController
     include IsGameSystem
 
+    def show
+      @presenter = CardGamePresenter.new(view_context, @card_game)
+    end
+
     private
 
     # Only allow a list of trusted parameters through.

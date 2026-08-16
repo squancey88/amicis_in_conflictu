@@ -1,20 +1,2 @@
-<%= render RecordShowWrapperComponent.new(
-  record: @army,
-  title: @army.name,
-  menu_options: [
-    { 
-      text: "Edit",
-      link: edit_army_path(@army)
-    },
-    {
-      text: "Delete",
-      link: army_path(@army),
-      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-    }
-  ]
-) do |component| %>
-
-  <% component.with_box do%>
-    <%= render @army %>
-  <% end %>
-<% end %>
+<%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
+<%= render @army %>

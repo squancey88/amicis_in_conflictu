@@ -5,6 +5,7 @@ RSpec.describe "quests/index", type: :view do
   before(:each) do
     assign(:quests, create_list(:quest, 2, title: "Title", world:))
     assign(:world, world)
+    assign(:presenter, QuestsPresenter.new(double, world))
   end
 
   it "renders a list of quests" do
