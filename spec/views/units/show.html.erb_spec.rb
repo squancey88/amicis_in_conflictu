@@ -2,9 +2,11 @@ require "rails_helper"
 
 RSpec.describe "units/show", type: :view do
   let(:army_list) { create(:army_list) }
+  let(:unit) { create(:unit, army_list:, cost: 2) }
   before(:each) do
     assign(:army_list, army_list)
-    assign(:unit, create(:unit, army_list:, cost: 2))
+    assign(:unit, unit)
+    assign(:presenter, UnitPresenter.new(double, unit))
   end
 
   it "renders attributes in <p>" do

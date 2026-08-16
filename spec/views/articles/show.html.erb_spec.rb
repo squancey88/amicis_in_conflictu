@@ -5,6 +5,7 @@ RSpec.describe "articles/show", type: :view do
   before(:each) do
     assign(:article, create(:article, title: "Title", world:))
     assign(:world, world)
+    assign(:presenter, WorldPresenter.new(double, world))
   end
 
   it "renders attributes in <p>" do

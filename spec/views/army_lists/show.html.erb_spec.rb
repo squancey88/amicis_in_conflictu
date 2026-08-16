@@ -3,10 +3,12 @@ require "rails_helper"
 RSpec.describe "army_lists/show", type: :view do
   let(:army) { create(:army) }
   let(:campaign) { create(:campaign, name: "Army list test") }
+  let(:army_list) { create(:army_list, name: "Name", army:) }
 
   context "without campaign" do
     before(:each) do
-      assign(:army_list, create(:army_list, name: "Name", army:))
+      assign(:army_list, army_list)
+      assign(:presenter, ArmyListPresenter.new(double, army_list))
     end
 
     it "renders attributes in <p>" do
