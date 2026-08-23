@@ -8,6 +8,7 @@ namespace :data_management do
       game.save
     end
     Player.find_each do |player|
+      next unless player.game_data.has_key?("turns")
       player.game_data["turns"] = player.game_data["turns"].map do |score|
         score.transform_keys do |key|
           key.tr("_", "-").downcase
