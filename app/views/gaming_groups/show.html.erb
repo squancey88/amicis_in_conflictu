@@ -1,5 +1,16 @@
 <%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
+<%= render Common::ReactTabsComponent.new(
+  tabs: [
+    { label: "Sessions", id: "gaming-group-sessions"},
+    { label: "Campaigns", id: "gaming-group-campaigns"},
+    { label: "Members & Teams", id: "gaming-group-members"},
+  ],
+  group_id: 'gaming-group-main'
+) do |tab_section| %>
+
+<% end %>
+
 <%= render Common::TabsSectionComponent.new do |tab_section| %>
   <% tab_section.with_tab(label: "Sessions") do |tab| %>
     <% tab.with_grid_box do %>

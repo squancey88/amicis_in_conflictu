@@ -6,9 +6,10 @@ import { IndexList } from "Organisms/IndexList";
 import { NewGameMapForm } from "Organisms/NewGameMapForm";
 import { GameMapViewer } from "Organisms/GameMapViewer";
 import { HeaderMenu } from "Organisms/HeaderMenu";
-import { ScoringKeySelector } from "./components/organisms/ScoringKeySelector";
-import { RawScoreTurnForm } from "./components/organisms/RawScoreTurnForm";
+import { ScoringKeySelector } from "Organisms/ScoringKeySelector";
+import { RawScoreTurnForm } from "Organisms/RawScoreTurnForm";
 import { ObjectiveBasedTurnForm } from "./components/organisms/ObjectiveBasedTurnForm";
+import { Tabs } from "Organisms/Tabs";
 
 // Component registry
 const components = {
@@ -22,6 +23,7 @@ const components = {
   ScoringKeySelector,
   RawScoreTurnForm,
   ObjectiveBasedTurnForm,
+  Tabs,
 };
 
 const roots = new Map<Element, Root>();
