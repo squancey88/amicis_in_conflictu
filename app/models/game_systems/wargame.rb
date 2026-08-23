@@ -16,7 +16,7 @@ module GameSystems
     config_has_scoring_systems(:turn_based, :non_scoring)
     config_has_turn_data(title: "Turn Tracking",
       point_title: "Tracking Point") do |items|
-        items.add_item(:key, :string)
+        items.add_item(:key, :string, pattern: "[a-z\\-]+")
         items.add_item(:type, :string, enum: [:number])
         items.add_item(:name, :string)
         items.add_item(:scoring, :boolean)
