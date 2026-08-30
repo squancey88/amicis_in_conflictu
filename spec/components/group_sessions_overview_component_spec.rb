@@ -9,6 +9,6 @@ RSpec.describe GroupSessionsOverviewComponent, type: :component do
   end
 
   it "should have a tab section" do
-    expect(page).to have_css(".nav-tabs")
+    expect(page).to have_css(".tab-panel")
   end
 end

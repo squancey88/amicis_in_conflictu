@@ -25,11 +25,18 @@ export interface Campaign extends AICRecord {
 }
 
 export interface Player extends AICRecord {
-  id: string;
   type: string;
   displayName: string;
   turns?: Array<Record<string, number>>;
   turnObjectives?: Array<TurnObjective>;
+}
+
+export interface User extends AICRecord {
+  displayName: string;
+}
+
+export interface Team extends AICRecord {
+  displayName: string;
 }
 
 export interface GroupedGameSystems {
