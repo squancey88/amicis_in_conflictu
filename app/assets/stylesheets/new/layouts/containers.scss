@@ -18,3 +18,14 @@ div.site-container {
     text-align: center;
   }
 }
+
+.grid-layout-2-col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  > * {
+    flex: 1 1 calc(50% - 5px);
+  }
+}

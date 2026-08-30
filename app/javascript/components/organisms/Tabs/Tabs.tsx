@@ -31,14 +31,16 @@ const Tabs = ({ groupId, tabs, defaultActive, children }: TabsProps) => {
 
   return (
     <TabsContext.Provider value={{ active, handleSelect }}>
-      <div role="tablist">
+      <div className="tabs-header" role="tablist">
         {tabs.map((tab) => {
+          const selected = active === tab.id;
           return (
             <button
               key={tab.id}
               role="tab"
               type="button"
-              aria-selected={active === tab.id}
+              className={selected ? "active-tab" : ""}
+              aria-selected={selected}
               onClick={() => handleSelect(tab.id)}
             >
               {tab.label}

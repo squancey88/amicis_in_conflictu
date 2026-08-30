@@ -7,32 +7,22 @@
     { label: "Members & Teams", id: "gaming-group-members"},
   ],
   group_id: 'gaming-group-main'
-) do |tab_section| %>
-
-<% end %>
-
-<%= render Common::TabsSectionComponent.new do |tab_section| %>
-  <% tab_section.with_tab(label: "Sessions") do |tab| %>
-    <% tab.with_grid_box do %>
+) do |tabs| %>
+  <% tabs.with_tab_panel(panel_id: "gaming-group-sessions", visible: true) do %>
+    <div class="grid-layout-2-col">
       <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
-    <% end %>
-
-    <% tab.with_grid_box do %>
       <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
-    <% end %>
+    </div>
   <% end %>
-
-  <% tab_section.with_tab(label: "Campaigns") do |tab| %>
-    <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
+  <% tabs.with_tab_panel(panel_id: "gaming-group-campaigns") do %>
+    <div class="grid-layout-2-col">
+      <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
+    </div>
   <% end %>
-
-  <% tab_section.with_tab(label: "Members & Teams") do |tab| %>
-    <% tab.with_grid_box do %>
+  <% tabs.with_tab_panel(panel_id: "gaming-group-members") do %>
+    <div class="grid-layout-2-col">
       <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
-    <% end %>
-
-    <% tab.with_grid_box do %>
       <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>
-    <% end %>
+    </div>
   <% end %>
 <% end %>

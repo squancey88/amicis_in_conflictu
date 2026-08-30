@@ -17,6 +17,7 @@ $accent: $plum;
 
 $primary-color: color($primary, 500);
 $accent-color: color($accent, 500);
+$secondary-color: color($secondary, 500);
 
 $component-background: color($gray, 50);
 $component-border: color($gray, 300);
@@ -25,6 +26,7 @@ $component-accent: #e3f2fd;
 
 :root {
   --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
   --accent-color: #{$accent-color};
 
   --component-accent: #{$component-accent};
