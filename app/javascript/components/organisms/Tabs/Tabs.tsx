@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useContext } from "react";
 
 interface Tab {
   label: string;
@@ -7,9 +7,9 @@ interface Tab {
 
 interface TabsProps {
   tabs: Array<Tab>;
-  defaultActive: string;
-  children: ReactNode;
   groupId?: string;
+  defaultActive?: string;
+  children?: ReactNode;
 }
 
 interface TabsContextValue {
@@ -18,6 +18,14 @@ interface TabsContextValue {
 }
 
 const TabsContext = createContext<TabsContextValue | null>(null);
+
+export function useTabsContext(): TabsContextValue {
+  const context = useContext(TabsContext);
+  if (context === null) {
+    throw new Error("useTabsContext must be used within a <Tabs> component");
+  }
+  return context;
+}
 
 const Tabs = ({ groupId, tabs, defaultActive, children }: TabsProps) => {
   const [active, setActive] = useState<string>(defaultActive ?? tabs[0].id);
@@ -48,7 +56,11 @@ const Tabs = ({ groupId, tabs, defaultActive, children }: TabsProps) => {
           );
         })}
       </div>
-      {children}
+      {children && (
+        <div className="tab-panel-group" data-tab-group-id={groupId}>
+          {children}
+        </div>
+      )}
     </TabsContext.Provider>
   );
 };

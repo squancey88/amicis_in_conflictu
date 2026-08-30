@@ -4,4 +4,4 @@ import * as bootstrap from "bootstrap";
 
 import "./controllers";
 import "./components";
-import "./polyfills";
+import "./tab-control";

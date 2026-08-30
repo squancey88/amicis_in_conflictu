@@ -47,7 +47,7 @@ module Common
       end
 
       def call
-        content_tag :div, class: classes, data: {tab_panel: panel_id} do
+        content_tag :div, class: classes, role: :tabpanel, data: {tab_panel: panel_id} do
           content
         end
       end
