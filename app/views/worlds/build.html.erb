@@ -1,17 +1,19 @@
 <%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
-<%= render Common::TabsSectionComponent.new do |tab_section| %>
+<%= render Common::ReactTabsComponent.new do |tab_section| %>
 
-  <% tab_section.with_tab(label: "Overview") do |tab| %>
-    <% tab.with_grid_box(as_box: true, title: "Details") do %>
-      <%= render @world %>
-    <% end %>
-    <% tab.with_grid_box(as_box: true, title: "Blurb") do %>
-      <%= render TextEditorRenderComponent.new(model: @world, attribute: :blurb) %>
-    <% end %>
+  <% tab_section.with_tab_panel(label: "Overview") do |tab| %>
+    <div class="grid-layout-2-col">
+      <%= render Common::CardWithMenuComponent.new(title: "Details") do |component| %>
+        <%= render @world %>
+      <% end %>
+      <%= render Common::CardWithMenuComponent.new(title: "Blurb") do %>
+        <%= render TextEditorRenderComponent.new(model: @world, attribute: :blurb) %>
+      <% end %>
+    </div>
   <% end %>
 
-  <% tab_section.with_tab(label: "Time") do |tab| %>
+  <% tab_section.with_tab_panel(label: "Time") do |tab| %>
     <%= render Common::EmbeddedIndexComponent.new(title: "Time Periods",
         turbo_frame_id: "time_periods",
         records_path: world_time_periods_path(@world),
@@ -19,7 +21,7 @@
       ) %>
   <% end %>
 
-  <% tab_section.with_tab(label: "Quests") do |tab| %>
+  <% tab_section.with_tab_panel(label: "Quests") do |tab| %>
     <%= render Common::EmbeddedIndexComponent.new(title: "Quests",
         turbo_frame_id: "quests",
         records_path: world_quests_path(@world),
@@ -27,40 +29,33 @@
       ) %>
   <% end %>
 
-  <% tab_section.with_tab(label: "Character Settings") do |tab| %>
-    <% tab.with_grid_box do %>
+  <% tab_section.with_tab_panel(label: "Character Settings") do |tab| %>
+    <div class="grid-layout-2-col">
       <%= render Common::EmbeddedIndexComponent.new(title: "Character Types",
           turbo_frame_id: "character_types",
           records_path: world_character_types_path(@world),
           new_path: new_world_character_type_path(@world)
         ) %>
-    <% end %>
-    <% tab.with_grid_box do %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Character Species",
           turbo_frame_id: "character_species_types",
           records_path: world_character_species_types_path(@world),
           new_path: new_world_character_species_type_path(@world)
         ) %>
-    <% end %>
+    </div>
   <% end %>
 
-  <% tab_section.with_tab(label: "Organisation Settings") do |tab| %>
-    <% tab.with_grid_box do %>
+  <% tab_section.with_tab_panel(label: "Organisation Settings") do |tab| %>
+    <div class="grid-layout-2-col">
       <%= render Common::EmbeddedIndexComponent.new(title: "Organisation Types",
           turbo_frame_id: "organisation_types",
           records_path: world_organisation_types_path(@world),
           new_path: new_world_organisation_type_path(@world)
         ) %>
-    <% end %>
-  <% end %>
-
-  <% tab_section.with_tab(label: "Location Settings") do |tab| %>
-    <% tab.with_grid_box do %>
       <%= render Common::EmbeddedIndexComponent.new(title: "Location Types",
           turbo_frame_id: "location_types",
           records_path: world_location_types_path(@world),
           new_path: new_world_location_type_path(@world)
         ) %>
-    <% end %>
+    </div>
   <% end %>
 <% end %>

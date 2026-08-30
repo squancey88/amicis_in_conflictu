@@ -1,25 +1,18 @@
 <%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
-<%= render Common::ReactTabsComponent.new(
-  tabs: [
-    { label: "Sessions", id: "gaming-group-sessions"},
-    { label: "Campaigns", id: "gaming-group-campaigns"},
-    { label: "Members & Teams", id: "gaming-group-members"},
-  ],
-  group_id: 'gaming-group-main'
-) do |tabs| %>
-  <% tabs.with_tab_panel(panel_id: "gaming-group-sessions", visible: true) do %>
+<%= render Common::ReactTabsComponent.new(group_id: 'gaming-group-main') do |tabs| %>
+  <% tabs.with_tab_panel(panel_id: "gaming-group-sessions", label: "Sessions", visible: true) do %>
     <div class="grid-layout-2-col">
       <%= render GroupSessionsOverviewComponent.new(gaming_group: @gaming_group) %>
       <%= render LeagueTableComponent.new(gaming_group: @gaming_group) %>
     </div>
   <% end %>
-  <% tabs.with_tab_panel(panel_id: "gaming-group-campaigns") do %>
+  <% tabs.with_tab_panel(panel_id: "gaming-group-campaigns", label: "Campaigns") do %>
     <div class="grid-layout-2-col">
       <%= render CampaignListComponent.new(gaming_group: @gaming_group) %>
     </div>
   <% end %>
-  <% tabs.with_tab_panel(panel_id: "gaming-group-members") do %>
+  <% tabs.with_tab_panel(panel_id: "gaming-group-members", label: "Members & Teams") do %>
     <div class="grid-layout-2-col">
       <%= render GamingGroupUserOverviewComponent.new(gaming_group: @gaming_group, current_user:) %>
       <%= render GamingGroupTeamManagementComponent.new(gaming_group: @gaming_group, current_user:) %>

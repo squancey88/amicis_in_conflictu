@@ -13,9 +13,10 @@
       <% end %>
     </div>
   </div>
-  <% if body %>
+  <% if (body || content) %>
     <div class="body">
       <%= body %>
+      <%= content %>
     </div>
   <% end %>
 </div>

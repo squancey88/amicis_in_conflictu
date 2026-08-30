@@ -3,7 +3,7 @@
 class RecordFormWrapperComponent < ViewComponent::Base
   renders_one :menu_items
   renders_many :form_boxes, "FormBoxComponent"
-  renders_one :tab_section, Common::TabsSectionComponent
+  renders_one :tab_section, Common::ReactTabsComponent
   renders_many :notices, "FormNoticeComponent"
 
   def initialize(record:, form:, title: nil, row_cols: 2)

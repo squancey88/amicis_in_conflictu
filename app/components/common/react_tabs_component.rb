@@ -5,9 +5,16 @@ module Common
     delegate :react_component, to: :helpers
     renders_many :tab_panels, "Common::ReactTabsComponent::TabPanel"
 
-    def initialize(tabs:, group_id:)
-      @tabs = tabs
+    def initialize(group_id: SecureRandom.hex(6))
       @group_id = group_id
+    end
+
+    def tabs
+      tab_panels.map { {id: _1.panel_id, label: _1.label} }
+    end
+
+    def before_render
+      set_visible
     end
 
     def call
@@ -19,10 +26,16 @@ module Common
 
     private
 
-    attr_accessor :tabs, :group_id
+    def set_visible
+      return if tab_panels.any?(:visible)
+      tab_panels.first.visible = true
+    end
+
+    attr_accessor :group_id
 
     class TabPanel < ViewComponent::Base
-      def initialize(panel_id:, visible: false)
+      def initialize(label:, panel_id: SecureRandom.hex(6), visible: false)
+        @label = label
         @panel_id = panel_id
         @visible = visible
       end
@@ -39,9 +52,7 @@ module Common
         end
       end
 
-      private
-
-      attr_accessor :visible, :panel_id
+      attr_accessor :visible, :panel_id, :label
     end
   end
 end

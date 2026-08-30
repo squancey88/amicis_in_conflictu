@@ -1,18 +1,18 @@
 <%= render Common::PageHeaderComponent.new(presenter: @presenter) %>
 
-<%= render Common::TabsSectionComponent.new do |tab_section| %>
-  <% tab_section.with_tab(label: "Overview") do |tab| %>
-
-    <% tab.with_grid_box(title: "Details", as_box: true) do %>
-      <%= labelled_attribute("World", @quest.world.name) %>
-    <% end %>
-
-    <% tab.with_grid_box(title: "Blurb", as_box: true) do %>
-      <%= render TextEditorRenderComponent.new(model: @quest, attribute: :blurb) %>
-    <% end %>
+<%= render Common::ReactTabsComponent.new do |tab_section| %>
+  <% tab_section.with_tab_panel(label: "Overview") do |tab| %>
+    <div class="grid-layout-2-col">
+      <%= render Common::CardWithMenuComponent.new(title: "Details") do |component| %>
+        <%= labelled_attribute("World", @quest.world.name) %>
+      <% end %>
+      <%= render Common::CardWithMenuComponent.new(title: "Blurb") do %>
+        <%= render TextEditorRenderComponent.new(model: @quest, attribute: :blurb) %>
+      <% end %>
+    </div>
   <% end %>
 
-  <% tab_section.with_tab(label: "Events") do |tab| %>
+  <% tab_section.with_tab_panel(label: "Events") do |tab| %>
     <%= render Common::EmbeddedIndexComponent.new(title: "Events",
         records_path: api_world_quest_quest_events_path(@world, @quest),
         new_path: new_world_quest_quest_event_path(@world, @quest),
