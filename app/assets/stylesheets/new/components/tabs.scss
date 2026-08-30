@@ -1,0 +1,50 @@
+.tabs-header {
+  background-color: color($gray, 50);
+  border-width: 0px 0px 1px 0px;
+  border-bottom-color: var(--accent-color);
+  border-style: solid;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  margin-bottom: $std_spacer;
+
+  button {
+    border-width: 1px 1px 0px 1px;
+    border-style: solid;
+    border-color: color($gray, 50);
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0.5rem;
+
+    background-color: color($gray, 50);
+
+    &:hover {
+      border-color: color($gray, 300);
+    }
+
+    &.active-tab {
+      border-color: var(--accent-color);
+      background-color: var(--secondary-color);
+    }
+  }
+}
+
+.tab-panel-group {
+  display: grid;
+  grid-template-areas: "panel";
+
+  .tab-panel {
+    grid-area: panel;
+    display: none;
+    opacity: 0;
+    transition: opacity 200ms ease, display 200ms allow-discrete;
+
+    &.active-panel {
+      display: block;
+      opacity: 1;
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+}

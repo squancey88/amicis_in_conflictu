@@ -26,6 +26,8 @@ RSpec.describe("Creating a Game", type: :system) do
       find("select").select("User")
       find(:testid, "add-player").click
 
+      expect(page).to have_text("Selected Players:")
+
       within(find(:testid, "selected-players")) do |content|
         expect(content).to have_text("User")
       end

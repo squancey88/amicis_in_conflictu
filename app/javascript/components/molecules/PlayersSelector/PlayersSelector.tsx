@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Player } from "Types/common";
 
-export interface PlayersSelectorProps {
-  users: Array<Player>;
-  teams: Array<Player>;
-  fieldName: string;
-  onChange?: (players: Array<Player>) => void;
+export interface PlayerSelection {
+  id: string;
+  name: string;
+  type: string;
 }
 
-const PlayersSelector = ({
-  users,
-  teams,
-  fieldName,
-  onChange,
-}: PlayersSelectorProps) => {
-  const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
+export interface PlayersSelectorProps {
+  users: Array<PlayerSelection>;
+  teams: Array<PlayerSelection>;
+  fieldName: string;
+  onChange?: (players: Array<PlayerSelection>) => void;
+}
+
+const PlayersSelector = ({ users, teams, fieldName, onChange }: PlayersSelectorProps) => {
+  const [selectedPlayers, setSelectedPlayers] = useState<PlayerSelection[]>([]);
   const [currentSelection, setCurrentSelection] = useState<string>("");
 
   const handleAddPlayer = () => {
     if (currentSelection) {
       // Find the player object from the ID
-      const player = [...users, ...teams].find(
-        (p) => p.id === currentSelection,
-      );
+      const player = [...users, ...teams].find((p) => p.id === currentSelection);
 
       if (player && !selectedPlayers.some((p) => p.id === player.id)) {
         setSelectedPlayers([...selectedPlayers, player]);
@@ -38,11 +36,7 @@ const PlayersSelector = ({
   return (
     <div data-testid="PlayerSelector">
       <div className="input-group mb-3">
-        <select
-          className="form-select"
-          value={currentSelection}
-          onChange={(e) => setCurrentSelection(e.target.value)}
-        >
+        <select className="form-select" value={currentSelection} onChange={(e) => setCurrentSelection(e.target.value)}>
           <option value="">Select a player...</option>
           <optgroup label="Users">
             {users.map((player) => (
@@ -72,34 +66,15 @@ const PlayersSelector = ({
       {selectedPlayers.length > 0 && (
         <div className="mt-3">
           <h6>Selected Players:</h6>
-          <div
-            data-testid="selected-players"
-            className="d-flex flex-column gap-2"
-          >
+          <div data-testid="selected-players" className="d-flex flex-column gap-2">
             {selectedPlayers.map((player, index) => (
-              <div
-                key={player.id}
-                className="d-flex flex-row justify-content-between"
-                data-testid="player-row"
-              >
+              <div key={player.id} className="d-flex flex-row justify-content-between" data-testid="player-row">
                 {player.name}
-                <input
-                  type="hidden"
-                  name={`${fieldName}[${index}][controller_type]`}
-                  value={player.type}
-                />
-                <input
-                  type="hidden"
-                  name={`${fieldName}[${index}][controller_id]`}
-                  value={player.id}
-                />
+                <input type="hidden" name={`${fieldName}[${index}][controller_type]`} value={player.type} />
+                <input type="hidden" name={`${fieldName}[${index}][controller_id]`} value={player.id} />
                 <button
                   className="btn btn-sm btn-danger ms-2"
-                  onClick={() =>
-                    setSelectedPlayers(
-                      selectedPlayers.filter((p) => p.id !== player.id),
-                    )
-                  }
+                  onClick={() => setSelectedPlayers(selectedPlayers.filter((p) => p.id !== player.id))}
                 >
                   Remove
                 </button>

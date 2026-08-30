@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { GroupedGameSystems, Player } from "Types/common";
-import {
-  PlayersSelector,
-  PlayersSelectorProps,
-} from "Molecules/PlayersSelector";
+import { GroupedGameSystems } from "Types/common";
+import { PlayersSelector, PlayersSelectorProps, PlayerSelection } from "Molecules/PlayersSelector";
 import { GroupedGameSystemsSelect } from "Molecules/GroupedGameSystemsSelect";
 import { CampaignSelect, CampaignSelectProps } from "Molecules/CampaignSelect";
 
@@ -12,19 +9,11 @@ interface NewGameFormProps extends CampaignSelectProps {
   playersSelector: PlayersSelectorProps;
 }
 
-const NewGameForm = ({
-  groupedGameSystems,
-  playersSelector,
-  campaignsByGameSystem,
-}: NewGameFormProps) => {
-  const [gameSystemId, setGameSystemId] = useState<string | undefined>(
-    undefined,
-  );
-  const [selectedPlayers, setSelectedPlayers] = useState<Array<Player>>([]);
+const NewGameForm = ({ groupedGameSystems, playersSelector, campaignsByGameSystem }: NewGameFormProps) => {
+  const [gameSystemId, setGameSystemId] = useState<string | undefined>(undefined);
+  const [selectedPlayers, setSelectedPlayers] = useState<Array<PlayerSelection>>([]);
 
-  const handleGameSystemChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
+  const handleGameSystemChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setGameSystemId(event.target.value);
   };
 
@@ -49,17 +38,10 @@ const NewGameForm = ({
           fieldName="game[campaign_id]"
         />
 
-        <PlayersSelector
-          {...playersSelector}
-          onChange={setSelectedPlayers}
-        ></PlayersSelector>
+        <PlayersSelector {...playersSelector} onChange={setSelectedPlayers}></PlayersSelector>
       </div>
       <div className="modal-footer">
-        <button
-          type="button"
-          className="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
 

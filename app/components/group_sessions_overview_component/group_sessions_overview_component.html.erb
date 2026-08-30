@@ -1,7 +1,7 @@
 <div class="bg-body-tertiary rounded-3 p-3">
 
-  <%= render Common::TabsSectionComponent.new do |tab_section|%>
-    <% tab_section.with_tab(label: "Upcoming") do %>
+  <%= render Common::ReactTabsComponent.new do |tab_section|%>
+    <% tab_section.with_tab_panel(label: "Upcoming") do %>
       <% @gaming_group.gaming_sessions.upcoming.order(:start_time).each do |session| %>
         <div class="card mb-1">
           <div class="card-body">
@@ -10,7 +10,7 @@
         </div>
       <% end %>
     <% end %>
-    <% tab_section.with_tab(label: "Previous") do %>
+    <% tab_section.with_tab_panel(label: "Previous") do %>
       <%= render Common::EmbeddedIndexComponent.new(
         title: "Sessions",
         records_path: api_gaming_group_gaming_sessions_path(gaming_group_id: @gaming_group.id, params:{ filters: { previous: true }}),
@@ -18,7 +18,7 @@
         display_config: [{attribute: :pretty_time}]
       ) %>
     <% end %>
-    <% tab_section.with_tab(label: "Calendar") do %>
+    <% tab_section.with_tab_panel(label: "Calendar") do %>
       Coming soon...
     <% end %>
   <% end %>
